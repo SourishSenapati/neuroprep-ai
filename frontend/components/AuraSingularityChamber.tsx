@@ -25,7 +25,7 @@ export default function AuraSingularityChamber({
 }) {
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCamOn, setIsCamOn] = useState(true);
-  const [isOffline, setIsOffline] = useState(false); // New Offline State
+  const [isOffline, setIsOffline] = useState(false);
   
   // Camera Selection State
   const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
@@ -35,23 +35,21 @@ export default function AuraSingularityChamber({
   useEffect(() => {
     const getDevices = async () => {
       try {
-        if (!navigator?.mediaDevices?.enumerateDevices) {
-          console.warn("Media devices not supported");
-          return;
-        }
+        if (!navigator?.mediaDevices?.enumerateDevices) return;
         const devices = await navigator.mediaDevices.enumerateDevices();
         const cameras = devices.filter(device => device.kind === 'videoinput');
         setVideoDevices(cameras);
 
-        // Prefer laptop/integrated camera
-        const laptopCamera = cameras.find(camera => 
+        // Robust Laptop/Front Camera Detection
+        const preferredCamera = cameras.find(camera => 
           camera.label.toLowerCase().includes('integrated') || 
           camera.label.toLowerCase().includes('facetime') ||
-          camera.label.toLowerCase().includes('front')
+          camera.label.toLowerCase().includes('front') ||
+          camera.label.toLowerCase().includes('built-in')
         );
 
-        if (laptopCamera) {
-          setSelectedDeviceId(laptopCamera.deviceId);
+        if (preferredCamera) {
+          setSelectedDeviceId(preferredCamera.deviceId);
         } else if (cameras.length > 0) {
           setSelectedDeviceId(cameras[0].deviceId);
         }
@@ -366,14 +364,12 @@ export default function AuraSingularityChamber({
 
         const data = await res.json();
         sessionId.current = data.sessionId;
-        setActiveSessionId(data.sessionId); // Trigger updates
+        setActiveSessionId(data.sessionId);
         setAiThought(`Link Forged. Session ID: ${data.sessionId.substr(0, 8)}...`);
         
-        // Auto-start if no consent modal
-        if (!showConsentModal) {
-             console.log("Auto-starting session...");
-             startSession();
-        }
+        // Auto-start immediately (Bio-Analysis defaults to OFF)
+        console.log("Auto-starting session (Standard Mode)...");
+        startSession();
         
         // Connect Socket after forging
         try {
@@ -419,9 +415,7 @@ export default function AuraSingularityChamber({
         setActiveSessionId(sessionId.current);
         
         // Auto-start in offline mode
-        if (!showConsentModal) {
-            setTimeout(() => startSession(), 1500);
-        }
+        setTimeout(() => startSession(), 1000);
       }
     };
     
@@ -433,24 +427,15 @@ export default function AuraSingularityChamber({
   }, [role, difficulty, persona]); // IMPORTANT: Ensure deps are correct or use refs inside if specific behavior needed
 
 
-  const handleConsent = async (allowed: boolean) => {
-    setIsBioAnalysisEnabled(allowed);
-    setShowConsentModal(false);
-    
-    if (allowed) {
-      setAiThought('Bio-Analysis Enabled. Calibrating...');
-    } else {
-      setAiThought('Bio-Analysis Disabled. Standard Mode Active.');
-    }
-
-    // Small delay to allow UI to update
-    setTimeout(() => {
-        startSession();
-    }, 500);
-  };
-
   const [glitchActive, setGlitchActive] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+  // Toggle Bio Mode Manually
+  const toggleBioAnalysis = () => {
+     const newState = !isBioAnalysisEnabled;
+     setIsBioAnalysisEnabled(newState);
+     setAiThought(newState ? "Bio-Analysis Modules Engaged." : "Bio-Analysis Modules Disengaged.");
+  };
 
   // Glitch Logic
   useEffect(() => {
@@ -549,40 +534,8 @@ export default function AuraSingularityChamber({
         )}
       </AnimatePresence>
 
-      {/* Consent Modal */}
-      {/* Consent Modal - Simplified to ensure removal */}
-      {showConsentModal && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-            <div className="bg-gray-900 border border-purple-500/30 p-8 rounded-2xl max-w-md w-full shadow-[0_0_50px_rgba(168,85,247,0.2)]">
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <Brain className="w-6 h-6 text-purple-500" />
-                Neural Calibration
-              </h2>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                To enhance your interview simulation, Aura can analyze your 
-                <span className="text-purple-400 font-bold"> body language, gaze patterns, and micro-expressions</span>.
-                <br/><br/>
-                This data is used solely to provide real-time feedback on your confidence and engagement.
-              </p>
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={() => handleConsent(true)}
-                  className="w-full py-4 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
-                >
-                  <CheckCircle className="w-5 h-5" />
-                  Enable Bio-Analysis
-                </button>
-                <button
-                  onClick={() => handleConsent(false)}
-                  className="w-full py-4 bg-white/5 hover:bg-white/10 text-gray-400 font-medium rounded-xl flex items-center justify-center gap-2 transition-all"
-                >
-                  <XCircle className="w-5 h-5" />
-                  Disable (Audio Only)
-                </button>
-              </div>
-            </div>
-          </div>
-      )}
+      {/* Consent Modal Removed - Auto-Start Enabled */}
+
 
       {/* Holo-Panel (Interviewer Area) */}
       <div className="flex-1 relative flex items-center justify-center">
@@ -715,9 +668,9 @@ export default function AuraSingularityChamber({
           
           {/* AR Toggle */}
           <button
-            onClick={() => setIsARMode(!isARMode)}
-            className={`p-4 rounded-full border ${isARMode ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
-            title="Toggle AR Proctor HUD"
+            onClick={toggleBioAnalysis}
+            className={`p-4 rounded-full border ${isBioAnalysisEnabled ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
+            title={isBioAnalysisEnabled ? "Disable Bio-Analysis" : "Enable Bio-Analysis (Body Language)"}
           >
             <Scan className="w-6 h-6" />
           </button>
