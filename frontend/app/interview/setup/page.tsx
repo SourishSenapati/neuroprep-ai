@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import '@/styles/apple-glass.css';
@@ -113,24 +113,31 @@ const difficultyLabels = [
   'Legendary'
 ];
 
-export default function AppleInterviewSetup() {
+export default function InterviewSetupPage() {
   const router = useRouter();
   const [selectedRole, setSelectedRole] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(5);
   const [isStarting, setIsStarting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleStartInterview = async () => {
     if (!selectedRole) return;
     
     setIsStarting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    // Simulate prep time
+    await new Promise(resolve => setTimeout(resolve, 800));
     router.push(`/interview/session?role=${selectedRole}&difficulty=${difficulty}`);
   };
 
+  if (!mounted) return null;
+
   return (
-    <div className="apple-bg">
-      <div className="apple-container min-h-screen flex flex-col justify-center py-20">
+    <div className="apple-bg min-h-screen overflow-y-auto overflow-x-hidden">
+      <div className="apple-container min-h-screen flex flex-col justify-start py-20 px-4 max-w-7xl mx-auto">
         
         {/* Header */}
         <motion.div
@@ -165,15 +172,17 @@ export default function AppleInterviewSetup() {
             Engineering Discipline
           </h2>
           
-          <div className="selection-grid">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {engineeringRoles.map((role, index) => (
               <motion.div
                 key={role.id}
-                className={`selection-card fade-in-up stagger-${(index % 5) + 1} ${
-                  selectedRole === role.id ? 'selected' : ''
+                className={`glass-card cursor-pointer transition-all duration-300 ${
+                  selectedRole === role.id 
+                    ? 'ring-2 ring-blue-500 bg-white/10' 
+                    : 'hover:bg-white/5 opacity-80 hover:opacity-100'
                 }`}
                 onClick={() => setSelectedRole(role.id)}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -5,  scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -194,24 +203,8 @@ export default function AppleInterviewSetup() {
                   {role.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2">
-                  {role.topics.slice(0, 3).map((topic) => (
-                    <span 
-                      key={topic}
-                      className="text-xs px-2 py-1 rounded-full"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)'
-                      }}
-                    >
-                      {topic}
-                    </span>
-                  ))}
-                  {role.topics.length > 3 && (
-                    <span className="text-xs px-2 py-1">
-                      +{role.topics.length - 3}
-                    </span>
-                  )}
+                <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-wide opacity-70">
+                   {role.topics.slice(0, 3).join(' • ')}
                 </div>
               </motion.div>
             ))}
@@ -222,123 +215,45 @@ export default function AppleInterviewSetup() {
         <AnimatePresence>
           {selectedRole && (
             <motion.div
-              className="glass-card max-w-3xl mx-auto w-full mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.4 }}
+              className="fixed bottom-0 left-0 w-full z-50 p-4 border-t border-white/10 backdrop-blur-xl bg-black/60"
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
-              <h2 className="heading-md mb-6 text-center">
-                Difficulty Level
-              </h2>
-              
-              <div className="mb-8">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="body-md">
-                    {difficultyLabels[difficulty - 1]}
-                  </span>
-                  <span className="text-3xl font-bold" style={{
-                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>
-                    {difficulty}/10
-                  </span>
-                </div>
+              <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 justify-between">
                 
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={difficulty}
-                  onChange={(e) => setDifficulty(parseInt(e.target.value))}
-                  className="glass-slider w-full"
-                />
-                
-                <div className="flex justify-between mt-2">
-                  {[1, 5, 10].map((level) => (
-                    <button
-                      key={level}
-                      onClick={() => setDifficulty(level)}
-                      className="caption hover:text-white transition-colors"
-                    >
-                      {level === 1 && 'Easy'}
-                      {level === 5 && 'Medium'}
-                      {level === 10 && 'Expert'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Progress Preview */}
-              <div className="glass-card bg-opacity-50 p-4 mb-6">
-                <div className="flex items-center gap-4 mb-3">
-                  <div 
-                    className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
-                    style={{ background: engineeringRoles.find(r => r.id === selectedRole)?.color }}
-                  >
-                    {engineeringRoles.find(r => r.id === selectedRole)?.title.charAt(0)}
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-sm mb-1">
-                      {engineeringRoles.find(r => r.id === selectedRole)?.title}
+                <div className="flex-1 w-full">
+                    <div className="flex justify-between mb-2 text-sm font-medium">
+                        <span>Difficulty: {difficultyLabels[difficulty - 1]}</span>
+                        <span className="text-blue-400">{difficulty}/10</span>
                     </div>
-                    <div className="glass-progress">
-                      <motion.div
-                        className="glass-progress-bar"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${difficulty * 10}%` }}
-                        transition={{ duration: 0.5 }}
-                      />
-                    </div>
-                  </div>
-                  <div className="text-sm text-right">
-                    <div className="font-bold">Level {difficulty}</div>
-                    <div className="caption">{difficultyLabels[difficulty - 1]}</div>
-                  </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="10"
+                      value={difficulty}
+                      onChange={(e) => setDifficulty(parseInt(e.target.value))}
+                      className="w-full"
+                    />
                 </div>
-              </div>
 
-              {/* Start Button */}
-              <motion.button
-                className="glass-button-primary w-full text-lg py-4"
-                onClick={handleStartInterview}
-                disabled={isStarting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {isStarting ? 'Preparing Interview...' : 'Start Interview'}
-              </motion.button>
+                <motion.button
+                  className="glass-button-primary px-8 py-3 whitespace-nowrap w-full md:w-auto text-lg font-semibold"
+                  onClick={handleStartInterview}
+                  disabled={isStarting}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {isStarting ? 'Preparing...' : 'Start Interview'}
+                </motion.button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Features Footer */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { title: 'Adaptive', desc: 'AI adjusts to your level' },
-              { title: 'Unlimited', desc: '224M+ unique questions' },
-              { title: 'Instant', desc: '<30ms response time' }
-            ].map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                className="glass-card text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + i * 0.1 }}
-              >
-                <div className="font-semibold mb-1">{feature.title}</div>
-                <div className="caption">{feature.desc}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        
+        {/* Spacer for fixed bottom bar */}
+        {selectedRole && <div className="h-32"></div>}
 
       </div>
     </div>
