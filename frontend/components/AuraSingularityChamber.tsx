@@ -25,6 +25,7 @@ export default function AuraSingularityChamber({
 }) {
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCamOn, setIsCamOn] = useState(true);
+  const [isOffline, setIsOffline] = useState(false); // New Offline State
   
   // Camera Selection State
   const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
@@ -107,6 +108,16 @@ export default function AuraSingularityChamber({
     setIsStreaming(true);
 
     try {
+
+      if (isOffline) {
+        // Offline Mock Response
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
+        const mockResponse = "That is an interesting perspective. Could you elaborate on how you would handle edge cases in that scenario? Specifically regarding system scalability.";
+        
+        setChatHistory(prev => [...prev, { role: 'ai', content: mockResponse }]);
+        speakWithRadioEffect(mockResponse);
+        return;
+      }
 
       const res = await fetch(`${API_URL}/api/stream`, {
         method: 'POST',
@@ -267,6 +278,14 @@ export default function AuraSingularityChamber({
 
   const startSession = async () => {
     try {
+      if (isOffline) {
+        setAiThought("Offline Mode: Initializing Simulation...");
+        const mockQuestion = `Since we are in offline mode, let's proceed with a standard evaluation. Tell me about your experience with ${role} and a challenging problem you solved recently.`;
+        setAiThought(mockQuestion);
+        speakWithRadioEffect(mockQuestion);
+        return;
+      }
+
       setAiThought("Establishing Neural Handshake...");
       const res = await fetch(`${API_URL}/api/start-session`, {
         method: 'POST',
@@ -394,7 +413,15 @@ export default function AuraSingularityChamber({
 
       } catch (e) {
         console.error("Forge failed", e);
-        setAiThought("Neural Link Failed. Offline Mode.");
+        setAiThought("Neural Link Failed. Switching to Offline Mode.");
+        setIsOffline(true);
+        sessionId.current = "offline_session_" + Date.now();
+        setActiveSessionId(sessionId.current);
+        
+        // Auto-start in offline mode
+        if (!showConsentModal) {
+            setTimeout(() => startSession(), 1500);
+        }
       }
     };
     
