@@ -1,0 +1,45 @@
+{
+  "name": "neuroprep-ai",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "dev:turbo": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "stitch:mcp": "echo 'Stitching MCP priors...' && node scripts/stitch.js",
+    "aura-bench": "echo 'Running Gaussian Splat benchmarks...' && node scripts/bench.js",
+    "test:zenith": "jest backend/tests/zenith.test.ts",
+    "deploy:zenith": "echo 'Deploying to Vercel (Zenith)...' && vercel --prod",
+    "weaver": "npx tsx scripts/weaver.ts",
+    "forge:live": "npx tsx scripts/forge_live.ts",
+    "test:jest": "jest --coverage --watchAll=false",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "deploy:vercel": "vercel --prod",
+    "deploy:backend": "cd backend && vercel --prod",
+    "deploy:frontend": "cd frontend && vercel --prod",
+    "seed:db": "psql $DATABASE_URL -f backend/seed.sql"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.10.6",
+    "@types/pg": "^8.15.6",
+    "concurrently": "^8.2.2",
+    "cypress": "^13.6.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "tsx": "^4.20.6",
+    "turbo": "^1.11.3",
+    "typescript": "^5.3.3",
+    "vercel": "^33.0.1"
+  },
+  "dependencies": {
+    "express-mysql-session": "^3.0.3",
+    "express-session": "^1.18.2"
+  }
+}
