@@ -35,23 +35,24 @@ export default function AuraSingularityChamber({
   useEffect(() => {
     const getDevices = async () => {
       try {
+        // Simple device enumeration - don't force selection unless user chooses
         if (!navigator?.mediaDevices?.enumerateDevices) return;
         const devices = await navigator.mediaDevices.enumerateDevices();
         const cameras = devices.filter(device => device.kind === 'videoinput');
         setVideoDevices(cameras);
-
-        // Robust Laptop/Front Camera Detection
-        const preferredCamera = cameras.find(camera => 
-          camera.label.toLowerCase().includes('integrated') || 
-          camera.label.toLowerCase().includes('facetime') ||
-          camera.label.toLowerCase().includes('front') ||
-          camera.label.toLowerCase().includes('built-in')
+        
+        // STRICT: Prioritize Laptop/Integrated Camera as requested
+        const laptopCam = cameras.find(c => 
+          c.label.toLowerCase().includes('integrated') || 
+          c.label.toLowerCase().includes('facetime') || 
+          c.label.toLowerCase().includes('front') ||
+          c.label.toLowerCase().includes('built-in')
         );
-
-        if (preferredCamera) {
-          setSelectedDeviceId(preferredCamera.deviceId);
+        
+        if (laptopCam) {
+           setSelectedDeviceId(laptopCam.deviceId);
         } else if (cameras.length > 0) {
-          setSelectedDeviceId(cameras[0].deviceId);
+           setSelectedDeviceId(cameras[0].deviceId);
         }
       } catch (e) {
         console.error("Error enumerating devices:", e);
@@ -59,6 +60,8 @@ export default function AuraSingularityChamber({
     };
     getDevices();
   }, []);
+
+  // ... (rest of code)
 
   const [riftIntensity, setRiftIntensity] = useState(0);
   const [interviewerState, setInterviewerState] = useState<'idle' | 'speaking' | 'listening'>('idle');
@@ -185,7 +188,6 @@ export default function AuraSingularityChamber({
   const { data: session } = useSession();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // ... existing state ...
 
   // Defined early to be used in effects
   const speakWithRadioEffect = (text: string) => {
@@ -277,8 +279,8 @@ export default function AuraSingularityChamber({
   const startSession = async () => {
     try {
       if (isOffline) {
-        setAiThought("Offline Mode: Initializing Simulation...");
-        const mockQuestion = `Since we are in offline mode, let's proceed with a standard evaluation. Tell me about your experience with ${role} and a challenging problem you solved recently.`;
+        setAiThought("Offline Protocol Engaged. Initializing Simulation...");
+        const mockQuestion = `Since we are operating in offline mode, let's proceed with a standard evaluation. Tell me about your experience with ${role} and a significant technical challenge you have overcome.`;
         setAiThought(mockQuestion);
         speakWithRadioEffect(mockQuestion);
         return;
@@ -297,14 +299,7 @@ export default function AuraSingularityChamber({
         })
       });
 
-      if (!res.ok) {
-        if (res.status === 403) {
-          setShowLoginModal(true);
-          setAiThought("Access Denied. Authentication Required.");
-          return;
-        }
-        throw new Error('Session start failed');
-      }
+      if (!res.ok) throw new Error('Session start failed');
 
       const reader = res.body?.getReader();
       const decoder = new TextDecoder();
@@ -338,7 +333,19 @@ export default function AuraSingularityChamber({
 
     } catch (e) {
       console.error("Start session failed", e);
-      setAiThought("Neural Handshake Failed.");
+      // AUTOMATIC FALLBACK TO OFFLINE MODE WITH 15s DELAY
+      setAiThought("Searching for Neural Link... (Retrying for 15s)");
+      
+      try {
+        await new Promise(resolve => setTimeout(resolve, 15000));
+      } catch (timeoutErr) {
+        // ignore
+      }
+
+      setAiThought("Connection Unstable. Engaging Offline Protocol...");
+      setIsOffline(true);
+      // Wait 1.5s then retry in offline mode
+      setTimeout(() => startSession(), 1500); 
     }
   };
 
