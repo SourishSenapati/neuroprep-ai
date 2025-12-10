@@ -74,7 +74,7 @@ export default function EnterprisePage() {
   }
 
   return (
-    <div className="apple-bg">
+    <div className="apple-bg h-screen overflow-y-auto">
       <div className="apple-container min-h-screen py-20">
         
         {/* Header */}
@@ -290,7 +290,7 @@ export default function EnterprisePage() {
               background: 'linear-gradient(135deg, #667eea, #764ba2)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
-            }}>$50,000</span>/year
+            }}>₹400,000</span>/year
           </p>
           <p className="text-white/70">
             Custom pricing based on team size and features needed.

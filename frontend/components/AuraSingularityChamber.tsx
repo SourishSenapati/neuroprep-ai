@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { multiAuraSync } from '../lib/multiAuraSync';
 import ARProctorHUD from './ARProctorHUD';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-4frzf87gh-sourish-sennapatis-projects.vercel.app';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-cz9h0gdrr-sourish-sennapatis-projects.vercel.app';
 
 export default function AuraSingularityChamber({ 
   role = 'Software Engineer',
@@ -48,18 +48,31 @@ export default function AuraSingularityChamber({
         const cameras = devices.filter(device => device.kind === 'videoinput');
         setVideoDevices(cameras);
         
-        // STRICT: Prioritize Laptop/Integrated Camera as requested
-        const laptopCam = cameras.find(c => 
-          c.label.toLowerCase().includes('integrated') || 
-          c.label.toLowerCase().includes('facetime') || 
-          c.label.toLowerCase().includes('front') ||
-          c.label.toLowerCase().includes('built-in')
-        );
+        // Filter out virtual cameras first if possible
+        const realCameras = cameras.filter(c => {
+            const l = c.label.toLowerCase();
+            return !l.includes('virtual') && !l.includes('obs') && !l.includes('droidcam') && !l.includes('iriun'); 
+        });
         
-        if (laptopCam) {
-           setSelectedDeviceId(laptopCam.deviceId);
-        } else if (cameras.length > 0) {
-           setSelectedDeviceId(cameras[0].deviceId);
+        const candidateCameras = realCameras.length > 0 ? realCameras : cameras;
+
+        // STRICT: Prioritize Laptop/Integrated Camera, then any Webcam
+        const priorityCam = candidateCameras.find(c => {
+          const l = c.label.toLowerCase();
+          return l.includes('integrated') || l.includes('facetime') || l.includes('front') || l.includes('built-in');
+        });
+
+        const webcam = candidateCameras.find(c => {
+             const l = c.label.toLowerCase();
+             return l.includes('webcam') || l.includes('camera') || l.includes('video');
+        });
+        
+        if (priorityCam) {
+           setSelectedDeviceId(priorityCam.deviceId);
+        } else if (webcam) {
+           setSelectedDeviceId(webcam.deviceId);
+        } else if (candidateCameras.length > 0) {
+           setSelectedDeviceId(candidateCameras[0].deviceId);
         }
       } catch (e) {
         console.error("Error enumerating devices:", e);
@@ -83,19 +96,19 @@ export default function AuraSingularityChamber({
   const bioEnabledRef = useRef(isBioAnalysisEnabled);
   useEffect(() => { bioEnabledRef.current = isBioAnalysisEnabled; }, [isBioAnalysisEnabled]);
   
-  // Auto-start session if no modal
-  useEffect(() => {
-     if (!sessionId.current) {
-         // wait for forge then start
-         const check = setInterval(() => {
-             if (sessionId.current) {
-                 clearInterval(check);
-                 startSession();
-             }
-         }, 500);
-         return () => clearInterval(check);
-     }
-  }, []);
+  // Configuration Modal State
+  const [showConfigModal, setShowConfigModal] = useState(true);
+  const [isInitializing, setIsInitializing] = useState(false);
+
+  const handleManualStart = async () => {
+      setShowConfigModal(false);
+      setIsInitializing(true);
+      if (!sessionId.current) {
+         // Wait a moment if forge is still happening (rare race condition)
+         await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+      startSession();
+  };
 
   // AR Proctor State
   const [isARMode, setIsARMode] = useState(false);
@@ -322,7 +335,7 @@ export default function AuraSingularityChamber({
   const startSession = async () => {
     try {
       if (isOffline) {
-        setAiThought("Offline Protocol Engaged. Initializing Simulation...");
+        setAiThought("Low-Bandwidth Mode Active. Local Neural Core Engaged."); // Mobile-Ready messaging
         const mockQuestion = `Since we are operating in offline mode, let's proceed with a standard evaluation. Tell me about your experience with ${role} and a significant technical challenge you have overcome.`;
         setAiThought(mockQuestion);
         speakWithRadioEffect(mockQuestion);
@@ -376,19 +389,31 @@ export default function AuraSingularityChamber({
 
     } catch (e) {
       console.error("Start session failed", e);
-      // AUTOMATIC FALLBACK TO OFFLINE MODE WITH 15s DELAY
-      setAiThought("Searching for Neural Link... (Retrying for 15s)");
+      // CLOUD CORE FALLBACK
+      setAiThought("Cloud Uplink Unstable. Switching to Local Neural Processor...");
       
       try {
-        await new Promise(resolve => setTimeout(resolve, 15000));
-      } catch (timeoutErr) {
-        // ignore
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Use pseudo-random session ID for offline mode
+        const offlineId = `local_${Date.now()}`;
+        setActiveSessionId(offlineId);
+        setIsOffline(true); // Enable Mock AI Logic
+        setAiThought("Local Neural Processor Active. Privacy-First Mode Engaged.");
+        
+        // Connect Socket mock
+        try {
+          const newSocket = io(API_URL, {
+              transports: ['websocket'],
+              reconnectionAttempts: 0 // Don't try to reconnect if we are going offline
+          });
+          socketRef.current = newSocket;
+        } catch (e) {
+          console.warn("Socket init skipped in offline mode");
+        }
+        
+      } catch (retryError) {
+         setAiThought("Neural Core Initialization Failed.");
       }
-
-      setAiThought("Connection Unstable. Engaging Offline Protocol...");
-      setIsOffline(true);
-      // Wait 1.5s then retry in offline mode
-      setTimeout(() => startSession(), 1500); 
     }
   };
 
@@ -417,9 +442,9 @@ export default function AuraSingularityChamber({
         setActiveSessionId(data.sessionId);
         setAiThought(`Link Forged. Session ID: ${data.sessionId.substr(0, 8)}...`);
         
-        // Auto-start immediately (Bio-Analysis defaults to OFF)
-        console.log("Auto-starting session (Standard Mode)...");
-        startSession();
+        // Ready for user initiation
+        console.log("Link Forged. Waiting for user initiation.");
+        setAiThought("Neural Link Established. Awaiting User Configuration.");
         
         // Connect Socket after forging
         try {
@@ -574,6 +599,72 @@ export default function AuraSingularityChamber({
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden flex flex-col">
+      {/* Neural Interface Configuration Modal (Start Screen) */}
+      <AnimatePresence>
+        {showConfigModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-[60] flex items-center justify-center bg-black/95 backdrop-blur-xl"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="max-w-md w-full bg-gray-900 border border-cyan-500/30 p-8 rounded-2xl shadow-[0_0_50px_rgba(6,182,212,0.15)] text-center"
+            >
+              <div className="w-16 h-16 rounded-full bg-cyan-900/30 flex items-center justify-center mx-auto mb-6 border border-cyan-500/30 animate-pulse">
+                <Brain className="w-8 h-8 text-cyan-400" />
+              </div>
+              
+              <h2 className="text-2xl font-bold text-white mb-2 tracking-wide font-mono">NEURAL_INTERFACE_V2</h2>
+              <p className="text-gray-400 mb-8 text-sm">
+                 Establish link with {role} Persona. <br/>
+                 Configure biometric telemetry options.
+              </p>
+
+              <div className="bg-black/40 rounded-xl p-4 mb-8 text-left space-y-4 border border-white/5">
+                 <label className="flex items-center justify-between cursor-pointer group">
+                    <div className="flex items-center gap-3">
+                       <div className={`w-10 h-6 rounded-full p-1 transition-colors ${isBioAnalysisEnabled ? 'bg-cyan-600' : 'bg-gray-700'}`}>
+                          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${isBioAnalysisEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
+                       </div>
+                       <div>
+                          <span className="text-sm font-bold text-gray-200 block">Bio-Metric Analysis</span>
+                          <span className="text-[10px] text-gray-500 uppercase tracking-wider">Gaze Tracking • Stress Detection</span>
+                       </div>
+                    </div>
+                    
+                    <input 
+                      type="checkbox" 
+                      className="hidden"
+                      checked={isBioAnalysisEnabled || false}
+                      onChange={(e) => setIsBioAnalysisEnabled(e.target.checked)}
+                    />
+                 </label>
+                 
+                 <div className="flex items-center gap-3 opacity-50 cursor-not-allowed">
+                     <div className="w-10 h-6 rounded-full bg-cyan-900/20 p-1">
+                        <div className="w-4 h-4 bg-gray-600 rounded-full" />
+                     </div>
+                     <div>
+                        <span className="text-sm font-bold text-gray-500 block">Voice Spectrum Analysis</span>
+                        <span className="text-[10px] text-gray-600 uppercase tracking-wider">Tone • Pitch (Always On)</span>
+                     </div>
+                 </div>
+              </div>
+
+              <button
+                onClick={handleManualStart}
+                className="w-full py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition-all active:scale-95 tracking-widest text-sm"
+              >
+                INITIALIZE SESSION
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Glitch Overlay */}
       {glitchActive && (
         <div className="absolute inset-0 z-40 pointer-events-none mix-blend-exclusion bg-red-500/20">
@@ -751,7 +842,7 @@ export default function AuraSingularityChamber({
               </div>
             </>
           ) : (
-             <div className="absolute bottom-1 left-1 text-[10px] text-gray-500 font-mono">BIO-HASH: DISABLED</div>
+             <div className="absolute bottom-1 left-1 text-[10px] text-gray-600 font-mono opacity-50">BIO-AUTH: OFF</div>
           )}
         </div>
 
@@ -1016,11 +1107,14 @@ export default function AuraSingularityChamber({
               <div className="mt-auto pt-6 border-t border-white/10 flex justify-end gap-4">
                  <button 
                    onClick={() => window.location.href = '/dashboard'}
-                   className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all"
+                   className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all border border-white/10"
                  >
-                   View Dashboard
+                   Save Progress to Dashboard
                  </button>
-                 <button className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-all font-bold shadow-lg shadow-purple-500/20">
+                 <button 
+                   onClick={() => window.location.href = '/pricing'}
+                   className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-all font-bold shadow-lg shadow-purple-500/20"
+                 >
                    Unlock Detailed Analysis (Pro)
                  </button>
               </div>

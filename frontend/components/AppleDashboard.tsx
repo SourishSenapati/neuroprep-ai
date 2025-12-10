@@ -181,6 +181,22 @@ export default function AppleDashboard({ performance, interviewSessionCount, onS
             ))}
           </div>
         </div>
+
+        {/* Recommended Paths (Mobile Ready) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[
+                { title: 'TCS NQT Ready', desc: 'Specific patterns for TCS National Qualifier Test.', icon: '🏢' },
+                { title: 'Infosys Power Programmer', desc: 'Crack the toughest coding rounds.', icon: '💻' },
+                { title: 'Product & Service', desc: 'Balanced prep for both company types.', icon: '⚖️' }
+            ].map((path, i) => (
+               <div key={i} className="border border-white/10 p-6 hover:border-cyan-500/50 transition-colors group cursor-pointer bg-white/5 backdrop-blur-sm">
+                  <div className="text-2xl mb-4 group-hover:scale-110 transition-transform duration-300 transform">{path.icon}</div>
+                  <h3 className="font-bold text-white mb-2">{path.title}</h3>
+                  <p className="text-xs text-gray-400">{path.desc}</p>
+               </div>
+            ))}
+        </div>
+
       </div>
     </div>
   );
