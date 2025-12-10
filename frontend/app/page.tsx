@@ -1,22 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import '@/styles/apple-glass.css';
 
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // Prevent hydration mismatch
+
   return (
-    <div className="apple-bg min-h-screen flex flex-col">
-      <main className="flex-grow flex flex-col justify-center relative overlow-hidden">
+    <div className="apple-bg min-h-screen flex flex-col overflow-y-auto overflow-x-hidden">
+      <main className="flex-grow flex flex-col justify-center relative w-full">
         
-        {/* Background Gradients */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        {/* Background Gradients - Fixed position to allow scrolling content over it */}
+        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px]" />
            <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[120px]" />
         </div>
 
-        <div className="apple-container relative z-10 py-20 text-center">
+        <div className="apple-container relative z-10 py-20 text-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}
           <motion.div 
@@ -76,7 +84,7 @@ export default function HomePage() {
 
           {/* Metrics Grid */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-20"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -93,13 +101,32 @@ export default function HomePage() {
               </div>
             ))}
           </motion.div>
+          
+           {/* Features Section - Added to make page longer and scrollable */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 py-20 text-left"
+          >
+             {[
+               { title: 'TCS NQT Ready', desc: 'Specific patterns for TCS National Qualifier Test.' },
+               { title: 'Infosys Power Programmer', desc: 'Crack the toughest coding rounds.' },
+               { title: 'Product & Service', desc: 'Balanced prep for both company types.' }
+             ].map((f, i) => (
+               <div key={i} className="glass-card p-8">
+                 <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
+                 <p className="text-white/60">{f.desc}</p>
+               </div>
+             ))}
+          </motion.div>
 
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-8 mt-auto backdrop-blur-sm">
-        <div className="apple-container flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
+      <footer className="border-t border-white/5 py-8 mt-auto backdrop-blur-sm relative z-10">
+        <div className="apple-container flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p>© 2025 NeuroPrep AI. Crafted for Excellence.</p>
           <div className="flex gap-6">
             <span>Optimized for low-bandwidth</span>
