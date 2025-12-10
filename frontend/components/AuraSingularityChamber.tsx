@@ -4,13 +4,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 const Webcam = dynamic(() => import('react-webcam') as any, { ssr: false }) as any;
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, Video, VideoOff, Brain, AlertTriangle, CheckCircle, XCircle, Scan, MessageSquare, Send, Sparkles } from 'lucide-react';
+import { Mic, MicOff, Video, VideoOff, Brain, AlertTriangle, CheckCircle, XCircle, Scan, MessageSquare, Send, Sparkles, Volume2 } from 'lucide-react';
 import { io, Socket } from 'socket.io-client';
 import { useSession, signIn } from 'next-auth/react';
 import Image from 'next/image';
 
 import { multiAuraSync } from '../lib/multiAuraSync';
 import ARProctorHUD from './ARProctorHUD';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-cz9h0gdrr-sourish-sennapatis-projects.vercel.app';
 
 export default function AuraSingularityChamber({ 
   role = 'Software Engineer',
@@ -105,7 +107,8 @@ export default function AuraSingularityChamber({
     setIsStreaming(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/stream', {
+
+      const res = await fetch(`${API_URL}/api/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -265,7 +268,7 @@ export default function AuraSingularityChamber({
   const startSession = async () => {
     try {
       setAiThought("Establishing Neural Handshake...");
-      const res = await fetch('http://localhost:5000/api/start-session', {
+      const res = await fetch(`${API_URL}/api/start-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -328,7 +331,7 @@ export default function AuraSingularityChamber({
       try {
         if (!userId.current) return;
 
-        const res = await fetch('http://localhost:5000/api/forge-link', {
+        const res = await fetch(`${API_URL}/api/forge-link`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -355,7 +358,8 @@ export default function AuraSingularityChamber({
         
         // Connect Socket after forging
         try {
-          socketRef.current = io('http://localhost:5000/nexus-sync', {
+          socketRef.current = io(API_URL.replace('/api', ''), { // Remove /api if present for socket base
+            path: '/nexus-sync',
             reconnectionAttempts: 3, 
             timeout: 5000 
           });
@@ -442,7 +446,7 @@ export default function AuraSingularityChamber({
     if (!sessionId.current) return;
     try {
       setAiThought("Terminating Neural Link... Compiling Report...");
-      const res = await fetch('http://localhost:5000/api/end-session', {
+      const res = await fetch(`${API_URL}/api/end-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId: sessionId.current, userId: userId.current })
@@ -689,6 +693,15 @@ export default function AuraSingularityChamber({
             title="Toggle AR Proctor HUD"
           >
             <Scan className="w-6 h-6" />
+          </button>
+
+          {/* Read Aloud Toggle */}
+          <button
+            onClick={() => speakWithRadioEffect(aiThought)}
+            className={`p-4 rounded-full border bg-white/10 border-white/20 text-white hover:scale-105 transition-all`}
+            title="Read Question Aloud"
+          >
+            <Volume2 className="w-6 h-6" />
           </button>
 
           {/* Chat Toggle */}
