@@ -2,12 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import '@/styles/apple-glass.css';
 
 export default function AppleHomePage() {
-  const router = useRouter();
-
   return (
     <div className="apple-bg">
       <div className="apple-container min-h-screen">
@@ -77,23 +75,25 @@ export default function AppleHomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            <motion.button
-              className="glass-button-primary text-lg px-8 py-4"
-              onClick={() => router.push('/interview/setup')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Interview
-            </motion.button>
+            <Link href="/interview/setup">
+              <motion.button
+                className="glass-button-primary text-lg px-8 py-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Start Interview
+              </motion.button>
+            </Link>
             
-            <motion.button
-              className="glass-button text-lg px-8 py-4"
-              onClick={() => router.push('/dashboard')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Dashboard
-            </motion.button>
+            <Link href="/dashboard">
+              <motion.button
+                className="glass-button text-lg px-8 py-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View Dashboard
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Stats */}
@@ -253,14 +253,15 @@ export default function AppleHomePage() {
             <p className="body-lg mb-8">
               Join thousands of engineers mastering their interview skills with AI-powered precision.
             </p>
-            <motion.button
-              className="glass-button-primary text-xl px-12 py-5"
-              onClick={() => router.push('/interview/setup')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Begin Your Journey
-            </motion.button>
+            <Link href="/interview/setup">
+              <motion.button
+                className="glass-button-primary text-xl px-12 py-5"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Begin Your Journey
+              </motion.button>
+            </Link>
           </div>
         </motion.section>
 
@@ -275,8 +276,8 @@ export default function AppleHomePage() {
             NeuroPrep AI - The Future of Engineering Interviews
           </p>
           <div className="flex gap-6 justify-center">
-            <a href="/dashboard" className="caption hover:text-white transition-colors">Dashboard</a>
-            <a href="/interview/setup" className="caption hover:text-white transition-colors">Start Interview</a>
+            <Link href="/dashboard" className="caption hover:text-white transition-colors">Dashboard</Link>
+            <Link href="/interview/setup" className="caption hover:text-white transition-colors">Start Interview</Link>
           </div>
         </motion.footer>
 
