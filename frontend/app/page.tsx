@@ -17,7 +17,7 @@ export default function AppleHomePage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Floating Icon */}
+          {/* Floating Icon - Tricolor Accent */}
           <motion.div
             className="mb-8"
             animate={{
@@ -32,29 +32,36 @@ export default function AppleHomePage() {
             <div 
               className="w-32 h-32 rounded-3xl flex items-center justify-center text-6xl font-bold text-white"
               style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                boxShadow: '0 20px 60px rgba(102, 126, 234, 0.4)'
+                background: 'linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%)', // India Flag Gradient Inspiration
+                boxShadow: '0 20px 60px rgba(255, 153, 51, 0.3)'
               }}
             >
-              NP
+              <div className="bg-black/20 w-full h-full rounded-3xl flex items-center justify-center backdrop-blur-sm">
+                NP
+              </div>
             </div>
           </motion.div>
 
           {/* Main Headline */}
+          <div className="mb-4 flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="text-sm font-medium text-white/90">Placement Season Ready 2025</span>
+          </div>
+
           <motion.h1
             className="heading-xl max-w-5xl mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Master Engineering
+            Crack Your Dream
             <br />
             <span style={{
-              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              background: 'linear-gradient(135deg, #FF9933, #138808)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>
-              Interviews with AI
+              Engineering Package
             </span>
           </motion.h1>
 
@@ -64,8 +71,10 @@ export default function AppleHomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            The world's most advanced interview platform with 224+ million unique questions.
-            Adaptive AI that evolves with your performance. Zero repetition guaranteed.
+            Better than LeetCode. Designed for Indian placements. 
+            From <strong>TCS/Infosys</strong> to <strong>Google/Amazon</strong>.
+            <br/>
+            Works flawlessly on 4G/5G mobile data.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -81,17 +90,17 @@ export default function AppleHomePage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Start Interview
+                Start Practicing (Free)
               </motion.button>
             </Link>
             
-            <Link href="/dashboard">
+            <Link href="/pricing">
               <motion.button
                 className="glass-button text-lg px-8 py-4"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View Dashboard
+                View Plans (₹ Pricing)
               </motion.button>
             </Link>
           </motion.div>
@@ -104,9 +113,9 @@ export default function AppleHomePage() {
             transition={{ delay: 0.8, duration: 0.6 }}
           >
             {[
-              { value: '224M+', label: 'Questions' },
-              { value: '99.9%', label: 'Unique' },
-              { value: '<30ms', label: 'Response' }
+              { value: '45L+', label: 'Highest Package Cracked' },
+              { value: 'IIT/NIT', label: 'Curriculum Aligned' },
+              { value: 'Offline', label: 'Works without Net' }
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -116,9 +125,9 @@ export default function AppleHomePage() {
                 transition={{ delay: 1 + i * 0.1 }}
               >
                 <div 
-                  className="text-4xl font-bold mb-2"
+                  className="text-3xl font-bold mb-2"
                   style={{
-                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                    background: 'linear-gradient(135deg, #FF9933, #FFFFFF)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
                   }}
@@ -140,39 +149,39 @@ export default function AppleHomePage() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="heading-lg text-center mb-16">
-            Designed for Excellence
+            Engineered for Indian Success
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Adaptive Difficulty',
-                description: 'AI analyzes your performance and adjusts question difficulty in real-time.',
-                color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                title: 'Data-Saver Mode',
+                description: 'Optimized for Jio/Airtel 4G. Uses 50x less data than video tutorials.',
+                color: 'linear-gradient(135deg, #138808 0%, #2ECC71 100%)'
               },
               {
-                title: 'Infinite Questions',
-                description: 'Quantum-inspired RNG generates 224+ million unique questions across 47 engineering roles.',
-                color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+                title: 'Company Specific',
+                description: 'Banks for TCS NQT, Wipro Elite, Amazon SDE, and Google India.',
+                color: 'linear-gradient(135deg, #FF9933 0%, #FF512F 100%)'
               },
               {
-                title: 'Performance Analytics',
-                description: 'Track your progress with detailed insights and improvement recommendations.',
+                title: 'All Branches',
+                description: 'CS, IT, ECE, EEE, Mech, Civil - We cover core engineering subjects too.',
                 color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
               },
               {
-                title: 'Instant Feedback',
-                description: 'Get immediate technical evaluations with <30ms response time.',
+                title: 'Campus Mode',
+                description: 'Simulates high-pressure campus drive environments.',
                 color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
               },
               {
-                title: 'Zero Repetition',
-                description: '99.9% uniqueness guarantee with advanced collision detection.',
+                title: 'Beat the Interviewer',
+                description: 'AI trains you to handle trick questions common in Indian HR rounds.',
                 color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
               },
               {
-                title: 'Universal Coverage',
-                description: 'Software, civil, mechanical, electrical, and chemical engineering disciplines.',
+                title: 'Placement Guarantee',
+                description: 'Follow our roadmap to secure at least one offer letter.',
                 color: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
               }
             ].map((feature, i) => (
@@ -210,17 +219,17 @@ export default function AppleHomePage() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="heading-lg text-center mb-6">
-            47 Engineering Roles
+            Target Top Companies
           </h2>
           <p className="body-md text-center mb-12 max-w-2xl mx-auto">
-            From frontend development to chemical engineering, we cover every discipline with precision.
+            Prepare for specific company patterns and difficulty levels.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center max-w-5xl mx-auto">
             {[
-              'Frontend', 'Backend', 'Fullstack', 'DevOps', 'ML/AI', 'Mobile',
-              'Security', 'Data', 'Cloud', 'Embedded', 'Civil', 'Mechanical',
-              'Electrical', 'Chemical', 'Robotics', 'IoT', 'Blockchain', 'AR/VR'
+              'TCS', 'Infosys', 'Wipro', 'Accenture', 'Cognizant', 'Zoho',
+              'Flipkart', 'Amazon India', 'Google India', 'Microsoft IDC',
+              'Swiggy', 'Zomato', 'Paytm', 'Reliance', 'Tata Motors'
             ].map((role, i) => (
               <motion.div
                 key={role}
@@ -248,10 +257,10 @@ export default function AppleHomePage() {
         >
           <div className="glass-card max-w-4xl mx-auto p-12">
             <h2 className="heading-lg mb-6">
-              Ready to Excel?
+              Ready for Placement Season?
             </h2>
             <p className="body-lg mb-8">
-              Join thousands of engineers mastering their interview skills with AI-powered precision.
+              Join thousands of Indian engineering students securing 10LPA+ packages.
             </p>
             <Link href="/interview/setup">
               <motion.button
@@ -259,7 +268,7 @@ export default function AppleHomePage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Begin Your Journey
+                Start Preparation
               </motion.button>
             </Link>
           </div>
@@ -273,7 +282,7 @@ export default function AppleHomePage() {
           viewport={{ once: true }}
         >
           <p className="caption mb-4">
-            NeuroPrep AI - The Future of Engineering Interviews
+            Made with ❤️ in India for the World.
           </p>
           <div className="flex gap-6 justify-center">
             <Link href="/dashboard" className="caption hover:text-white transition-colors">Dashboard</Link>
