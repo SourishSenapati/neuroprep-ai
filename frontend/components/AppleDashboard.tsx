@@ -182,17 +182,35 @@ export default function AppleDashboard({ performance, interviewSessionCount, onS
           </div>
         </div>
 
-        {/* Recommended Paths (Mobile Ready) */}
+        {/* Engineering Excellence Paths (Motivational & Universal) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {[
-                { title: 'TCS NQT Ready', desc: 'Specific patterns for TCS National Qualifier Test.', icon: '🏢' },
-                { title: 'Infosys Power Programmer', desc: 'Crack the toughest coding rounds.', icon: '💻' },
-                { title: 'Product & Service', desc: 'Balanced prep for both company types.', icon: '⚖️' }
+                { 
+                    title: 'TCS NQT Mastery', 
+                    desc: 'Conquer the National Qualifier Test with precision. Your gateway to engineering excellence.', 
+                    icon: '🎯',
+                    gradient: 'from-blue-600 to-cyan-500'
+                },
+                { 
+                    title: 'Elite Technical Mastery', 
+                    desc: 'Master complex problem-solving across all engineering domains. Build unshakeable confidence.', 
+                    icon: '⚡',
+                    gradient: 'from-purple-600 to-pink-500'
+                },
+                { 
+                    title: 'Universal Engineering Path', 
+                    desc: 'Excel in product companies, service giants, and startups. Your complete preparation companion.', 
+                    icon: '🚀',
+                    gradient: 'from-orange-600 to-red-500'
+                }
             ].map((path, i) => (
-               <div key={i} className="border border-white/10 p-6 hover:border-cyan-500/50 transition-colors group cursor-pointer bg-white/5 backdrop-blur-sm">
-                  <div className="text-2xl mb-4 group-hover:scale-110 transition-transform duration-300 transform">{path.icon}</div>
-                  <h3 className="font-bold text-white mb-2">{path.title}</h3>
-                  <p className="text-xs text-gray-400">{path.desc}</p>
+               <div key={i} className={`border border-white/10 p-6 hover:border-cyan-500/50 transition-all group cursor-pointer bg-gradient-to-br ${path.gradient} bg-opacity-10 hover:bg-opacity-20 relative overflow-hidden`}>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">{path.icon}</div>
+                    <h3 className="font-bold text-white mb-2 text-lg">{path.title}</h3>
+                    <p className="text-xs text-gray-300 leading-relaxed">{path.desc}</p>
+                  </div>
                </div>
             ))}
         </div>
