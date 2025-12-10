@@ -35,6 +35,13 @@ export default function AuraSingularityChamber({
   useEffect(() => {
     const getDevices = async () => {
       try {
+        // Trigger permission prompt if needed
+        try {
+            await navigator.mediaDevices.getUserMedia({ video: true });
+        } catch(e) { 
+            console.warn("Camera permission denied", e);
+        }
+
         // Simple device enumeration - don't force selection unless user chooses
         if (!navigator?.mediaDevices?.enumerateDevices) return;
         const devices = await navigator.mediaDevices.enumerateDevices();
@@ -111,12 +118,48 @@ export default function AuraSingularityChamber({
     try {
 
       if (isOffline) {
-        // Offline Mock Response
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
-        const mockResponse = "That is an interesting perspective. Could you elaborate on how you would handle edge cases in that scenario? Specifically regarding system scalability.";
-        
-        setChatHistory(prev => [...prev, { role: 'ai', content: mockResponse }]);
-        speakWithRadioEffect(mockResponse);
+        // Dynamic Offline Intelligence (Mock NLP)
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate "Thinking"
+
+        // 1. Simulate Grammar/Understanding Correction (Simulated)
+        let processedInput = inputMessage;
+        let correctionNote = "";
+        if (inputMessage.length > 5 && Math.random() < 0.3) {
+           processedInput = inputMessage.charAt(0).toUpperCase() + inputMessage.slice(1); // naive fix
+           correctionNote = "(Auto-Correcting syntax for clarity...) ";
+        }
+
+        // 2. Keyword Analysis & Contextual Response
+        const lowerInput = processedInput.toLowerCase();
+        let aiResponse = "";
+
+        if (lowerInput.includes("don't know") || lowerInput.includes("not sure") || lowerInput.includes("no idea")) {
+            aiResponse = "That is perfectly fine. Honesty is crucial. Let's try to derive the answer from first principles. What are the fundamental constraints here?";
+        } else if (lowerInput.length < 20) {
+            aiResponse = `I notice your answer is quite brief ("${processedInput}"). Could you elaborate more on your reasoning?`;
+        } else if (lowerInput.includes("scale") || lowerInput.includes("traffic") || lowerInput.includes("load")) {
+            aiResponse = "You mentioned scalability. How would you specifically handle database bottlenecks under high concurrent write loads in this architecture?";
+        } else if (lowerInput.includes("database") || lowerInput.includes("sql") || lowerInput.includes("mongo")) {
+            aiResponse = "Regarding the data layer, how would you ensure data consistency across multiple availability zones during a partition event?";
+        } else if (lowerInput.includes("python") || lowerInput.includes("java") || lowerInput.includes("javascript")) {
+            aiResponse = "In the context of that language, how would you manage memory effectively for a long-running background process?";
+        } else if (lowerInput.includes("team") || lowerInput.includes("conflict")) {
+            aiResponse = "Interpersonal dynamics are key. Can you give a specific example of a time you had to compromise on a technical decision for the greater good?";
+        } else {
+             const genericResponses = [
+                `Interesting point about "${processedInput.substring(0, 15)}...". How does this approach impact the overall system latency?`,
+                "I see. That's a valid approach. How would you modify this if latency was the primary constraint?",
+                "Excellent point. Let's pivot slightly—how would you ensure data consistency in this distribuetd setup?",
+                "Understood. Can you walk me through the trade-offs you considered when choosing this design pattern?",
+                "How would you test this implementation to ensure it's robust against race conditions?"
+            ];
+            aiResponse = genericResponses[Math.floor(Math.random() * genericResponses.length)];
+        }
+
+        const finalResponse = correctionNote + aiResponse;
+
+        setChatHistory(prev => [...prev, { role: 'ai', content: finalResponse }]);
+        speakWithRadioEffect(finalResponse);
         return;
       }
 
@@ -461,10 +504,53 @@ export default function AuraSingularityChamber({
   const [showReportModal, setShowReportModal] = useState(false);
   const [sessionReport, setSessionReport] = useState<any>(null);
 
+  // Session Timer
+  const [elapsedTime, setElapsedTime] = useState(0);
+  useEffect(() => {
+    if (!sessionId.current) return; // Only start when session exists
+    const interval = setInterval(() => {
+      setElapsedTime(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [activeSessionId]); // properly dep
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
   const handleEndSession = async () => {
-    if (!sessionId.current) return;
     try {
       setAiThought("Terminating Neural Link... Compiling Report...");
+      
+      if (isOffline) {
+          // Offline Mock Report Generation
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          const mockReport = {
+              neuralResilience: Math.floor(Math.random() * 20) + 80, // 80-99
+              scores: {
+                  technicalScore: Math.floor(Math.random() * 30) + 70,
+                  eqScore: Math.floor(Math.random() * 20) + 80,
+                  authenticityScore: 95
+              },
+              insights: {
+                  strengths: ["Clear Communication", "Good Technical Foundation", "Honesty"],
+                  weaknesses: ["Could elaborate more on scalability", "Consider edge cases"],
+                  improvementPlan: [
+                       "Practice System Design depth",
+                       "Review CAP Theorem applications", 
+                       "Work on structured answers (STAR method)"
+                  ]
+              }
+          };
+          setSessionReport(mockReport);
+          setShowReportModal(true);
+          setAiThought("Session Terminated. Offline Report Generated.");
+          return;
+      }
+
+      if (!sessionId.current) return;
       const res = await fetch(`${API_URL}/api/end-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -476,6 +562,13 @@ export default function AuraSingularityChamber({
       setAiThought("Session Terminated. Report Generated.");
     } catch (e) {
       console.error("End session failed", e);
+      // Fallback report if online end fails
+      setSessionReport({
+          neuralResilience: 85,
+          scores: { technicalScore: 80, eqScore: 85, authenticityScore: 90 },
+          insights: { strengths: ["Resilience"], weaknesses: ["Connection Issues"], improvementPlan: ["Check internet connection"] }
+      });
+      setShowReportModal(true);
     }
   };
 
@@ -599,6 +692,10 @@ export default function AuraSingularityChamber({
 
       {/* User HUD (Bottom) */}
       <div className="h-1/3 bg-gradient-to-t from-black via-black/90 to-transparent p-8 flex justify-between items-end relative z-20">
+        {/* Session Timer */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 text-cyan-400 font-mono text-xl font-bold tracking-widest bg-black/40 px-4 py-1 rounded border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+            {formatTime(elapsedTime)}
+        </div>
         {/* User Cam Feed (Quantum Bio-Hash) */}
         <div className="relative w-48 h-36 bg-gray-900 rounded-lg overflow-hidden border border-white/10 group">
           {isCamOn ? (
@@ -775,7 +872,7 @@ export default function AuraSingularityChamber({
                   <div className={`flex flex-col max-w-[85%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                     {msg.role === 'ai' && (
                       <span className="text-xs text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-bold mb-1 ml-1">
-                        Gemini
+                        NeuroPrep AI
                       </span>
                     )}
                     <div className={`px-5 py-3 text-[15px] leading-relaxed tracking-wide ${

@@ -8,7 +8,7 @@ import '@/styles/apple-glass.css';
 const pricingPlans = [
   {
     name: 'Free',
-    price: '$0',
+    price: { monthly: '₹0', annual: '₹0' },
     period: 'forever',
     description: 'Perfect for trying out NeuroPrep AI',
     features: [
@@ -28,8 +28,8 @@ const pricingPlans = [
   },
   {
     name: 'Pro',
-    price: '$29',
-    period: 'per month',
+    price: { monthly: '₹2,499', annual: '₹23,990' },
+    period: { monthly: 'per month', annual: 'per year' },
     description: 'Unlimited interviews for serious preparation',
     features: [
       'Unlimited interviews',
@@ -48,7 +48,7 @@ const pricingPlans = [
   },
   {
     name: 'Enterprise',
-    price: 'Custom',
+    price: { monthly: 'Custom', annual: 'Custom' },
     period: 'contact us',
     description: 'For universities and companies',
     features: [
@@ -73,12 +73,12 @@ const pricingPlans = [
 const apiPricing = {
   free: {
     calls: '100 calls/month',
-    price: '$0',
+    price: '₹0',
     rateLimit: '10 requests/minute'
   },
   pro: {
     calls: '10,000 calls/month',
-    price: '$0.01 per call after limit',
+    price: '₹1 per call after limit',
     rateLimit: '100 requests/minute'
   },
   enterprise: {
@@ -92,8 +92,8 @@ export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
 
   return (
-    <div className="apple-bg">
-      <div className="apple-container min-h-screen py-20">
+    <div className="apple-bg h-screen overflow-y-auto">
+      <div className="apple-container py-20">
         
         {/* Header */}
         <motion.div
@@ -151,7 +151,10 @@ export default function PricingPage() {
                 <h3 className="heading-md text-2xl mb-2">{plan.name}</h3>
                 <p className="caption mb-4">{plan.description}</p>
                 <div className="mb-2">
-                  <span 
+                  <motion.span 
+                    key={billingPeriod} // Animate currency change
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     className="text-5xl font-bold"
                     style={{
                       background: 'linear-gradient(135deg, #667eea, #764ba2)',
@@ -159,10 +162,12 @@ export default function PricingPage() {
                       WebkitTextFillColor: 'transparent'
                     }}
                   >
-                    {plan.price}
-                  </span>
+                    {plan.price[billingPeriod]}
+                  </motion.span>
                 </div>
-                <p className="caption">{plan.period}</p>
+                <p className="caption">
+                   {typeof plan.period === 'string' ? plan.period : plan.period[billingPeriod]}
+                </p>
               </div>
 
               <ul className="space-y-3 mb-8">
