@@ -87,16 +87,15 @@ export const corsConfig = {
     // Allow requests with no origin (mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
     
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'https://neuroprep-ai.vercel.app',
-      'https://ai-interviewer.vercel.app'
-    ];
-    
-    if (allowedOrigins.includes(origin)) {
+    // Allow all vercel.app subdomains and local development
+    if (
+      origin.includes('localhost') || 
+      origin.endsWith('.vercel.app') || 
+      origin === 'https://neuroprep-ai.vercel.app'
+    ) {
       callback(null, true);
     } else {
+      console.warn(`CORS blocked origin: ${origin}`);
       callback(new Error('Not allowed by CORS'), false);
     }
   },
