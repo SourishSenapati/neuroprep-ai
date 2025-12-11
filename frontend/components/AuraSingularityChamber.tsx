@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { multiAuraSync } from '../lib/multiAuraSync';
 import ARProctorHUD from './ARProctorHUD';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-c7le0xxvj-sourish-sennapatis-projects.vercel.app';
 
 export default function AuraSingularityChamber({ 
   role = 'Software Engineer',
