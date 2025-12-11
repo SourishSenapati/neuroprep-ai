@@ -895,12 +895,15 @@ nexus.on('connection', (socket) => {
   });
 });
 
-// Start server
-const PORT = parseInt(env.PORT);
-httpServer.listen(PORT, () => {
-  console.log(`🚀 NeuroPrep AI Backend running on port ${PORT}`);
-  console.log(`Environment: ${env.NODE_ENV}`);
-  console.log(`CORS Origin: ${env.CORS_ORIGIN}`);
-});
+// Start server (only when not running in serverless environment)
+if (process.env.VERCEL !== '1') {
+  const PORT = parseInt(env.PORT);
+  httpServer.listen(PORT, () => {
+    console.log(`🚀 NeuroPrep AI Backend running on port ${PORT}`);
+    console.log(`Environment: ${env.NODE_ENV}`);
+    console.log(`CORS Origin: ${env.CORS_ORIGIN}`);
+  });
+}
 
 export default app;
+
