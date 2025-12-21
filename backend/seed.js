@@ -14,7 +14,7 @@ const paths = [
     companyTags: ["All Industries", "R&D", "Product Design", "Field Services"],
     difficulty: "All Levels",
     salaryRange: "₹3.5-25 LPA",
-    icon: "�",
+    icon: "🎯",
     skills: ["Critical Thinking", "Precision Engineering", "Core Logic", "Problem-Solving Intuition"]
   },
   {
