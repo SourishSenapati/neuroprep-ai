@@ -74,14 +74,14 @@ export default function HomePage() {
           ))}
         </motion.div>
 
-        {/* CTA Button */}
+        {/* CTA Button - ELECTRIC BLUE = ACTION */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
           <Link href="/interview/setup">
-            <button className="group bg-[#4ADE80] text-black px-8 py-4 rounded-full text-lg font-mono uppercase tracking-widest hover:bg-[#3BC56D] transition-all duration-300 shadow-lg hover:shadow-[#4ADE80]/50">
+            <button className="group bg-[#3B82F6] text-white px-8 py-4 rounded-full text-lg font-mono uppercase tracking-widest hover:bg-[#2563EB] transition-all duration-300 shadow-lg hover:shadow-[#3B82F6]/50">
               Start Your Preparation
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
