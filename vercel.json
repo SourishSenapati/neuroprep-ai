@@ -1,20 +1,15 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "https://neuroprep-backend.vercel.app/api/:path*" }
-  ],
-  "headers": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
-        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
+      "src": "frontend/package.json",
+      "use": "@vercel/next"
     }
   ],
-  "env": {
-    "NEXT_PUBLIC_TFJS_BACKEND": "webgpu",
-    "NEXT_PUBLIC_ENABLE_GAUSSIAN_SPLATS": "true"
-  }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
+  ]
 }
