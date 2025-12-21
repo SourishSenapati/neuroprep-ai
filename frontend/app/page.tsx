@@ -1,7 +1,7 @@
 'use client';
 
 export const dynamic = 'force-dynamic';
-// Deployed: 2025-12-21 16:08 - ALL TCS/Infosys mentions removed
+// Deployed: 2025-12-21 17:40 - FORCE UPDATE VOGUE THEME
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';

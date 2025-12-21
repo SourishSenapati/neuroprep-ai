@@ -40,20 +40,9 @@ const FALLBACK_PATHS = [
 // @route   GET /api/mastery-paths
 // @desc    Get all mastery paths
 router.get('/', async (req, res) => {
-  try {
-    const paths = await MasteryPath.find({});
-    if (paths && paths.length > 0) {
-      res.json(paths);
-    } else {
-      // Return fallback if DB is empty
-      console.log('DB empty, returning fallback paths');
-      res.json(FALLBACK_PATHS);
-    }
-  } catch (error) {
-    console.error('Error fetching mastery paths, returning fallback:', error);
-    // Return fallback data instead of error
-    res.json(FALLBACK_PATHS);
-  }
+  // STRICT MODE: Always return Universal Engineering paths (Fallback) for this hackathon version
+  // This bypasses any legacy data in the generic MongoDB
+  res.json(FALLBACK_PATHS);
 });
 
 export default router;

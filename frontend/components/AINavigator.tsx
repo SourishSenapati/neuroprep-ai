@@ -53,8 +53,7 @@ export default function AINavigator() {
     }
   };
 
-  return (
-    <>
+
   return (
     <>
       <motion.button
