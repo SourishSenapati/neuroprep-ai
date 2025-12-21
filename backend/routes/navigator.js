@@ -5,13 +5,14 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     const { message } = req.body;
     try {
-        if (!process.env.GEMINI_API_KEY) {
+        const apiKey = process.env.GEMINI_API_KEY || 'AlzaSyAW-YXJ6P8TMUoKAlZwskSN9IXkryhwMzk';
+        if (!apiKey) {
             return res.json({ 
-                text: "I can help you navigate! (Note: Gemini API Key missing, strict mode active). Try 'Go to Dashboard'.", 
+                text: "I can help you navigate! (Note: Gemini API Key missing). Try 'Go to Dashboard'.", 
                 action: message.toLowerCase().includes('dashboard') ? { type: 'navigate', path: '/dashboard' } : null 
             });
         }
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
         
         const prompt = `

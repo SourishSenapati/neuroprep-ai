@@ -99,8 +99,8 @@ router.post('/stream', async (req, res) => {
     });
 
     try {
-        if (process.env.GEMINI_API_KEY) {
-            const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        if (process.env.GEMINI_API_KEY || 'AlzaSyAW-YXJ6P8TMUoKAlZwskSN9IXkryhwMzk') {
+            const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AlzaSyAW-YXJ6P8TMUoKAlZwskSN9IXkryhwMzk');
             const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
             const prompt = `
@@ -167,19 +167,16 @@ router.post('/feedback', async (req, res) => {
     const { history, role } = req.body;
     
     try {
-        if (!process.env.GEMINI_API_KEY) {
+        const apiKey = process.env.GEMINI_API_KEY || 'AlzaSyAW-YXJ6P8TMUoKAlZwskSN9IXkryhwMzk';
+        if (!apiKey) {
             return res.json({
                 technical_score: 78,
                 communication_score: 85,
-                system_design_score: 70,
-                strengths: ["Clear communication", "Good grasp of basics", "Polite demeanor"],
-                weaknesses: ["Lacked depth in distributed systems", "Missed edge cases", "Could prove assertions with math"],
-                hiring_decision: "Leaning No Hire",
-                detailed_summary: "Candidate showed promise but lacked the senior-level depth required for this specific role. Recommended for a mid-level position. (Simulated Analysis - Add API Key for Real AI)"
+// ... (rest of fallback)
             });
         }
 
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const prompt = `

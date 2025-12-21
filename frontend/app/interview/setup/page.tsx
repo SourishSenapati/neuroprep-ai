@@ -161,11 +161,7 @@ export default function InterviewSetupPage() {
 
   return (
     <div 
-      className="min-h-screen" 
-      style={{
-        background: 'linear-gradient(135deg, #0a0e1a 0%, #191970 50%, #0a0e1a 100%)',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen bg-void-black apple-bg" 
     >
       {/* Back Button - Luxury Watch Crown Style */}
       <motion.button
