@@ -107,29 +107,49 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Choose Your
-            <span className="text-terminal-green block mt-2">Mastery Path</span>
+            Your Personal
+            <span className="text-terminal-green block mt-2">AI Tutor</span>
           </motion.h1>
 
           <motion.p
-            className="text-muted-silver max-w-2xl mx-auto mb-12 font-light text-lg tracking-wide"
+            className="text-muted-silver max-w-3xl mx-auto mb-8 font-light text-xl tracking-wide leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Elite preparation for every engineering discipline. From campus placements to FAANG interviews.
+            <span className="text-crisp-white font-medium">Adaptive AI-driven preparation</span> that focuses on your weak areas. 
+            Stop wasting time on random practice—let NeuroPrep analyze, guide, and personalize your learning journey.
           </motion.p>
+
+          {/* Value Props */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12 text-sm"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            {[
+              { icon: "🎯", text: "Personalized Questions & Guidance" },
+              { icon: "📊", text: "Identifies Your Weak Areas" },
+              { icon: "🧠", text: "Adapts to You, Not Vice Versa" }
+            ].map((prop, i) => (
+              <div key={i} className="flex items-center gap-3 bg-glass-charcoal/30 border border-white/5 px-4 py-3 backdrop-blur-sm">
+                <span className="text-2xl">{prop.icon}</span>
+                <span className="text-muted-silver font-mono">{prop.text}</span>
+              </div>
+            ))}
+          </motion.div>
 
           {/* Action Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Link href="/interview/setup" className="group">
               <button className="border border-terminal-green text-terminal-green bg-terminal-green/5 hover:bg-terminal-green hover:text-void-black text-lg px-8 py-4 min-w-[200px] flex items-center justify-center gap-2 transition-all duration-300 rounded-none tracking-widest uppercase font-mono text-sm">
-                Start Practicing
+                Start Your Preparation
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </Link>
