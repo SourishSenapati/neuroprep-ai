@@ -27,8 +27,9 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email) return null;
         
         try {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
           // Sync with backend to get/create user
-          const res = await fetch('http://localhost:5000/api/register', {
+          const res = await fetch(`${apiUrl}/api/register`, {
              method: 'POST',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ 
@@ -67,8 +68,9 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user }: { user: any }) {
       try {
         if (user?.email) {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
           // Sync with backend
-          await fetch('http://localhost:5000/api/register', {
+          await fetch(`${apiUrl}/api/register`, {
              method: 'POST',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ 
