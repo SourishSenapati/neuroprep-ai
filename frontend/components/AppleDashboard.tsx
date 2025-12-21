@@ -186,21 +186,21 @@ export default function AppleDashboard({ performance, interviewSessionCount, onS
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {[
                 { 
-                    title: 'TCS NQT Mastery', 
-                    desc: 'Conquer the National Qualifier Test with precision. Your gateway to engineering excellence.', 
+                    title: 'Logic & Precision', 
+                    desc: 'The essential toolkit for every engineer who values accuracy over approximation.', 
                     icon: '🎯',
                     gradient: 'from-blue-600 to-cyan-500'
                 },
                 { 
-                    title: 'Elite Technical Mastery', 
-                    desc: 'Master complex problem-solving across all engineering domains. Build unshakeable confidence.', 
-                    icon: '⚡',
+                    title: 'Complexity Decoded', 
+                    desc: 'Learn to navigate high-level friction, entropy, and edge cases in any system you design.', 
+                    icon: '🧩',
                     gradient: 'from-purple-600 to-pink-500'
                 },
                 { 
-                    title: 'Universal Engineering Path', 
-                    desc: 'Excel in product companies, service giants, and startups. Your complete preparation companion.', 
-                    icon: '🚀',
+                    title: 'Total Versatility', 
+                    desc: 'Prepare for a dynamic future. Equip yourself to work in R&D, operations, product design, or field services.', 
+                    icon: '🌐',
                     gradient: 'from-orange-600 to-red-500'
                 }
             ].map((path, i) => (

@@ -31,6 +31,7 @@ const TEMPLATES = [
 ];
 
 // Role-specific topics (100 per role)
+// Role-specific topics (100 per role)
 const ROLE_TOPICS: Record<string, string[]> = {
   'chemical': [
     'Material Balance', 'Energy Balance', 'Thermodynamics', 'Fluid Mechanics',
@@ -46,7 +47,7 @@ const ROLE_TOPICS: Record<string, string[]> = {
     'Circuit Theory', 'Electrical Machines', 'Power Systems', 'Control Systems',
     // ... 82 more
   ],
-  'tcs-nqt': [
+  'logic-precision': [
     'Number Systems', 'Percentages', 'Profit & Loss', 'Time & Work', 'Speed & Distance',
     'Averages', 'Ratios', 'Mixtures', 'Algebra', 'Geometry', 'Trigonometry', 'Probability',
     'Permutations', 'Data Interpretation', 'Blood Relations', 'Coding-Decoding',
