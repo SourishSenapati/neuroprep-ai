@@ -13,6 +13,8 @@ Add these keys:
 | `NEXTAUTH_SECRET` | Generate one: `openssl rand -base64 32` (or just mash keyboard) |
 | `NEXT_PUBLIC_RAZORPAY_KEY_ID` | `rzp_test_RuBymTWufgW3fT` (Or your real Key ID) |
 | `GEMINI_API_KEY` | (Your Google Gemini AI Key) |
+| `LINKEDIN_CLIENT_ID` | (From LinkedIn Developer Portal) |
+| `LINKEDIN_CLIENT_SECRET` | (From LinkedIn Developer Portal) |
 
 ---
 
