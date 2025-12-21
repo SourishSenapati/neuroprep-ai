@@ -79,6 +79,22 @@ export default function RootLayout({
           }}
         />
         
+        <footer className="py-8 text-center border-t border-white/5 bg-black/80 backdrop-blur-md relative z-40">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <p className="text-gray-400 font-medium">Built with ❤️ using Next.js 15, deployed on Vercel</p>
+            <div className="flex items-center gap-3 text-xs text-gray-600 font-mono bg-white/5 px-4 py-2 rounded-full border border-white/5">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Status: ✅ Production Ready
+              </span>
+              <span className="text-gray-700">|</span>
+              <span>Version: 2.0.0</span>
+              <span className="text-gray-700">|</span>
+              <span>Last Updated: December 2025</span>
+            </div>
+          </div>
+        </footer>
+
         {/* Floating Share Button */}
         <ShareButton />
       </body>

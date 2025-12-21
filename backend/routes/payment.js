@@ -2,12 +2,15 @@ import express from 'express';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import User from '../models/User.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
 
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
+  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_RuBymTWufgW3fT',
+  key_secret: process.env.RAZORPAY_KEY_SECRET || 'Jtz8G0RYgmWzW5L4xg74THZn'
 });
 
 // @route   POST /api/payment/create-order
@@ -36,7 +39,7 @@ router.post('/verify', async (req, res) => {
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || 'Jtz8G0RYgmWzW5L4xg74THZn')
       .update(sign.toString())
       .digest("hex");
 

@@ -53,8 +53,9 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // Connect to MongoDB & Start Server
 const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://sourishschemug_db_user:a4r1UIXNpZe16pRA@neuroprep-db.mongodb.net/?retryWrites=true&w=majority';
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB Connected');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

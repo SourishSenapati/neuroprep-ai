@@ -38,7 +38,7 @@ export const useRazorpay = () => {
             if (!order) return;
 
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_RuBymTWufgW3fT', 
                 amount: order.amount,
                 currency: order.currency,
                 name: "NeuroPrep AI",
