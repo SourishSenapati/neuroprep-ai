@@ -1,0 +1,6 @@
+DEPLOYMENT TEST - 2025-12-21 19:06 IST
+If you can see this file at https://neuroprep-ai.vercel.app/test-deployment.txt
+then Vercel IS deploying from GitHub.
+
+Latest commit: Remove GitHub Actions workflow
+Expected homepage: "Your Personal AI Tutor"
