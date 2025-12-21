@@ -377,7 +377,9 @@ graph TB
 
 ### Unit Tests
 - **Backend:** Jest (31 tests passing)
-- **Frontend:** React Testing Library
+- **Instant AI Feedback**: Real-time analysis of your answers.
+- **Social Login**: Google & LinkedIn Authentication.
+- **Payment Integration**: Razorpay (UPI) Support.
 - **Coverage:** Target 80%+
 
 ### E2E Tests
