@@ -22,7 +22,7 @@ export default function RegisterPage() {
       
       {/* Background Ambience */}
       <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-iconic-gold/10 blur-[120px]" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 blur-[120px]" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-electric-blue/10 blur-[120px]" />
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

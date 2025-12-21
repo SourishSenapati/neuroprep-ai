@@ -637,10 +637,10 @@ export default function AuraSingularityChamber({
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="max-w-md w-full bg-gray-900 border border-cyan-500/30 p-8 rounded-2xl shadow-[0_0_50px_rgba(6,182,212,0.15)] text-center"
+              className="max-w-md w-full bg-gray-900 border border-electric-blue/30 p-8 rounded-2xl shadow-[0_0_50px_rgba(6,182,212,0.15)] text-center"
             >
-              <div className="w-16 h-16 rounded-full bg-cyan-900/30 flex items-center justify-center mx-auto mb-6 border border-cyan-500/30 animate-pulse">
-                <Brain className="w-8 h-8 text-cyan-400" />
+              <div className="w-16 h-16 rounded-full bg-cyan-900/30 flex items-center justify-center mx-auto mb-6 border border-electric-blue/30 animate-pulse">
+                <Brain className="w-8 h-8 text-electric-blue" />
               </div>
               
               <h2 className="text-2xl font-bold text-white mb-2 tracking-wide font-mono">NEURAL_INTERFACE_V2</h2>
@@ -682,7 +682,7 @@ export default function AuraSingularityChamber({
 
               <button
                 onClick={handleManualStart}
-                className="w-full py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition-all active:scale-95 tracking-widest text-sm"
+                className="w-full py-4 bg-cyan-600 hover:bg-electric-blue text-white font-bold rounded-xl shadow-lg shadow-electric-blue/20 transition-all active:scale-95 tracking-widest text-sm"
               >
                 INITIALIZE SESSION
               </button>
@@ -722,21 +722,21 @@ export default function AuraSingularityChamber({
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              className="bg-gradient-to-br from-gray-900 to-black border border-amber-500/50 p-8 rounded-2xl max-w-lg w-full shadow-[0_0_100px_rgba(245,158,11,0.3)] text-center"
+              className="bg-gradient-to-br from-gray-900 to-black border border-iconic-gold/50 p-8 rounded-2xl max-w-lg w-full shadow-[0_0_100px_rgba(245,158,11,0.3)] text-center"
             >
-              <div className="mx-auto w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mb-6">
-                <Brain className="w-8 h-8 text-amber-500" />
+              <div className="mx-auto w-16 h-16 bg-iconic-gold/20 rounded-full flex items-center justify-center mb-6">
+                <Brain className="w-8 h-8 text-iconic-gold" />
               </div>
               <h2 className="text-3xl font-bold text-white mb-2">Singularity Limit Reached</h2>
               <p className="text-gray-400 mb-8">
                 Your neural field has exhausted its free quantum states (5/5). 
                 <br/>
-                Entangle with the <span className="text-amber-400 font-bold">Pinnacle Edition</span> for infinite simulations.
+                Entangle with the <span className="text-iconic-gold font-bold">Pinnacle Edition</span> for infinite simulations.
               </p>
               
               <button
                 onClick={() => setShowUpgradeModal(false)}
-                className="w-full py-4 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-amber-500/25"
+                className="w-full py-4 bg-amber-600 hover:bg-iconic-gold text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-iconic-gold/25"
               >
                 Unlock Infinite Rift ($29/mo)
               </button>
@@ -764,7 +764,7 @@ export default function AuraSingularityChamber({
               filter: `blur(${20 + riftIntensity * 20}px) hue-rotate(${riftIntensity * 90}deg)`,
             }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 bg-gradient-to-t from-purple-600 to-blue-500 rounded-full opacity-60 mix-blend-screen"
+            className="absolute inset-0 bg-gradient-to-t from-electric-blue to-blue-500 rounded-full opacity-60 mix-blend-screen"
           />
           <motion.div
             animate={{
@@ -772,7 +772,7 @@ export default function AuraSingularityChamber({
               rotate: [0, 180, 360],
             }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-10 bg-gradient-to-b from-pink-500 to-purple-600 rounded-full opacity-40 mix-blend-screen"
+            className="absolute inset-10 bg-gradient-to-b from-pink-500 to-electric-blue rounded-full opacity-40 mix-blend-screen"
           />
           
           {/* AR Gaze Overlay (Only if Enabled) */}
@@ -810,7 +810,7 @@ export default function AuraSingularityChamber({
       {/* User HUD (Bottom) */}
       <div className="h-1/3 bg-gradient-to-t from-black via-black/90 to-transparent p-8 flex justify-between items-end relative z-20">
         {/* Session Timer */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 text-cyan-400 font-mono text-xl font-bold tracking-widest bg-black/40 px-4 py-1 rounded border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 text-electric-blue font-mono text-xl font-bold tracking-widest bg-black/40 px-4 py-1 rounded border border-electric-blue/20 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
             {formatTime(elapsedTime)}
         </div>
         {/* User Cam Feed (Quantum Bio-Hash) */}
@@ -890,7 +890,7 @@ export default function AuraSingularityChamber({
           {/* AR Toggle */}
           <button
             onClick={toggleBioAnalysis}
-            className={`p-4 rounded-full border ${isBioAnalysisEnabled ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
+            className={`p-4 rounded-full border ${isBioAnalysisEnabled ? 'bg-electric-blue/20 border-electric-blue text-electric-blue' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
             title={isBioAnalysisEnabled ? "Disable Bio-Analysis" : "Enable Bio-Analysis (Body Language)"}
           >
             <Scan className="w-6 h-6" />
@@ -1104,11 +1104,11 @@ export default function AuraSingularityChamber({
                 
                 <div>
                   <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-amber-500" /> Areas for Growth
+                    <AlertTriangle className="w-5 h-5 text-iconic-gold" /> Areas for Growth
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {sessionReport.insights?.weaknesses?.map((w: string, i: number) => (
-                      <span key={i} className="px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm border border-amber-500/20">{w}</span>
+                      <span key={i} className="px-3 py-1 bg-iconic-gold/10 text-iconic-gold rounded-full text-sm border border-iconic-gold/20">{w}</span>
                     ))}
                   </div>
                 </div>
@@ -1139,7 +1139,7 @@ export default function AuraSingularityChamber({
                  </button>
                  <button 
                    onClick={() => window.location.href = '/pricing'}
-                   className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-all font-bold shadow-lg shadow-purple-500/20"
+                   className="px-6 py-3 bg-electric-blue hover:bg-purple-500 text-white rounded-lg transition-all font-bold shadow-lg shadow-purple-500/20"
                  >
                    Unlock Detailed Analysis (Pro)
                  </button>

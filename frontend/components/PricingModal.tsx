@@ -103,7 +103,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
             <X className="w-6 h-6" />
           </button>
 
-          <div className="border-2 border-purple-500 bg-gradient-to-br from-black via-purple-950 to-black p-8">
+          <div className="border-2 border-electric-blue bg-gradient-to-br from-black via-purple-950 to-black p-8">
             {/* Success Screen */}
             <AnimatePresence>
               {showSuccess && (
@@ -125,7 +125,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
                       <Crown className="w-24 h-24 mx-auto text-yellow-400 fill-yellow-400" />
                     </motion.div>
                     
-                    <h2 className="text-4xl font-bold uppercase mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">
+                    <h2 className="text-4xl font-bold uppercase mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-iconic-gold">
                       Welcome to Pro!
                     </h2>
                     
@@ -145,7 +145,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
             {/* Header */}
             <div className="text-center mb-8">
               <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 border border-purple-500 bg-purple-500/20 mb-4"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-electric-blue bg-electric-blue/20 mb-4"
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -203,9 +203,9 @@ import { useRazorpay } from '@/hooks/useRazorpay';
               </div>
 
               {/* PRO TIER */}
-              <div className="relative border-2 border-purple-500 bg-gradient-to-br from-purple-900/50 to-blue-900/50 p-6">
+              <div className="relative border-2 border-electric-blue bg-gradient-to-br from-purple-900/50 to-blue-900/50 p-6">
                 {/* Popular Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-xs font-bold uppercase">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-yellow-400 to-iconic-gold text-black text-xs font-bold uppercase">
                   Most Popular
                 </div>
 
@@ -260,7 +260,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
             {/* UPI Payment Section */}
             {!isProcessing && !showSuccess && (
               <div className="space-y-4">
-                 <div className="bg-white p-4 rounded-lg flex flex-col items-center justify-center border-2 border-dashed border-purple-500/50">
+                 <div className="bg-white p-4 rounded-lg flex flex-col items-center justify-center border-2 border-dashed border-electric-blue/50">
                     <div className="w-48 h-48 bg-white p-2 flex items-center justify-center">
                        {/* QR Code Placeholder using CSS patterns to look like a QR */}
                        <div className="w-full h-full bg-black relative overflow-hidden" style={{
@@ -268,7 +268,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
                           backgroundSize: '20px 20px'
                        }}>
                           <div className="absolute inset-[15%] bg-white flex items-center justify-center">
-                             <div className="w-10 h-10 bg-purple-600 rounded flex items-center justify-center text-white font-bold">UPI</div>
+                             <div className="w-10 h-10 bg-electric-blue rounded flex items-center justify-center text-white font-bold">UPI</div>
                           </div>
                           {/* Corner markers */}
                           <div className="absolute top-0 left-0 w-10 h-10 border-4 border-black bg-white">
@@ -288,7 +288,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
 
                  <button
                   onClick={handleUpgrade}
-                  className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-gradient-to-r from-electric-blue to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2"
                 >
                   <Check className="w-5 h-5" />
                   I have Paid (Verify)
@@ -301,7 +301,7 @@ import { useRazorpay } from '@/hooks/useRazorpay';
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"
+                        className="w-12 h-12 border-4 border-electric-blue border-t-transparent rounded-full mx-auto mb-4"
                       />
                       <p className="text-purple-300 font-mono animate-pulse">Verifying UPI Transaction...</p>
                  </div>
