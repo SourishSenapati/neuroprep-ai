@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
 import MasteryPath from './models/MasteryPath.js';
 
 dotenv.config();
+
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://sourishschemug_db_user:a4r1UIXNpZe16pRA@neuroprep-db.4lhua3l.mongodb.net/?appName=NeuroPrep-DB';
 
 const paths = [
   {
@@ -139,7 +140,8 @@ const paths = [
 ];
 
 const seedDB = async () => {
-    await connectDB();
+    await mongoose.connect(MONGO_URI);
+    console.log('Connected to MongoDB Atlas');
     
     try {
         await MasteryPath.deleteMany({});

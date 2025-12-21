@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.js';
 import paymentRouter from './routes/payment.js';
+import masteryPathsRouter from './routes/masteryPaths.js';
 import User from './models/User.js'; // Imported for Dashboard but can also be moved to route
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRouter);
 app.use('/api/payment', paymentRouter);
+app.use('/api/mastery-paths', masteryPathsRouter);
 
 // Dashboard Route (Included here for simplicity as requested, or can be separate)
 app.get('/api/dashboard', async (req, res) => {
