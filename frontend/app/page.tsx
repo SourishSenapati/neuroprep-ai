@@ -117,34 +117,48 @@ export default function HomePage() {
       </div>
 
       {/* Footer - Built by Sourish Senapati */}
-      <footer className="fixed bottom-0 left-0 right-0 border-t border-white/5 py-4 bg-[#050505]/90 backdrop-blur-xl z-50">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-white/5 py-6 bg-[#050505]/90 backdrop-blur-xl z-50">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm font-mono gap-4">
             
-            {/* Creator Badge */}
-           <div className="flex items-center gap-4">
-             <span className="text-[#A3A3A3]">Built by</span>
-             <a 
-                href="https://www.linkedin.com/in/sourish-senapati-0aba921b1/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-1.5 bg-[#0077b5]/10 border border-[#0077b5]/30 rounded text-[#0077b5] hover:bg-[#0077b5] hover:text-white transition-all text-xs uppercase tracking-wider font-bold"
-             >
-                <Linkedin className="w-3 h-3" />
-                Sourish Senapati
-             </a>
+            {/* Left Side: Creator */}
+           <div className="flex flex-col items-center md:items-start gap-2">
+             <div className="flex items-center gap-3">
+               <span className="text-[#A3A3A3]">Built by</span>
+               <a 
+                  href="https://www.linkedin.com/in/sourish-senapati-0aba921b1/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1 bg-[#0077b5]/10 border border-[#0077b5]/30 rounded text-[#0077b5] hover:bg-[#0077b5] hover:text-white transition-all text-xs uppercase tracking-wider font-bold shadow-[0_0_10px_rgba(0,119,181,0.2)]"
+               >
+                  <Linkedin className="w-3 h-3" />
+                  Sourish Senapati
+               </a>
+             </div>
+             <div className="flex items-center gap-4 text-xs text-[#525252]">
+                <a href="mailto:sourishs.chem.ug@jadavpuruniversity.in" className="hover:text-white transition-colors">sourishs.chem.ug...</a>
+                <span>|</span>
+                <a href="mailto:sourishsenapati791@gmail.com" className="hover:text-white transition-colors">sourishsenapati791...</a>
+             </div>
            </div>
 
-           {/* Contact Links */}
-           <div className="flex items-center gap-3">
-              <a href="mailto:sourishs.chem.ug@jadavpuruniversity.in" className="text-[#A3A3A3] hover:text-white transition-colors" title="University Email">
-                 <Mail className="w-4 h-4" />
-              </a>
-              <span className="text-white/20">|</span>
-              <a href="mailto:sourishsenapati791@gmail.com" className="text-[#A3A3A3] hover:text-white transition-colors" title="Personal Email">
-                 <Mail className="w-4 h-4" />
-              </a>
-              <span className="text-[#A3A3A3] text-xs ml-2 hidden md:inline">© 2025 NeuroPrep AI</span>
+           {/* Right Side: Tech Stack & Status */}
+           <div className="flex flex-col items-center md:items-end gap-2 text-xs">
+              <div className="text-[#A3A3A3]">
+                Built with <span className="text-red-500 animate-pulse">❤️</span> using <span className="text-white font-bold">Next.js 16</span>, deployed on <span className="text-white font-bold">Vercel</span>
+              </div>
+              
+              <div className="flex items-center gap-3 text-[#525252]">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#121212] border border-white/10">
+                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                   <span className="text-emerald-500 font-bold">Production Ready</span>
+                </div>
+                <span>|</span>
+                <span>v2.0.0</span>
+                <span>|</span>
+                <span>Dec 2025</span>
+              </div>
            </div>
+
         </div>
       </footer>
     </div>
