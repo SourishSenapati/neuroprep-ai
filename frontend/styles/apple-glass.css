@@ -8,37 +8,37 @@
 @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Apple Color Palette */
-  --apple-blue: #007AFF;
-  --apple-indigo: #5856D6;
-  --apple-purple: #AF52DE;
-  --apple-pink: #FF2D55;
-  --apple-red: #FF3B30;
-  --apple-orange: #FF9500;
-  --apple-yellow: #FFCC00;
-  --apple-green: #34C759;
-  --apple-teal: #5AC8FA;
-  --apple-cyan: #32ADE6;
+  /* Sourish Portfolio Palette */
+  --apple-blue: #4ADE80; /* Replacing Blue with Green */
+  --apple-indigo: #22c55e; /* Replacing Indigo with Darker Green */
+  --apple-purple: #4ADE80; /* Replacing Purple with Green */
+  --apple-pink: #F0F0F0; /* Replacing Pink with White */
+  --apple-red: #EF4444;
+  --apple-orange: #F59E0B;
+  --apple-yellow: #FBBF24;
+  --apple-green: #4ADE80;
+  --apple-teal: #4ADE80;
+  --apple-cyan: #4ADE80;
   
   /* Neutral Colors */
-  --glass-white: rgba(255, 255, 255, 0.1);
-  --glass-white-strong: rgba(255, 255, 255, 0.15);
-  --glass-dark: rgba(0, 0, 0, 0.3);
-  --glass-darker: rgba(0, 0, 0, 0.5);
-  --text-primary: rgba(255, 255, 255, 0.95);
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-tertiary: rgba(255, 255, 255, 0.5);
+  --glass-white: rgba(255, 255, 255, 0.05); /* Darker glass */
+  --glass-white-strong: rgba(255, 255, 255, 0.1);
+  --glass-dark: rgba(0, 0, 0, 0.6);
+  --glass-darker: rgba(0, 0, 0, 0.8);
+  --text-primary: #F0F0F0;
+  --text-secondary: #A3A3A3;
+  --text-tertiary: #737373;
   
   /* Backgrounds */
-  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --bg-gradient-alt: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --bg-dark: #0A0A0A;
+  --bg-gradient: linear-gradient(135deg, #050505 0%, #111111 100%);
+  --bg-gradient-alt: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --bg-dark: #050505;
   --bg-darker: #000000;
   
   /* Glass Effects */
-  --glass-background: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-background: rgba(20, 20, 20, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   --glass-blur: blur(20px);
   
   /* Shadows */
@@ -85,17 +85,14 @@ body {
 }
 
 /* Gradient Background */
+/* Gradient Background */
 .apple-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    #0f0c29 0%, 
-    #302b63 50%, 
-    #24243e 100%
-  );
+  background: #050505; /* Pure dark per request */
   z-index: -2;
 }
 
@@ -106,9 +103,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
-  animation: gradient-shift 15s ease infinite;
+  background: radial-gradient(circle at 20% 20%, rgba(74, 222, 128, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(74, 222, 128, 0.05) 0%, transparent 40%);
 }
 
 @keyframes gradient-shift {
@@ -211,8 +207,8 @@ body {
 
 .glass-input:focus {
   background: var(--glass-white-strong);
-  border-color: var(--apple-blue);
-  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+  border-color: var(--apple-green);
+  box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.2);
 }
 
 .glass-input::placeholder {

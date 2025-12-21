@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Brain, Target, Shield, Code, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle, Brain, Target, Shield, Code, Zap, Upload } from 'lucide-react';
+import ResumeUpload from './ResumeUpload';
+import toast from 'react-hot-toast';
 
 interface InterviewSetupProps {
   onStart: (config: any) => void;
@@ -14,6 +16,7 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
     difficulty: 5,
     persona: '1950s Radio Host'
   });
+  const [showResumeUpload, setShowResumeUpload] = useState(false);
 
   const topics = [
     'Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Fullstack Engineer', 'DevOps Engineer',
@@ -39,6 +42,34 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
   const handleNext = () => {
     if (step < 3) setStep(step + 1);
     else onStart(config);
+  };
+
+  // Handle resume upload success - auto-fill form
+  const handleResumeSuccess = (data: any) => {
+    if (data.role) {
+      setConfig(prev => ({ ...prev, topic: data.role }));
+      toast.success(`Detected role: ${data.role}`, {
+        icon: '🎯',
+        duration: 3000
+      });
+    }
+    
+    // Auto-set difficulty based on experience level
+    if (data.experienceLevel) {
+      const difficultyMap: Record<string, number> = {
+        'Entry Level': 3,
+        'Junior Engineer': 4,
+        'Mid-Level Engineer': 5,
+        'Senior Engineer': 7,
+        'Lead Engineer': 8,
+        'Engineering Manager': 8,
+        'Architect': 9
+      };
+      const difficulty = difficultyMap[data.experienceLevel] || 5;
+      setConfig(prev => ({ ...prev, difficulty }));
+    }
+    
+    setShowResumeUpload(false);
   };
 
   return (
@@ -101,6 +132,26 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
                 </button>
               ))}
             </div>
+            
+            {/* Resume Upload Toggle */}
+            {!showResumeUpload && (
+              <button
+                onClick={() => setShowResumeUpload(true)}
+                className="w-full py-4 border border-blue-500/30 bg-blue-500/5 text-blue-400 font-bold uppercase text-sm hover:bg-blue-500/10 transition-colors flex items-center justify-center gap-3"
+              >
+                <Upload className="w-4 h-4" />
+                Upload Resume (Auto-Fill)
+              </button>
+            )}
+            
+            {/* Resume Upload Component */}
+            {showResumeUpload && (
+              <ResumeUpload 
+                onSuccess={handleResumeSuccess}
+                onError={() => setShowResumeUpload(false)}
+              />
+            )}
+            
             <div className="relative">
               <input 
                 type="text" 

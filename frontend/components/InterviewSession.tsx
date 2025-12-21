@@ -366,11 +366,11 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
                   </div>
 
                   <div className="space-y-4">
-                      <div className="p-4 border border-white/10 bg-white/5">
-                          <h3 className="text-sm font-bold uppercase mb-2 flex items-center gap-2">
+                      <div className="p-4 border border-[#1F1F1F] bg-[#4ADE80]/5">
+                          <h3 className="text-sm font-bold uppercase mb-2 flex items-center gap-2 text-[#4ADE80]">
                               <Activity className="w-4 h-4" /> NEUROPREP_ANALYSIS
                           </h3>
-                          <p className="text-xs text-gray-400 leading-relaxed">
+                          <p className="text-xs text-[#A3A3A3] leading-relaxed">
                               NeuroPrep AI Assessment: Strong technical foundation with excellent problem-solving approach. 
                               Biometric analysis shows optimal stress management. 
                               Recommendation: Ready for senior-level technical challenges.
@@ -425,13 +425,13 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
         <div className="flex items-center gap-4">
           <button 
               onClick={handleNextQuestion}
-              className="px-4 py-2 border border-white/10 text-xs font-bold uppercase hover:bg-white hover:text-black transition-colors flex items-center gap-2"
+              className="px-4 py-2 border border-[#4ADE80] text-[#4ADE80] text-xs font-bold uppercase hover:bg-[#4ADE80] hover:text-black transition-colors flex items-center gap-2"
           >
               NEXT_QUERY <SkipForward className="w-3 h-3" />
           </button>
           <button 
               onClick={handleEndInterview}
-              className="px-4 py-2 bg-red-600 text-white text-xs font-bold uppercase hover:bg-red-700 transition-colors flex items-center gap-2"
+              className="px-4 py-2 bg-red-600/10 border border-red-600 text-red-500 text-xs font-bold uppercase hover:bg-red-600 hover:text-white transition-colors flex items-center gap-2"
           >
               TERMINATE <Square className="w-3 h-3 fill-current" />
           </button>
@@ -537,7 +537,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
                       onChange={(e) => setInputText(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSendMessage(inputText)}
                       placeholder="ENTER_RESPONSE..."
-                      className="w-full bg-transparent border border-white/10 p-3 text-white placeholder-gray-600 focus:outline-none focus:border-white font-mono text-sm"
+                      className="w-full bg-transparent border border-[#1F1F1F] p-3 text-[#F0F0F0] placeholder-[#737373] focus:outline-none focus:border-[#4ADE80] font-mono text-sm"
                   />
               </div>
 
@@ -555,7 +555,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
               <button
                   onClick={() => handleSendMessage(inputText)}
                   disabled={!inputText.trim()}
-                  className="p-3 bg-white text-black hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-3 bg-[#4ADE80] text-black hover:bg-[#22c55e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                   <Send className="w-5 h-5" />
               </button>

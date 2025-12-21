@@ -30,10 +30,10 @@ export default function AuraSingularity({ onForge }: { onForge: (params: { role:
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 mb-4 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-[#4ADE80] mb-4 drop-shadow-[0_0_15px_rgba(74,222,128,0.5)] font-serif">
             AURA NEUROPREP
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 tracking-widest font-mono mb-4">
+          <p className="text-xl md:text-2xl text-[#A3A3A3] tracking-widest font-mono mb-4">
             PINNACLE EDITION // 2025
           </p>
         </motion.div>
@@ -92,23 +92,23 @@ export default function AuraSingularity({ onForge }: { onForge: (params: { role:
         <motion.button
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.1, textShadow: "0 0 8px rgb(255,255,255)" }}
+          whileHover={{ scale: 1.1, textShadow: "0 0 8px rgb(74,222,128)" }}
           whileTap={{ scale: 0.95 }}
           onClick={handleForge}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="pointer-events-auto px-12 py-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-white font-bold tracking-widest uppercase hover:bg-white/10 hover:border-purple-500 transition-all duration-300 group relative overflow-hidden"
+          className="pointer-events-auto px-12 py-4 bg-[#4ADE80]/10 backdrop-blur-md border border-[#4ADE80] rounded-full text-[#4ADE80] font-bold tracking-widest uppercase hover:bg-[#4ADE80] hover:text-black transition-all duration-300 group relative overflow-hidden"
         >
           <span className="relative z-10">Forge Neural Link</span>
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-20"
+            className="absolute inset-0 bg-gradient-to-r from-[#4ADE80] to-[#22c55e] opacity-0 group-hover:opacity-100"
             layoutId="glow"
           />
           {/* Gaussian Splat Effect on Hover */}
           {isHovered && (
             <motion.div
               layoutId="splat"
-              className="absolute inset-0 bg-purple-500 blur-xl opacity-20"
+              className="absolute inset-0 bg-[#4ADE80] blur-xl opacity-20"
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
             />
           )}

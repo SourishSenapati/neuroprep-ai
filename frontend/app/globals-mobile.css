@@ -1,0 +1,223 @@
+/* ========================================
+   MOBILE-FIRST RESPONSIVE STYLES
+   Applied globally across all components
+   ======================================== */
+
+/* Mobile Base (< 768px) */
+@media (max-width: 767px) {
+  /* Typography */
+  h1 { font-size: 2rem !important; line-height: 1.2 !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.25rem !important; }
+  p { font-size: 0.875rem !important; }
+  
+  /* Spacing */
+  .p-8 { padding: 1rem !important; }
+  .p-6 { padding: 0.75rem !important; }
+  .gap-8 { gap: 1rem !important; }
+  .gap-6 { gap: 0.75rem !important; }
+  
+  /* Grids */
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  
+  /* Flexbox */
+  .flex-row { flex-direction: column !important; }
+  
+  /* Widths */
+  .w-64, .w-72, .w-80 { width: 100% !important; }
+  .max-w-7xl, .max-w-6xl, .max-w-4xl { max-width: 100% !important; padding: 0 1rem !important; }
+  
+  /* BiometricEye Mobile */
+  .biometric-eye-container {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+  }
+  
+  .biometric-overlay {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  /* Trading Card Mobile */
+  .trading-card {
+    width: 100% !important;
+    max-width: 350px !important;
+    margin: 0 auto !important;
+  }
+  
+  .trading-card-buttons {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .trading-card-button {
+    width: 100% !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Pricing Modal Mobile */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .pricing-tier {
+    padding: 1.5rem !important;
+  }
+  
+  .pricing-features {
+    font-size: 0.875rem !important;
+  }
+  
+  /* Dashboard Mobile */
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stat-card {
+    padding: 1rem !important;
+  }
+  
+  .chart-container {
+    height: 200px !important;
+  }
+  
+  /* Nemesis Mode Mobile */
+  .nemesis-controls {
+    flex-direction: column !important;
+  }
+  
+  .voice-meter {
+    width: 100% !important;
+  }
+  
+  /* Interview Simulator Mobile */
+  .code-editor {
+    height: 300px !important;
+  }
+  
+  .video-feed {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* DojoEntry Mobile */
+  .dojo-card {
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+  
+  /* Modal Mobile */
+  .modal-content {
+    width: 95% !important;
+    max-width: 95vw !important;
+    margin: 0.5rem !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Buttons Mobile */
+  button {
+    min-height: 44px !important; /* Touch-friendly */
+    padding: 0.75rem 1rem !important;
+  }
+  
+  /* Forms Mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px !important;
+  }
+  
+  /* Analytics Mobile */
+  .analytics-card {
+    padding: 1rem !important;
+  }
+  
+  .metric-number {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Accessibility - Touch Targets */
+  a, button, .clickable {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  
+  /* Hide on mobile */
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  /* Stack on mobile */
+  .stack-mobile {
+    flex-direction: column !important;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  .max-w-7xl {
+    padding: 0 2rem !important;
+  }
+  
+  .trading-card {
+    max-width: 400px !important;
+  }
+}
+
+/* Desktop (> 1024px) - Default styles */
+@media (min-width: 1025px) {
+  /* Use component's default desktop styles */
+}
+
+/* Landscape Mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 80vh !important;
+  }
+  
+  .video-feed {
+    max-height: 40vh !important;
+  }
+}
+
+/* High DPI / Retina */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Sharper images */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Dark Mode (Respects system preference) */
+@media (prefers-color-scheme: dark) {
+  /* Already dark by default */
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print, .hide-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

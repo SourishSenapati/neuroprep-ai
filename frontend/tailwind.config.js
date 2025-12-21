@@ -31,7 +31,20 @@ module.exports = {
           700: '#a21caf',
           800: '#86198f',
           900: '#701a75',
+        },
+        // NeuroPrep Custom Palette
+        'neuro': {
+          black: '#050505',
+          green: '#4ADE80',
+          text: '#F0F0F0',
+          muted: '#A3A3A3',
+          border: '#1F1F1F'
         }
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular'],
+        serif: ['var(--font-serif)', 'ui-serif', 'Georgia'],
       },
       animation: {
         'blob': 'blob 7s infinite',

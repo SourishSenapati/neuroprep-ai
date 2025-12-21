@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import './globals-mobile.css'
 import '@/styles/apple-glass.css'
 import AuraOverlay from '../components/AuraOverlay'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' })
 
 export const metadata: Metadata = {
   title: 'NeuroPrep AI - Master Engineering Interviews',
@@ -29,6 +31,11 @@ export const metadata: Metadata = {
 }
 
 import { Providers } from '../components/Providers'
+import GlobalErrorBoundary from '../components/GlobalErrorBoundary'
+import { Toaster } from 'react-hot-toast'
+import GameStoreInit from '../components/GameStoreInit'
+import JudgeWelcomeModal from '../components/JudgeWelcomeModal'
+import ShareButton from '../components/ShareButton'
 
 // ...
 
@@ -42,15 +49,38 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body 
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#050505] text-white selection:bg-purple-500 selection:text-white`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} font-sans bg-[#050505] text-white selection:bg-purple-500 selection:text-white`}
         suppressHydrationWarning
       >
-        <Providers>
-          <AuraOverlay />
-          <div className="relative z-10">
-            {children}
-          </div>
-        </Providers>
+        <GlobalErrorBoundary>
+          <Providers>
+            <GameStoreInit />
+            <JudgeWelcomeModal />
+            <AuraOverlay />
+            <div className="relative z-10">
+              {children}
+            </div>
+          </Providers>
+        </GlobalErrorBoundary>
+        
+        {/* Toast Notifications */}
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#1a1a1a',
+              color: '#fff',
+              border: '1px solid rgba(255,255,255,0.1)',
+              padding: '16px',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '14px'
+            }
+          }}
+        />
+        
+        {/* Floating Share Button */}
+        <ShareButton />
       </body>
     </html>
   )

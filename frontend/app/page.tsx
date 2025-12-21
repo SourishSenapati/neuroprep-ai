@@ -1,64 +1,86 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import '@/styles/apple-glass.css';
+import MasteryCard from '@/components/MasteryCard';
+import LiveAnalytics from '@/components/LiveAnalytics';
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
+  const [paths, setPaths] = useState<any[]>([]);
 
   useEffect(() => {
     setMounted(true);
+    fetchPaths();
   }, []);
+
+  const fetchPaths = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/mastery-paths`);
+        const data = await res.json();
+        if (Array.isArray(data)) {
+            setPaths(data);
+        }
+    } catch (error) {
+        console.error('Failed to fetch paths', error);
+        // Fallback or leave empty? Maybe fallback hardcoded list if fetch fails
+    }
+  };
 
   if (!mounted) return null; // Prevent hydration mismatch
 
   return (
-    <div className="apple-bg min-h-screen flex flex-col overflow-y-auto overflow-x-hidden">
-      <main className="flex-grow flex flex-col justify-center relative w-full">
+    <div className="apple-bg min-h-screen flex flex-col overflow-y-auto overflow-x-hidden relative">
+      <LiveAnalytics />
+      
+      <main className="flex-grow flex flex-col justify-center relative w-full pt-20">
         
-        {/* Background Gradients - Fixed position to allow scrolling content over it */}
+        {/* Background Gradients */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-           <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px]" />
-           <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[120px]" />
+           <div 
+             className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[120px]" 
+             style={{ background: 'radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(5, 5, 5, 0) 70%)' }}
+           />
+           <div 
+             className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px]" 
+             style={{ background: 'radial-gradient(circle, rgba(74, 222, 128, 0.05) 0%, rgba(5, 5, 5, 0) 70%)' }}
+           />
         </div>
 
-        <div className="apple-container relative z-10 py-20 text-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="apple-container relative z-10 py-10 text-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Badge */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 mx-auto"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#1F1F1F] backdrop-blur-md mb-8 mx-auto"
           >
-            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-400 via-white to-green-400 animate-pulse"></span>
-            <span className="text-sm font-medium text-white/80 tracking-wide">India's Premier Interview AI</span>
+            <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse"></span>
+            <span className="text-sm font-medium text-[#F0F0F0]/80 tracking-wide font-mono">India's Premier Interview AI</span>
           </motion.div>
 
           {/* Hero Title */}
           <motion.h1
-            className="heading-xl mb-6 max-w-4xl mx-auto tracking-tight"
+            className="heading-xl mb-6 max-w-4xl mx-auto tracking-tight font-serif text-5xl md:text-7xl font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Engineering Excellence.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              Mastered.
-            </span>
+            Choose Your
+            <span className="text-[#4ADE80] block mt-2">Mastery Path</span>
           </motion.h1>
 
           <motion.p
-            className="body-lg text-white/60 max-w-2xl mx-auto mb-12"
+            className="body-lg text-[#A3A3A3] max-w-2xl mx-auto mb-12 font-light text-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            The comprehensive platform for Indian engineering placements. 
-            From campus drives to top-tier product companies.
+            Elite preparation for every engineering discipline. From campus placements to FAANG interviews.
           </motion.p>
 
           {/* Action Buttons */}
@@ -69,56 +91,59 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Link href="/interview/setup" className="group">
-              <button className="glass-button-primary text-lg px-8 py-4 min-w-[200px] flex items-center justify-center gap-2 group-hover:scale-[1.02] transition-transform duration-300">
+              <button className="border border-[#4ADE80] text-[#4ADE80] bg-[#4ADE80]/10 text-lg px-8 py-4 min-w-[200px] flex items-center justify-center gap-2 group-hover:bg-[#4ADE80] group-hover:text-black transition-all duration-300 rounded-none">
                 Start Practicing
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </Link>
-            
-            <Link href="/pricing" className="group">
-              <button className="glass-button text-lg px-8 py-4 min-w-[200px] group-hover:bg-white/10 transition-colors duration-300">
-                View Pricing
-              </button>
-            </Link>
           </motion.div>
 
-          {/* Metrics Grid */}
+          {/* Mastery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 text-left">
+             {paths.map((path, index) => (
+                <motion.div
+                  key={path.slug || index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                    <MasteryCard 
+                        title={path.title}
+                        slug={path.slug}
+                        description={path.description}
+                        companyTags={path.companyTags}
+                        difficulty={path.difficulty}
+                        salaryRange={path.salaryRange}
+                        icon={path.icon}
+                        skills={path.skills}
+                    />
+                </motion.div>
+             ))}
+             {paths.length === 0 && (
+                <div className="col-span-full text-center py-10 text-gray-500">
+                    Loading Mastery Paths...
+                </div>
+             )}
+          </div>
+          
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-20"
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
             {[
-              { label: 'Questions', value: '224M+' },
-              { label: 'Companies', value: '500+' },
-              { label: 'Roles', value: '47' },
-              { label: 'Uptime', value: '99.9%' }
+              { label: 'Questions', value: '1.2B+' },
+              { label: 'Unique', value: '99.9%' },
+              { label: 'Adaptive AI', value: 'Level 10' },
+              { label: 'Engineering Specializations', value: 'All Branches' }
             ].map((stat, i) => (
               <div key={i} className="glass-card p-6 flex flex-col items-center justify-center">
                 <span className="text-2xl font-bold text-white mb-1">{stat.value}</span>
-                <span className="text-sm text-white/40 uppercase tracking-wider">{stat.label}</span>
+                <span className="text-xs text-white/40 uppercase tracking-wider">{stat.label}</span>
               </div>
             ))}
-          </motion.div>
-          
-           {/* Features Section - Added to make page longer and scrollable */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 py-20 text-left"
-          >
-             {[
-               { title: 'TCS NQT Ready', desc: 'Specific patterns for TCS National Qualifier Test.' },
-               { title: 'Infosys Power Programmer', desc: 'Crack the toughest coding rounds.' },
-               { title: 'Product & Service', desc: 'Balanced prep for both company types.' }
-             ].map((f, i) => (
-               <div key={i} className="glass-card p-8">
-                 <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
-                 <p className="text-white/60">{f.desc}</p>
-               </div>
-             ))}
           </motion.div>
 
         </div>

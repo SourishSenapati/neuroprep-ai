@@ -1,28 +1,78 @@
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DATA_DIR = path.join(__dirname, 'data');
+const DB_FILE = path.join(DATA_DIR, 'db.json');
+
+// Ensure data directory exists
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// Ensure DB file exists
+if (!fs.existsSync(DB_FILE)) {
+  fs.writeFileSync(DB_FILE, JSON.stringify({ users: [], sessions: [], questions: [], biometrics: [] }, null, 2));
+}
 
 let pool = null;
+let useJsonDb = false;
+
+function getJsonDb() {
+  try {
+    const data = fs.readFileSync(DB_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    return { users: [], sessions: [], questions: [], biometrics: [] };
+  }
+}
+
+function saveJsonDb(data) {
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+}
 
 export function initDatabase() {
-  if (!pool) {
-    pool = mysql.createPool({
-      host: process.env.DB_HOST || 'localhost',
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_NAME || 'neuroprep_ai',
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-      acquireTimeout: 60000,
-      timeout: 60000
-    });
+  if (pool) return pool;
+
+  // Check if MySQL config is present
+  if (process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD) {
+    try {
+      pool = mysql.createPool({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME || 'neuroprep_ai',
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+        acquireTimeout: 60000,
+        timeout: 60000
+      });
+      console.log('MySQL Pool initialized');
+      return pool;
+    } catch (err) {
+      console.warn('MySQL initialization failed, falling back to JSON DB', err);
+    }
   }
-  return pool;
+
+  console.log('Using JSON File Persistence (data/db.json)');
+  useJsonDb = true;
+  return null;
 }
 
 export async function createTables() {
   const db = initDatabase();
   
+  if (useJsonDb || !db) {
+    console.log('JSON DB ready (schema implicit)');
+    return;
+  }
+
   // Users table
   await db.execute(`
     CREATE TABLE IF NOT EXISTS users (
@@ -112,6 +162,14 @@ export async function createTables() {
   console.log('Database tables created successfully');
 }
 
+// Helper to generate UUID-like string
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 // User management functions
 export async function createUser(userData) {
   const db = initDatabase();
@@ -120,6 +178,21 @@ export async function createUser(userData) {
   let password_hash = null;
   if (password) {
     password_hash = await bcrypt.hash(password, 12);
+  }
+
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const newUser = {
+      id: uuidv4(),
+      email, phone, password_hash, google_id, linkedin_id, twitter_id, name, avatar_url, role, level,
+      is_pro: false,
+      sessions_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    data.users.push(newUser);
+    saveJsonDb(data);
+    return newUser.id;
   }
   
   const [result] = await db.execute(`
@@ -132,36 +205,66 @@ export async function createUser(userData) {
 
 export async function findUserByEmail(email) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    return data.users.find(u => u.email === email) || null;
+  }
   const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
   return rows[0] || null;
 }
 
 export async function findUserByGoogleId(google_id) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    return data.users.find(u => u.google_id === google_id) || null;
+  }
   const [rows] = await db.execute('SELECT * FROM users WHERE google_id = ?', [google_id]);
   return rows[0] || null;
 }
 
 export async function findUserByLinkedInId(linkedin_id) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    return data.users.find(u => u.linkedin_id === linkedin_id) || null;
+  }
   const [rows] = await db.execute('SELECT * FROM users WHERE linkedin_id = ?', [linkedin_id]);
   return rows[0] || null;
 }
 
 export async function findUserByTwitterId(twitter_id) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    return data.users.find(u => u.twitter_id === twitter_id) || null;
+  }
   const [rows] = await db.execute('SELECT * FROM users WHERE twitter_id = ?', [twitter_id]);
   return rows[0] || null;
 }
 
 export async function findUserById(id) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    return data.users.find(u => u.id === id) || null;
+  }
   const [rows] = await db.execute('SELECT * FROM users WHERE id = ?', [id]);
   return rows[0] || null;
 }
 
 export async function updateUser(id, updates) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const idx = data.users.findIndex(u => u.id === id);
+    if (idx !== -1) {
+      data.users[idx] = { ...data.users[idx], ...updates, updated_at: new Date().toISOString() };
+      saveJsonDb(data);
+    }
+    return;
+  }
+
   const fields = Object.keys(updates).map(key => `${key} = ?`).join(', ');
   const values = Object.values(updates);
   
@@ -169,11 +272,21 @@ export async function updateUser(id, updates) {
 }
 
 export async function verifyPassword(password, hash) {
+  if (!hash) return false;
   return await bcrypt.compare(password, hash);
 }
 
 export async function updateUserSessions(userId) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const user = data.users.find(u => u.id === userId);
+    if (user) {
+      user.sessions_count = (user.sessions_count || 0) + 1;
+      saveJsonDb(data);
+    }
+    return;
+  }
   await db.execute('UPDATE users SET sessions_count = sessions_count + 1 WHERE id = ?', [userId]);
 }
 
@@ -181,6 +294,26 @@ export async function updateUserSessions(userId) {
 export async function createSession(sessionData) {
   const db = initDatabase();
   const { user_id, role, difficulty, mode } = sessionData;
+  
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const newSession = {
+      id: uuidv4(),
+      user_id, role, difficulty, mode,
+      status: 'active',
+      questions_asked: 0,
+      avg_score: 0,
+      technical_score: 0,
+      eq_score: 0,
+      authenticity_score: 0,
+      session_data: null,
+      started_at: new Date().toISOString(),
+      completed_at: null
+    };
+    data.sessions.push(newSession);
+    saveJsonDb(data);
+    return newSession.id;
+  }
   
   const [result] = await db.execute(`
     INSERT INTO sessions (user_id, role, difficulty, mode)
@@ -192,6 +325,16 @@ export async function createSession(sessionData) {
 
 export async function updateSession(sessionId, updates) {
   const db = initDatabase();
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const idx = data.sessions.findIndex(s => s.id === sessionId);
+    if (idx !== -1) {
+      data.sessions[idx] = { ...data.sessions[idx], ...updates };
+      saveJsonDb(data);
+    }
+    return;
+  }
+
   const fields = Object.keys(updates).map(key => `${key} = ?`).join(', ');
   const values = Object.values(updates);
   
@@ -201,6 +344,18 @@ export async function updateSession(sessionId, updates) {
 export async function saveQuestion(questionData) {
   const db = initDatabase();
   const { session_id, question_text, user_response, technical_score, response_time, difficulty, topic, question_type } = questionData;
+  
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const newQuestion = {
+      id: uuidv4(),
+      session_id, question_text, user_response, technical_score, response_time, difficulty, topic, question_type,
+      asked_at: new Date().toISOString()
+    };
+    data.questions.push(newQuestion);
+    saveJsonDb(data);
+    return;
+  }
   
   await db.execute(`
     INSERT INTO session_questions (session_id, question_text, user_response, technical_score, response_time, difficulty, topic, question_type)
@@ -212,6 +367,18 @@ export async function saveBiometric(biometricData) {
   const db = initDatabase();
   const { session_id, stress_level, heart_rate, emotion, gaze_variance, voice_tremor } = biometricData;
   
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    const newBiometric = {
+      id: uuidv4(),
+      session_id, stress_level, heart_rate, emotion, gaze_variance, voice_tremor,
+      recorded_at: new Date().toISOString()
+    };
+    data.biometrics.push(newBiometric);
+    saveJsonDb(data);
+    return;
+  }
+
   await db.execute(`
     INSERT INTO biometrics (session_id, stress_level, heart_rate, emotion, gaze_variance, voice_tremor)
     VALUES (?, ?, ?, ?, ?, ?)
@@ -221,6 +388,60 @@ export async function saveBiometric(biometricData) {
 // Dashboard data
 export async function getDashboardData(userId) {
   const db = initDatabase();
+  
+  if (useJsonDb || !db) {
+    const data = getJsonDb();
+    
+    // Simple aggregations
+    const userSessions = data.sessions.filter(s => s.user_id === userId && s.status === 'completed');
+    const totalSessions = userSessions.length;
+    
+    const sumScore = userSessions.reduce((a, b) => a + (parseFloat(b.avg_score) || 0), 0);
+    const sumTech = userSessions.reduce((a, b) => a + (parseFloat(b.technical_score) || 0), 0);
+    const sumEq = userSessions.reduce((a, b) => a + (parseFloat(b.eq_score) || 0), 0);
+    
+    const averageScore = totalSessions ? sumScore / totalSessions : 0;
+    const avgTechnical = totalSessions ? sumTech / totalSessions : 0;
+    const avgEQ = totalSessions ? sumEq / totalSessions : 0;
+    
+    const lastSession = userSessions.length > 0 
+      ? userSessions.sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at))[0].completed_at 
+      : null;
+      
+    // Recent sessions
+    const recentSessions = data.sessions
+      .filter(s => s.user_id === userId)
+      .sort((a, b) => new Date(b.started_at) - new Date(a.started_at))
+      .slice(0, 10);
+      
+    // Topic performance
+    // Join questions with sessions
+    const userSessionIds = new Set(data.sessions.filter(s => s.user_id === userId).map(s => s.id));
+    const userQuestions = data.questions.filter(q => userSessionIds.has(q.session_id));
+    
+    const topicMap = {};
+    userQuestions.forEach(q => {
+       if (!topicMap[q.topic]) topicMap[q.topic] = { count: 0, sumScore: 0 };
+       topicMap[q.topic].count++;
+       topicMap[q.topic].sumScore += (parseFloat(q.technical_score) || 0);
+    });
+    
+    const topicPerformance = Object.keys(topicMap).map(topic => ({
+      topic,
+      question_count: topicMap[topic].count,
+      avg_score: topicMap[topic].sumScore / topicMap[topic].count
+    })).sort((a, b) => b.avg_score - a.avg_score);
+
+    return {
+      totalSessions,
+      averageScore: averageScore.toFixed(2),
+      avgTechnical: avgTechnical.toFixed(2),
+      avgEQ: avgEQ.toFixed(2),
+      lastSession,
+      recentSessions,
+      topicPerformance
+    };
+  }
   
   // Get user stats
   const [userStats] = await db.execute(`

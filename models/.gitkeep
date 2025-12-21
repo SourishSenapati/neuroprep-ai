@@ -1,0 +1,9 @@
+# Models Directory
+
+This directory is reserved for:
+- Local AI model inference scripts
+- Prompt templates
+- Fine-tuned model weights (if applicable)
+- RAG knowledge base files
+
+Currently using API-based models (OpenAI/Claude).

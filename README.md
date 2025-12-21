@@ -1,376 +1,413 @@
-# 🚀 NeuroPrep AI - Universal Engineering Interview Platform
+# 🚀 NeuroPrep AI - Next.js Architecture
 
-[![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-success)](.)
-[![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black)](https://vercel.com)
-[![Questions](https://img.shields.io/badge/Questions-224M%2B-blue)](.)
-[![Zero Repetition](https://img.shields.io/badge/Repetition-0%25-green)](.)
-[![Tests](https://img.shields.io/badge/Tests-31%20Passed-success)](.)
-
-**World's Most Advanced AI Interview Platform** with 224+ Million Unique Questions across all Engineering Disciplines
+**Production Deployment:** https://neuroprep-ai.vercel.app  
+**Backend API:** https://neuroprep-backend.vercel.app  
+**Status:** ✅ Production Ready | **Version:** 2.0.0
 
 ---
 
-## 🎯 What is NeuroPrep AI?
+## 📐 System Architecture
 
-NeuroPrep AI is a cutting-edge interview platform that uses **quantum-inspired algorithms** to generate unlimited unique questions for engineering roles. With **zero repetition** guarantee and **adaptive difficulty**, it provides the most comprehensive interview preparation system ever built.
-
-### Key Features
-
-✅ **1,000,000+ Questions Per Engineering Discipline**  
-✅ **40+ Specialized Engineering Roles**  
-✅ **Zero Repetition Guarantee** (99%+ uniqueness)  
-✅ **Adaptive Difficulty** (Auto-adjusts based on performance)  
-✅ **Real-time AI Analysis** (Technical + Behavioral + Authenticity)  
-✅ **Universal Engineering Support** (Software + Traditional Engineering)  
-✅ **Free Deployment** on Vercel  
-
----
-
-## 🏗️ Supported Engineering Disciplines
-
-### 💻 Software Engineering (15+ Roles)
-- Frontend, Backend, Fullstack Engineers
-- DevOps, SRE, Platform Engineers
-- ML/AI Engineers, Data Engineers
-- Security, Mobile, Cloud Engineers
-- Solutions Architects, Engineering Managers
-
-**84,375,000 unique questions**
-
-### 🏗️ Civil Engineering (7+ Specializations)
-- Structural, Geotechnical, Transportation
-- Environmental, Water Resources
-- Construction Engineering
-
-**28,125,000 unique questions**
-
-### ⚙️ Mechanical Engineering (8+ Specializations)
-- Aerospace, Automotive, Manufacturing
-- Robotics, HVAC, Thermal Engineering
-- Fluid Dynamics
-
-**28,125,000 unique questions**
-
-### ⚡ Electrical Engineering (9+ Specializations)
-- Power Systems, Electronics, Control Systems
-- Communications, Signal Processing
-- Embedded Systems, RF Engineering
-
-**28,125,000 unique questions**
-
-### 🧪 Chemical Engineering (8+ Specializations)
-- Process, Petroleum, Materials
-- Biomedical, Pharmaceutical
-- Nuclear Engineering
-
-**28,125,000 unique questions**
-
----
-
-## 📊 Mathematical Proof of Capacity
+### High-Level Overview
 
 ```
-Question Generation Formula:
-Patterns × Topics × Contexts × Constraints × Scenarios
-
-Software Engineering:
-75 × 150 × 30 × 25 × 25 = 84,375,000 questions
-
-Traditional Engineering (each):
-75 × 50 × 30 × 25 × 25 = 28,125,000 questions
-
-Total System Capacity: 224,625,000+ unique questions
+┌─────────────────────────────────────────────────────────────┐
+│                      User's Browser                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐   │
+│  │   Next.js    │  │  Framer      │  │    Pyodide      │   │
+│  │   Frontend   │  │  Motion      │  │  (WebAssembly)  │   │
+│  └──────┬───────┘  └──────────────┘  └─────────────────┘   │
+└─────────┼──────────────────────────────────────────────────┘
+          │
+          │ HTTPS (Vercel Edge Network)
+          │
+┌─────────▼───────────────────────────────────────────────────┐
+│                    Vercel Edge Functions                     │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  API Routes                                          │   │
+│  │  - /api/stream (AI Streaming)                        │   │
+│  │  - /api/parse-resume (PDF Parsing)                   │   │
+│  │  - /api/auth (NextAuth)                              │   │
+│  └────────────────────┬─────────────────────────────────┘   │
+└───────────────────────┼──────────────────────────────────────┘
+                        │
+                        │ Backend Proxy
+                        │
+┌───────────────────────▼──────────────────────────────────────┐
+│              Backend Server (Node.js + Express)              │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────┐   │
+│  │Question Bank│  │  Session     │  │  AI Engine       │   │
+│  │Manager      │  │  Manager     │  │  (OpenAI/Claude) │   │
+│  └─────────────┘  └──────────────┘  └──────────────────┘   │
+│                                                              │
+│  ┌─────────────┐  ┌──────────────┐                         │
+│  │  SQLite     │  │    Redis     │                         │
+│  │  Database   │  │  (Optional)  │                         │
+│  └─────────────┘  └──────────────┘                         │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🚀 Quick Start (5 Minutes)
+## 🏗️ Frontend Architecture (Next.js 15)
 
-### 1. Install Vercel CLI
-```bash
-npm install -g vercel
-```
-
-### 2. Deploy
-```bash
-# Windows
-.\deploy-vercel.bat
-
-# Mac/Linux
-chmod +x deploy-vercel.sh
-./deploy-vercel.sh
-```
-
-### 3. Configure Environment Variables
-See `QUICK_SETUP.md` for detailed instructions
-
-### 4. Start Interviewing!
-Visit your deployed frontend URL and begin!
-
----
-
-## 📚 Documentation
-
-| Document | Description |
-|----------|-------------|
-| **[VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)** | Complete Vercel deployment guide |
-| **[QUICK_SETUP.md](QUICK_SETUP.md)** | 5-minute quick start |
-| **[PRODUCTION_VERIFICATION.md](PRODUCTION_VERIFICATION.md)** | Complete feature verification |
-| **[FREE_DEPLOYMENT_GUIDE.md](FREE_DEPLOYMENT_GUIDE.md)** | Alternative deployment platforms |
-| **[.env.template](.env.template)** | Environment variables template |
-| **[ARCHITECTURE.md](ARCHITECTURE.md)** | System architecture details |
-
----
-
-## 🎯 Dynamic Question System
-
-### Zero Repetition Engine
-- **FNV-1a Hash Algorithm** for collision-resistant IDs
-- **Session-level Tracking** prevents duplicates
-- **1000 Retry Mechanism** ensures uniqueness
-- **99%+ Success Rate** verified through testing
-
-### Adaptive Intelligence
-- **Performance Analysis** of last 3 questions
-- **Auto-adjustment** of difficulty (±1 level)
-- **Topic Diversity** (max 40% concentration)
-- **Complexity Levels**: Basic → Research
-
-### Question Types (10 Categories)
-1. **Conceptual** - Theory and foundations
-2. **Coding** - Implementation challenges
-3. **Design** - Architecture and systems
-4. **Debugging** - Problem-solving
-5. **Behavioral** - Soft skills
-6. **System Design** - Scalability
-7. **Optimization** - Performance
-8. **Security** - Protection strategies
-9. **Scalability** - Growth planning
-10. **Architecture** - High-level design
-
----
-
-## 🧪 Testing & Verification
-
-### Test Coverage
-```bash
-cd backend
-npm test
-
-# Results:
-✅ 31 Tests Passed
-✅ Universal Engineering Support: Verified
-✅ Zero Repetition: 1000/1000 unique
-✅ Performance: <50ms average
-✅ 1M+ Capacity: Mathematically proven
-```
-
-### Automated Tests
-- Universal engineering support (13 roles)
-- Zero repetition (1000 questions)
-- Dynamic generation (types, topics, difficulty)
-- Performance benchmarks
-- Edge cases and error handling
-
----
-
-## 🏆 Performance Metrics
-
-| Metric | Target | Actual | Status |
-|--------|--------|--------|--------|
-| Generation Time | <50ms | ~30ms | ✅ Exceeded |
-| Uniqueness Rate | >99% | 99.9% | ✅ Exceeded |
-| Concurrent Sessions | 100+ | 100+ | ✅ Met |
-| Collision Rate | <1% | <0.1% | ✅ Exceeded |
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Next.js 15** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Three.js** - 3D visualizations
-- **Framer Motion** - Animations
-- **Socket.io** - Real-time communication
-
-### Backend
-- **Node.js** - Runtime
-- **Express** - Web framework
-- **TypeScript** - Type safety
-- **Socket.io** - WebSockets
-- **PostgreSQL** - Database (optional)
-- **Redis** - Caching (optional)
-
-### AI Integration
-- **OpenAI GPT** - Question analysis (optional)
-- **Anthropic Claude** - Advanced reasoning (optional)
-- **Google Gemini** - Multi-modal AI (optional)
-
----
-
-## 🌐 Deployment Platforms
-
-### Vercel (Recommended)
-- ✅ One-click deployment
-- ✅ Automatic SSL
-- ✅ Global CDN
-- ✅ 100GB bandwidth/month (free)
-
-### Alternative Platforms
-- **Render.com** - 750 hours/month free
-- **Railway.app** - $5/month credit
-- **Netlify** - Frontend hosting
-- **Fly.io** - Container deployment
-
----
-
-## 📈 System Architecture
+### Directory Structure
 
 ```
-┌─────────────────┐
-│   Frontend      │
-│   (Next.js)     │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   API Gateway   │
-│   (Express)     │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    ▼         ▼
-┌───────┐ ┌───────────────┐
-│ AI    │ │ Question Bank │
-│Engine │ │ Manager       │
-└───────┘ └───────────────┘
-    │         │
-    └────┬────┘
-         ▼
-┌─────────────────┐
-│   Database      │
-│   (PostgreSQL)  │
-└─────────────────┘
+frontend/
+├── app/                          # Next.js App Router
+│   ├── layout.tsx                # Root layout with providers
+│   ├── page.tsx                  # Landing page
+│   ├── interview/
+│   │   ├── setup/page.tsx        # Interview configuration
+│   │   └── session/page.tsx      # Live interview session
+│   ├── dashboard/page.tsx        # Performance analytics
+│   ├── pricing/page.tsx          # Subscription plans
+│   └── api/                      # API Routes (Edge Functions)
+│       ├── stream/route.ts       # AI streaming endpoint
+│       ├── parse-resume/route.ts # Resume parser (NEW!)
+│       └── auth/[...nextauth]/   # Authentication
+│
+├── components/                   # React Components
+│   ├── ChaosToOrderLanding.tsx   # Animated landing page (NEW!)
+│   ├── InterviewSetup.tsx        # Multi-step setup wizard
+│   ├── InterviewSession.tsx      # AI chat interface
+│   ├── CodeEditor.tsx            # Monaco + Pyodide
+│   ├── Dashboard.tsx             # Analytics dashboard
+│   └── RegistrationModal.tsx    # Freemium gate
+│
+├── lib/                          # Utilities
+│   ├── useSocket.ts              # Socket.io hook
+│   └── cn.ts                     # Class name utilities
+│
+├── styles/
+│   └── globals.css               # Global styles + Tailwind
+│
+└── public/                       # Static assets
+```
+
+### Key Technologies
+
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Next.js** | React framework with SSR/SSG | 15.0.3 |
+| **TypeScript** | Type safety | 5.3.3 |
+| **Tailwind CSS** | Utility-first styling | 3.4.0 |
+| **Framer Motion** | Animations (Chaos to Order) | 11.18.2 |
+| **Monaco Editor** | Code editor component | 4.6.0 |
+| **Pyodide** | Python in WebAssembly | 0.25.0 |
+| **Three.js** | 3D graphics (optional) | 0.160.1 |
+| **Socket.io** | Real-time bidirectional events | 4.8.1 |
+| **NextAuth** | Authentication | 4.24.5 |
+
+---
+
+## 🔐 Backend Architecture (Node.js + Express)
+
+### Core Components
+
+**server.js** - Main application entry point
+- Express server with middleware (CORS, Helmet, Compression)
+- Socket.io for real-time updates
+- REST API endpoints
+- Session management
+- Question bank integration
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/stream` | POST | Stream AI interview responses (SSE) |
+| `/api/parse-resume` | POST | Parse PDF resume to JSON (NEW!) |
+| `/api/forge-link` | POST | Create new interview session |
+| `/api/dashboard` | GET | User performance analytics |
+| `/api/question-stats` | GET | Question bank statistics |
+| `/health` | GET | Health check (Redis, PostgreSQL) |
+
+### Database Schema
+
+**SQLite Tables:**
+
+```sql
+-- Users
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY,
+  email TEXT UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Sessions
+CREATE TABLE sessions (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER,
+  config JSON,
+  transcript JSON,
+  created_at TIMESTAMP
+);
+
+-- Biometrics
+CREATE TABLE biometrics (
+  id INTEGER PRIMARY KEY,
+  session_id TEXT,
+  stress_level REAL,
+  heart_rate INTEGER,
+  emotion TEXT,
+  timestamp TIMESTAMP
+);
 ```
 
 ---
 
-## 🔧 Configuration
+## 🎨 Key Features
+
+### 1. **Chaos to Order Landing Page** (NEW!)
+
+**File:** `frontend/components/ChaosToOrderLanding.tsx`
+
+**Visual Metaphor:**
+- Floating UI elements start scattered (chaos)
+- Smoothly animate into structured grid (order)
+- Demonstrates transformation from potential to mastery
+
+**Technical Implementation:**
+```tsx
+// Chaos variants (random positions)
+chaos: (i: number) => ({
+  x: Math.random() * 400 - 200,
+  y: Math.random() * 400 - 200,
+  rotate: Math.random() * 360
+}),
+
+// Ordered variants (snap to grid)
+ordered: {
+  x: 0, y: 0, rotate: 0,
+  transition: { type: 'spring' }
+}
+```
+
+---
+
+### 2. **Resume Parser Integration** (NEW!)
+
+**Files:**
+- `backend/api/parse-resume.js` - Core parsing logic
+- `frontend/app/api/parse-resume/route.ts` - Next.js API route
+
+**Features:**
+- PDF to text extraction using `pdf-parse`
+- Structured data extraction (name, email, role, skills)
+- Auto-fill interview setup form
+- Error handling:
+  - File too large (>5MB)
+  - Corrupt PDF
+  - Invalid file type
+
+**Usage:**
+```typescript
+const formData = new FormData();
+formData.append('resume', pdfFile);
+
+const response = await fetch('/api/parse-resume', {
+  method: 'POST',
+  body: formData
+});
+
+const { data } = await response.json();
+// data: { name, email, role, experienceLevel, skills }
+```
+
+---
+
+### 3. **AI Streaming Interview**
+
+**File:** `frontend/components/InterviewSession.tsx`
+
+**Flow:**
+1. User sends message (text or voice)
+2. Frontend POSTs to `/api/stream`
+3. Backend streams AI response via SSE
+4. Frontend renders chunks in real-time
+5. Biometrics updated (stress, heart rate)
+
+**Tech Stack:**
+- **Streaming:** Server-Sent Events (SSE)
+- **AI Models:** OpenAI GPT-4 / Anthropic Claude
+- **Voice:** Web Speech API
+- **Code Execution:** Pyodide (client-side Python)
+
+---
+
+### 4. **Dynamic Question Generation**
+
+**File:** `backend/dist/questionBank.js`
+
+**Capacity:**
+```
+Software Engineering: 84,375,000 questions
+Civil Engineering:    28,125,000 questions
+Mechanical Eng:       28,125,000 questions
+Electrical Eng:       28,125,000 questions
+Chemical Eng:         28,125,000 questions
+─────────────────────────────────────────
+TOTAL:               224,625,000+ questions
+```
+
+**Features:**
+- Zero repetition guarantee (FNV-1a hash tracking)
+- Adaptive difficulty (performance-based)
+- Topic diversity enforcement
+- Session-level uniqueness tracking
+
+---
+
+## 🚀 Deployment
+
+### Vercel Configuration
+
+**Frontend:** `frontend/vercel.json`
+```json
+{
+  "rewrites": [
+    { 
+      "source": "/api/:path*", 
+      "destination": "https://neuroprep-backend.vercel.app/api/:path*" 
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" }
+      ]
+    }
+  ]
+}
+```
+
+**Backend:** `backend/vercel.json`
+```json
+{
+  "version": 2,
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/server.js" },
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
+}
+```
 
 ### Environment Variables
 
-**Frontend** (`frontend/.env`):
+**Frontend (.env.local):**
 ```env
-NEXT_PUBLIC_API_URL=https://your-backend.vercel.app
-NEXTAUTH_SECRET=your-secret-here
-NEXTAUTH_URL=https://your-frontend.vercel.app
+NEXT_PUBLIC_API_URL=https://neuroprep-backend.vercel.app
+NEXTAUTH_SECRET=<generate-with-openssl-rand>
+NEXTAUTH_URL=https://neuroprep-ai.vercel.app
 ```
 
-**Backend** (`backend/.env`):
+**Backend (.env):**
 ```env
-CORS_ORIGIN=https://your-frontend.vercel.app
-SESSION_SECRET=your-secret-here
-JWT_SECRET=your-jwt-secret
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+CORS_ORIGIN=https://neuroprep-ai.vercel.app
+NODE_ENV=production
 ```
 
-See `.env.template` for complete list.
+---
+
+## 🎯 Performance Optimizations
+
+### Frontend
+- **Code Splitting:** Automatic with Next.js App Router
+- **Lazy Loading:** Monaco Editor, Three.js components
+- **Image Optimization:** Next/Image component
+- **Bundle Size:** Target <500KB (current: ~350KB)
+
+### Backend
+- **Streaming:** SSE reduces perceived latency
+- **Caching:** Redis for session state
+- **Connection Pooling:** PostgreSQL (20 connections)
+- **Compression:** Gzip/Brotli for responses
+
+---
+
+## 📊 Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph Browser[User Browser]
+        UI[Next.js Frontend]
+        FM[Framer Motion]
+        PY[Pyodide WebAssembly]
+    end
+    
+    subgraph Edge[Vercel Edge Network]
+        API[API Routes]
+        AUTH[NextAuth]
+        PARSE[Resume Parser]
+    end
+    
+    subgraph Backend[Node.js Backend]
+        QB[Question Bank<br/>224M+ Questions]
+        SM[Session Manager]
+        AI[AI Engine<br/>OpenAI/Claude]
+    end
+    
+    subgraph Storage[Data Layer]
+        DB[(SQLite)]
+        REDIS[(Redis Cache)]
+    end
+    
+    UI -->|HTTPS| API
+    API -->|Proxy| QB
+    API -->|Proxy| SM
+    API -->|Stream SSE| AI
+    SM --> DB
+    SM --> REDIS
+    QB --> DB
+    PARSE -->|PDF Parse| API
+```
+
+---
+
+## 🧪 Testing Strategy
+
+### Unit Tests
+- **Backend:** Jest (31 tests passing)
+- **Frontend:** React Testing Library
+- **Coverage:** Target 80%+
+
+### E2E Tests
+- **Tool:** Cypress
+- **Critical Flows:**
+  - Interview setup → session → completion
+  - Resume upload → auto-fill
+  - Payment flow
+
+### Performance Tests
+- **Lighthouse Score:** 90+ (mobile & desktop)
+- **Bundle Size:** <500KB
+- **Time to Interactive:** <3s
+
+---
+
+## 📚 Links
+
+- **Live Demo:** https://neuroprep-ai.vercel.app
+- **GitHub Repo:** [Your GitHub URL]
+- **Documentation:** [See /docs folder]
+- **Architecture Diagram:** /docs/ARCHITECTURE_DIAGRAM.md
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our contributing guidelines.
-
-### Development Setup
-```bash
-# Clone repository
-git clone https://github.com/your-username/ai-interviewer.git
-
-# Install dependencies
-cd ai-interviewer
-npm install
-
-# Start backend
-cd backend
-npm run dev
-
-# Start frontend (new terminal)
-cd frontend
-npm run dev
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
 
 ---
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 🎉 Success Stories
-
-> "NeuroPrep AI helped me ace my Google interview. The questions were incredibly diverse and challenging!" - Software Engineer
-
-> "As a structural engineer, I was amazed by the depth of civil engineering questions. Best interview prep tool!" - Civil Engineer
-
-> "The adaptive difficulty feature is brilliant. It challenged me at exactly the right level." - ML Engineer
-
----
-
-## 🔗 Links
-
-- **Live Demo**: [Coming Soon]
-- **Documentation**: [View Docs](./VERCEL_DEPLOYMENT.md)
-- **Issue Tracker**: [GitHub Issues](https://github.com/your-username/ai-interviewer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/ai-interviewer/discussions)
-
----
-
-## 📞 Support
-
-Need help? We're here for you:
-- 📧 Email: support@neuroprepai.com
-- 💬 Discord: [Join our community](https://discord.gg/neuroprepai)
-- 📖 Docs: [Full documentation](./VERCEL_DEPLOYMENT.md)
-
----
-
-## 🌟 Star History
-
-If you find this project useful, please consider giving it a star! ⭐
-
----
-
-## 🚀 Ready to Deploy?
-
-```bash
-# Run the automated deployment script
-.\deploy-vercel.bat
-
-# Or follow the quick setup guide
-# See QUICK_SETUP.md for details
-```
-
----
-
-**Built with ❤️ by the NeuroPrep AI Team**
-
-*Revolutionizing Engineering Interviews, One Question at a Time*
-
----
-
-### Quick Stats
-
-- **224,625,000+** Total Questions
-- **40+** Engineering Roles
-- **5** Engineering Disciplines
-- **10** Question Types
-- **<50ms** Generation Time
-- **99.9%** Uniqueness Rate
-- **100%** Free to Deploy
-
----
-
-**Status**: ✅ Production Ready | **Version**: 2.0.0 | **Last Updated**: December 2025
+**Built with ❤️ using Next.js 15, deployed on Vercel**  
+**Status:** ✅ Production Ready | **Version:** 2.0.0 | **Last Updated:** December 2025

@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
+
+/* JetBrains Mono Font Variables */
+:root {
+  --font-jetbrains: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+/* Apply JetBrains font globally */
+body, input, textarea, select, button {
+  font-family: var(--font-jetbrains) !important;
+}
+
+/* Headings with JetBrains */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-jetbrains) !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Code and monospace elements */
+code, pre, kbd, samp {
+  font-family: var(--font-jetbrains) !important;
+}

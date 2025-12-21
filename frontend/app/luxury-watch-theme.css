@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&display=swap');
+
+/* Luxury Watch Theme - Rolex/Patek Philippe Inspired */
+
+:root {
+  /* Premium Colors - Watch-inspired */
+  --watch-rose-gold: #B76E79;
+  --watch-platinum: #E5E4E2;
+  --watch-midnight: #191970;
+  --watch-champagne: #F7E7CE;
+  --watch-steel: #71797E;
+  --watch-black: #0A0A0A;
+  --watch-white: #FAFAFA;
+  
+  /* Accent Colors */
+  --accent-emerald: #50C878;
+  --accent-sapphire: #0F52BA;
+  --accent-ruby: #E0115F;
+  --accent-diamond: #B9F2FF;
+  
+  /* Luxury Gradients */
+  --gradient-rose-gold: linear-gradient(135deg, #B76E79 0%, #8B4513 100%);
+  --gradient-platinum: linear-gradient(135deg, #E5E4E2 0%, #C0C0C0 100%);
+  --gradient-midnight: linear-gradient(135deg, #191970 0%, #000080 100%);
+  --gradient-prestige: linear-gradient(135deg, #B76E79 0%, #8B4513 50%, #191970 100%);
+  
+  /* Shadows - Premium depth */
+  --shadow-watch-light: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0,0, 0, 0.06);
+  --shadow-watch-medium: 0 4px 16px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-watch-heavy: 0 8px 32px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-watch-luxury: 0 16px 64px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  /* Fonts */
+  --font-luxury: 'Playfair Display', 'Georgia', serif;
+  --font-prestige: 'Cinzel', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Global Luxury Styling */
+body {
+  background: var(--watch-midnight);
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(183, 110, 121, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(229, 228, 226, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  font-family: var(--font-luxury);
+  color: var(--watch-white);
+}
+
+/* Luxury Glassmorphic Card - Watch Face Inspired */
+.watch-card {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(183, 110, 121, 0.3);
+  border-radius: 24px;
+  box-shadow: var(--shadow-watch-luxury);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.watch-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.5), transparent);
+}
+
+.watch-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(183, 110, 121, 0.1), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.watch-card:hover::after {
+  opacity: 1;
+}
+
+.watch-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(183, 110, 121, 0.5);
+  box-shadow: 
+    0 24px 72px rgba(0, 0, 0, 0.4),
+    0 12px 24px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(183, 110, 121, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Premium Button - Watch Crown Inspired */
+.watch-button-primary {
+  background: var(--gradient-rose-gold);
+  border: none;
+  border-radius: 16px;
+  padding: 16px 32px;
+  font-family: var(--font-prestige);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--watch-white);
+  box-shadow: 
+    0 6px 20px rgba(183, 110, 121, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.watch-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.watch-button-primary:hover::before {
+  left: 100%;
+}
+
+.watch-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 28px rgba(183, 110, 121, 0.5),
+    0 0 24px rgba(183, 110, 121, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.watch-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 12px rgba(183, 110, 121, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Secondary Button - Steel Bracelet Style */
+.watch-button-secondary {
+  background: transparent;
+  border: 2px solid rgba(229, 228, 226, 0.3);
+  border-radius: 16px;
+  padding: 14px 30px;
+  font-family: var(--font-prestige);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--watch-platinum);
+  box-shadow: var(--shadow-watch-medium);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.watch-button-secondary:hover {
+  background: rgba(229, 228, 226, 0.1);
+  border-color: rgba(229, 228, 226, 0.5);
+  color: var(--watch-white);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(229, 228, 226, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Luxury Input - Watch Display Style */
+.watch-input {
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(183, 110, 121, 0.2);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--watch-white);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.watch-input:focus {
+  outline: none;
+  background: rgba(10, 10, 10, 0.7);
+  border-color: rgba(183, 110, 121, 0.5);
+  box-shadow: 
+    0 0 0 4px rgba(183, 110, 121, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.watch-input::placeholder {
+  color: rgba(250, 250, 250, 0.3);
+  font-style: italic;
+}
+
+/* Premium Typography */
+.watch-heading-xl {
+  font-family: var(--font-prestige);
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  background: var(--gradient-rose-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 12px rgba(183, 110, 121, 0.3);
+}
+
+.watch-heading-lg {
+  font-family: var(--font-prestige);
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  color: var(--watch-platinum);
+}
+
+.watch-heading-md {
+  font-family: var(--font-prestige);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--watch-white);
+}
+
+.watch-body {
+  font-family: var(--font-luxury);
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(250, 250, 250, 0.9);
+  font-weight: 400;
+}
+
+/* Watch Dial Animation - Rotating Bezel */
+@keyframes watch-dial-rotate {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+
+.watch-dial {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(10, 10, 10, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%);
+  border: 4px solid rgba(183, 110, 121, 0.5);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(183, 110, 121, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  animation: watch-dial-rotate 60s linear infinite;
+}
+
+/* Watch Hand Animation */
+@keyframes watch-hand {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.watch-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 3px;
+  height: 35%;
+  background: linear-gradient(to top, rgba(183, 110, 121, 1), rgba(183, 110, 121, 0.5));
+  transform-origin: bottom center;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(183, 110, 121, 0.5);
+  animation: watch-hand 120s linear infinite;
+}
+
+/* Luxury Progress Bar - Watch Power Reserve */
+.watch-progress {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.watch-progress::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-rose-gold);
+  background-size: 200% 100%;
+  animation: watch-progress-shimmer 2s linear infinite;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(183, 110, 121, 0.5);
+}
+
+@keyframes watch-progress-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Luxury Badge - Complication Style */
+.watch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(183, 110, 121, 0.2);
+  border: 1px solid rgba(183, 110, 121, 0.4);
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--watch-rose-gold);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 2px 8px rgba(183, 110, 121, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Luxury Modal - Watch Box Opening */
+.watch-modal {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(183, 110, 121, 0.3);
+  border-radius: 32px;
+  padding: 48px;
+  box-shadow: 
+    0 32px 96px rgba(0, 0, 0, 0.5),
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(183, 110, 121, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  animation: watch-box-open 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes watch-box-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Luxury Scrollbar - Watch Crown Style */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 0.5);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-rose-gold);
+  border-radius: 6px;
+  border: 2px solid rgba(10, 10, 10, 0.5);
+  box-shadow: 0 0 8px rgba(183, 110, 121, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-prestige);
+  box-shadow: 0 0 12px rgba(183, 110, 121, 0.5);
+}
+
+/* Selection */
+::selection {
+  background: rgba(183, 110, 121, 0.3);
+  color: var(--watch-white);
+}
+
+/* Floating Animation - Watch Levitation */
+@keyframes watch-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.watch-float {
+  animation: watch-float 4s ease-in-out infinite;
+}
+
+/* Premium Divider - Watch Case Separator */
+.watch-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(183, 110, 121, 0.5),
+    rgba(229, 228, 226, 0.3),
+    rgba(183, 110, 121, 0.5),
+    transparent
+  );
+  margin: 32px 0;
+  position: relative;
+}
+
+.watch-divider::before {
+  content: '◆';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--watch-midnight);
+  padding: 0 16px;
+  color: var(--watch-rose-gold);
+  font-size: 12px;
+}

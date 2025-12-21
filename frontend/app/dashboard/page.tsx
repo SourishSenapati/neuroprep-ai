@@ -1,42 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+export const dynamic = 'force-dynamic';
+
+import React from 'react';
 import Dashboard from '../../components/Dashboard';
+import DojoEntry from '../../components/DojoEntry';
+import RealTimeAnalytics from '../../components/RealTimeAnalytics';
 
-export default function Page() {
-  const router = useRouter();
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    // Check for authentication
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/');
-      return;
-    }
-
-    // Try to load user from localStorage or fetch from API
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    } else {
-      // Mock user if not found
-      setUser({ id: 'temp_user', name: 'Guest User', email: 'guest@example.com' });
-    }
-  }, [router]);
-
-  const handleStartInterview = () => {
-    router.push('/');
-  };
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+export default function DashboardPage() {
+  return (
+    <div className="min-h-screen bg-[#050505] text-white py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Real-Time Analytics */}
+        <div className="mb-8">
+          <RealTimeAnalytics />
+        </div>
+        
+        {/* Dojo Entry Portal */}
+        <div className="mb-8">
+          <DojoEntry />
+        </div>
+        
+        {/* Main Dashboard */}
+        <Dashboard 
+          onStartInterview={() => window.location.href = '/interview/setup'}
+        />
       </div>
-    );
-  }
-
-  return <Dashboard user={user} onStartInterview={handleStartInterview} />;
+    </div>
+  );
 }
