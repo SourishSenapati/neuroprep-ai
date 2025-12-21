@@ -67,6 +67,7 @@ const careerTracks = [
     icon: '🚀'
   },
   {
+    id: 'devops-sre',
     initial: 'O',
     title: 'DevOps & SRE',
     tagline: 'Infrastructure Excellence',
