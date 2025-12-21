@@ -32,19 +32,29 @@ module.exports = {
           800: '#86198f',
           900: '#701a75',
         },
-        // NeuroPrep Custom Palette
+        // High-Contrast Dark Theme (The "Vogue" Palette)
+        'void-black': '#050505',
+        'glass-charcoal': '#121212',
+        'glass-charcoal-50': 'rgba(18, 18, 18, 0.5)',
+        'crisp-white': '#FFFFFF',
+        'muted-silver': '#A3A3A3',
+        'terminal-green': '#4ADE80',
+        'electric-blue': '#3B82F6',
+        'iconic-gold': '#EAB308',
+        
+        // Retaining old keys for backward compatibility but mapping to new theme
         'neuro': {
           black: '#050505',
           green: '#4ADE80',
-          text: '#F0F0F0',
+          text: '#FFFFFF',
           muted: '#A3A3A3',
-          border: '#1F1F1F'
+          border: '#333333'
         }
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui'],
-        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular'],
-        serif: ['var(--font-serif)', 'ui-serif', 'Georgia'],
+        sans: ['Inter', 'Manrope', 'ui-sans-serif', 'system-ui'],
+        serif: ['Playfair Display', 'Merriweather', 'ui-serif', 'Georgia'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
         'blob': 'blob 7s infinite',

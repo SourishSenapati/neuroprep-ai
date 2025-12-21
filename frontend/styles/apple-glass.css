@@ -8,36 +8,45 @@
 @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Sourish Portfolio Palette */
-  --apple-blue: #4ADE80; /* Replacing Blue with Green */
-  --apple-indigo: #22c55e; /* Replacing Indigo with Darker Green */
-  --apple-purple: #4ADE80; /* Replacing Purple with Green */
-  --apple-pink: #F0F0F0; /* Replacing Pink with White */
+  /* High-Contrast Dark Theme (The "Vogue" Palette) */
+  --void-black: #050505;
+  --glass-charcoal: #121212;
+  --glass-charcoal-50: rgba(18, 18, 18, 0.5);
+  --crisp-white: #FFFFFF;
+  --muted-silver: #A3A3A3;
+  --terminal-green: #4ADE80; 
+  --electric-blue: #3B82F6;
+  --iconic-gold: #EAB308;
+
+  /* Semantic Mappings for Apple Glass Theme */
+  --apple-blue: var(--electric-blue);       /* Primary Actions */
+  --apple-green: var(--terminal-green);     /* Success/Code */
+  --apple-yellow: var(--iconic-gold);       /* Brand/Warning */
+  --apple-indigo: var(--terminal-green);    /* Mapped to Green for consistency */
+  --apple-purple: var(--electric-blue);     /* Mapped to Blue */
+  --apple-pink: var(--crisp-white);
   --apple-red: #EF4444;
-  --apple-orange: #F59E0B;
-  --apple-yellow: #FBBF24;
-  --apple-green: #4ADE80;
-  --apple-teal: #4ADE80;
-  --apple-cyan: #4ADE80;
+  --apple-orange: var(--iconic-gold);
   
   /* Neutral Colors */
-  --glass-white: rgba(255, 255, 255, 0.05); /* Darker glass */
+  --glass-white: rgba(255, 255, 255, 0.05); 
   --glass-white-strong: rgba(255, 255, 255, 0.1);
-  --glass-dark: rgba(0, 0, 0, 0.6);
-  --glass-darker: rgba(0, 0, 0, 0.8);
-  --text-primary: #F0F0F0;
-  --text-secondary: #A3A3A3;
+  --glass-dark: rgba(18, 18, 18, 0.6);      /* Glass Charcoal Base */
+  --glass-darker: rgba(5, 5, 5, 0.8);       /* Void Black Base */
+  
+  --text-primary: var(--crisp-white);
+  --text-secondary: var(--muted-silver);
   --text-tertiary: #737373;
   
   /* Backgrounds */
-  --bg-gradient: linear-gradient(135deg, #050505 0%, #111111 100%);
+  --bg-gradient: linear-gradient(135deg, var(--void-black) 0%, var(--glass-charcoal) 100%);
   --bg-gradient-alt: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-  --bg-dark: #050505;
+  --bg-dark: var(--void-black);
   --bg-darker: #000000;
   
   /* Glass Effects */
-  --glass-background: rgba(20, 20, 20, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-background: rgba(18, 18, 18, 0.4); /* Glass Charcoal Tint */
+  --glass-border: rgba(255, 255, 255, 0.08); /* Subtle White Border */
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   --glass-blur: blur(20px);
   

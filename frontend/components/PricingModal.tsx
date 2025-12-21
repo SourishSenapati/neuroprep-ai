@@ -28,61 +28,50 @@ export default function PricingModal({
   trigger = 'general',
   onUpgradeComplete 
 }: PricingModalProps) {
-  const [isProcessing, setIsProcessing] = useState(false);
+import { useRazorpay } from '@/hooks/useRazorpay';
+
+// ... inside component ...
   const [showSuccess, setShowSuccess] = useState(false);
   const gameStore = useGameStore();
+  const { handlePayment, loading: isProcessing } = useRazorpay();
 
-  const triggerMessages: Record<string, string> = {
-    nemesis: "You've used your 3 free Nemesis Mode sessions! Upgrade to unlock unlimited access.",
-    biometric: "Unlock advanced biometric analytics with Pro!",
-    roast: "Get unlimited AI resume roasts with Pro!",
-    general: "Unlock all premium features with NeuroPrep AI Pro!"
-  };
-
-  // Simulate Stripe checkout
   const handleUpgrade = async () => {
-    setIsProcessing(true);
-    
-    // Simulate payment processing (2 seconds)
-    setTimeout(() => {
-      setIsProcessing(false);
-      setShowSuccess(true);
-      
-      // Confetti explosion!
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        colors: ['#a855f7', '#ec4899', '#f59e0b', '#10b981']
-      });
+    const userDataRaw = localStorage.getItem('user');
+    const userData = userDataRaw ? JSON.parse(userDataRaw) : null;
+    const userId = userData?._id || userData?.uid || `guest_${Date.now()}`;
 
-      // Grant premium status
-      localStorage.setItem('isPremium', 'true');
-      
-      // Update user object
-      const userDataRaw = localStorage.getItem('user');
-      if (userDataRaw) {
-        const userData = JSON.parse(userDataRaw);
-        userData.isPremium = true;
-        localStorage.setItem('user', JSON.stringify(userData));
-      }
+    try {
+      await handlePayment(userId, () => {
+        // Success Callback
+        setShowSuccess(true);
+        
+        // Confetti
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          colors: ['#a855f7', '#ec4899', '#f59e0b', '#10b981']
+        });
 
-      // Bonus XP for "upgrading"
-      gameStore.completeTask(500);
-
-      toast.success('🎉 Upgraded to Pro! +500 Bonus XP!', {
-        duration: 5000,
-        icon: '👑'
-      });
-
-      // Close modal after 3 seconds
-      setTimeout(() => {
-        setShowSuccess(false);
-        onClose();
-        if (onUpgradeComplete) {
-          onUpgradeComplete();
+        // Grant premium status locally
+        localStorage.setItem('isPremium', 'true');
+        if (userData) {
+          userData.isPremium = true;
+          localStorage.setItem('user', JSON.stringify(userData));
         }
-      }, 3000);
-    }, 2000);
+
+        // Bonus XP
+        gameStore.completeTask(500);
+        toast.success('🎉 Upgraded to Pro! +500 Bonus XP!', { duration: 5000, icon: '👑' });
+
+        setTimeout(() => {
+          setShowSuccess(false);
+          onClose();
+          if (onUpgradeComplete) onUpgradeComplete();
+        }, 3000);
+      });
+    } catch (error) {
+      toast.error('Payment initialization failed');
+    }
   };
 
   if (!isOpen) return null;
@@ -226,11 +215,16 @@ export default function PricingModal({
                     <Crown className="w-6 h-6 text-yellow-400 fill-yellow-400" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                      ₹99
+                    <div className="flex items-baseline gap-2">
+                      <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                        ₹499
+                      </div>
+                      <div className="text-lg text-gray-500 line-through font-sans">
+                        ₹1,999
+                      </div>
                     </div>
                     <div className="text-sm text-gray-400">/month</div>
-                    <div className="text-xs text-green-400">~$1.20 USD</div>
+                    <div className="text-xs text-green-400 font-bold">75% OFF • Limited Time</div>
                   </div>
                 </div>
 

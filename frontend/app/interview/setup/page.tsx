@@ -65,8 +65,8 @@ const careerTracks = [
     salary: '₹6-20 LPA',
     difficulty: 'Intermediate',
     icon: '🚀'
-  }
-];
+  },
+  {
     initial: 'O',
     title: 'DevOps & SRE',
     tagline: 'Infrastructure Excellence',

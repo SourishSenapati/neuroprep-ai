@@ -12,6 +12,7 @@ import authRouter from './routes/auth.js';
 import paymentRouter from './routes/payment.js';
 import masteryPathsRouter from './routes/masteryPaths.js';
 import interviewRouter from './routes/interview.js';
+import navigatorRouter from './routes/navigator.js';
 import User from './models/User.js';
 
 dotenv.config();
@@ -69,6 +70,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/payment', paymentRouter);
 app.use('/api/mastery-paths', masteryPathsRouter);
 app.use('/api', interviewRouter); // Mounts /stream endpoint
+app.use('/api/navigate', navigatorRouter);
 
 // Dashboard Route (Optimized)
 app.get('/api/dashboard', async (req, res) => {

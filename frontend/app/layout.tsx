@@ -37,6 +37,7 @@ import { Toaster } from 'react-hot-toast'
 import GameStoreInit from '../components/GameStoreInit'
 import JudgeWelcomeModal from '../components/JudgeWelcomeModal'
 import ShareButton from '../components/ShareButton'
+import AINavigator from '../components/AINavigator'
 
 // ...
 
@@ -58,6 +59,7 @@ export default function RootLayout({
             <GameStoreInit />
             <JudgeWelcomeModal />
             <AuraOverlay />
+            <AINavigator />
             <div className="relative z-10">
               {children}
             </div>
