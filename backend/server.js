@@ -11,6 +11,7 @@ import hpp from 'hpp';
 import authRouter from './routes/auth.js';
 import paymentRouter from './routes/payment.js';
 import masteryPathsRouter from './routes/masteryPaths.js';
+import interviewRouter from './routes/interview.js';
 import User from './models/User.js';
 
 dotenv.config();
@@ -67,6 +68,7 @@ app.use(express.json({ limit: '10kb' })); // Body limit
 app.use('/api/auth', authRouter);
 app.use('/api/payment', paymentRouter);
 app.use('/api/mastery-paths', masteryPathsRouter);
+app.use('/api', interviewRouter); // Mounts /stream endpoint
 
 // Dashboard Route (Optimized)
 app.get('/api/dashboard', async (req, res) => {

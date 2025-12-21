@@ -11,6 +11,7 @@ import Image from 'next/image';
 
 import { multiAuraSync } from '../lib/multiAuraSync';
 import ARProctorHUD from './ARProctorHUD';
+import { useGameStore } from '../lib/store/gameStore';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-c7le0xxvj-sourish-sennapatis-projects.vercel.app';
 
@@ -23,6 +24,7 @@ export default function AuraSingularityChamber({
   difficulty?: string;
   persona?: string;
 }) {
+  const { gradeAnswer } = useGameStore();
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCamOn, setIsCamOn] = useState(true);
   const [isOffline, setIsOffline] = useState(false);

@@ -29,8 +29,8 @@ export interface GameState {
   achievements: string[];
   
   // Actions
-  completeTask: (xp: number) => void;
-  answerQuestion: (correct: boolean) => void;
+  completeTask: (baseXp?: number) => void;
+  gradeAnswer: (accuracy: number) => { xpGained: number; newLevel: number };
   executeCode: () => void;
   resetStreak: () => void;
   initializeStreak: () => void;
@@ -48,29 +48,23 @@ export interface GameState {
 
 /**
  * Calculate level from total XP
- * Level 1: 0-100 XP
- * Level 2: 100-300 XP (+200)
- * Level 3: 300-600 XP (+300)
- * Formula: Level N requires N*100 XP from previous level
+ * Formula: XP = 100 * (Level-1)^1.5
+ * Inverse: Level = (XP/100)^(1/1.5) + 1
  */
 function calculateLevel(xp: number): number {
   let level = 1;
-  let xpRequired = 0;
-  
-  while (xpRequired <= xp) {
+  while (xp >= 100 * Math.pow(level, 1.5)) {
     level++;
-    xpRequired += level * 100;
   }
-  
-  return level - 1;
+  return level;
 }
 
 /**
  * Calculate XP required for next level
  */
 function calculateXpToNextLevel(xp: number, currentLevel: number): number {
-  const nextLevelXp = Array.from({ length: currentLevel + 1 }, (_, i) => (i + 1) * 100).reduce((a, b) => a + b, 0);
-  return nextLevelXp - xp;
+  const nextLevelThreshold = Math.ceil(100 * Math.pow(currentLevel, 1.5));
+  return Math.max(0, nextLevelThreshold - xp);
 }
 
 /**
@@ -207,25 +201,37 @@ export const useGameStore = create<GameState>()(
         });
       },
 
-      // Complete a task (interview session, question, etc.)
-      completeTask: (xpReward = 10) => {
-        const { xp, streak, lastActiveDate } = get();
+      // Complete a task with exponential level scaling
+      completeTask: (baseXp = 50) => {
+        const { xp, streak, lastActiveDate, level } = get();
         const today = getTodayISO();
         
+        // Streak Logic
         let newStreak = streak;
-        
-        // If not active today yet, increment streak
         if (lastActiveDate && !isToday(lastActiveDate)) {
           if (isYesterday(lastActiveDate)) {
             newStreak = streak + 1;
           } else {
-            // Streak broken, start fresh
-            newStreak = 1;
+            newStreak = 1; // Reset if broken
           }
+        } else if (!lastActiveDate) {
+           newStreak = 1;
         }
+
+        // Exponential XP Scaling: Higher level = More XP per task
+        // Multiplier: 1.0 + (Level * 0.15) -> Level 10 gets 2.5x XP
+        const levelMultiplier = 1 + (level * 0.15);
+        const streakBonus = Math.min(newStreak * 0.05, 0.5); // Up to 50% bonus for streaks
         
-        const newXp = xp + xpReward;
-        const newLevel = calculateLevel(newXp);
+        const finalXpReward = Math.round(baseXp * (levelMultiplier + streakBonus));
+        const newXp = xp + finalXpReward;
+        
+        // Recalculate Level: EXPONENTIAL CURVE
+        // Level N requires ~ 100 * N^1.5 XP
+        let newLevel = 1;
+        while (newXp >= 100 * Math.pow(newLevel, 1.5)) {
+            newLevel++;
+        }
         
         set({
           xp: newXp,
@@ -235,20 +241,46 @@ export const useGameStore = create<GameState>()(
           sessionsCompleted: get().sessionsCompleted + 1
         });
         
-        // Check for level up
-        if (newLevel > get().level) {
-          console.log(`Level Up! You are now level ${newLevel}`);
-        }
+        console.log(`🏅 XP Gained: ${finalXpReward} (Base: ${baseXp} x Lvl: ${levelMultiplier.toFixed(2)} x Strk: ${streakBonus.toFixed(2)})`);
       },
 
-      // Answer a question
-      answerQuestion: (correct: boolean) => {
-        const xpReward = correct ? 5 : 2; // More XP for correct answers
+      // Grade an answer with precision accuracy (0-100)
+      gradeAnswer: (accuracy: number) => {
+        const { level, xp } = get();
+        
+        // 1. Level Scaling (10% bonus per level)
+        const levelMultiplier = 1 + (level * 0.1);
+        
+        // 2. Accuracy Bonus (Non-linear reward for high accuracy)
+        // 100% -> 1.0
+        // 80% -> 0.8
+        // But we want to reward 90+ significantly more
+        let accuracyBonus = accuracy * 0.5; // Base: 0-50 XP
+        if (accuracy > 90) accuracyBonus += 25; // Perfect score bonus
+        else if (accuracy > 75) accuracyBonus += 10; // Good score bonus
+        
+        // 3. Base Participation XP
+        const participationBase = 10;
+        
+        // Final Formula
+        const rawXp = (participationBase + accuracyBonus) * levelMultiplier;
+        const xpReward = Math.round(rawXp);
+        
+        const newXp = xp + xpReward;
+        
+        // Recalculate Level
+        let newLevel = 1;
+        while (newXp >= 100 * Math.pow(newLevel, 1.5)) {
+            newLevel++;
+        }
         
         set({
           questionsAnswered: get().questionsAnswered + 1,
-          xp: get().xp + xpReward
+          xp: newXp,
+          level: newLevel
         });
+        
+        return { xpGained: xpReward, newLevel };
       },
 
       // Execute code
