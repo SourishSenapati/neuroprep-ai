@@ -14,6 +14,40 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [paths, setPaths] = useState<any[]>([]);
 
+  // Fallback data - NEW universal paths (NO TCS/Infosys)
+  const FALLBACK_PATHS = [
+    {
+      title: "Logic & Precision",
+      slug: "logic-precision",
+      description: "The essential toolkit for every engineer who values accuracy over approximation. Master the core logic and critical thinking that supports every engineering discipline, from circuits to concrete.",
+      companyTags: ["All Industries", "R&D", "Product Design", "Field Services"],
+      difficulty: "All Levels",
+      salaryRange: "₹3.5-25 LPA",
+      icon: "🎯",
+      skills: ["Critical Thinking", "Precision Engineering", "Core Logic", "Problem-Solving Intuition"]
+    },
+    {
+      title: "Complexity Decoded",
+      slug: "complexity-decoded",
+      description: "Learn to navigate high-level friction, entropy, and edge cases in any system you design. Whether optimizing algorithms or infrastructure, learn to build what hasn't been built yet.",
+      companyTags: ["Product Companies", "R&D Labs", "Innovation Centers", "Patents"],
+      difficulty: "Intermediate to Expert",
+      salaryRange: "₹8-45 LPA",
+      icon: "🧩",
+      skills: ["System Design", "Edge Case Analysis", "Deep Tech", "Innovation"]
+    },
+    {
+      title: "Total Versatility",
+      slug: "total-versatility",
+      description: "Prepare for a dynamic future. Equip yourself to work in R&D, operations, product design, or field services. Be the engineer who thrives anywhere.",
+      companyTags: ["Any Industry", "Operations", "Product Design", "Crisis Management"],
+      difficulty: "All Levels",
+      salaryRange: "₹4-30 LPA",
+      icon: "🌐",
+      skills: ["Adaptive Engineering", "Versatility", "Impact-Driven", "Real-World Problem Solving"]
+    }
+  ];
+
   useEffect(() => {
     setMounted(true);
     fetchPaths();
@@ -23,12 +57,16 @@ export default function HomePage() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/mastery-paths`);
         const data = await res.json();
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
             setPaths(data);
+        } else {
+            // Use fallback if API returns empty or invalid data
+            setPaths(FALLBACK_PATHS);
         }
     } catch (error) {
-        console.error('Failed to fetch paths', error);
-        // Fallback or leave empty? Maybe fallback hardcoded list if fetch fails
+        console.error('Failed to fetch paths, using fallback:', error);
+        // Always show fallback instead of empty state
+        setPaths(FALLBACK_PATHS);
     }
   };
 
