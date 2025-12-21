@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import './globals-mobile.css'
@@ -9,17 +9,18 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' })
 
+export const viewport: Viewport = {
+  themeColor: '#667eea',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export const metadata: Metadata = {
   title: 'NeuroPrep AI - Master Engineering Interviews',
   description: 'The world\'s most advanced AI interview platform with 224+ million unique questions across 47 engineering roles.',
   manifest: '/manifest.json',
-  themeColor: '#667eea',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
