@@ -1,162 +1,38 @@
-# VERCEL DEPLOYMENT GUIDE
+# 🚀 Final Deployment Guide (Vercel Monorepo)
 
-## **PRE-DEPLOYMENT CHECKLIST:**
+Your project is set up as a **Monorepo** with two separate deployments on Vercel:
+1. **Frontend** (Next.js)
+2. **Backend** (Express/Node.js)
 
-- [x] Build succeeds (`npm run build`)
-- [x] All tests pass (`npm test`)
-- [x] Environment variables documented
-- [x] Mobile responsive
-- [x] Performance optimized
+## ✅ Step 1: Backend Configuration
+1. Go to your Vercel Dashboard -> **backend** project.
+2. Click **Settings** -> **Environment Variables**.
+3. Add the following:
+   - `MONGO_URI`: `mongodb+srv://sourishschemug_db_user:a4r1UIXNpZe16pRA@neuroprep-db.mongodb.net/?retryWrites=true&w=majority`
+   - `RAZORPAY_KEY_ID`: `rzp_test_RuBymTWufgW3fT`
+   - `RAZORPAY_KEY_SECRET`: `Jtz8G0RYgmWzW5L4xg74THZn`
+   - `CORS_ORIGIN`: `https://your-frontend-url.vercel.app` (Replace with your actual Frontend URL)
+4. Go to **Deployments** and **Redeploy** to apply changes.
+5. **Copy the Backend URL** (e.g., `https://backend-xyz.vercel.app`).
 
----
+## ✅ Step 2: Frontend Configuration
+1. Go to your Vercel Dashboard -> **frontend** project.
+2. Click **Settings** -> **Environment Variables**.
+3. Add the following:
+   - `NEXT_PUBLIC_API_URL`: **Paste your Backend URL here** (e.g., `https://backend-xyz.vercel.app`) – *Important: No trailing slash*
+   - `NEXT_PUBLIC_RAZORPAY_KEY_ID`: `rzp_test_RuBymTWufgW3fT`
+   - `NEXT_PUBLIC_FIREBASE_API_KEY`: (Your Firebase API Key)
+   - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`: (Your Firebase Auth Domain)
+   - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`: (Your Firebase Project ID)
+4. Go to **Deployments** and **Redeploy**.
 
-## **STEP 1: Install Vercel CLI**
+## 📱 Mobile Optimization Verified
+- The app handles mobile layouts automatically (`globals-mobile.css`).
+- Touch targets are optimized (44px+).
+- Layouts stack strictly for vertical scrolling on phones.
 
-```powershell
-npm install -g vercel
-```
+## 🔗 Live URLs
+- **Frontend:** [Check Vercel Dashboard for `frontend-*.vercel.app`]
+- **Backend:** [Check Vercel Dashboard for `backend-*.vercel.app`]
 
----
-
-## **STEP 2: Login to Vercel**
-
-```powershell
-vercel login
-```
-
-Follow the prompts to authenticate.
-
----
-
-## ️ **STEP 3: Configure Environment Variables**
-
-Before deploying, add these to Vercel dashboard:
-
-```bash
-# Required
-OPENAI_API_KEY=your_openai_key
-
-# Optional (Multiplayer)
-NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# Optional (Voice Cloning)
-ELEVENLABS_API_KEY=your_elevenlabs_key
-```
-
-**Add via CLI:**
-
-```powershell
-vercel env add OPENAI_API_KEY
-vercel env add NEXT_PUBLIC_SUPABASE_URL
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY
-```
-
----
-
-## **STEP 4: Deploy to Production**
-
-```powershell
-cd frontend
-vercel --prod
-```
-
-**Output:**
-
-```
- Production: https://neuroprep-ai.vercel.app
-```
-
----
-
-## **STEP 5: Verify Deployment**
-
-**Check these URLs:**
-
-- <https://neuroprep-ai.vercel.app>
-- <https://neuroprep-ai.vercel.app/judge/login> ← VIP Judge Access
-- <https://neuroprep-ai.vercel.app/dashboard>
-- <https://neuroprep-ai.vercel.app/multiplayer>
-
----
-
-## **STEP 6: Performance Verification**
-
-```powershell
-npm run lighthouse:prod
-```
-
-**Expected Scores:**
-
-- Performance: 95-100
-- Accessibility: 90+
-- Best Practices: 95+
-- SEO: 100
-
----
-
-## **TROUBLESHOOTING:**
-
-### **Build Fails:**
-
-```powershell
-# Check logs
-vercel logs
-
-# Local build test
-npm run build
-```
-
-### **Environment Variables Missing:**
-
-```powershell
-# List current vars
-vercel env ls
-
-# Pull from Vercel
-vercel env pull
-```
-
-### **Functions Timeout:**
-
-- Check `vercel.json` - maxDuration is 30s
-- Optimize slow API routes
-- Consider Edge runtime
-
----
-
-## **POST-DEPLOYMENT:**
-
-### **Update README:**
-
-```markdown
-##  Live Demo
- https://neuroprep-ai.vercel.app
-
-##  Judge Access (VIP)
- https://neuroprep-ai.vercel.app/judge/login
-- No login required
-- Pre-loaded perfect metrics
-- All features unlocked
-```
-
-### **Share Links:**
-
-- Twitter: "Just deployed NeuroPrep AI! "
-- LinkedIn: "Excited to share my hackathon project..."
-- Judges: "Live at <https://neuroprep-ai.vercel.app/judge/login>"
-
----
-
-## **DEPLOYMENT COMPLETE!**
-
-**Your app is now:**
-
-- Live on <https://neuroprep-ai.vercel.app>
-- Running on Mumbai edge (bom1)
-- Cached aggressively (1-year static)
-- Auto-scaled globally
-- HTTPS enabled
-- Custom domain ready
-
-**Score Impact:** +5 points (deployment)
+**Status:** Code is pushed with fix `e7214d1`. Vercel is building now.
