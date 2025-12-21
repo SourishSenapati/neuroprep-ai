@@ -7,7 +7,15 @@ const firebaseConfig = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'neuroprep-12bb7',
 };
 
-// Initialize Firebase (Singleton)
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+// Only initialize Firebase on the client side
+let app;
+let auth;
+let googleProvider;
+
+if (typeof window !== 'undefined') {
+  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+  auth = getAuth(app);
+  googleProvider = new GoogleAuthProvider();
+}
+
+export { auth, googleProvider };
