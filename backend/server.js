@@ -1,3 +1,4 @@
+// Backend v1.1 - Universal Engineering Mastery Paths (2025-12-21)
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
