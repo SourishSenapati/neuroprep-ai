@@ -7,34 +7,44 @@ dotenv.config();
 
 const paths = [
   {
-    title: "TCS NQT Mastery",
-    slug: "tcs-nqt",
-    description: "Master the TCS National Qualifier Test pattern with focused preparation for mass recruitment drives",
-    companyTags: ["TCS", "Infosys", "Wipro", "Cognizant"],
-    difficulty: "Beginner",
-    salaryRange: "₹3.5-5 LPA",
+    title: "Industry-Aligned Training",
+    slug: "universal-placement",
+    description: "This program is designed to prepare engineering students for campus recruitment and entry-level professional roles by focusing on universally applicable competencies such as aptitude, logical reasoning, analytical thinking, and problem-solving. The curriculum supports students from all engineering branches and prepares them for opportunities across IT, core engineering, consulting, analytics, and research-driven roles.",
+    companyTags: ["All Industries", "IT", "Core Engineering", "Consulting"],
+    difficulty: "All Levels",
+    salaryRange: "₹3.5-25 LPA",
     icon: "🎓",
-    skills: ["Aptitude", "Reasoning", "Coding", "Verbal"]
+    skills: ["Aptitude", "Reasoning", "Problem Solving", "Analytical Thinking"]
   },
   {
-    title: "Infosys Specialist",
-    slug: "infosys-specialist",
-    description: "Crack Infosys HackWithInfy and Power Programmer with advanced DSA and problem-solving skills",
-    companyTags: ["Infosys", "HCL", "Tech Mahindra", "Wipro"],
-    difficulty: "Intermediate",
-    salaryRange: "₹7-12 LPA",
+    title: "Universal Placement Preparation",
+    slug: "placement-ready",
+    description: "Develop aptitude, logical reasoning, and problem-solving skills essential for engineering placements across IT, core engineering, consulting, analytics, and R&D roles.",
+    companyTags: ["TCS", "Infosys", "L&T", "Consulting Firms"],
+    difficulty: "Beginner to Intermediate",
+    salaryRange: "₹3.5-15 LPA",
+    icon: "💼",
+    skills: ["Quantitative Aptitude", "Logical Reasoning", "Verbal Ability", "Technical Fundamentals"]
+  },
+  {
+    title: "Advanced Analytical & Coding Skills",
+    slug: "analytical-coding",
+    description: "Strengthen structured thinking and coding fundamentals required for technical, analytical, and emerging engineering careers—regardless of branch or background.",
+    companyTags: ["Google", "Amazon", "Fractal", "Tech Startups"],
+    difficulty: "Intermediate to Advanced",
+    salaryRange: "₹8-45 LPA",
     icon: "💻",
-    skills: ["DSA", "Problem Solving", "System Design", "OOP"]
+    skills: ["DSA", "Problem Solving", "System Design", "Algorithmic Thinking"]
   },
   {
-    title: "Product Engineer",
-    slug: "product-engineer",
-    description: "Comprehensive preparation for product-based companies with focus on system design and scalability",
-    companyTags: ["Amazon", "Flipkart", "Google", "Microsoft"],
-    difficulty: "Advanced",
-    salaryRange: "₹15-45 LPA",
+    title: "Career-Ready Skill Development",
+    slug: "transferable-skills",
+    description: "Build transferable, job-ready skills that employers value across product-based, service-based, and multidisciplinary engineering roles.",
+    companyTags: ["Product Companies", "Service Companies", "Startups", "MNCs"],
+    difficulty: "All Levels",
+    salaryRange: "₹4-30 LPA",
     icon: "🚀",
-    skills: ["System Design", "DSA", "Behavioral", "Architecture"]
+    skills: ["Communication", "Teamwork", "Adaptability", "Professional Skills"]
   },
   {
     title: "Startup Specialist",
