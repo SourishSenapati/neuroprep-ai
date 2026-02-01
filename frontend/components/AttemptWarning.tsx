@@ -67,6 +67,7 @@ export default function AttemptWarning({ onSignUpClick }: AttemptWarningProps) {
             <button
               onClick={() => setIsVisible(false)}
               className="text-gray-400 hover:text-white transition-colors"
+              aria-label="Close Warning"
             >
               <X className="w-4 h-4" />
             </button>

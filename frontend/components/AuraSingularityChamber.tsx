@@ -19,13 +19,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-c7le0xxvj-so
 export default function AuraSingularityChamber({ 
   role = 'Software Engineer',
   difficulty = 'Senior',
-  persona = 'Professional'
-}: { 
-  role?: string;
-  difficulty?: string;
-  persona?: string;
-  role = 'Software Engineer',
-  difficulty = 'Senior',
   persona = 'Professional',
   mode = 'standard'
 }: { 

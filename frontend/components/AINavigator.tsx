@@ -61,6 +61,7 @@ export default function AINavigator() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        aria-label="Toggle AI Navigator"
       >
          {isOpen ? <X className="w-6 h-6" /> : <Sparkles className="w-6 h-6 animate-pulse" />}
          
@@ -143,6 +144,7 @@ export default function AINavigator() {
                         onClick={handleSend} 
                         disabled={loading}
                         className="p-2 mr-1 hover:bg-white/10 rounded-lg transition-colors text-electric-blue disabled:opacity-50"
+                        aria-label="Send Message"
                       >
                          <Send className="w-4 h-4" />
                       </button>

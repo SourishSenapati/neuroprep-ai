@@ -188,6 +188,7 @@ export default function ResumeUpload({ onSuccess, onError, className = '' }: Res
             disabled={isUploading}
             className="absolute inset-0 opacity-0 cursor-pointer disabled:cursor-not-allowed"
             id="resume-upload"
+            aria-label="Upload Resume"
           />
 
           <div className="p-8 md:p-12 text-center">

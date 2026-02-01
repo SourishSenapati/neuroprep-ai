@@ -442,6 +442,7 @@ export default function InterviewSetupPage() {
                     </div>
                   </div>
                   <input
+                    aria-label="Difficulty Level"
                     type="range"
                     min="0"
                     max="9"
