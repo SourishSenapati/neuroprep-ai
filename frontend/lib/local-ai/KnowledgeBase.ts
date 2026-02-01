@@ -55,17 +55,84 @@ export const INTERVIEW_CONCEPTS: Record<string, { patterns: string[], responses:
              "How would you handle offline-first capabilities for this application?"
         ]
     },
+    "behavioral_conflict": {
+        patterns: ["conflict", "disagreement", "team", "argument", "different opinion", "clash", "manager"],
+        responses: [
+            "Conflicts are inevitable in healthy engineering teams.",
+            "Navigating interpersonal friction shows emotional intelligence.",
+            "It's important to separate ideas from egos."
+        ],
+        followups: [
+            "How did you ensure the relationship remained constructive after the resolution?",
+            "Looking back, would you have handled that situation differently?",
+            "How do you handle a teammate who is consistently underperforming?"
+        ]
+    },
+    "behavioral_failure": {
+        patterns: ["fail", "failure", "mistake", "error", "bug", "outage", "production incident"],
+        responses: [
+            "Failure is often the best teacher in engineering.",
+            "A blameless post-mortem culture is vital for growth.",
+            "Ownership involves admitting mistakes early and fixing them."
+        ],
+        followups: [
+            "What specific process change did you implement to prevent recurrence?",
+            "How did you communicate this incident to stakeholders?",
+            "Tell me about a time you took a calculated risk that didn't pay off."
+        ]
+    },
+    "testing": {
+        patterns: ["test", "unit test", "integration", "e2e", "qa", "coverage", "mock", "stub", "tdd"],
+        responses: [
+            "Tests are the documentation that never lies.",
+            "High coverage doesn't always equal high quality, but it's a good start.",
+            "Shift-left testing reduces the cost of bugs significantly."
+        ],
+        followups: [
+            "What is your philosophy on mocking vs. using real dependencies in tests?",
+            "How do you handle flaky tests in your CI/CD pipeline?",
+            "Describe a time when a test saved you from a critical regression."
+        ]
+    },
+    "microservices": {
+        patterns: ["microservice", "monolith", "service", "grpc", "message queue", "kafka", "rabbitmq", "event driven"],
+        responses: [
+            "Microservices solve organizational scaling issues but introduce operational complexity.",
+            "Distributed tracing becomes non-negotiable in this architecture.",
+            "Event-driven architecture decouples services effectively."
+        ],
+        followups: [
+            "How do you handle distributed transactions (Sagas vs 2PC)?",
+            "What criteria do you use to split a monolith into services?",
+            "How do you manage data consistency across boundaries?"
+        ]
+    },
+    "api_design": {
+        patterns: ["api", "rest", "graphql", "endpoint", "status code", "idempotency", "versioning", "json"],
+        responses: [
+            "A well-designed API is intuitive and predictable.",
+            "GraphQL offers flexibility but requires careful query complexity management.",
+            "Idempotency is crucial for reliable payment or state-changing APIs."
+        ],
+        followups: [
+            "How do you handle API versioning without breaking existing clients?",
+            "When would you choose gRPC over REST related to performance?",
+            "How do you design for pagination in a high-volume dataset?"
+        ]
+    },
     "generic": {
         patterns: [],
         responses: [
-            "That's a valid perspective.",
-            "I see where you're coming from.",
-            "Interesting approach."
+            "That's a valid perspective. Let's dig deeper.",
+            "I see where you're coming from. Elaborate on the impact.",
+            "Interesting approach. How does that scale?",
+            "Good point. But what about the edge cases?"
         ],
         followups: [
             "Could you elaborate on the trade-offs of that decision?",
             "What was the most challenging part of implementing that?",
-            "How would you explain this to a non-technical stakeholder?"
+            "How would you explain this to a non-technical stakeholder?",
+            "What alternatives did you consider before choosing this path?"
         ]
     }
 };
