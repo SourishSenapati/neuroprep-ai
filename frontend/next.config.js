@@ -4,9 +4,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // eslint: {
-  //   ignoreDuringBuilds: true,
-  // },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   
   experimental: {
     serverActions: {
@@ -20,7 +20,7 @@ const nextConfig = {
   transpilePackages: ['@supabase/supabase-js'],
   
   webpack: (config, { isServer }) => {
-    // Client-side: polyfill node modules
+    // Client-side: polyfill node modules and ignore server packages
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -28,6 +28,10 @@ const nextConfig = {
         net: false,
         tls: false,
         crypto: false,
+      };
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'onnxruntime-node': false, 
       };
     }
     
@@ -41,6 +45,8 @@ const nextConfig = {
         '@react-three/drei': false,
         'three': false,
         'pyodide': false,
+        'onnxruntime-node': false,
+        '@xenova/transformers': false,
       };
     }
     

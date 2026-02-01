@@ -2,8 +2,9 @@
 import { pipeline, env } from '@xenova/transformers';
 import { INTERVIEW_CONCEPTS, SYSTEM_PROMPTS } from './KnowledgeBase';
 
-// Skip local model checks if needed (optional config)
-// env.allowLocalModels = false; 
+// Skip local model checks to prevent Vercel build errors (fs module issues)
+env.allowLocalModels = false; 
+env.useBrowserCache = true; 
 
 /**
  * LocalInferenceEngine
