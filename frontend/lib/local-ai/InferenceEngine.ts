@@ -77,36 +77,65 @@ export class LocalInferenceEngine {
         const lowerInput = userInput.toLowerCase();
         
         // Find best matching concept
-        let bestMatch = 'generic';
-        let maxScore = 0;
+        let bestMatch = 'generic'; // Default match
+        let maxScore = -1; // Score determines confidence
 
-        // 1. Keyword Overlap Score (Simple & Robust)
-        for (const [key, data] of Object.entries(INTERVIEW_CONCEPTS)) {
-             let score = 0;
-             data.patterns.forEach(pattern => {
-                 if (lowerInput.includes(pattern)) score += 1;
-             });
-             
-             if (score > maxScore) {
-                 maxScore = score;
-                 bestMatch = key;
+        // 0. Init Pipeline if not ready (Lazy Load)
+        if (!this.isInitialized || !this.pipe) {
+             await this.init();
+        }
+
+        // 1. Semantic Analysis (Neural)
+        if (this.isInitialized && this.pipe) {
+             try {
+                // Generate embedding for user input
+                const output = await this.pipe(userInput, { pooling: 'mean', normalize: true });
+                const userEmbedding = Array.from(output.data) as number[];
+
+                // Compare against concept embeddings (We generate them on the fly for this lightweight demo)
+                // In production, these would be pre-calculated in KnowledgeBase
+                for (const [key, data] of Object.entries(INTERVIEW_CONCEPTS)) {
+                     // Check similarity with the concept content/description patterns
+                     // We take the first pattern as the "centroid" representation for speed
+                     const conceptText = data.patterns.join(' '); 
+                     const conceptOutput = await this.pipe(conceptText, { pooling: 'mean', normalize: true });
+                     const conceptEmbedding = Array.from(conceptOutput.data) as number[];
+
+                     const similarity = this.cosineSimilarity(userEmbedding, conceptEmbedding);
+                     
+                     // Boost score if direct keywords match
+                     const keywordBoost = data.patterns.some(p => lowerInput.includes(p)) ? 0.3 : 0;
+                     const finalScore = similarity + keywordBoost;
+
+                     if (finalScore > maxScore) {
+                         maxScore = finalScore;
+                         bestMatch = key;
+                     }
+                }
+             } catch (neuralError) {
+                 console.warn("Neural inference hiccup, falling back to symbolic:", neuralError);
+                 // Fallthrough to keyword matching
              }
         }
 
-        // 2. Semantic Refinement (If model is loaded)
-        // Note: For this simplified implementation, we rely on the strong keyword baseline
-        // because running embedding calculation on every keystroke/message might be heavy depending on device.
-        // If we wanted to use the model:
-        /*
-        if (this.isInitialized && this.pipe) {
-            const output = await this.pipe(userInput, { pooling: 'mean', normalize: true });
-            const userEmbedding = output.data;
-            // Compare against pre-computed embeddings of concepts...
+        // 2. Fallback: Keyword Overlap Score (Symbolic)
+        if (maxScore < 0.2) { // logic if neural failed or confidence low
+            let maxKeywordScore = 0;
+            for (const [key, data] of Object.entries(INTERVIEW_CONCEPTS)) {
+                let score = 0;
+                data.patterns.forEach(pattern => {
+                    if (lowerInput.includes(pattern)) score += 1;
+                });
+                
+                if (score > maxKeywordScore) {
+                    maxKeywordScore = score;
+                    bestMatch = key;
+                }
+            }
         }
-        */
 
         // Construct Response
-        const ConceptData = INTERVIEW_CONCEPTS[bestMatch];
+        const ConceptData = INTERVIEW_CONCEPTS[bestMatch] || INTERVIEW_CONCEPTS['generic'];
         const responseTemplate = ConceptData.responses[Math.floor(Math.random() * ConceptData.responses.length)];
         const questionTemplate = ConceptData.followups[Math.floor(Math.random() * ConceptData.followups.length)];
 
