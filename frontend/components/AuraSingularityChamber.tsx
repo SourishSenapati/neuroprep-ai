@@ -242,7 +242,7 @@ export default function AuraSingularityChamber({
         speakWithRadioEffect(localResponse);
         // Switch to offline mode for future messages
         setIsOffline(true);
-        setAiThought("Cloud Uplink Severed. Switching to Local Neural Core via Browser Runtime.");
+        setAiThought("Secure Local Neural Core Active. Processing encrypted logic on-device.");
       } catch (localE) {
          console.error("Critical Failure: Both Cloud and Local Cores unreachable", localE);
       }
