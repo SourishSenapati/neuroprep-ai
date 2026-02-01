@@ -88,7 +88,7 @@ function constructQuestion(topic, phase) {
 }
 
 router.post('/stream', async (req, res) => {
-    const { messages, role } = req.body;
+    const { messages, role, context } = req.body; // Added context
     const lastUserMessage = messages[messages.length - 1].content;
     const history = messages.slice(0, -1);
 
@@ -103,11 +103,29 @@ router.post('/stream', async (req, res) => {
             const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AlzaSyAW-YXJ6P8TMUoKAlZwskSN9IXkryhwMzk');
             const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
+            let systemContext = "";
+            if (context) {
+                systemContext = `
+                SPECIAL INSTRUCTION:
+                The user has provided specific context for this interview (e.g., a Job Description or Resume).
+                Use this context to tailor your questions and feedback:
+                
+                CONTEXT_DATA:
+                """
+                ${context.substring(0, 2000)} 
+                """
+                
+                Align your questions strictly with the requirements/skills found in the CONTEXT_DATA.
+                `;
+            }
+
             const prompt = `
             You are an expert Senior Engineering Interviewer at a top tech company (FAANG level).
             Your Role: ${role}.
             Current Phase: ${history.length < 3 ? 'Intro' : 'Technical Deep Dive'}.
             
+            ${systemContext}
+
             Context: The user is a candidate. 
             History: ${JSON.stringify(history.map(m => m.content).join('\n'))}
             

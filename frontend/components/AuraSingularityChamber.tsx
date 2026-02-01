@@ -109,6 +109,22 @@ export default function AuraSingularityChamber({
   // Configuration Modal State
   const [showConfigModal, setShowConfigModal] = useState(true);
   const [isInitializing, setIsInitializing] = useState(false);
+  const [contextInput, setContextInput] = useState(''); // JD or Resume Text
+  const [showContextModal, setShowContextModal] = useState(false);
+
+  // Trigger Context Modal on Mount if special mode
+  useEffect(() => {
+     if (mode === 'jd-analysis' || mode === 'resume-guidance') {
+         setShowContextModal(true);
+         setShowConfigModal(false); // Valid flow: Context -> Config -> Start
+     }
+  }, [mode]);
+
+  const handleContextSubmit = () => {
+      if (!contextInput.trim()) return;
+      setShowContextModal(false);
+      setShowConfigModal(true);
+  };
   
   // Initialize Local Neural Core
   useEffect(() => {
@@ -170,7 +186,8 @@ export default function AuraSingularityChamber({
           sessionId: sessionId.current,
           role,
           difficulty,
-          persona
+          persona,
+          context: contextInput
         })
       });
 
@@ -231,8 +248,42 @@ export default function AuraSingularityChamber({
       }
     } finally {
       setIsStreaming(false);
+      resetQuestionTimer(); // Reset timer after user answers
     }
   };
+
+  // --- Strict Time Constraints Logic ---
+  const TIME_LIMIT_PER_QUESTION = 120; // 2 minutes
+  const [timeLeft, setTimeLeft] = useState(TIME_LIMIT_PER_QUESTION);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isTimerActive && timeLeft > 0 && interviewerState !== 'speaking' && !isStreaming) {
+       interval = setInterval(() => {
+          setTimeLeft((prev) => prev - 1);
+       }, 1000);
+    } else if (timeLeft === 0) {
+       // Time's Up Logic
+       setAiThought("Time limit exceeded. Please finalize your answer.");
+       // Optional: Auto-submit or Penalize
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive, timeLeft, interviewerState, isStreaming]);
+
+  const resetQuestionTimer = () => {
+     setTimeLeft(TIME_LIMIT_PER_QUESTION);
+     setIsTimerActive(true);
+  };
+  
+  // Start timer when AI finishes speaking (Question asked)
+  useEffect(() => {
+     if (interviewerState === 'listening') {
+         resetQuestionTimer();
+     } else {
+         setIsTimerActive(false); // Pause timer while AI speaks
+     }
+  }, [interviewerState]);
 
   const socketRef = useRef<Socket | null>(null);
   const sessionId = useRef<string | null>(null);
@@ -348,7 +399,8 @@ export default function AuraSingularityChamber({
           mode,
           role,
           difficulty,
-          persona
+          persona,
+          context: contextInput
         })
       });
 
@@ -428,7 +480,10 @@ export default function AuraSingularityChamber({
             mode, 
             role,
             difficulty,
-            persona
+            role,
+            difficulty,
+            persona,
+            context: contextInput
           })
         });
 
@@ -816,6 +871,48 @@ export default function AuraSingularityChamber({
             </motion.div>
           )}
         </AnimatePresence>
+
+      {/* Context Input Modal (JD / Resume) */}
+      <AnimatePresence>
+        {showContextModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-[70] flex items-center justify-center bg-black/95 backdrop-blur-xl"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="max-w-2xl w-full bg-gray-900 border border-purple-500/30 p-8 rounded-2xl shadow-[0_0_50px_rgba(168,85,247,0.15)]"
+            >
+               <h2 className="text-2xl font-bold text-white mb-4 font-mono">
+                  {mode === 'jd-analysis' ? 'UPLOAD JOB DESCRIPTION' : 'PASTE RESUME CONTENT'}
+               </h2>
+               <p className="text-gray-400 mb-4 text-sm">
+                  {mode === 'jd-analysis' 
+                     ? 'Paste the full Job Description below. Our AI will extract key skills and requirements to tailor the interview questions.' 
+                     : 'Paste your resume text below (or upload via dashboard). AI will identify knowledge gaps.'}
+               </p>
+               
+               <textarea
+                  value={contextInput}
+                  onChange={(e) => setContextInput(e.target.value)}
+                  placeholder={mode === 'jd-analysis' ? "Paste JD here..." : "Paste Resume text here..."}
+                  className="w-full h-64 bg-black/50 border border-white/10 rounded-xl p-4 text-sm text-gray-300 focus:border-purple-500 focus:outline-none font-mono mb-6 resize-none"
+               />
+
+               <button
+                 onClick={handleContextSubmit}
+                 disabled={!contextInput.trim()}
+                 className="w-full py-4 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+               >
+                 ANALYZE & CONFIGURE
+               </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       </div>
 
       {/* Control Bar (Center Bottom) */}
@@ -852,6 +949,21 @@ export default function AuraSingularityChamber({
            animate={{ opacity: 1, x: 0 }}
            className="absolute right-8 top-24 bottom-24 w-80 pointer-events-none flex flex-col items-end gap-3 z-30"
         >
+             {/* STRICT TIME CONSTRAINT VISUALIZER */}
+             <div className="w-full bg-black/60 backdrop-blur-md border border-white/10 rounded-full h-1.5 overflow-hidden mb-1">
+                 <motion.div 
+                    className={`h-full ${timeLeft < 30 ? 'bg-red-500' : 'bg-cyan-500'}`}
+                    initial={{ width: '100%' }}
+                    animate={{ width: `${(timeLeft / TIME_LIMIT_PER_QUESTION) * 100}%` }}
+                    transition={{ duration: 1, ease: "linear" }}
+                 />
+             </div>
+             {timeLeft < 30 && (
+                <div className="text-[10px] text-red-400 font-mono animate-pulse">
+                   CRITICAL TIME: {timeLeft}s REMAINING
+                </div>
+             )}
+
              {/* AI Thought Bubble (Always visible) */}
              <div className="bg-black/60 backdrop-blur-md p-4 rounded-xl border border-electric-blue/30 max-w-xs text-right shadow-[0_0_30px_rgba(6,182,212,0.1)]">
                  <div className="flex items-center justify-end gap-2 text-electric-blue mb-2">
