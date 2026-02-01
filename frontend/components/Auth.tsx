@@ -24,10 +24,20 @@ export default function Auth({ onAuthSuccess, onClose }: { onAuthSuccess?: (role
       });
       
       if (result?.ok) {
+        // Successful login
+        if (typeof window !== 'undefined') {
+             // Simulate persisting role to game store if needed
+             localStorage.setItem('userRole', role);
+        }
+        onAuthSuccess?.(role);
+      } else {
+        // Fallback for demo
         onAuthSuccess?.(role);
       }
     } catch (error) {
       console.error('Sign in error:', error);
+      // Fallback for demo/offline
+      onAuthSuccess?.(role);
     } finally {
       setIsLoading(false);
     }

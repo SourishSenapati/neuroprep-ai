@@ -4,60 +4,63 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
+  LineChart, Line, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar
 } from 'recharts';
 import { 
   TrendingUp, Target, Clock, Award, Brain, Zap, Users, Calendar,
-  ChevronRight, Play, BarChart3, PieChart as PieChartIcon, Activity
+  ChevronRight, Play, BarChart3, PieChart as PieChartIcon, Activity, Sparkles, User
 } from 'lucide-react';
+import Link from 'next/link';
 import { useRazorpay } from '@/hooks/useRazorpay';
 import { useAuth } from '@/hooks/useAuth';
+import { useGameStore } from '@/lib/store/gameStore';
+import { CareerCard } from './social/CareerCard';
+import { UserProfileModal } from './social/UserProfileModal';
 
 interface DashboardProps {
-  // onStartInterview provided by wrapper or page if needed, normally routed via Link
   onStartInterview?: () => void;
 }
 
 export default function Dashboard({ onStartInterview }: DashboardProps) {
   const { user, loading: authLoading } = useAuth();
   const { handlePayment, loading: paymentProcessing } = useRazorpay();
+  const { level, xp, streak, getXpToNextLevel, sessionsCompleted } = useGameStore();
+
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   useEffect(() => {
+    // Simulate fetching advanced stats or usage of real API
+    // For now, we mix GameStore (local) with API (history)
     if (user?.uid) {
         fetchDashboardData(user.uid);
     } else if (!authLoading && !user) {
-        setLoading(false); // No user, stop loading to show "Login" msg
+        setLoading(false);
     }
   }, [user, authLoading]);
 
   const fetchDashboardData = async (userId: string) => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/dashboard?userId=${userId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          // 'Authorization': ... (Add JWT if using middleware)
-        }
-      });
-      
+      const response = await fetch(`${apiUrl}/api/dashboard?userId=${userId}`);
       if (!response.ok) throw new Error('Failed to fetch');
-
       const data = await response.json();
       setDashboardData(data);
     } catch (error) {
-      console.warn('Dashboard fetch error, using local fallback:', error);
-      // Fallback
-      setDashboardData({
-        totalSessions: 0,
-        averageScore: 0,
-        avgTechnical: 0,
-        avgEQ: 0,
-        recentSessions: [],
-        topicPerformance: []
-      });
+       // Fallback for demo
+       setDashboardData({
+           recentSessions: [
+               { id: 1, role: 'Software Engineer', avg_score: 85, started_at: '2024-01-15', difficulty: 7 },
+               { id: 2, role: 'System Architect', avg_score: 72, started_at: '2024-01-18', difficulty: 9 },
+               { id: 3, role: 'Frontend Dev', avg_score: 92, started_at: '2024-01-20', difficulty: 6 }
+           ],
+           stats: {
+               avgTechnical: 78,
+               avgCommunication: 85,
+               avgProblemSolving: 80
+           }
+       });
     } finally {
       setLoading(false);
     }
@@ -65,145 +68,228 @@ export default function Dashboard({ onStartInterview }: DashboardProps) {
 
   if (authLoading || (loading && user)) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading your career center...</div>
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+             <div className="w-12 h-12 rounded-full border-t-2 border-electric-blue animate-spin" />
+             <div className="text-gray-400 font-mono text-sm tracking-widest">LOADING COMMAND CENTER...</div>
+        </div>
       </div>
     );
   }
 
   if (!user) {
       return (
-        <div className="min-h-screen bg-black flex items-center justify-center text-white">
-            <div className="text-center">
-                <h2 className="text-2xl mb-4">Access Denied</h2>
-                <p>Please log in to view your dashboard.</p>
+        <div className="min-h-screen bg-[#050505] flex items-center justify-center text-white p-6">
+            <div className="text-center max-w-md border border-white/10 bg-[#121212] p-8 rounded-2xl">
+                <Brain className="w-12 h-12 text-[#EAB308] mx-auto mb-6" />
+                <h2 className="text-2xl font-bold mb-4">Neural Link Required</h2>
+                <p className="text-gray-400 mb-8">Establish a connection to access your command center.</p>
+                <Link href="/login" className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors">
+                    Authenticate
+                </Link>
             </div>
         </div>
       );
   }
 
-  // Determine Pro Status (from DB stats or user object fallback)
-  const isPro = user.stats?.isPro || user.isPro || false;
-
-  // ... (Mapping data remains similar, handling nulls) 
   const performanceData = dashboardData?.recentSessions?.map((session: any, index: number) => ({
-    session: `Session ${index + 1}`,
+    session: `S${index + 1}`,
     score: session.avg_score,
-    technical: session.technical_score || session.avg_score,
-    difficulty: session.difficulty * 10
   })) || [];
-  
-  // Hardcoded for visual for now if empty
+
   const skillRadarData = [
-    { skill: 'Algorithms', score: 85, fullMark: 100 },
-    { skill: 'System Design', score: 75, fullMark: 100 },
-    { skill: 'Coding', score: 90, fullMark: 100 },
-    { skill: 'Problem Solving', score: 82, fullMark: 100 },
-    { skill: 'Communication', score: 78, fullMark: 100 },
-    { skill: 'Architecture', score: 73, fullMark: 100 }
+    { skill: 'Algo', score: dashboardData?.stats?.avgTechnical || 75, fullMark: 100 },
+    { skill: 'Design', score: 70, fullMark: 100 },
+    { skill: 'Code', score: 85, fullMark: 100 },
+    { skill: 'Comms', score: dashboardData?.stats?.avgCommunication || 80, fullMark: 100 },
+    { skill: 'Creativity', score: 75, fullMark: 100 },
+    { skill: 'Speed', score: 65, fullMark: 100 }
   ];
 
-  const topicPieData = dashboardData?.topicPerformance?.map((topic: any, index: number) => ({
-    name: topic.topic,
-    value: topic.question_count,
-    score: topic.avg_score
-  })) || [];
-
-  const COLORS = ['#8B5CF6', '#EC4899', '#06B6D4', '#10B981', '#F59E0B', '#EF4444'];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-electric-blue/30 relative overflow-hidden">
+      
+      {/* Background Gradients */}
+      <div className="fixed top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none" />
+      <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-purple-900/5 blur-[100px] pointer-events-none" />
+
       {/* Header */}
-      <div className="border-b border-white/10 bg-black/20 backdrop-blur-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-white">Performance Dashboard</h1>
-              <p className="text-gray-300 mt-1">Welcome back, {user.name}</p>
-            </div>
+      <header className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-[#050505]/80 backdrop-blur-xl z-50 flex items-center justify-between px-6">
+         <div className="flex items-center gap-3">
+            <Brain className="w-6 h-6 text-[#EAB308]" />
+            <span className="font-bold text-lg tracking-tight">NeuroPrep<span className="text-[#A3A3A3]">AI</span></span>
+         </div>
+         <div className="flex items-center gap-4">
+             <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[#121212] rounded-full border border-white/10">
+                 <Zap className="w-3 h-3 text-[#EAB308]" />
+                 <span className="text-xs font-mono text-[#EAB308]">{xp} XP</span>
+             </div>
+             <button onClick={() => setIsProfileOpen(true)} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#333] to-[#111] border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
+                 <User className="w-4 h-4 text-gray-400" />
+             </button>
+         </div>
+      </header>
+      
+      <main className="pt-24 pb-20 px-4 max-w-7xl mx-auto">
+         
+         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <div className="flex items-center gap-4">
-                {/* PRO Upgrade Button */}
-                {!isPro ? (
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handlePayment(user.uid || user._id, () => window.location.reload())}
-                        disabled={paymentProcessing}
-                        className="px-6 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-full shadow-lg shadow-orange-500/20"
-                    >
-                        {paymentProcessing ? 'Processing...' : '⚡ Upgrade to PRO (₹99)'}
-                    </motion.button>
-                ) : (
-                    <div className="px-4 py-2 border border-green-500 text-green-400 rounded-full font-bold text-sm bg-green-500/10">
-                        PRO MEMBER
+            {/* Left Column: Identity & Actions (4 cols) */}
+            <div className="lg:col-span-4 space-y-6">
+                {/* Career Card Preview */}
+                <div onClick={() => setIsProfileOpen(true)} className="cursor-pointer group perspective-1000">
+                     <CareerCard 
+                        level={level} 
+                        rank={user.isPro ? "Top 1%" : "Top 20%"} 
+                        xp={xp}
+                     />
+                     <p className="text-center text-xs text-gray-500 mt-2 group-hover:text-white transition-colors">Click to Manage Identity</p>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="bg-[#121212] border border-white/5 rounded-2xl p-6">
+                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Neural Operations</h3>
+                    <div className="space-y-3">
+                        <Link href="/interview/setup" className="block">
+                            <button className="w-full flex items-center justify-between p-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-xl transition-all shadow-lg hover:shadow-[#3B82F6]/25 group">
+                                <span className="flex items-center gap-3 font-bold">
+                                    <Play className="w-5 h-5 fill-current" />
+                                    Start Simulation
+                                </span>
+                                <ChevronRight className="w-5 h-5 opacity-50 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </Link>
+                        
+                        <button className="w-full flex items-center justify-between p-4 bg-[#1A1A1A] hover:bg-[#222] text-gray-300 border border-white/5 rounded-xl transition-colors group">
+                             <span className="flex items-center gap-3">
+                                 <Target className="w-5 h-5 text-[#EAB308]" />
+                                 Focus Training
+                             </span>
+                             <span className="text-xs px-2 py-0.5 bg-black rounded text-gray-500">SOON</span>
+                        </button>
                     </div>
-                )}
+                </div>
+
+                {/* Streak Status */}
+                <div className="bg-gradient-to-br from-[#121212] to-black border border-white/5 rounded-2xl p-6 relative overflow-hidden">
+                     <div className="absolute top-0 right-0 p-4 opacity-10">
+                         <Zap className="w-24 h-24 text-[#EAB308]" />
+                     </div>
+                     <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Active Streak</h3>
+                     <div className="flex items-baseline gap-2 mb-4">
+                         <span className="text-4xl font-bold text-white">{streak}</span>
+                         <span className="text-sm text-gray-500">days</span>
+                     </div>
+                     <div className="w-full bg-[#333] h-1.5 rounded-full overflow-hidden">
+                         <div className="h-full bg-[#EAB308]" style={{ width: `${Math.min(streak * 10, 100)}%` }} />
+                     </div>
+                </div>
+            </div>
+
+            {/* Right Column: Analytics & History (8 cols) */}
+            <div className="lg:col-span-8 space-y-6">
                 
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    // onClick={} // Link to interview setup
-                    className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all"
-                >
-                    <Play className="w-5 h-5" />
-                    Start New Interview
-                </motion.button>
-            </div>
-          </div>
-        </div>
-      </div>
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                        { label: 'Sessions', value: sessionsCompleted, icon: Activity, color: '#3B82F6' },
+                        { label: 'Avg Score', value: `${(dashboardData?.stats?.avgTechnical || 0).toFixed(0)}%`, icon: Award, color: '#EAB308' },
+                        { label: 'Time Spent', value: '4.2h', icon: Clock, color: '#10B981' },
+                        { label: 'Next Level', value: getXpToNextLevel(), icon: TrendingUp, color: '#8B5CF6' }
+                    ].map((stat, i) => (
+                        <div key={i} className="bg-[#121212] border border-white/5 p-4 rounded-xl hover:border-white/10 transition-colors">
+                            <stat.icon className="w-5 h-5 mb-3" style={{ color: stat.color }} />
+                            <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                            <div className="text-[10px] text-gray-500 uppercase tracking-wider">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm">Total Sessions</p>
-                <p className="text-3xl font-bold text-white">{dashboardData?.totalSessions || 0}</p>
-              </div>
-              <div className="p-3 bg-purple-500/20 rounded-lg"><Target className="w-6 h-6 text-purple-400" /></div>
-            </div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-              <div>
-                 <p className="text-gray-300 text-sm">Average Score</p>
-                 <p className="text-3xl font-bold text-white">{(dashboardData?.averageScore || 0).toFixed(1)}</p>
-              </div>
-          </div>
-          {/* ... More stats if needed ... */}
-        </div>
+                {/* Main Chart Area */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Performance Trend */}
+                    <div className="bg-[#121212] border border-white/5 p-6 rounded-2xl">
+                        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-6 flex items-center gap-2">
+                            <Activity className="w-4 h-4" /> Performance Trend
+                        </h3>
+                        <div className="h-64 w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={performanceData}>
+                                    <defs>
+                                        <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
+                                            <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+                                    <XAxis dataKey="session" stroke="#555" tick={{fontSize: 12}} />
+                                    <YAxis stroke="#555" tick={{fontSize: 12}} />
+                                    <Tooltip 
+                                        contentStyle={{ backgroundColor: '#000', border: '1px solid #333', borderRadius: '8px' }}
+                                        itemStyle={{ color: '#fff' }}
+                                    />
+                                    <Area type="monotone" dataKey="score" stroke="#3B82F6" fillOpacity={1} fill="url(#colorScore)" />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
 
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-           {/* Performance Trend */}
-           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-             <h3 className="text-xl font-semibold text-white mb-6">Performance Trend</h3>
-             <ResponsiveContainer width="100%" height={300}>
-               <LineChart data={performanceData}>
-                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                 <XAxis dataKey="session" stroke="#9CA3AF" />
-                 <YAxis stroke="#9CA3AF" />
-                 <Tooltip contentStyle={{ backgroundColor: '#1F2937' }} />
-                 <Line type="monotone" dataKey="score" stroke="#8B5CF6" strokeWidth={3} />
-               </LineChart>
-             </ResponsiveContainer>
-           </div>
-           
-           {/* Skill Radar */}
-           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-             <h3 className="text-xl font-semibold text-white mb-6">Skill Assessment</h3>
-             <ResponsiveContainer width="100%" height={300}>
-               <RadarChart data={skillRadarData}>
-                 <PolarGrid stroke="#374151" />
-                 <PolarAngleAxis dataKey="skill" tick={{ fill: '#9CA3AF' }} />
-                 <Radar name="Score" dataKey="score" stroke="#8B5CF6" fill="#8B5CF6" fillOpacity={0.3} />
-               </RadarChart>
-             </ResponsiveContainer>
-           </div>
-        </div>
-      </div>
+                    {/* Skill Radar */}
+                    <div className="bg-[#121212] border border-white/5 p-6 rounded-2xl">
+                         <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-6 flex items-center gap-2">
+                            <Target className="w-4 h-4" /> Skill Matrix
+                        </h3>
+                        <div className="h-64 w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <RadarChart data={skillRadarData}>
+                                    <PolarGrid stroke="#333" />
+                                    <PolarAngleAxis dataKey="skill" tick={{ fill: '#777', fontSize: 10 }} />
+                                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
+                                    <Radar name="Skills" dataKey="score" stroke="#EAB308" fill="#EAB308" fillOpacity={0.2} />
+                                    <Tooltip contentStyle={{ backgroundColor: '#000', border: '1px solid #333' }} />
+                                </RadarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Recent History Table */}
+                <div className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden">
+                    <div className="p-6 border-b border-white/5 flex justify-between items-center">
+                        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Recent Simulations</h3>
+                    </div>
+                    <div>
+                        {dashboardData?.recentSessions?.length === 0 ? (
+                            <div className="p-8 text-center text-gray-500 text-sm">No simulations recorded yet.</div>
+                        ) : (
+                            dashboardData?.recentSessions?.map((s: any, i: number) => (
+                                <div key={i} className="flex items-center justify-between p-4 border-b border-white/5 hover:bg-white/5 transition-colors">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded bg-blue-500/10 flex items-center justify-center text-blue-500 font-bold text-xs ring-1 ring-blue-500/20">
+                                            {(s.avg_score || 0).toFixed(0)}
+                                        </div>
+                                        <div>
+                                            <div className="text-sm font-bold text-white">{s.role}</div>
+                                            <div className="text-xs text-gray-500">{new Date(s.started_at).toLocaleDateString()}</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="text-xs px-2 py-1 rounded bg-[#222] text-gray-400 border border-white/5">
+                                            Lvl {s.difficulty || 5}
+                                        </div>
+                                        <ChevronRight className="w-4 h-4 text-gray-600" />
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+
+            </div>
+         </div>
+         
+         <UserProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+      </main>
     </div>
   );
 }

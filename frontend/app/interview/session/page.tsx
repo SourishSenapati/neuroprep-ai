@@ -14,10 +14,10 @@ function SessionContent() {
   const persona = searchParams.get('persona') || 'Professional';
 
   return (
-    <AuraSingularityChamber 
       role={role}
       difficulty={difficulty}
       persona={persona}
+      mode={searchParams.get('mode') || 'standard'}
     />
   );
 }

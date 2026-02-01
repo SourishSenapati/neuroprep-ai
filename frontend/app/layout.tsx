@@ -39,10 +39,6 @@ import JudgeWelcomeModal from '../components/JudgeWelcomeModal'
 import ShareButton from '../components/ShareButton'
 import AINavigator from '../components/AINavigator'
 
-// ...
-
-
-
 export default function RootLayout({
   children,
 }: {
@@ -60,9 +56,11 @@ export default function RootLayout({
             <JudgeWelcomeModal />
             <AuraOverlay />
             <AINavigator />
-            <div className="relative z-10">
+            <div className="relative z-10 w-full min-h-screen">
               {children}
             </div>
+             {/* Floating Share Button - moved inside Providers */}
+             <ShareButton />
           </Providers>
         </GlobalErrorBoundary>
         
@@ -72,35 +70,17 @@ export default function RootLayout({
           toastOptions={{
             duration: 3000,
             style: {
-              background: '#1a1a1a',
+              background: '#121212',
               color: '#fff',
               border: '1px solid rgba(255,255,255,0.1)',
               padding: '16px',
               fontFamily: 'var(--font-mono)',
-              fontSize: '14px'
+              fontSize: '14px',
+              boxShadow: '0 0 20px rgba(0,0,0,0.5)'
             }
           }}
         />
-        
-        <footer className="py-8 text-center border-t border-white/5 bg-black/80 backdrop-blur-md relative z-40">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <p className="text-gray-400 font-medium">Built with ❤️ using Next.js 15, deployed on Vercel</p>
-            <div className="flex items-center gap-3 text-xs text-gray-600 font-mono bg-white/5 px-4 py-2 rounded-full border border-white/5">
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                Status: ✅ Production Ready
-              </span>
-              <span className="text-gray-700">|</span>
-              <span>Version: 2.0.0</span>
-              <span className="text-gray-700">|</span>
-              <span>Last Updated: December 2025</span>
-            </div>
-          </div>
-        </footer>
-
-        {/* Floating Share Button */}
-        <ShareButton />
       </body>
     </html>
-  )
+  );
 }

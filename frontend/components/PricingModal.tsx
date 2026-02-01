@@ -15,6 +15,8 @@ import toast from 'react-hot-toast';
  * Perfect for hackathon judges to see business thinking
  */
 
+import { useRazorpay } from '@/hooks/useRazorpay';
+
 interface PricingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -22,15 +24,19 @@ interface PricingModalProps {
   onUpgradeComplete?: () => void;
 }
 
+const triggerMessages = {
+  nemesis: 'Nemesis Mode Unlock',
+  biometric: 'Biometric Analysis',
+  roast: 'Resume Roast Access',
+  general: 'Upgrade to Pro'
+};
+
 export default function PricingModal({ 
   isOpen, 
   onClose, 
   trigger = 'general',
   onUpgradeComplete 
 }: PricingModalProps) {
-import { useRazorpay } from '@/hooks/useRazorpay';
-
-// ... inside component ...
   const [showSuccess, setShowSuccess] = useState(false);
   const gameStore = useGameStore();
   const { handlePayment, loading: isProcessing } = useRazorpay();

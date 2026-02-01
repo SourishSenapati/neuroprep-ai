@@ -29,8 +29,8 @@ function CheckoutContent() {
         animate={{ opacity: 1, scale: 1 }}
         className="glass-card max-w-md w-full p-8"
       >
-        <h1 className="text-2xl font-bold text-white mb-2">Secure Checkout</h1>
-        <p className="text-gray-400 mb-6">Upgrading to <span className="text-purple-400 font-bold capitalize">{plan}</span> Plan</p>
+        <h1 className="text-2xl font-serif font-bold text-white mb-2">Secure Checkout</h1>
+        <p className="text-gray-400 mb-6 font-mono text-sm">Upgrading to <span className="text-[#4ADE80] font-bold capitalize">{plan}</span> Plan</p>
         
         <div className="bg-white/5 p-4 rounded-lg mb-6 border border-white/10">
            <div className="flex justify-between mb-2">
@@ -50,7 +50,7 @@ function CheckoutContent() {
         <button 
           onClick={handlePayment}
           disabled={processing}
-          className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold rounded-lg shadow-lg transition-all flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#4ADE80] hover:bg-[#22c55e] text-black font-bold rounded-lg shadow-lg transition-all flex items-center justify-center gap-2"
         >
           {processing ? (
              <>Processing...</>
@@ -68,7 +68,7 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <div className="apple-bg min-h-screen flex items-center justify-center p-4">
+    <div className="bg-[#050505] min-h-screen flex items-center justify-center p-4 selection:bg-[#4ADE80]/30 selection:text-black">
        <Suspense fallback={<div className="text-white">Loading Secure Gateway...</div>}>
           <CheckoutContent />
        </Suspense>

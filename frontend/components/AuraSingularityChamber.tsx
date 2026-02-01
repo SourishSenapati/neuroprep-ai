@@ -23,6 +23,15 @@ export default function AuraSingularityChamber({
   role?: string;
   difficulty?: string;
   persona?: string;
+  role = 'Software Engineer',
+  difficulty = 'Senior',
+  persona = 'Professional',
+  mode = 'standard'
+}: { 
+  role?: string;
+  difficulty?: string;
+  persona?: string;
+  mode?: string;
 }) {
   const { gradeAnswer } = useGameStore();
   const [isMicOn, setIsMicOn] = useState(true);
@@ -82,8 +91,6 @@ export default function AuraSingularityChamber({
     };
     getDevices();
   }, []);
-
-  // ... (rest of code)
 
   const [riftIntensity, setRiftIntensity] = useState(0);
   const [interviewerState, setInterviewerState] = useState<'idle' | 'speaking' | 'listening'>('idle');
@@ -350,7 +357,7 @@ export default function AuraSingularityChamber({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           userId: userId.current,
-          mode: 'standard',
+          mode,
           role,
           difficulty,
           persona
@@ -430,7 +437,7 @@ export default function AuraSingularityChamber({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
             userId: userId.current, 
-            mode: 'standard', 
+            mode, 
             role,
             difficulty,
             persona
@@ -608,9 +615,14 @@ export default function AuraSingularityChamber({
           }
       };
       
+      // GAMIFICATION: Award XP based on scores
+      const avgScore = data.neuralResilience;
+      const { xpGained, newLevel } = gradeAnswer(avgScore);
+      useGameStore.getState().completeTask(100); // Bonus for completing session
+      
       setSessionReport(data);
       setShowReportModal(true);
-      setAiThought("Session Terminated. Comprehensive Report Generated.");
+      setAiThought(`Session Terminated. Report Generated. +${xpGained} XP Awarded.`);
     } catch (e) {
       console.error("End session failed", e);
       // Fallback report if online end fails
@@ -649,42 +661,54 @@ export default function AuraSingularityChamber({
                  Configure biometric telemetry options.
               </p>
 
-              <div className="bg-black/40 rounded-xl p-4 mb-8 text-left space-y-4 border border-white/5">
-                 <label className="flex items-center justify-between cursor-pointer group">
-                    <div className="flex items-center gap-3">
-                       <div className={`w-10 h-6 rounded-full p-1 transition-colors ${isBioAnalysisEnabled ? 'bg-cyan-600' : 'bg-gray-700'}`}>
-                          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${isBioAnalysisEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
-                       </div>
-                       <div>
-                          <span className="text-sm font-bold text-gray-200 block">Bio-Metric Analysis</span>
-                          <span className="text-[10px] text-gray-500 uppercase tracking-wider">Gaze Tracking • Stress Detection</span>
-                       </div>
-                    </div>
-                    
-                    <input 
-                      type="checkbox" 
-                      className="hidden"
-                      checked={isBioAnalysisEnabled || false}
-                      onChange={(e) => setIsBioAnalysisEnabled(e.target.checked)}
-                    />
-                 </label>
+              <div className="bg-black/40 rounded-xl p-4 mb-8 text-left space-y-4 border border-white/5 relative overflow-hidden">
                  
-                 <div className="flex items-center gap-3 opacity-50 cursor-not-allowed">
-                     <div className="w-10 h-6 rounded-full bg-cyan-900/20 p-1">
-                        <div className="w-4 h-4 bg-gray-600 rounded-full" />
-                     </div>
-                     <div>
-                        <span className="text-sm font-bold text-gray-500 block">Voice Spectrum Analysis</span>
-                        <span className="text-[10px] text-gray-600 uppercase tracking-wider">Tone • Pitch (Always On)</span>
+                 {/* Premium Grid Background */}
+                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+
+                 <div className="relative z-10">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Telemetry Modules</h3>
+
+                     <label className="flex items-center justify-between cursor-pointer group mb-4 p-3 rounded-lg hover:bg-white/5 transition-colors">
+                        <div className="flex items-center gap-3">
+                           <div className={`w-10 h-6 rounded-full p-1 transition-colors ${isBioAnalysisEnabled ? 'bg-cyan-600' : 'bg-gray-700'}`}>
+                              <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${isBioAnalysisEnabled ? 'translate-x-4' : 'translate-x-0'}`} />
+                           </div>
+                           <div>
+                              <span className={`text-sm font-bold block transition-colors ${isBioAnalysisEnabled ? 'text-white' : 'text-gray-400'}`}>Neuro-Physical Analysis</span>
+                              <span className="text-[10px] text-gray-500 uppercase tracking-wider">Body Language • Posture • Micro-expressions</span>
+                           </div>
+                        </div>
+                        <input 
+                          type="checkbox" 
+                          className="hidden"
+                          checked={isBioAnalysisEnabled || false}
+                          onChange={(e) => setIsBioAnalysisEnabled(e.target.checked)}
+                        />
+                        {isBioAnalysisEnabled && <Scan className="w-4 h-4 text-cyan-500 animate-pulse" />}
+                     </label>
+
+                     <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5">
+                         <div className="flex items-center gap-3">
+                             <div className="w-10 h-6 rounded-full bg-emerald-500/20 p-1">
+                                <div className="w-4 h-4 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                             </div>
+                             <div>
+                                <span className="text-sm font-bold text-white block">Voice Spectrum Analysis</span>
+                                <span className="text-[10px] text-gray-500 uppercase tracking-wider">Tone • Pitch • Confidence (Always On)</span>
+                             </div>
+                         </div>
+                         <Volume2 className="w-4 h-4 text-emerald-500" />
                      </div>
                  </div>
               </div>
 
               <button
                 onClick={handleManualStart}
-                className="w-full py-4 bg-cyan-600 hover:bg-electric-blue text-white font-bold rounded-xl shadow-lg shadow-electric-blue/20 transition-all active:scale-95 tracking-widest text-sm"
+                className="w-full py-4 bg-cyan-600 hover:bg-electric-blue text-white font-bold rounded-xl shadow-lg shadow-electric-blue/20 transition-all active:scale-95 tracking-widest text-sm flex items-center justify-center gap-2 group"
               >
-                INITIALIZE SESSION
+                <span>INITIALIZE NEURAL LINK</span>
+                <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
               </button>
             </motion.div>
           </motion.div>
@@ -751,9 +775,6 @@ export default function AuraSingularityChamber({
         )}
       </AnimatePresence>
 
-      {/* Consent Modal Removed - Auto-Start Enabled */}
-
-
       {/* Holo-Panel (Interviewer Area) */}
       <div className="flex-1 relative flex items-center justify-center">
         {/* Gaussian Splat Interviewer Avatar (Abstract Representation) */}
@@ -798,421 +819,158 @@ export default function AuraSingularityChamber({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute top-10 text-red-500 flex items-center gap-2 bg-red-500/10 px-6 py-2 rounded-full border border-red-500/20 backdrop-blur-md"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none"
             >
-              <AlertTriangle className="w-5 h-5" />
-              <span className="font-mono font-bold tracking-widest">{riftWarning.toUpperCase()}</span>
+              <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/50 px-6 py-3 rounded-lg backdrop-blur-sm">
+                <AlertTriangle className="w-6 h-6 text-red-500 animate-pulse" />
+                <span className="text-red-400 font-mono font-bold tracking-widest uppercase">{riftWarning}</span>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* User HUD (Bottom) */}
-      <div className="h-1/3 bg-gradient-to-t from-black via-black/90 to-transparent p-8 flex justify-between items-end relative z-20">
-        {/* Session Timer */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 text-electric-blue font-mono text-xl font-bold tracking-widest bg-black/40 px-4 py-1 rounded border border-electric-blue/20 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-            {formatTime(elapsedTime)}
-        </div>
-        {/* User Cam Feed (Quantum Bio-Hash) */}
-        <div className="relative w-48 h-36 bg-gray-900 rounded-lg overflow-hidden border border-white/10 group">
-          {isCamOn ? (
-            <Webcam
-              audio={false}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-              mirrored
-              videoConstraints={{ deviceId: selectedDeviceId }}
-              onUserMedia={() => console.log('Webcam: User media access granted')}
-              onUserMediaError={(err: any) => console.error('Webcam: User media access denied', err)}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-600">
-              <VideoOff className="w-8 h-8" />
-            </div>
-          )}
-          
-          {/* Camera Selector Overlay (on hover) */}
-          <div className="absolute top-2 left-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-             <button 
-               onClick={() => setShowCameraMenu(!showCameraMenu)}
-               className="p-1 bg-black/50 rounded hover:bg-black/80 text-xs text-white flex items-center gap-1"
-             >
-               <Video className="w-3 h-3" />
-               Change Cam
-             </button>
-             {showCameraMenu && (
-               <div className="absolute top-full left-0 mt-1 bg-gray-900 border border-white/10 rounded-lg p-1 min-w-[150px] shadow-xl">
-                 {videoDevices.map((device, idx) => (
-                   <button
-                     key={device.deviceId}
-                     onClick={() => {
-                       setSelectedDeviceId(device.deviceId);
-                       setShowCameraMenu(false);
-                     }}
-                     className={`w-full text-left px-2 py-1 text-xs rounded hover:bg-white/10 ${selectedDeviceId === device.deviceId ? 'text-purple-400' : 'text-gray-300'}`}
-                   >
-                     {device.label || `Camera ${idx + 1}`}
-                   </button>
-                 ))}
-               </div>
-             )}
-          </div>
-          
-          {/* Eye Tracking Overlay (Only if Enabled) */}
-          {isBioAnalysisEnabled ? (
-            <>
-              <div className={`absolute inset-0 border-2 rounded-lg pointer-events-none ${riftWarning ? 'border-red-500/30' : 'border-green-500/30'}`}>
-                <div className={`absolute top-2 right-2 w-2 h-2 rounded-full animate-pulse ${riftWarning ? 'bg-red-500' : 'bg-green-500'}`} />
-              </div>
-              <div className={`absolute bottom-1 left-1 text-[10px] font-mono ${riftWarning ? 'text-red-500' : 'text-green-500'}`}>
-                BIO-HASH: {riftWarning ? 'UNSTABLE' : 'ACTIVE'}
-              </div>
-            </>
-          ) : (
-             <div className="absolute bottom-1 left-1 text-[10px] text-gray-600 font-mono opacity-50">BIO-AUTH: OFF</div>
-          )}
-        </div>
+      {/* Control Bar (Center Bottom) */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-4 bg-gray-900/80 backdrop-blur-xl p-3 pr-5 pl-5 rounded-full border border-white/10 shadow-2xl z-50">
+           
+           <button 
+              onClick={() => setIsMicOn(!isMicOn)}
+              className={`p-3 rounded-full transition-all ${isMicOn ? 'bg-electric-blue hover:bg-blue-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'bg-red-500/20 text-red-400 hover:bg-red-500/30'}`}
+           >
+              {isMicOn ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
+           </button>
 
-        {/* Controls */}
-        <div className="flex gap-4">
-          <button
-            onClick={() => setIsMicOn(!isMicOn)}
-            className={`p-4 rounded-full border ${isMicOn ? 'bg-white/10 border-white/20 text-white' : 'bg-red-500/20 border-red-500/50 text-red-500'} hover:scale-105 transition-all`}
-          >
-            {isMicOn ? <Mic className="w-6 h-6" /> : <MicOff className="w-6 h-6" />}
-          </button>
-          <button
-            onClick={() => setIsCamOn(!isCamOn)}
-            className={`p-4 rounded-full border ${isCamOn ? 'bg-white/10 border-white/20 text-white' : 'bg-red-500/20 border-red-500/50 text-red-500'} hover:scale-105 transition-all`}
-          >
-            {isCamOn ? <Video className="w-6 h-6" /> : <VideoOff className="w-6 h-6" />}
-          </button>
-          
-          {/* AR Toggle */}
-          <button
-            onClick={toggleBioAnalysis}
-            className={`p-4 rounded-full border ${isBioAnalysisEnabled ? 'bg-electric-blue/20 border-electric-blue text-electric-blue' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
-            title={isBioAnalysisEnabled ? "Disable Bio-Analysis" : "Enable Bio-Analysis (Body Language)"}
-          >
-            <Scan className="w-6 h-6" />
-          </button>
+           <button 
+              onClick={() => setIsCamOn(!isCamOn)}
+              className={`p-3 rounded-full transition-all ${isCamOn ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-red-500/20 text-red-400'}`}
+           >
+              {isCamOn ? <Video className="w-5 h-5" /> : <VideoOff className="w-5 h-5" />}
+           </button>
 
-          {/* Read Aloud Toggle */}
-          <button
-            onClick={() => speakWithRadioEffect(aiThought)}
-            className={`p-4 rounded-full border bg-white/10 border-white/20 text-white hover:scale-105 transition-all`}
-            title="Read Question Aloud"
-          >
-            <Volume2 className="w-6 h-6" />
-          </button>
-
-          {/* Chat Toggle */}
-          <button
-            onClick={() => setIsChatOpen(!isChatOpen)}
-            className={`p-4 rounded-full border ${isChatOpen ? 'bg-green-500/20 border-green-500 text-green-400' : 'bg-white/10 border-white/20 text-gray-400'} hover:scale-105 transition-all`}
-            title="Toggle Neural Chat"
-          >
-            <MessageSquare className="w-6 h-6" />
-          </button>
-
-          {/* End Session Button */}
-          <button
-            onClick={handleEndSession}
-            className="p-4 rounded-full border bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/20 transition-all"
-            title="Terminate Session"
-          >
-            <XCircle className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Live Transcript / AI Thought Process */}
-        <div className="w-1/3 h-32 bg-white/5 border border-white/10 rounded-xl p-4 overflow-hidden relative">
-          <div className="absolute top-2 left-2 flex items-center gap-2 text-xs text-purple-400 font-bold mb-2">
-            <Brain className="w-3 h-3" />
-            NEURAL_PROCESSOR
-          </div>
-          <div className="mt-6 text-sm text-gray-300 font-mono leading-relaxed">
-            <span className="text-purple-500">{">"}</span> {aiThought} <br/>
-            <span className="animate-pulse">_</span>
-          </div>
-        </div>
+           {/* Camera Selector (Hidden unless multiple) */}
+           {/* End Session */}
+           <button
+             onClick={handleEndSession}
+             className="ml-4 px-5 py-2 rounded-full bg-red-600/90 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]"
+           >
+             Terminate
+           </button>
       </div>
 
-      {/* Chat Panel (Gemini Style) */}
+      {/* Chat / Thought Stream on Right */}
       <AnimatePresence>
-        {isChatOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            className="absolute right-0 top-0 h-full w-full sm:w-[450px] bg-[#131314] border-l border-[#303132] shadow-2xl flex flex-col z-30 font-sans"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#303132]">
-              <div className="flex items-center gap-2">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-red-400 font-medium text-lg flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-blue-400" fill="currentColor" /> 
-                  NEUROPREP AI
-                </span>
-                <span className="text-xs bg-[#1e1f20] text-gray-400 px-2 py-0.5 rounded-full border border-[#303132]">
-                  {role} • {difficulty}
-                </span>
-              </div>
-              <button onClick={() => setIsChatOpen(false)} className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-[#303132]">
-                <XCircle className="w-6 h-6" />
-              </button>
-            </div>
-
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-[#303132] scrollbar-track-transparent">
-               {/* Welcome Message (Implicit) */}
-               {chatHistory.length === 0 && (
-                 <div className="flex flex-col items-center justify-center h-full text-center opacity-50">
-                   <Brain className="w-12 h-12 mb-4 text-purple-400/50" />
-                   <p className="text-sm">Ready to begin your simulation.</p>
+        <motion.div 
+           initial={{ opacity: 0, x: 20 }}
+           animate={{ opacity: 1, x: 0 }}
+           className="absolute right-8 top-24 bottom-24 w-80 pointer-events-none flex flex-col items-end gap-3 z-30"
+        >
+             {/* AI Thought Bubble (Always visible) */}
+             <div className="bg-black/60 backdrop-blur-md p-4 rounded-xl border border-electric-blue/30 max-w-xs text-right shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+                 <div className="flex items-center justify-end gap-2 text-electric-blue mb-2">
+                     <Brain className="w-3 h-3 animate-pulse" />
+                     <span className="text-[10px] font-mono uppercase tracking-widest">Neural Stream</span>
                  </div>
-               )}
+                 <p className="text-white/90 text-sm font-light leading-relaxed font-mono">
+                     {aiThought}
+                 </p>
+             </div>
 
-              {chatHistory.map((msg, i) => (
-                <div key={i} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                  {/* Avatar */}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                    msg.role === 'ai' ? 'mt-1' : 'bg-[#303132] mt-auto'
-                  }`}>
-                    {msg.role === 'ai' ? (
-                      <Sparkles className="w-5 h-5 text-blue-400" />
-                    ) : (
-                      <div className="text-xs font-bold text-gray-300">YOU</div> 
-                    )}
+             {/* User Chat Input (Interactive) */}
+             <div className="pointer-events-auto mt-auto w-full">
+                  <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl p-3 flex gap-2 shadow-2xl">
+                     <input
+                       type="text"
+                       value={inputMessage}
+                       onChange={(e) => setInputMessage(e.target.value)}
+                       onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                       placeholder="Type your response..."
+                       className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-gray-500 font-mono"
+                     />
+                     <button 
+                        onClick={handleSendMessage}
+                        disabled={!inputMessage.trim() || isStreaming}
+                        className="p-2 bg-electric-blue rounded-xl text-white hover:bg-blue-600 transition-colors disabled:opacity-50"
+                     >
+                        <Send className="w-4 h-4" />
+                     </button>
                   </div>
+             </div>
+        </motion.div>
+      </AnimatePresence>
 
-                  {/* Message Bubble */}
-                  <div className={`flex flex-col max-w-[85%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                    {msg.role === 'ai' && (
-                      <span className="text-xs text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-bold mb-1 ml-1">
-                        NeuroPrep AI
-                      </span>
-                    )}
-                    <div className={`px-5 py-3 text-[15px] leading-relaxed tracking-wide ${
-                      msg.role === 'user' 
-                        ? 'bg-[#303132] text-gray-100 rounded-2xl rounded-tr-sm' 
-                        : 'text-gray-100' // AI has no bubble background, just authentic text
-                    }`}>
-                      <div className="whitespace-pre-wrap">{msg.content}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              
-              {isStreaming && (
-                 <div className="flex gap-4">
-                     <div className="w-8 h-8 mt-1 flex items-center justify-center">
-                        <Sparkles className="w-5 h-5 text-blue-400 animate-spin-slow" />
+      {/* User Camera (Picture-in-Picture) */}
+      <motion.div 
+         drag
+         className="absolute top-8 left-8 w-64 aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10 z-40 group"
+      >
+          {/* Bio-Analysis Overlay */}
+          {isBioAnalysisEnabled && (
+                <div className="absolute inset-0 z-20 pointer-events-none border-[2px] border-cyan-500/30">
+                     <div className="absolute top-2 left-2 flex flex-col gap-1">
+                          <div className="bg-black/70 px-2 py-1 rounded text-[8px] text-cyan-400 font-mono flex items-center gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+                              TRACKING: ACTIVE
+                          </div>
+                          <div className="bg-black/70 px-2 py-1 rounded text-[8px] text-green-400 font-mono">
+                              STRESS: LOW
+                          </div>
+                          <div className="bg-black/70 px-2 py-1 rounded text-[8px] text-purple-400 font-mono">
+                              PITCH: 140Hz
+                          </div>
                      </div>
-                     <div className="flex items-center gap-1 h-8">
-                       <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                       <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                       <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                     </div>
-                 </div>
-              )}
-            </div>
 
-            {/* Input Area (Gemini Floating Pill) */}
-            <div className="p-4 bg-[#131314]">
-              <div className="relative bg-[#1e1f20] rounded-full border border-[#303132] focus-within:border-gray-500 focus-within:bg-[#252627] transition-all duration-200 flex items-center pr-2 pl-4 py-2 shadow-lg">
-                <input
-                  type="text"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Type your response here..."
-                  className="flex-1 bg-transparent text-white placeholder-gray-500 focus:outline-none py-2 text-sm font-medium"
-                />
-                <button
-                  onClick={handleSendMessage}
-                  disabled={isStreaming || !inputMessage.trim()}
-                  className={`p-2 rounded-full transition-all duration-200 ${
-                    inputMessage.trim() && !isStreaming 
-                      ? 'bg-white text-black hover:bg-gray-200 rotate-0 scale-100' 
-                      : 'bg-transparent text-gray-600 rotate-90 scale-75 cursor-not-allowed'
-                  }`}
-                >
-                  <Send className="w-4 h-4 ml-0.5" />
-                </button>
-              </div>
-              <div className="text-center mt-2 pb-1">
-                 <p className="text-[10px] text-gray-500">Gemini may display inaccurate info, including about people, so double-check its responses.</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                     {/* Face Landmarks (Simulated) */}
+                     <svg className="absolute inset-0 opacity-30">
+                         <circle cx="50%" cy="40%" r="5" fill="none" stroke="cyan" strokeWidth="1" />
+                         <circle cx="35%" cy="35%" r="2" fill="cyan" />
+                         <circle cx="65%" cy="35%" r="2" fill="cyan" />
+                         <path d="M 40 60 Q 50 70 60 60" stroke="cyan" fill="none" />
+                     </svg>
+                </div>
+          )}
 
-      {/* Report Modal */}
-      <AnimatePresence>
-        {showReportModal && sessionReport && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-8"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              className="bg-gray-900 border border-white/10 p-8 rounded-2xl max-w-4xl w-full h-[80vh] overflow-y-auto shadow-2xl flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-8 border-b border-white/10 pb-6">
-                <div>
-                  <h2 className="text-4xl font-bold text-white mb-2">NEURAL AUDIT REPORT</h2>
-                  <p className="text-gray-400 font-mono text-sm">SESSION_ID: {sessionId.current}</p>
+          {isCamOn ? (
+             <Webcam
+               audio={false}
+               className="w-full h-full object-cover transform scale-x-[-1]"
+               videoConstraints={{
+                   deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined
+               }}
+             />
+          ) : (
+             <div className="w-full h-full flex items-center justify-center bg-gray-900">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center animate-pulse">
+                   <div className="w-8 h-8 rounded-full bg-white/20" />
                 </div>
-                <div className="text-right">
-                  <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                    {sessionReport.neuralResilience || 0}%
-                  </div>
-                  <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Overall Proficiency</div>
-                </div>
+             </div>
+          )}
+          
+          <div className="absolute bottom-2 right-2 flex gap-1 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
+               <button onClick={() => setShowCameraMenu(!showCameraMenu)} className="p-1.5 bg-black/60 rounded text-white hover:bg-white/20">
+                   <Settings className="w-3 h-3" />
+               </button>
+          </div>
+          
+          {/* Camera Menu */}
+          {showCameraMenu && (
+              <div className="absolute bottom-full left-0 mb-2 w-48 bg-black/90 border border-white/20 rounded-lg p-2 z-50">
+                  <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1 pl-1">Select Camera</div>
+                  {videoDevices.map((device, idx) => (
+                      <button
+                          key={device.deviceId}
+                          onClick={() => { setSelectedDeviceId(device.deviceId); setShowCameraMenu(false); }}
+                          className={`w-full text-left px-2 py-1.5 text-xs truncate rounded ${selectedDeviceId === device.deviceId ? 'bg-electric-blue text-white' : 'text-gray-300 hover:bg-white/10'}`}
+                      >
+                          {device.label || `Camera ${idx + 1}`}
+                      </button>
+                  ))}
               </div>
-
-              <div className="grid grid-cols-3 gap-6 mb-8">
-                <div className="bg-white/5 p-6 rounded-xl border border-white/5">
-                  <h3 className="text-gray-400 text-xs tracking-widest mb-2">TECHNICAL</h3>
-                  <div className="text-2xl font-bold text-blue-400">{Math.round(sessionReport.scores?.technicalScore || 0)}/100</div>
-                </div>
-                <div className="bg-white/5 p-6 rounded-xl border border-white/5">
-                  <h3 className="text-gray-400 text-xs tracking-widest mb-2">COMMUNICATION</h3>
-                  <div className="text-2xl font-bold text-green-400">{Math.round(sessionReport.scores?.eqScore || 0)}/100</div>
-                </div>
-                <div className="bg-white/5 p-6 rounded-xl border border-white/5">
-                  <h3 className="text-gray-400 text-xs tracking-widest mb-2">AUTHENTICITY</h3>
-                  <div className="text-2xl font-bold text-purple-400">{Math.round(sessionReport.scores?.authenticityScore || 0)}/100</div>
-                </div>
-              </div>
-
-              <div className="space-y-6 mb-8">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" /> Strengths
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {sessionReport.insights?.strengths?.map((s: string, i: number) => (
-                      <span key={i} className="px-3 py-1 bg-green-500/10 text-green-400 rounded-full text-sm border border-green-500/20">{s}</span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-iconic-gold" /> Areas for Growth
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {sessionReport.insights?.weaknesses?.map((w: string, i: number) => (
-                      <span key={i} className="px-3 py-1 bg-iconic-gold/10 text-iconic-gold rounded-full text-sm border border-iconic-gold/20">{w}</span>
-                    ))}
-                  </div>
-                </div>
-
-                {sessionReport.insights?.improvementPlan && (
-                   <div>
-                    <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                      <Brain className="w-5 h-5 text-blue-500" /> Neural Optimization Path
-                    </h3>
-                    <ul className="space-y-3">
-                      {sessionReport.insights.improvementPlan.map((step: string, i: number) => (
-                        <li key={i} className="flex items-start gap-3 text-gray-300 bg-white/5 p-4 rounded-lg">
-                          <span className="text-blue-500 font-bold">{i+1}.</span>
-                          {step}
-                        </li>
-                      ))}
-                    </ul>
-                   </div>
-                )}
-              </div>
-              
-              <div className="mt-auto pt-6 border-t border-white/10 flex justify-end gap-4">
-                 <button 
-                   onClick={() => window.location.href = '/dashboard'}
-                   className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all border border-white/10"
-                 >
-                   Save Progress to Dashboard
-                 </button>
-                 <button 
-                   onClick={() => window.location.href = '/pricing'}
-                   className="px-6 py-3 bg-electric-blue hover:bg-purple-500 text-white rounded-lg transition-all font-bold shadow-lg shadow-purple-500/20"
-                 >
-                   Unlock Detailed Analysis (Pro)
-                 </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Login Modal */}
-      <AnimatePresence>
-        {showLoginModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-8"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              className="bg-gray-900 border border-purple-500/30 p-8 rounded-2xl max-w-md w-full shadow-2xl text-center"
-            >
-              <div className="mx-auto w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-6">
-                <Brain className="w-8 h-8 text-purple-500" />
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-2">Neural Link Limit Reached</h2>
-              <p className="text-gray-400 mb-8">
-                You have exhausted your free anonymous sessions. 
-                <br/>
-                Authenticate to restore neural entanglement.
-              </p>
-              
-              <div className="space-y-3">
-                <button
-                  onClick={() => signIn('google')}
-                  className="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
-                >
-                  <Image src="https://authjs.dev/img/providers/google.svg" width={20} height={20} className="w-5 h-5" alt="Google" unoptimized />
-                  Continue with Google
-                </button>
-                <button
-                  onClick={() => signIn('github')}
-                  className="w-full py-3 bg-[#24292e] text-white font-bold rounded-lg hover:bg-[#2f363d] transition-all flex items-center justify-center gap-2"
-                >
-                  <Image src="https://authjs.dev/img/providers/github.svg" width={20} height={20} className="w-5 h-5 invert" alt="GitHub" unoptimized />
-                  Continue with GitHub
-                </button>
-                <button
-                  onClick={() => signIn('linkedin')}
-                  className="w-full py-3 bg-[#0077b5] text-white font-bold rounded-lg hover:bg-[#006097] transition-all flex items-center justify-center gap-2"
-                >
-                  <span className="font-bold text-xl">in</span>
-                  Continue with LinkedIn
-                </button>
-                <button
-                  onClick={() => signIn('credentials')}
-                  className="w-full py-3 bg-gray-800 text-gray-300 font-bold rounded-lg hover:bg-gray-700 transition-all flex items-center justify-center gap-2"
-                >
-                  Use Phone Number
-                </button>
-              </div>
-              
-              <button
-                onClick={() => setShowLoginModal(false)}
-                className="mt-6 text-sm text-gray-500 hover:text-gray-300"
-              >
-                Cancel Transmission
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+      </motion.div>
+      
     </div>
   );
 }
+
+// Helper icons
+import { Settings } from 'lucide-react';
