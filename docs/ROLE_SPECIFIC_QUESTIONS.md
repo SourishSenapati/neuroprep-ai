@@ -1,14 +1,18 @@
 # 🎯 COMPREHENSIVE QUESTION GENERATION SYSTEM
 
+
 ## The Problem:
 User selected "Chemical Engineer Level 5" but got tech questions about "latency" and "system design"
+
 
 ## Root Cause:
 Backend receives `role` parameter but doesn't use it properly in question generation
 
 ---
 
+
 ## Solution: Dynamic Question Generator
+
 
 ### 1. Role-Specific Question Banks
 
@@ -37,6 +41,7 @@ With dynamic parameter generation: 28.8M × 8 = 230.4M+ questions
 ```
 
 ---
+
 
 ### 2. Role-Specific Topic Maps
 
@@ -204,6 +209,7 @@ const ROLE_TOPICS = {
 
 ---
 
+
 ### 3. Question Generation Engine
 
 ```typescript
@@ -239,6 +245,7 @@ function generateRoleSpecificQuestion(
 
 ---
 
+
 ### 4. Verification System
 
 **Ensures 99.9% Uniqueness:**
@@ -262,6 +269,7 @@ function generateRoleSpecificQuestion(
 
 ---
 
+
 ## Implementation Status:
 
 **Current:**  
@@ -277,6 +285,7 @@ function generateRoleSpecificQuestion(
 ✅ India-company focused  
 
 ---
+
 
 ## Next Steps:
 

@@ -1,5 +1,6 @@
 # 🚨 CRITICAL BUG FIX + ENHANCEMENTS
 
+
 ## Issue 1: Wrong Questions for Selected Role ⚠️ CRITICAL
 
 **User Report:** Selected "Chemical Engineer Level 5" but got tech questions about latency/system design
@@ -9,6 +10,7 @@
 **Fix Required:** Update backend to generate role-specific questions.
 
 **Temporary Workaround (Frontend):** Map role IDs to full role descriptions
+
 
 ### Role ID Mapping:
 ```typescript
@@ -32,6 +34,7 @@ CS National Qualifier Test - programming, aptitude, reasoning',
 
 ---
 
+
 ## Issue 2: Supabase Integration for Real Data
 
 **Credentials Provided:**
@@ -42,13 +45,16 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 **Required Changes:**
 
+
 ### 1. Update `.env.local` (User must add manually - gitignored):
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
 ```
 
+
 ### 2. Enable Supabase Client (already done in `/lib/supabase/client.ts`)
+
 
 ### 3. Create Supabase Tables:
 ```sql
@@ -87,6 +93,7 @@ CREATE INDEX idx_sessions_created ON user_sessions(created_at DESC);
 CREATE INDEX idx_profiles_city ON user_profiles(city);
 ```
 
+
 ### 4. Update RealTimeAnalytics to pull from Supabase:
 ```typescript
 // Instead of simulated data
@@ -104,10 +111,12 @@ const { data: cityStats } = await supabase
 
 ---
 
+
 ## Issue 3: Mobile Optimization
 
 **Current:** Desktop-first  
 **Required:** Mobile-first responsive
+
 
 ### Actions:
 
@@ -117,6 +126,7 @@ const { data: cityStats } = await supabase
 4. **Touch-friendly** buttons (min 44x44px)
 5. **Hamburger menu** for navigation
 
+
 ### Key Files to Update:
 - `app/globals-mobile.css` - enhance
 - `components/Dashboard.tsx` - responsive grid
@@ -125,6 +135,7 @@ const { data: cityStats } = await supabase
 - `app/layout.tsx` - mobile nav
 
 ---
+
 
 ## Issue 4: Dynamic Interview Responses
 
@@ -158,6 +169,7 @@ if (isShort && !isQuestion) {
 
 ---
 
+
 ## Priority Order:
 
 1. **CRITICAL**: Fix role-based question generation (30 min)
@@ -166,6 +178,7 @@ if (isShort && !isQuestion) {
 4. **LOW**: Dynamic offline responses (1 hour)
 
 ---
+
 
 ## Deployment Steps:
 

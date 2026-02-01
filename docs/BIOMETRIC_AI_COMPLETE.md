@@ -6,13 +6,17 @@
 
 ---
 
+
 ## ️ PHASE 1: BIOMETRIC SURVEILLANCE ("Eye of Truth")
+
 
 ### **File Created:**
 
 - `frontend/components/BiometricEye.tsx` (450 lines)
 
+
 ### **Features Implemented:**
+
 
 #### **Face-API.js Integration:**
 
@@ -23,6 +27,7 @@
 - Webcam stream management
 - 500ms detection loop (2 FPS for efficiency)
 
+
 #### **Emotions Detected:**
 
 1. **Neutral** - Baseline composure
@@ -32,6 +37,7 @@
 5. **Fearful** - Anxiety, stress
 6. **Surprised** - Unexpected questions
 7. **Disgusted** - Discomfort
+
 
 #### **Futuristic Targeting Overlay:**
 
@@ -46,6 +52,7 @@
 - **Crosshair** at face center
 - **HUD Display:** "● FACE LOCKED" vs "○ SCANNING"
 
+
 #### **Privacy & Safety:**
 
 - Runs entirely in browser (no server uploads)
@@ -55,15 +62,19 @@
 
 ---
 
+
 ## 🧠 PHASE 2: SENTIENT BRAIN ("Emotion-Aware AI")
+
 
 ### **File Created:**
 
 - `frontend/app/api/chat/interview/route.ts` (150 lines)
 
+
 ### **Breakthrough Feature:**
 
 **AI adapts its personality based on user's facial emotion in real-time!**
+
 
 #### **How It Works:**
 
@@ -80,16 +91,18 @@ Soften your tone. Be encouraging.
 Use: 'Take a breath, you've got this'"
 ```
 
+
 #### **Emotion-Specific AI Behaviors:**
 
-| User Emotion | AI Adaptation |
-|--------------|---------------|
-| **Neutral/Happy** | "Challenge them! Ask deeper questions. They can handle it." |
-| **Fearful** | "Soften tone. Be supportive. Break down questions. Celebrate small wins." |
-| **Sad** | "Be empathetic. Acknowledge difficulty. Focus on strengths." |
-| **Angry** | "De-escalate immediately. Remain calm. Offer to rephrase questions." |
-| **Surprised** | "Give them extra time. Offer hints if stuck." |
-| **Disgusted** | "Question might be irrelevant. Be willing to move on." |
+| User Emotion | AI Adaptation | 
+| -------------- | --------------- | 
+| **Neutral/Happy** | "Challenge them! Ask deeper questions. They can handle it." | 
+| **Fearful** | "Soften tone. Be supportive. Break down questions. Celebrate small wins." | 
+| **Sad** | "Be empathetic. Acknowledge difficulty. Focus on strengths." | 
+| **Angry** | "De-escalate immediately. Remain calm. Offer to rephrase questions." | 
+| **Surprised** | "Give them extra time. Offer hints if stuck." | 
+| **Disgusted** | "Question might be irrelevant. Be willing to move on." | 
+
 
 #### **Technical Details:**
 
@@ -97,6 +110,7 @@ Use: 'Take a breath, you've got this'"
 - Temperature adjustment (0.7 for fearful, 0.8 for confident)
 - System prompt dynamically generated per request
 - Edge runtime for low latency
+
 
 #### **Example Adaptation:**
 
@@ -111,7 +125,9 @@ Use: 'Take a breath, you've got this'"
 
 ---
 
+
 ## PHASE 3: THE AURA ("Reactive 3D Environment")
+
 
 ### **File Created:**
 
@@ -122,7 +138,9 @@ Use: 'Take a breath, you've got this'"
 1. **Full 3D Version** (Three.js + react-three-fiber) - Ready when dependencies work
 2. **CSS Fallback Version** (`ReactiveBackgroundSimple`) - Works immediately
 
+
 ### **Features:**
+
 
 #### **Full Version (Three.js):**
 
@@ -135,6 +153,7 @@ Use: 'Take a breath, you've got this'"
 - Real-time vertex morphing (wave effects)
 - Particle field for positive emotions
 - Smooth color/scale transitions
+
 
 #### **CSS Fallback (Currently Active):**
 
@@ -151,6 +170,7 @@ Use: 'Take a breath, you've got this'"
 - Intensity-based opacity
 - Zero performance impact
 
+
 ### **Self-Regulation Benefit:**
 
 **When user sees their stress reflected visually:**
@@ -162,17 +182,22 @@ Use: 'Take a breath, you've got this'"
 
 ---
 
+
 ## PHASE 4: NEMESIS MODE ("The Ultimate Challenge")
+
 
 ### **File Created:**
 
 - `frontend/components/NemesisMode.tsx` (350 lines)
 
+
 ### **The Pressure Cooker:**
 
 **This is THE hackathon showstopper feature!**
 
+
 #### **Features:**
+
 
 ### **1. Voice Stress Detection**
 
@@ -182,6 +207,7 @@ Use: 'Take a breath, you've got this'"
 - **Mumbling:** Volume < 15% → Toast: "Speak up! You are mumbling."
 - **Jittery voice:** Rapid volume changes
 - **Silence:** < 5% volume → Triggers interruption
+
 
 ### **2. AI Interruption Protocol** 🤖
 
@@ -197,6 +223,7 @@ Use: 'Take a breath, you've got this'"
 - Pitch: 0.8 (lower = more intimidating)
 - Volume: 100%
 
+
 ### **3. Win Condition**
 
 **Defeat the Nemesis by:**
@@ -205,6 +232,7 @@ Use: 'Take a breath, you've got this'"
 - For **60 consecutive seconds**
 - While answering interview questions
 - Under voice stress monitoring
+
 
 #### **Progress Tracking:**
 
@@ -219,12 +247,14 @@ Use: 'Take a breath, you've got this'"
 - Live countdown
 - Breaks streak if emotion changes to sad/angry/fearful
 
+
 ### **4. Rewards:**
 
 - **Defeat Nemesis:** +500 XP (massive!)
 - **Victory Toast:** " YOU DEFEATED THE NEMESIS! +500 XP!"
 - **TTS Acknowledgment:** "Impressive. You have defeated the Nemesis."
 - Auto-disables after win
+
 
 ### **5. HUD Display:**
 
@@ -235,7 +265,9 @@ Use: 'Take a breath, you've got this'"
 
 ---
 
+
 ## INTEGRATION POINTS
+
 
 ### **1. BiometricEye → AI Chat:**
 
@@ -253,6 +285,7 @@ fetch('/api/chat/interview', {
 });
 ```
 
+
 ### **2. BiometricEye → ReactiveBackground:**
 
 ```tsx
@@ -261,6 +294,7 @@ fetch('/api/chat/interview', {
   intensity={confidence}     // ← 0-1 scale
 />
 ```
+
 
 ### **3. BiometricEye → Nemesis Mode:**
 
@@ -272,6 +306,7 @@ fetch('/api/chat/interview', {
 ```
 
 ---
+
 
 ## COMPLETE USER FLOW
 
@@ -299,16 +334,20 @@ fetch('/api/chat/interview', {
 
 ---
 
+
 ## DEPENDENCIES
+
 
 ### **Installed:**
 
 - `face-api.js` - Emotion recognition (9 packages)
 
+
 ### **Attempted (React 19 incompatibility):**
 
 - ️ `@react-three/fiber`, `@react-three/drei`, `three`
 - **Solution:** Using CSS fallback (`ReactiveBackgroundSimple`)
+
 
 ### **Built-in:**
 
@@ -318,7 +357,9 @@ fetch('/api/chat/interview', {
 
 ---
 
+
 ## 🧪 TESTING CHECKLIST
+
 
 ### **BiometricEye:**
 
@@ -328,11 +369,13 @@ fetch('/api/chat/interview', {
 - [ ] Move around → Targeting box follows face
 - [ ] Cover camera → "○ SCANNING" appears
 
+
 ### **Emotion-Aware AI:**
 
 - [ ] Start chat with fearful face → AI is supportive
 - [ ] Start chat with happy face → AI is challenging
 - [ ] Switch emotions mid-chat → AI adapts tone
+
 
 ### **Reactive Background:**
 
@@ -340,6 +383,7 @@ fetch('/api/chat/interview', {
 - [ ] Happy emotion → Gold gradient
 - [ ] Fear emotion → Red gradient
 - [ ] Smooth transitions between emotions
+
 
 ### **Nemesis Mode:**
 
@@ -351,7 +395,9 @@ fetch('/api/chat/interview', {
 
 ---
 
+
 ## HACKATHON IMPACT
+
 
 ### **Innovation Score: MAXIMUM**
 
@@ -384,19 +430,22 @@ fetch('/api/chat/interview', {
 - "This is production-ready AND innovative"
 - "The emotion-aware AI is breakthrough"
 
+
 ### **Score Projection:**
 
-| Criterion | Before | After | Gain |
-|-----------|--------|-------|------|
-| Innovation | 25/25 | **25/25** | - (already max!) |
-| Technical | 24/25 | **25/25** | +1  |
-| UX | 25/25 | **25/25** | - (already max!) |
-| Completeness | 25/25 | **25/25** | - (already max!) |
-| **TOTAL** | **99/100** | **100/100** | **PERFECT SCORE** |
+| Criterion | Before | After | Gain | 
+| ----------- | -------- | ------- | ------ | 
+| Innovation | 25/25 | **25/25** | - (already max!) | 
+| Technical | 24/25 | **25/25** | +1  | 
+| UX | 25/25 | **25/25** | - (already max!) | 
+| Completeness | 25/25 | **25/25** | - (already max!) | 
+| **TOTAL** | **99/100** | **100/100** | **PERFECT SCORE** | 
 
 ---
 
+
 ## USAGE EXAMPLES
+
 
 ### **Basic Integration:**
 
@@ -437,6 +486,7 @@ export default function InterviewPage() {
 }
 ```
 
+
 ### **Nemesis Mode:**
 
 ```tsx
@@ -454,6 +504,7 @@ import NemesisMode from '@/components/NemesisMode';
 ```
 
 ---
+
 
 ## DEFINITION OF DONE
 
@@ -492,6 +543,7 @@ import NemesisMode from '@/components/NemesisMode';
 - [x] Progress tracker HUD
 
 ---
+
 
 ## DEMO SCRIPT UPDATE (For Video)
 

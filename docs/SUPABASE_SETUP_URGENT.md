@@ -1,12 +1,15 @@
 # ⚠️ URGENT ACTION REQUIRED
 
+
 ## User Must Add Supabase Credentials
 
 Since `.env.local` is gitignored (for security), **you must manually create this file:**
 
+
 ### Step 1: Create File
 
 **Location:** `d:\PROJECT\ai-interview\frontend\.env.local`
+
 
 ### Step 2: Add These Lines
 
@@ -16,10 +19,12 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJI
 
 UzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
 
+
 # Optional - for full features
 OPENAI_API_KEY=your_openai_key_here
 ELEVENLABS_API_KEY=your_elevenlabs_key_here
 ```
+
 
 ### Step 3: Restart Dev Server
 
@@ -27,6 +32,7 @@ ELEVENLABS_API_KEY=your_elevenlabs_key_here
 cd frontend
 npm run dev
 ```
+
 
 ### Step 4: Create Supabase Tables
 
@@ -69,6 +75,7 @@ CREATE INDEX idx_profiles_city ON user_profiles(city);
 ```
 
 ---
+
 
 ## Then You'll Have:
 

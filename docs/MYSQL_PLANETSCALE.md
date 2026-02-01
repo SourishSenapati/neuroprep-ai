@@ -1,10 +1,13 @@
 # 🗄️ MYSQL IMPLEMENTATION #1 - PlanetScale (Serverless)
 
+
 ## **Complete PlanetScale MySQL Setup**
 
 ---
 
+
 ## **1. Setup PlanetScale Account**
+
 
 ### **Sign Up:**
 1. Go to https://planetscale.com
@@ -12,13 +15,17 @@
 3. Create new database: "neuroprep-ai"
 4. Region: Mumbai (ap-south-1) or Singapore (ap-southeast-1)
 
+
 ### **Get Connection String:**
 ```bash
+
 # Click "Connect" in PlanetScale dashboard
+
 # Copy connection string
 ```
 
 ---
+
 
 ## **2. Install Dependencies**
 
@@ -29,10 +36,12 @@ npm install -D prisma @prisma/client
 
 ---
 
+
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
 ```env
+
 # PlanetScale
 DATABASE_URL="mysql://username:password@host/database?sslaccept=strict"
 DATABASE_HOST="aws.connect.psdb.cloud"
@@ -41,6 +50,7 @@ DATABASE_PASSWORD="your-password"
 ```
 
 ---
+
 
 ## **4. Database Schema**
 
@@ -167,17 +177,21 @@ model AnalyticsEvent {
 
 ---
 
+
 ## **5. Initialize Prisma**
 
 ```bash
+
 # Generate Prisma Client
 npx prisma generate
+
 
 # Push schema to PlanetScale
 npx prisma db push
 ```
 
 ---
+
 
 ## **6. Create Database Client**
 
@@ -441,7 +455,9 @@ export const analytics = {
 
 ---
 
+
 ## **7. API Routes**
+
 
 ### **Create `app/api/auth/signup/route.ts`:**
 
@@ -471,6 +487,7 @@ export async function POST(request: Request) {
   }
 }
 ```
+
 
 ### **Create `app/api/auth/login/route.ts`:**
 
@@ -506,23 +523,29 @@ export async function POST(request: Request) {
 
 ---
 
+
 ## **8. Deploy to PlanetScale**
 
 ```bash
+
 # Create production branch
 pscale branch create neuroprep-ai production
+
 
 # Deploy schema
 npx prisma db push
 
+
 # Promote to production
 pscale deploy-request create neuroprep-ai production
+
 
 # Get production connection string
 pscale connect neuroprep-ai production
 ```
 
 ---
+
 
 ## **9. Advantages**
 
@@ -534,5 +557,6 @@ pscale connect neuroprep-ai production
 ✅ **Prisma:** Type-safe database access  
 
 ---
+
 
 ## **COMPLETE PLANETSCALE SETUP! 🚀**

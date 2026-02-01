@@ -1,6 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic'; // Route segment config invalid in Client Component
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -81,8 +81,8 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-[#525252]">
            <div className="flex items-center gap-6">
               <span>© 2025 NeuroPrep AI</span>
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+              <a href="/terms" className="hover:text-white transition-colors">Terms</a>
            </div>
 
            <div className="flex items-center gap-3">

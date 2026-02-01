@@ -7,6 +7,7 @@
 
 ---
 
+
 ## SPRINT OBJECTIVES
 
 Transform NeuroPrep AI from a functional prototype into a **production-grade, hackathon-winning application** by addressing three critical gaps:
@@ -17,9 +18,12 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ## ⏰ TIME-BOXED SCHEDULE (30-minute blocks)
 
+
 ### **HOUR 0-1: Setup & Planning**  COMPLETED
+
 
 #### `[00:00 - 00:30]` Environment Setup
 
@@ -27,6 +31,7 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 - [x] Codebase audit completed
 - [x] Gap analysis documented
 - **Output:** HACKATHON_READINESS_CHECKLIST.md
+
 
 #### `[00:30 - 01:00]` Architecture Documentation
 
@@ -37,11 +42,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 1-2: ERROR HANDLING FOUNDATION**
+
 
 #### `[01:00 - 01:30]` Global Error Boundary
 
 ```bash
+
 # Tasks:
 1. Create ErrorBoundary.tsx component
 2. Wrap app in layout.tsx
@@ -55,9 +63,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 - `frontend/app/layout.tsx` (MODIFY)
 - `frontend/app/error.tsx` (NEW)
 
+
 #### `[01:30 - 02:00]` API Error Handling
 
 ```bash
+
 # Tasks:
 1. Create API client with retry logic
 2. Add exponential backoff
@@ -73,11 +83,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 2-3: LOADING STATES**
+
 
 #### `[02:00 - 02:30]` Loading Components Library
 
 ```bash
+
 # Tasks:
 1. Create skeleton loaders
 2. Create spinner components
@@ -91,9 +104,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 - `frontend/components/LoadingSpinner.tsx` (NEW)
 - `frontend/components/TypingIndicator.tsx` (NEW)
 
+
 #### `[02:30 - 03:00]` Integrate Loading States
 
 ```bash
+
 # Tasks:
 1. Add to InterviewSession (streaming)
 2. Add to InterviewSetup (transitions)
@@ -109,11 +124,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 3-4: MOBILE RESPONSIVENESS (PART 1)**
+
 
 #### `[03:00 - 03:30]` Mobile Audit & Planning
 
 ```bash
+
 # Tasks:
 1. Test all pages in Chrome DevTools (375px, 768px, 1024px)
 2. Document layout breaks
@@ -123,9 +141,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 **Tools:** Chrome DevTools Device Mode
 
+
 #### `[03:30 - 04:00]` Fix InterviewSetup Mobile
 
 ```bash
+
 # Tasks:
 1. Grid layout → Stack layout on mobile
 2. Reduce font sizes for small screens
@@ -139,11 +159,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 4-5: MOBILE RESPONSIVENESS (PART 2)**
+
 
 #### `[04:00 - 04:30]` Fix InterviewSession Mobile
 
 ```bash
+
 # Tasks:
 1. Responsive header (collapse biometrics)
 2. Mobile-friendly chat interface
@@ -155,9 +178,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 - `frontend/components/InterviewSession.tsx` (MODIFY)
 
+
 #### `[04:30 - 05:00]` Mobile Code Editor
 
 ```bash
+
 # Tasks:
 1. Lazy load Monaco on desktop only
 2. Fallback to textarea on mobile
@@ -171,11 +196,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 5-6: UX POLISH**
+
 
 #### `[05:00 - 05:30]` Toast Notifications
 
 ```bash
+
 # Tasks:
 1. Install react-hot-toast
 2. Add success toasts (session start, code execution)
@@ -188,9 +216,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 - `frontend/app/layout.tsx` (MODIFY)
 - `frontend/components/InterviewSession.tsx` (MODIFY)
 
+
 #### `[05:30 - 06:00]` Accessibility Improvements
 
 ```bash
+
 # Tasks:
 1. Add ARIA labels to all interactive elements
 2. Keyboard navigation (Tab, Enter, Esc)
@@ -204,11 +234,14 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 ---
 
+
 ### **HOUR 6-7: PERFORMANCE OPTIMIZATION**
+
 
 #### `[06:00 - 06:30]` Code Splitting & Lazy Loading
 
 ```bash
+
 # Tasks:
 1. Dynamic import for Monaco Editor
 2. Dynamic import for Three.js components
@@ -221,9 +254,11 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 - `frontend/components/CodeEditor.tsx` (MODIFY)
 - `frontend/next.config.js` (MODIFY)
 
+
 #### `[06:30 - 07:00]` Bundle Optimization
 
 ```bash
+
 # Tasks:
 1. Run next/bundle-analyzer
 2. Remove unused dependencies
@@ -240,11 +275,14 @@ ANALYZE=true npm run build
 
 ---
 
+
 ### **HOUR 7-8: TESTING & QA**
+
 
 #### `[07:00 - 07:30]` E2E Testing
 
 ```bash
+
 # Tasks:
 1. Write Cypress tests for critical flows
 2. Test interview setup → session → completion
@@ -256,9 +294,11 @@ ANALYZE=true npm run build
 
 - `cypress/e2e/interview-flow.cy.ts` (NEW)
 
+
 #### `[07:30 - 08:00]` Cross-Browser Testing
 
 ```bash
+
 # Tasks:
 1. Test on Chrome (Desktop + Mobile)
 2. Test on Firefox
@@ -268,11 +308,14 @@ ANALYZE=true npm run build
 
 ---
 
+
 ### **HOUR 8-9: DOCUMENTATION & DEMO**
+
 
 #### `[08:00 - 08:30]` Architecture Diagram
 
 ```bash
+
 # Tasks:
 1. Create Mermaid diagram of system architecture
 2. Document component hierarchy
@@ -284,9 +327,11 @@ ANALYZE=true npm run build
 
 - `docs/ARCHITECTURE_DIAGRAM.md` (NEW)
 
+
 #### `[08:30 - 09:00]` Demo Video Recording
 
 ```bash
+
 # Tasks:
 1. Script demo (5-minute max)
 2. Record screen + voiceover
@@ -298,11 +343,14 @@ ANALYZE=true npm run build
 
 ---
 
+
 ### **HOUR 9-10: FINAL DEPLOYMENT & SUBMISSION**
+
 
 #### `[09:00 - 09:30]` Production Deployment
 
 ```bash
+
 # Tasks:
 1. Final commit & push to GitHub
 2. Deploy to Vercel (production)
@@ -319,9 +367,11 @@ git push origin main
 vercel --prod
 ```
 
+
 #### `[09:30 - 10:00]` Final Checks & Submission
 
 ```bash
+
 # Tasks:
 1. Fill out submission form
 2. Verify all links work
@@ -331,7 +381,9 @@ vercel --prod
 
 ---
 
+
 ## QUICK REFERENCE: FILES TO CREATE/MODIFY
+
 
 ### **NEW FILES** (8 files)
 
@@ -346,6 +398,7 @@ docs/ARCHITECTURE_DIAGRAM.md
 cypress/e2e/interview-flow.cy.ts
 ```
 
+
 ### **MODIFY FILES** (6 files)
 
 ```
@@ -359,7 +412,9 @@ frontend/next.config.js
 
 ---
 
+
 ## SUCCESS CRITERIA (Definition of Done)
+
 
 ### Must-Have (Non-Negotiable)
 
@@ -371,6 +426,7 @@ frontend/next.config.js
 - [ ] Demo video recorded (3-5 minutes)
 - [ ] Architecture diagram in docs/
 
+
 ### Should-Have (Competitive Edge)
 
 - [ ] Toast notifications for UX feedback
@@ -378,6 +434,7 @@ frontend/next.config.js
 - [ ] Keyboard navigation support
 - [ ] Bundle size <500KB (frontend)
 - [ ] Lighthouse score 90+ (mobile & desktop)
+
 
 ### Could-Have (Wow Factor)
 
@@ -388,19 +445,22 @@ frontend/next.config.js
 
 ---
 
+
 ## RISK MITIGATION
 
-| Risk | Mitigation Strategy |
-|------|---------------------|
-| **Time Overrun on Error Handling** | Use pre-built library (`react-error-boundary`) |
-| **Mobile Testing Reveals Major Bugs** | Allocate 2 hours buffer, prioritize critical flows |
-| **Vercel Deployment Failure** | Test deploy in Hour 6, have rollback plan |
-| **Bundle Size Too Large** | Code splitting already in place, optimize early |
-| **AI API Rate Limits** | Implement request throttling, caching |
+| Risk | Mitigation Strategy | 
+| ------ | --------------------- | 
+| **Time Overrun on Error Handling** | Use pre-built library (`react-error-boundary`) | 
+| **Mobile Testing Reveals Major Bugs** | Allocate 2 hours buffer, prioritize critical flows | 
+| **Vercel Deployment Failure** | Test deploy in Hour 6, have rollback plan | 
+| **Bundle Size Too Large** | Code splitting already in place, optimize early | 
+| **AI API Rate Limits** | Implement request throttling, caching | 
 
 ---
 
+
 ## PRODUCTIVITY TIPS
+
 
 ### Time Management
 
@@ -409,18 +469,24 @@ frontend/next.config.js
 - Log blockers immediately, move on if stuck >15 min
 - Use code snippets and templates (don't reinvent)
 
+
 ### Development Workflow
 
 ```bash
+
 # Terminal 1: Frontend dev server
 cd frontend && npm run dev
+
 
 # Terminal 2: Backend dev server
 cd backend && npm run dev
 
+
 # Terminal 3: Testing/commands
+
 # (use for git, testing, deployment)
 ```
+
 
 ### Keyboard Shortcuts
 
@@ -431,7 +497,9 @@ cd backend && npm run dev
 
 ---
 
+
 ## PROGRESS TRACKING
+
 
 ### Hour-by-Hour Checklist
 
@@ -447,6 +515,7 @@ cd backend && npm run dev
 - [ ] **Hour 9-10**: Final Deployment & Submission
 
 ---
+
 
 ## DEMO VIDEO OUTLINE (5 minutes)
 
@@ -485,7 +554,9 @@ cd backend && npm run dev
 
 ---
 
+
 ## RESOURCES & REFERENCES
+
 
 ### Documentation
 
@@ -493,6 +564,7 @@ cd backend && npm run dev
 - [React Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
 - [Tailwind Responsive Design](https://tailwindcss.com/docs/responsive-design)
 - [Web Accessibility (WCAG)](https://www.w3.org/WAI/WCAG21/quickref/)
+
 
 ### Tools
 
@@ -504,7 +576,9 @@ cd backend && npm run dev
 
 ---
 
+
 ## FINAL PRE-SUBMISSION CHECKLIST
+
 
 ### Code Quality
 
@@ -512,6 +586,7 @@ cd backend && npm run dev
 - [ ] All TypeScript errors resolved
 - [ ] ESLint warnings addressed
 - [ ] Code formatted (Prettier)
+
 
 ### Functionality
 
@@ -521,6 +596,7 @@ cd backend && npm run dev
 - [ ] Code editor executes Python
 - [ ] Registration/freemium works
 
+
 ### Performance
 
 - [ ] Page load <3s
@@ -528,12 +604,14 @@ cd backend && npm run dev
 - [ ] Bundle size optimized
 - [ ] Lighthouse score 90+
 
+
 ### Documentation
 
 - [ ] README.md updated
 - [ ] Architecture diagram complete
 - [ ] Demo video uploaded
 - [ ] Environment variables documented
+
 
 ### Deployment
 

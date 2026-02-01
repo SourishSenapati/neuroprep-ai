@@ -6,18 +6,22 @@
 
 ---
 
+
 ## ️ TASK 1: GLOBAL ERROR BOUNDARY
+
 
 ### **Files Created:**
 
 1. `frontend/components/GlobalErrorBoundary.tsx` (240 lines)
 2. `frontend/app/error.tsx` (90 lines)
 
+
 ### **Integration:**
 
 - Wrapped entire app in `layout.tsx`
 - Catches React component errors
 - Catches route-level errors (Next.js App Router)
+
 
 ### **Features Implemented:**
 
@@ -42,13 +46,17 @@
 
 ---
 
+
 ## TASK 2: RESILIENT PARSER (RETRY LOGIC)
+
 
 ### **File Created:**
 
 - `frontend/lib/apiClient.ts` (280 lines)
 
+
 ### **Features Implemented:**
+
 
 #### **1. Generic Retry Function:**
 
@@ -67,6 +75,7 @@ fetchWithRetry(url, options, {
 - Custom retry callback for progress updates
 - Network error detection
 
+
 #### **2. Specialized Resume Parser:**
 
 ```typescript
@@ -82,6 +91,7 @@ fetchResumeParser(file, onProgress)
 - Corrupt PDF → "Please ensure it's a valid PDF"
 - Timeout → "The Resume Parser is busy. Please try a smaller PDF."
 
+
 #### **3. Error Handling:**
 
 - `APIError` class with status codes
@@ -90,7 +100,9 @@ fetchResumeParser(file, onProgress)
 
 ---
 
+
 ## TASK 3: FEEDBACK LOOP (TOASTS & LOADING)
+
 
 ### **Files Created/Modified:**
 
@@ -98,11 +110,14 @@ fetchResumeParser(file, onProgress)
 2. `frontend/app/layout.tsx` (modified - added Toaster)
 3. `frontend/components/InterviewSetup.tsx` (modified - added resume integration)
 
+
 ### **Libraries Installed:**
 
 - `react-hot-toast` (toast notifications)
 
+
 ### **Features Implemented:**
+
 
 #### **1. Loading States:**
 
@@ -114,6 +129,7 @@ fetchResumeParser(file, onProgress)
 - "Reading PDF..."
 - "Extracting Skills..."
 - "Retry 1/3: Server busy..." (if needed)
+
 
 #### **2. Toast Notifications:**
 
@@ -130,6 +146,7 @@ fetchResumeParser(file, onProgress)
 
 - **Info Toasts (Blue):**
 - "Detected role: Frontend Engineer"
+
 
 #### **3. Resume Upload Component:**
 
@@ -152,7 +169,9 @@ fetchResumeParser(file, onProgress)
 
 ---
 
+
 ## INTEGRATION
+
 
 ### **Auto-Fill Logic:**
 
@@ -176,7 +195,9 @@ When resume is successfully parsed:
 
 ---
 
+
 ## TESTING CHECKLIST
+
 
 ### **Error Boundary:**
 
@@ -187,6 +208,7 @@ When resume is successfully parsed:
 - [ ] Check dev mode shows stack trace
 - [ ] Check production hides technical details
 
+
 ### **Retry Logic:**
 
 - [x] Simulate 500 error (retry should trigger)
@@ -194,12 +216,14 @@ When resume is successfully parsed:
 - [ ] Test timeout with large PDF
 - [ ] Verify final error message after 3 failures
 
+
 ### **Toast Notifications:**
 
 - [ ] Upload valid PDF → See success toast
 - [ ] Upload >5MB PDF → See "File too large" error toast
 - [ ] Upload corrupted PDF → See "Invalid PDF" error toast
 - [ ] Disconnect network → See "Unable to connect" error toast
+
 
 ### **Resume Upload:**
 
@@ -212,11 +236,14 @@ When resume is successfully parsed:
 
 ---
 
+
 ## IMPACT ON HACKATHON SCORE
+
 
 ### **Before (Phase 1):**
 
 - Technical Execution: 22/25
+
 
 ### **After (Tasks 1-3):**
 
@@ -234,7 +261,9 @@ When resume is successfully parsed:
 
 ---
 
+
 ## NEXT PRIORITIES
+
 
 ### **Hour 3-5: Mobile Responsiveness** (Critical)
 
@@ -243,11 +272,13 @@ When resume is successfully parsed:
 - [ ] Responsive toast positioning
 - [ ] Mobile-friendly error page layout
 
+
 ### **Hour 5-6: Integration Polish**
 
 - [ ] Test full flow: Resume upload → Setup → Interview
 - [ ] Add keyboard shortcuts (Esc to close upload)
 - [ ] Add analytics tracking (resume upload success rate)
+
 
 ### **Hour 6-8: Testing**
 
@@ -257,7 +288,9 @@ When resume is successfully parsed:
 
 ---
 
+
 ## CODE QUALITY
+
 
 ### **Best Practices Implemented:**
 
@@ -270,6 +303,7 @@ When resume is successfully parsed:
 - Loading states for all async ops
 - Toast notifications for feedback
 
+
 ### **Performance:**
 
 - Lazy loading (ResumeUpload only mounts when needed)
@@ -277,6 +311,7 @@ When resume is successfully parsed:
 - Small bundle size impact (+10KB for react-hot-toast)
 
 ---
+
 
 ## DEFINITION OF DONE
 
@@ -309,6 +344,7 @@ When resume is successfully parsed:
 - [x] Auto-fill logic implemented
 
 ---
+
 
 ## DEMO SCRIPT UPDATE (For Video)
 

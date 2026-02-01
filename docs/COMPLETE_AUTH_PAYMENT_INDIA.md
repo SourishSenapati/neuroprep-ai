@@ -1,10 +1,13 @@
 # 🔐 COMPLETE AUTH + PAYMENT SYSTEM (India-Optimized)
 
+
 ## **NextAuth.js + Razorpay (Google, LinkedIn, GitHub + UPI, Net Banking)**
 
 ---
 
+
 ## **PART 1: AUTHENTICATION (OAuth + Email)**
+
 
 ### **1. Install Dependencies**
 
@@ -15,7 +18,9 @@ npm install @types/bcryptjs -D
 
 ---
 
+
 ### **2. Setup OAuth Applications**
+
 
 #### **A. Google OAuth**
 1. Go to https://console.cloud.google.com
@@ -25,11 +30,13 @@ npm install @types/bcryptjs -D
 5. Authorized redirect: `https://your-domain.com/api/auth/callback/google`
 6. Copy Client ID and Secret
 
+
 #### **B. GitHub OAuth**
 1. Go to https://github.com/settings/developers
 2. New OAuth App
 3. Authorization callback: `https://your-domain.com/api/auth/callback/github`
 4. Copy Client ID and Secret
+
 
 #### **C. LinkedIn OAuth**
 1. Go to https://www.linkedin.com/developers/apps
@@ -39,37 +46,45 @@ npm install @types/bcryptjs -D
 
 ---
 
+
 ### **3. Environment Variables**
 
 Add to `frontend/.env.local`:
 
 ```env
+
 # NextAuth
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-super-secret-key-min-32-chars
+
 
 # Google OAuth
 GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 
+
 # GitHub OAuth
 GITHUB_ID=your-github-client-id
 GITHUB_SECRET=your-github-client-secret
 
+
 # LinkedIn OAuth
 LINKEDIN_CLIENT_ID=your-linkedin-client-id
 LINKEDIN_CLIENT_SECRET=your-linkedin-client-secret
+
 
 # Razorpay (India Payment Gateway)
 RAZORPAY_KEY_ID=rzp_test_xxxxx
 RAZORPAY_KEY_SECRET=your_razorpay_secret
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxxx
 
+
 # Database (use any from previous implementations)
 DATABASE_URL=your-database-url
 ```
 
 ---
+
 
 ### **4. Update Database Schema**
 
@@ -148,6 +163,7 @@ npx prisma db push
 ```
 
 ---
+
 
 ### **5. Create NextAuth Configuration**
 
@@ -320,6 +336,7 @@ export { handler as GET, handler as POST };
 
 ---
 
+
 ### **6. Create Registration API**
 
 Create `frontend/app/api/auth/register/route.ts`:
@@ -390,6 +407,7 @@ export async function POST(request: Request) {
 
 ---
 
+
 ### **7. Create Auth Context**
 
 Create `frontend/components/Providers.tsx`:
@@ -421,6 +439,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 ---
+
 
 ### **8. Login Component Example**
 
@@ -557,6 +576,7 @@ export default function LoginForm() {
 
 ---
 
+
 ### **9. Logout Function**
 
 ```typescript
@@ -570,7 +590,9 @@ const handleLogout = async () => {
 
 ---
 
+
 ## **PART 2: PAYMENT SYSTEM (UPI + Net Banking)**
+
 
 ### **1. Install Razorpay**
 
@@ -580,6 +602,7 @@ npm install @types/razorpay -D
 ```
 
 ---
+
 
 ### **2. Create Razorpay Client**
 
@@ -609,6 +632,7 @@ export const PAYMENT_PLANS = {
 ```
 
 ---
+
 
 ### **3. Create Order API**
 
@@ -687,6 +711,7 @@ export async function POST(request: Request) {
 ```
 
 ---
+
 
 ### **4. Verify Payment API**
 
@@ -776,6 +801,7 @@ export async function POST(request: Request) {
 ```
 
 ---
+
 
 ### **5. Payment Component**
 
@@ -895,6 +921,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
 ```
 
 ---
+
 
 ## **COMPLETE AUTH + PAYMENT SYSTEM READY! 🎉**
 

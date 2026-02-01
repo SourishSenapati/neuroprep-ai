@@ -4,6 +4,7 @@ Your project is set up as a **Monorepo** with two separate deployments on Vercel
 1. **Frontend** (Next.js)
 2. **Backend** (Express/Node.js)
 
+
 ## ✅ Step 1: Backend Configuration
 1. Go to your Vercel Dashboard -> **backend** project.
 2. Click **Settings** -> **Environment Variables**.
@@ -14,6 +15,7 @@ Your project is set up as a **Monorepo** with two separate deployments on Vercel
    - `CORS_ORIGIN`: `https://your-frontend-url.vercel.app` (Replace with your actual Frontend URL)
 4. Go to **Deployments** and **Redeploy** to apply changes.
 5. **Copy the Backend URL** (e.g., `https://backend-xyz.vercel.app`).
+
 
 ## ✅ Step 2: Frontend Configuration
 1. Go to your Vercel Dashboard -> **frontend** project.
@@ -26,10 +28,12 @@ Your project is set up as a **Monorepo** with two separate deployments on Vercel
    - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`: (Your Firebase Project ID)
 4. Go to **Deployments** and **Redeploy**.
 
+
 ## 📱 Mobile Optimization Verified
 - The app handles mobile layouts automatically (`globals-mobile.css`).
 - Touch targets are optimized (44px+).
 - Layouts stack strictly for vertical scrolling on phones.
+
 
 ## 🔗 Live URLs
 - **Frontend:** [Check Vercel Dashboard for `frontend-*.vercel.app`]

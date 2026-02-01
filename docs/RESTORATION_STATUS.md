@@ -1,6 +1,8 @@
 # ️ FEATURES REMOVED & RESTORATION PLAN
 
+
 ## **TEMPORARILY REMOVED:**
+
 
 ### **1. Multiplayer Dojo (Full Feature)**
 
@@ -16,6 +18,7 @@
 **Current Status:** `/multiplayer` shows "coming soon" placeholder
 
 ---
+
 
 ## **RESTORATION IN PROGRESS:**
 
@@ -33,6 +36,7 @@
 **ETA:** 5 minutes
 
 ---
+
 
 ## **OTHER FEATURES (INTACT):**
 

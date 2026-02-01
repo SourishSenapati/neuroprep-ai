@@ -1,6 +1,8 @@
 # ✅ ALL ENGINEERING DISCIPLINES SUPPORTED
 
+
 ## 12 Complete Career Tracks
+
 
 ### SOFTWARE & IT (5 tracks)
 1. **TCS NQT Ready** - TCS, Infosys, Wipro
@@ -9,12 +11,14 @@
 4. **Startup Ninja** - Razorpay, CRED, Swiggy, Zomato
 5. **Data & ML Engineer** - Fractal, Mu Sigma, Tiger Analytics
 
+
 ### CORE ENGINEERING (1 track)
 6. **Core Engineering** - L&T, Tata Steel, Reliance
    - Mechanical Engineering
    - Civil Engineering  
    - Electrical Engineering
    - Topics: CAD, Materials, Thermodynamics, Circuits
+
 
 ### SPECIALIZED ENGINEERING (6 tracks)
 7. **Quant & Finance** - Tower Research, Optiver, Deutsche Bank
@@ -28,6 +32,7 @@
     - PSU recruitment
 
 ---
+
 
 ## Status: ✅ ALL IMPLEMENTED
 
@@ -45,38 +50,50 @@ The screenshot showing only 3 tracks is because:
 
 ---
 
+
 ## Company Coverage:
+
 
 ### Indian Service Companies
 - TCS, Infosys, Wipro, HCL, Tech Mahindra
 
+
 ### Product Companies
 - Amazon, Flipkart, Google, Microsoft
+
 
 ### Indian Startups
 - Razorpay, CRED, Swiggy, Zomato, Ola, Myntra, PhonePe, Zerodha, Paytm
 
+
 ### Core/Manufacturing
 - L&T, Tata Steel, Reliance
+
 
 ### Finance/Trading
 - Tower Research, Optiver, Deutsche Bank
 
+
 ### Crypto/Web3
 - WazirX, CoinDCX, Polygon
+
 
 ### Government
 - ISRO, DRDO, BHEL, NTPC
 
+
 ### Telecom
 - Jio, Airtel
+
 
 ### Analytics
 - Fractal, Mu Sigma, Tiger Analytics
 
 ---
 
+
 ## Topic Coverage by Discipline:
+
 
 ### Chemical Engineering ✓
 - Process Design, Thermodynamics
@@ -84,17 +101,20 @@ The screenshot showing only 3 tracks is because:
 - Heat Transfer, Mass Transfer
 - Reactors, Distillation, Safety
 
+
 ### Mechanical Engineering ✓
 - CAD/CAM, Manufacturing
 - Strength of Materials
 - Thermal Engineering, IC Engines
 - Machine Design, Robotics
 
+
 ### Civil Engineering ✓
 - Structural Analysis
 - RCC & Steel Design
 - Soil Mechanics, Surveying
 - Transportation, Water Resources
+
 
 ### Electrical Engineering ✓
 - Circuit Theory, Machines
@@ -103,6 +123,7 @@ The screenshot showing only 3 tracks is because:
 - Instrumentation, PLC
 
 ---
+
 
 ## Question Bank Size:
 
@@ -118,6 +139,7 @@ Breakdown:
 **Verification:** Math already documented in `ROLE_SPECIFIC_QUESTIONS.md`
 
 ---
+
 
 ## ✓ Confirmed Working For:
 

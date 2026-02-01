@@ -1,6 +1,8 @@
 # COMPLETE SETUP GUIDE - NEUROPREP AI
 
+
 ## **STEP-BY-STEP SETUP**
+
 
 ### **STEP 1: Configure Environment Variables**
 
@@ -9,20 +11,30 @@
 **Add these lines:**
 
 ```bash
+
 # ========================================
+
 # SUPABASE CONFIGURATION (Multiplayer)
+
 # ========================================
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
 
+
 # ========================================
+
 # ELEVENLABS (Voice Cloning) - OPTIONAL
+
 # Get key from: https://elevenlabs.io
+
 # ========================================
 ELEVENLABS_API_KEY=your_elevenlabs_key_here
 
+
 # ========================================
+
 # OPENAI (Already configured)
+
 # ========================================
 OPENAI_API_KEY=your_existing_openai_key
 ```
@@ -30,6 +42,7 @@ OPENAI_API_KEY=your_existing_openai_key
 **Save the file!**
 
 ---
+
 
 ### **STEP 2: Setup Supabase Database**
 
@@ -48,12 +61,15 @@ OPENAI_API_KEY=your_existing_openai_key
 
 ---
 
+
 ### **STEP 3: Restart Dev Server**
 
 **Action:** Restart your development server
 
 ```powershell
+
 # Stop current server (Ctrl+C)
+
 # Then restart:
 cd frontend
 npm run dev
@@ -62,6 +78,7 @@ npm run dev
 **Why?** Environment variables only load on server start.
 
 ---
+
 
 ### **STEP 4: Verify Everything Works**
 
@@ -91,6 +108,7 @@ npm run dev
 
 ---
 
+
 ## **WHAT'S ENABLED NOW**
 
 With Supabase configured:
@@ -117,7 +135,9 @@ Already working:
 
 ---
 
+
 ## **DEMO PREPARATION**
+
 
 ### **For Multiplayer Demo:**
 
@@ -138,6 +158,7 @@ Already working:
 
 **Judge Reaction:** 🤯
 
+
 ### **For Judge Mode Demo:**
 
 **Setup:**
@@ -152,7 +173,9 @@ Already working:
 
 ---
 
+
 ## **TROUBLESHOOTING**
+
 
 ### **Issue: Multiplayer not connecting**
 
@@ -163,6 +186,7 @@ Already working:
 - Check browser console for errors
 - Ensure both users on same network (for WebRTC)
 
+
 ### **Issue: Voice cloning fails**
 
 **Fix:**
@@ -171,6 +195,7 @@ Already working:
 - Verify API key is valid (check elevenlabs.io)
 - Ensure recording is 30+ seconds
 - Check browser console for errors
+
 
 ### **Issue: Database table not found**
 
@@ -181,6 +206,7 @@ Already working:
 - Verify `dojo_rooms` table exists
 
 ---
+
 
 ## **FINAL CHECKLIST**
 
@@ -197,6 +223,7 @@ Already working:
 - [ ] WiFi network identified
 
 ---
+
 
 ## **YOU'RE READY!**
 

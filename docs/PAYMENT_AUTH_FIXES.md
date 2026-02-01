@@ -1,6 +1,8 @@
 # 🚨 CRITICAL ISSUES TO FIX
 
+
 ## User-Reported Problems (Testing in Chrome):
+
 
 ### 1. ❌ Payment Terminal - UPI Not Working
 **Issue:** Payment collection system not accepting UPI payments  
@@ -17,6 +19,7 @@
 **Priority:** CRITICAL ⚠️
 
 ---
+
 
 ### 2. ❌ SQL/Database Not Working
 **Issue:** User registration/data not persisting  
@@ -40,6 +43,7 @@
 
 ---
 
+
 ### 3. ❌ GitHub/LinkedIn OAuth Not Working
 **Issue:** Social login buttons don't work  
 **Current State:** Buttons exist but no integration
@@ -58,6 +62,7 @@
 **Priority:** HIGH
 
 ---
+
 
 ### 4. ❌ Payment Collection Not Working
 **Issue:** Users can't actually pay for premium  
@@ -81,7 +86,9 @@
 
 ---
 
+
 ## Implementation Plan:
+
 
 ### Phase 1: Database Setup (30 min)
 ```sql
@@ -110,6 +117,7 @@ CREATE TABLE payments (
 );
 ```
 
+
 ### Phase 2: Razorpay Integration (1 hour)
 ```typescript
 // Install: npm install razorpay
@@ -130,6 +138,7 @@ const order = await razorpay.orders.create({
   payment_capture: 1
 });
 ```
+
 
 ### Phase 3: UPI Payment Flow (1 hour)
 ```typescript
@@ -164,6 +173,7 @@ const options = {
 const rzp = new window.Razorpay(options);
 rzp.open();
 ```
+
 
 ### Phase 4: OAuth Setup (1 hour)
 ```typescript
@@ -201,25 +211,31 @@ export const authOptions = {
 
 ---
 
+
 ## Environment Variables Needed:
 
 ```env
+
 # Razorpay (get from https://dashboard.razorpay.com)
 RAZORPAY_KEY_ID=rzp_test_...
 RAZORPAY_KEY_SECRET=...
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
 
+
 # GitHub OAuth (create at https://github.com/settings/developers)
 GITHUB_ID=...
 GITHUB_SECRET=...
+
 
 # LinkedIn OAuth (create at https://www.linkedin.com/developers)
 LINKEDIN_ID=...
 LINKEDIN_SECRET=...
 
+
 # NextAuth
 NEXTAUTH_URL=https://your-domain.vercel.app
 NEXTAUTH_SECRET=<random-string>
+
 
 # Supabase (already have)
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
@@ -227,6 +243,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
 ---
+
 
 ## Testing Checklist:
 

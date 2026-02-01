@@ -1,6 +1,8 @@
 # MULTIPLAYER DOJO - COMPLETE IMPLEMENTATION
 
+
 ## **WHAT WE JUST BUILT**
+
 
 ### **1. WebRTC P2P Infrastructure:**
 
@@ -9,6 +11,7 @@
  Room creation & joining system  
  Automatic peer discovery  
 
+
 ### **2. Cyberpunk Arena UI:**
 
  **Split-screen layout** (Code + Video)  
@@ -16,6 +19,7 @@
  **Real-time code sync** (500ms debounce)  
  **Dual video feeds** (local + remote)  
  **Synergy Meter** (glows gold at 100%)  
+
 
 ### **3. Smart Features:**
 
@@ -26,13 +30,16 @@
 
 ---
 
+
 ## **SETUP (3 STEPS)**
+
 
 ### **Step 1: Create Supabase Project**
 
 1. Go to <https://supabase.com>
 2. Create new project (free tier)
 3. Copy Project URL + Anon Key
+
 
 ### **Step 2: Create Database Table**
 
@@ -51,15 +58,18 @@ create table dojo_rooms (
 alter publication supabase_realtime add table dojo_rooms;
 ```
 
+
 ### **Step 3: Add Environment Variables**
 
 ```bash
+
 # In frontend/.env.local
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 ---
+
 
 ## **DEMO FLOW**
 
@@ -69,6 +79,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 **Both type >50 WPM** → GOLD GLOW!
 
 ---
+
 
 ## **SCORE**
 

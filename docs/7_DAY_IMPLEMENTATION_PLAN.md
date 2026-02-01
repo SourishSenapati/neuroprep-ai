@@ -7,7 +7,9 @@
 
 ---
 
+
 ## DAY-BY-DAY BREAKDOWN
+
 
 ### **DAY 1-2: AI Voice Clone** (+8 points)
 
@@ -26,6 +28,7 @@
 
 ```bash
 npm install @11ty/eleventy-plugin-syntaxhighlight
+
 # Use ElevenLabs free tier: 10,000 chars/month
 ```
 
@@ -40,6 +43,7 @@ npm install @11ty/eleventy-plugin-syntaxhighlight
 **Deliverable:** Working voice clone demo
 
 ---
+
 
 ### **DAY 3-4: Multiplayer Mode** (+10 points)
 
@@ -58,6 +62,7 @@ npm install @11ty/eleventy-plugin-syntaxhighlight
 
 ```bash
 npm install @supabase/supabase-js socket.io-client
+
 # Supabase free tier: Unlimited connections
 ```
 
@@ -72,6 +77,7 @@ npm install @supabase/supabase-js socket.io-client
 **Deliverable:** 2-player interview session
 
 ---
+
 
 ### **DAY 5-7: AR Face Tracking** (+12 points)
 
@@ -90,6 +96,7 @@ npm install @supabase/supabase-js socket.io-client
 
 ```bash
 npm install @mediapipe/face_mesh @mediapipe/camera_utils
+
 # Google MediaPipe: Free + runs in browser
 ```
 
@@ -105,9 +112,12 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 ---
 
+
 ## IMPLEMENTATION GUIDES (DETAILED)
 
+
 ### **FEATURE 1: AI VOICE CLONE**
+
 
 #### **Architecture:**
 
@@ -122,6 +132,7 @@ Use Clone for Interview AI
   ↓
 Text → Speech (in your voice!)
 ```
+
 
 #### **Code Scaffold:**
 
@@ -262,7 +273,9 @@ export async function POST(req: Request) {
 
 ---
 
+
 ### **FEATURE 2: MULTIPLAYER MODE**
+
 
 #### **Architecture:**
 
@@ -277,6 +290,7 @@ Supabase Realtime Sync
   ↓
 Both see same interview
 ```
+
 
 #### **Code Scaffold:**
 
@@ -403,7 +417,9 @@ alter publication supabase_realtime add table interview_rooms;
 
 ---
 
+
 ### **FEATURE 3: AR FACE TRACKING**
+
 
 #### **Architecture:**
 
@@ -416,6 +432,7 @@ Three.js Overlay
   ↓
 Color by stress level
 ```
+
 
 #### **Code Scaffold:**
 
@@ -542,7 +559,9 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 ---
 
+
 ## SUCCESS CHECKLIST
+
 
 ### **Week Plan:**
 
@@ -572,7 +591,9 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 ---
 
+
 ## MINIMUM VIABLE VERSIONS
+
 
 ### **If Short on Time:**
 
@@ -599,6 +620,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 ---
 
+
 ## DEPLOYMENT NOTES
 
 **ElevenLabs Free Tier:**
@@ -620,6 +642,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 - Works offline
 
 ---
+
 
 ## FINAL SCORE PROJECTION
 
@@ -647,6 +670,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 - **Score: 128/100**
 
 ---
+
 
 ## TIPS FOR SUCCESS
 

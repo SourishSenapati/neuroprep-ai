@@ -1,9 +1,12 @@
 # NPM BUILD FIX - FINAL ATTEMPT
 
+
 ## Strategy: Fix Without Removing Features
+
 
 ### Issue Found
 **judge/login page** uses `window.innerWidth` during render → "window is not defined" error
+
 
 ### Solution Applied
 
@@ -28,6 +31,7 @@
    - Minimal config for stability
 
 ---
+
 
 ## Building Now
 

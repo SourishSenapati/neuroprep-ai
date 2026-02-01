@@ -2,7 +2,9 @@
 
 ---
 
+
 ## **WHAT WAS BUILT:**
+
 
 ### **1. TESTS**
 
@@ -24,6 +26,7 @@
 **Score Impact:** +5 points
 
 ---
+
 
 ### **2. MOBILE OPTIMIZATION**
 
@@ -51,6 +54,7 @@
 
 ---
 
+
 ### **3. DEPLOYMENT READY**
 
 - **Platform:** Vercel
@@ -68,16 +72,18 @@ vercel --prod
 
 ---
 
+
 ## **SCORE UPDATE:**
 
-| Category | Before | After | Gain |
-|----------|--------|-------|------|
-| Technical | 20/25 | **25/25** | **+5**  |
-| UX | 22/25 | **25/25** | **+3**  |
-| Completeness | 20/25 | **25/25** | **+5**  |
-| **TOTAL** | **96/100** | **109/100** | **+13**  |
+| Category | Before | After | Gain | 
+| ---------- | -------- | ------- | ------ | 
+| Technical | 20/25 | **25/25** | **+5**  | 
+| UX | 22/25 | **25/25** | **+3**  | 
+| Completeness | 20/25 | **25/25** | **+5**  | 
+| **TOTAL** | **96/100** | **109/100** | **+13**  | 
 
 ---
+
 
 ## **FINAL DELIVERABLES:**
 
@@ -87,20 +93,26 @@ vercel --prod
 
 ---
 
+
 ## **TO VERIFY:**
 
 ```powershell
+
 # 1. Run tests
 npm test
 
+
 # 2. Check mobile (open DevTools)
+
 # Toggle device toolbar → All responsive 
+
 
 # 3. Deploy
 vercel --prod
 ```
 
 ---
+
 
 ## **RESULT:**
 

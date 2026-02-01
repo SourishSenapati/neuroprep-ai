@@ -1,21 +1,28 @@
 # 🗄️ MYSQL IMPLEMENTATION #2 - Traditional MySQL + Sequelize
 
+
 ## **Complete MySQL Setup with Sequelize ORM**
 
 ---
 
+
 ## **1. Install MySQL**
+
 
 ### **Option A: Local MySQL**
 ```bash
+
 # Windows (using Chocolatey)
 choco install mysql
 
+
 # Or download from: https://dev.mysql.com/downloads/mysql/
+
 
 # Start MySQL
 net start mysql
 ```
+
 
 ### **Option B: Docker MySQL**
 ```bash
@@ -26,12 +33,14 @@ docker run --name neuroprep-mysql \
   -d mysql:8.0
 ```
 
+
 ### **Option C: Railway (FREE Cloud MySQL)**
 1. Go to https://railway.app
 2. New Project → MySQL
 3. Copy connection string
 
 ---
+
 
 ## **2. Install Dependencies**
 
@@ -42,10 +51,12 @@ npm install -D @types/sequelize
 
 ---
 
+
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
 ```env
+
 # MySQL
 DB_HOST=localhost
 DB_PORT=3306
@@ -53,11 +64,13 @@ DB_USER=root
 DB_PASSWORD=root
 DB_NAME=neuroprep
 
+
 # Or use connection URL
 DATABASE_URL="mysql://root:root@localhost:3306/neuroprep"
 ```
 
 ---
+
 
 ## **4. Database Configuration**
 
@@ -88,6 +101,7 @@ export default sequelize;
 ```
 
 ---
+
 
 ## **5. Define Models**
 
@@ -430,6 +444,7 @@ export { sequelize };
 
 ---
 
+
 ## **6. Database Service**
 
 Create `frontend/lib/mysql-service.ts`:
@@ -645,6 +660,7 @@ accuracy,
 
 ---
 
+
 ## **7. Initialize on Server Start**
 
 Create `frontend/lib/init-db.ts`:
@@ -663,6 +679,7 @@ export async function ensureDatabase() {
 ```
 
 ---
+
 
 ## **8. API Route Example**
 
@@ -692,5 +709,6 @@ export async function POST(request: Request) {
 ```
 
 ---
+
 
 ## **COMPLETE MYSQL + SEQUELIZE SETUP! 🗄️**

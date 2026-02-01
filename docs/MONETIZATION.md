@@ -7,7 +7,9 @@
 
 ---
 
+
 ## WHY THIS WINS
+
 
 ### **Hackathon Judging Criteria:**
 
@@ -32,7 +34,9 @@
 
 ---
 
+
 ## WHAT YOU JUST GOT
+
 
 ### **1. Freemium Pricing Model**
 
@@ -57,6 +61,7 @@
 - Priority Support
 - Custom Trading Cards
 - Interview History & Analytics
+
 
 ### **2. Indian Market Optimization**
 
@@ -85,6 +90,7 @@
 - UPI Auto-Pay for recurring subscriptions
 - Cancel anytime (no lock-in)
 
+
 ### **3. Simulated Payment Flow**
 
 **User Journey:**
@@ -104,7 +110,9 @@
 
 ---
 
+
 ## DEMO STRATEGY
+
 
 ### **During Pitch:**
 
@@ -140,7 +148,9 @@
 
 ---
 
+
 ## PRICING STRATEGY (Explained for Judges)
+
 
 ### **Why ₹99/month?**
 
@@ -152,12 +162,12 @@
 
 **Competitive Analysis:**
 
-| Service | Price/Month | Our Position |
-|---------|-------------|--------------|
-| Coursera Plus | ₹4,999/year (₹416/mo) | 4x cheaper  |
-| LeetCode Premium | $35 (~₹2,900/mo) | 29x cheaper  |
-| InterviewBit Pro | ₹2,999/year (₹250/mo) | 2.5x cheaper  |
-| **NeuroPrep Pro** | **₹99/month** | **Best Value**  |
+| Service | Price/Month | Our Position | 
+| --------- | ------------- | -------------- | 
+| Coursera Plus | ₹4,999/year (₹416/mo) | 4x cheaper  | 
+| LeetCode Premium | $35 (~₹2,900/mo) | 29x cheaper  | 
+| InterviewBit Pro | ₹2,999/year (₹250/mo) | 2.5x cheaper  | 
+| **NeuroPrep Pro** | **₹99/month** | **Best Value**  | 
 
 **Conversion Math:**
 
@@ -171,7 +181,9 @@
 
 ---
 
+
 ## USAGE LIMITS (Paywall Triggers)
+
 
 ### **Free Tier Limits:**
 
@@ -199,6 +211,7 @@
 - 50-min Pro sessions (locked)
 - Message: "Upgrade for longer focus sessions!"
 
+
 ### **How Limits Work:**
 
 ```typescript
@@ -224,7 +237,9 @@ useNemesisMode: () => {
 
 ---
 
+
 ## MODAL DESIGN FEATURES
+
 
 ### **Visual Excellence:**
 
@@ -263,7 +278,9 @@ useNemesisMode: () => {
 
 ---
 
+
 ## PAYMENT GATEWAY SIMULATION
+
 
 ### **What Gets "Processed":**
 
@@ -303,7 +320,9 @@ const handleUpgrade = async () => {
 
 ---
 
+
 ## SUSTAINABILITY PROOF
+
 
 ### **Hackathon Rubric:**
 
@@ -329,7 +348,9 @@ const handleUpgrade = async () => {
 
 ---
 
+
 ## INTEGRATION POINTS
+
 
 ### **Where to Trigger Paywall:**
 
@@ -378,7 +399,9 @@ const handleRoast = () => {
 
 ---
 
+
 ## COMPETITIVE POSITIONING
+
 
 ### **Interview Prep Market (India):**
 
@@ -412,7 +435,9 @@ const handleRoast = () => {
 
 ---
 
+
 ## PREMIUM FEATURES (Future Expansion)
+
 
 ### **Tier 3: Enterprise (₹499/month)**
 
@@ -427,6 +452,7 @@ For companies training employees:
 **B2B Revenue Potential:** 10x higher margins
 
 ---
+
 
 ## TESTING CHECKLIST
 
@@ -456,7 +482,9 @@ For companies training employees:
 
 ---
 
+
 ## JUDGE APPEAL
+
 
 ### **What Judges Love:**
 
@@ -475,6 +503,7 @@ For companies training employees:
 5. **Technical Execution**
    - "Smooth payment simulation"
 
+
 ### **Scoring Impact:**
 
 **Before Monetization:**
@@ -490,6 +519,7 @@ For companies training employees:
 **Total Score Gain:** +8 to +10 points
 
 ---
+
 
 ## FINAL NOTES
 

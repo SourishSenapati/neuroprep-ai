@@ -7,7 +7,9 @@
 
 ---
 
+
 ## WHY THIS WINS
+
 
 ### **Judge's Perspective:**
 
@@ -30,7 +32,9 @@
 
 ---
 
+
 ## WHAT YOU JUST GOT
+
 
 ### **1. Career Trading Card Generator**
 
@@ -44,6 +48,7 @@
 - QR Code linking back to app
 - Holographic corners + purple gradient
 - Professional trading card aesthetic
+
 
 ### **2. One-Click Social Sharing**
 
@@ -88,6 +93,7 @@
 - Opens Twitter intent URL
 - Downloads card for upload
 
+
 ### **3. HTML to Image Export**
 
 **Tech Stack:**
@@ -96,6 +102,7 @@
 - High quality (2x scale)
 - Preserves all styling
 - Works in browser (no server needed)
+
 
 ### **4. Skills Radar Chart**
 
@@ -112,6 +119,7 @@
 - Recharts library (production-grade)
 - Purple gradient fill
 
+
 ### **5. QR Code Deep Link**
 
 - Links to: `https://neuroprep-ai.vercel.app/judge/login`
@@ -121,7 +129,9 @@
 
 ---
 
+
 ## USER FLOW
+
 
 ### **Trigger Points:**
 
@@ -140,6 +150,7 @@
 - After hitting streak milestone
 - After Resume Roast completion
 
+
 ### **Share Flow:**
 
 1. **User clicks floating button**
@@ -154,7 +165,9 @@
 
 ---
 
+
 ## VIRAL MECHANICS
+
 
 ### **Why People Share:**
 
@@ -164,6 +177,7 @@
 4. **One-Click Easy** - No effort required
 5. **Pre-Written Copy** - Don't have to think
 6. **Social Proof** - Others see progress
+
 
 ### **Growth Loop:**
 
@@ -183,13 +197,16 @@ User completes task
 
 ---
 
+
 ## CARD DESIGN SPECIFICATIONS
+
 
 ### **Dimensions:**
 
 - **Aspect Ratio:** 3:4 (trading card standard)
 - **Resolution:** 2x scale (high quality)
 - **Format:** PNG with transparency support
+
 
 ### **Visual Elements:**
 
@@ -227,7 +244,9 @@ User completes task
 
 ---
 
+
 ## JUDGE APPEAL
+
 
 ### **Demonstrates:**
 
@@ -252,6 +271,7 @@ User completes task
    - Status symbols drive adoption
    - One-click reduces friction
 
+
 ### **Impact on Score:**
 
 **Without Viral Feature:**
@@ -267,7 +287,9 @@ User completes task
 
 ---
 
+
 ## REAL-WORLD EXAMPLES
+
 
 ### **Successful Viral Artifacts:**
 
@@ -288,7 +310,9 @@ User completes task
 
 ---
 
+
 ## DEMO STRATEGY
+
 
 ### **In Your Pitch:**
 
@@ -314,6 +338,7 @@ This isn't just an app. It's a growth engine."
 
 ---
 
+
 ## TESTING CHECKLIST
 
 - [ ] Click floating share button (bottom-right)
@@ -336,7 +361,9 @@ This isn't just an app. It's a growth engine."
 
 ---
 
+
 ## TECHNICAL DETAILS
+
 
 ### **Dependencies Added:**
 
@@ -347,6 +374,7 @@ npm install html2canvas qrcode.react recharts
 - `html2canvas` - DOM to canvas export
 - `qrcode.react` - QR code SVG generation
 - `recharts` - Professional charting library
+
 
 ### **Files Created:**
 
@@ -366,7 +394,9 @@ npm install html2canvas qrcode.react recharts
 
 ---
 
+
 ## PREMIUM FEATURES (Future)
+
 
 ### **Easy Additions:**
 
@@ -398,7 +428,9 @@ npm install html2canvas qrcode.react recharts
 
 ---
 
+
 ## METRICS TO TRACK (Post-Launch)
+
 
 ### **Viral Metrics:**
 
@@ -416,6 +448,7 @@ npm install html2canvas qrcode.react recharts
 
 ---
 
+
 ## SUCCESS CRITERIA
 
 **For Hackathon:**
@@ -432,7 +465,9 @@ npm install html2canvas qrcode.react recharts
 
 ---
 
+
 ## COMPETITIVE EDGE
+
 
 ### **Hackathon Projects (Typical):**
 
@@ -440,6 +475,7 @@ npm install html2canvas qrcode.react recharts
 - Manual sharing only
 - No viral mechanics
 - No growth strategy
+
 
 ### **Your Project:**
 
@@ -451,6 +487,7 @@ npm install html2canvas qrcode.react recharts
 **Difference:** Other teams built MVPs. You built a **PRODUCT**.
 
 ---
+
 
 ## FINAL IMPACT
 
@@ -468,6 +505,7 @@ npm install html2canvas qrcode.react recharts
 **Win Probability:** +25%
 
 ---
+
 
 ## DEPLOYMENT NOTES
 

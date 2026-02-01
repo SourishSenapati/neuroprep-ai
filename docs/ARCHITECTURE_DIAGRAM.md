@@ -1,5 +1,6 @@
 # NeuroPrep AI - System Architecture Diagram
 
+
 ## Visual Architecture
 
 ```mermaid
@@ -94,7 +95,9 @@ graph TB
 
 ---
 
+
 ## Data Flow Diagrams
+
 
 ### 1. Interview Session Flow
 
@@ -126,6 +129,7 @@ sequenceDiagram
     B->>DB: Save transcript
 ```
 
+
 ### 2. Resume Upload & Auto-Fill Flow
 
 ```mermaid
@@ -150,6 +154,7 @@ sequenceDiagram
     U->>S: Adjust & Start
 ```
 
+
 ### 3. Question Generation Flow
 
 ```mermaid
@@ -172,7 +177,9 @@ flowchart TD
 
 ---
 
+
 ## Component Architecture
+
 
 ### Frontend Component Hierarchy
 
@@ -199,6 +206,7 @@ graph TD
     CodeEd --> Monaco[Monaco Editor<br/>Syntax Highlighting]
     CodeEd --> PyEngine[Pyodide Engine<br/>Python Execution]
 ```
+
 
 ### Backend Module Architecture
 
@@ -228,40 +236,44 @@ graph LR
 
 ---
 
+
 ## Technology Stack Breakdown
+
 
 ### Frontend Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Framework** | Next.js 15 | React framework, SSR/SSG, API routes |
-| **Language** | TypeScript 5.3 | Type safety, developer experience |
-| **Styling** | Tailwind CSS 3.4 | Utility-first CSS, responsive design |
-| **Animations** | Framer Motion 11.18 | Chaos→Order metaphor, smooth transitions |
-| **Code Editor** | Monaco Editor 4.6 | VS Code component, syntax highlighting |
-| **Python Runtime** | Pyodide 0.25 | WebAssembly Python interpreter |
-| **3D Graphics** | Three.js 0.160 | 3D visualizations (optional) |
-| **Real-time** | Socket.io Client 4.8 | Bi-directional WebSocket events |
-| **Auth** | NextAuth 4.24 | Authentication, session management |
-| **State Management** | React Hooks + Zustand | Local & global state |
+| Layer | Technology | Purpose | 
+| ------- | ----------- | --------- | 
+| **Framework** | Next.js 15 | React framework, SSR/SSG, API routes | 
+| **Language** | TypeScript 5.3 | Type safety, developer experience | 
+| **Styling** | Tailwind CSS 3.4 | Utility-first CSS, responsive design | 
+| **Animations** | Framer Motion 11.18 | Chaos→Order metaphor, smooth transitions | 
+| **Code Editor** | Monaco Editor 4.6 | VS Code component, syntax highlighting | 
+| **Python Runtime** | Pyodide 0.25 | WebAssembly Python interpreter | 
+| **3D Graphics** | Three.js 0.160 | 3D visualizations (optional) | 
+| **Real-time** | Socket.io Client 4.8 | Bi-directional WebSocket events | 
+| **Auth** | NextAuth 4.24 | Authentication, session management | 
+| **State Management** | React Hooks + Zustand | Local & global state | 
+
 
 ### Backend Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Runtime** | Node.js 20+ | JavaScript server runtime |
-| **Framework** | Express 4.18 | Web framework, middleware |
-| **Language** | TypeScript 5.3 | Type safety, maintainability |
-| **AI Integration** | OpenAI API, Anthropic | Question generation, evaluation |
-| **Resume Parsing** | pdf-parse 1.1 | PDF text extraction **(NEW!)** |
-| **Database** | SQLite 3 | Embedded SQL database |
-| **Cache** | Redis (optional) | Session caching, pub/sub |
-| **Real-time** | Socket.io Server 4.8 | WebSocket server |
-| **Validation** | Zod 3.22 | Runtime type validation |
-| **Security** | Helmet, CORS | HTTP headers, cross-origin |
-| **Payment** | Stripe 14.25 | Subscription billing |
+| Layer | Technology | Purpose | 
+| ------- | ----------- | --------- | 
+| **Runtime** | Node.js 20+ | JavaScript server runtime | 
+| **Framework** | Express 4.18 | Web framework, middleware | 
+| **Language** | TypeScript 5.3 | Type safety, maintainability | 
+| **AI Integration** | OpenAI API, Anthropic | Question generation, evaluation | 
+| **Resume Parsing** | pdf-parse 1.1 | PDF text extraction **(NEW!)** | 
+| **Database** | SQLite 3 | Embedded SQL database | 
+| **Cache** | Redis (optional) | Session caching, pub/sub | 
+| **Real-time** | Socket.io Server 4.8 | WebSocket server | 
+| **Validation** | Zod 3.22 | Runtime type validation | 
+| **Security** | Helmet, CORS | HTTP headers, cross-origin | 
+| **Payment** | Stripe 14.25 | Subscription billing | 
 
 ---
+
 
 ## Deployment Architecture
 
@@ -323,6 +335,7 @@ graph TB
 
 ---
 
+
 ## Security Architecture
 
 ```mermaid
@@ -351,7 +364,9 @@ graph TD
 
 ---
 
+
 ## Performance Metrics
+
 
 ### Frontend Optimization
 
@@ -366,17 +381,19 @@ pie title Bundle Size Distribution (Target <500KB)
     "Other Dependencies" : 90
 ```
 
+
 ### Backend Performance
 
-| Metric | Target | Actual | Status |
-|--------|--------|--------|--------|
-| Question Generation | <50ms | ~30ms |  Exceeded |
-| AI Streaming (First Token) | <500ms | ~400ms |  Met |
-| Database Query | <10ms | ~5ms |  Exceeded |
-| Resume Parsing | <2s | ~1.5s |  Met |
-| Session Creation | <100ms | ~80ms |  Met |
+| Metric | Target | Actual | Status | 
+| -------- | -------- | -------- | -------- | 
+| Question Generation | <50ms | ~30ms |  Exceeded | 
+| AI Streaming (First Token) | <500ms | ~400ms |  Met | 
+| Database Query | <10ms | ~5ms |  Exceeded | 
+| Resume Parsing | <2s | ~1.5s |  Met | 
+| Session Creation | <100ms | ~80ms |  Met | 
 
 ---
+
 
 ## Future Enhancements
 
@@ -398,6 +415,7 @@ timeline
 ```
 
 ---
+
 
 ## Diagram Export
 
