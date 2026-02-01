@@ -78,6 +78,7 @@ export default function RegistrationModal({ isOpen, onClose, forced = false }: R
               >
                  <button 
                     onClick={onClose}
+                    aria-label="Close"
                     className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
                  >
                     <X className="w-6 h-6" />
@@ -130,7 +131,7 @@ export default function RegistrationModal({ isOpen, onClose, forced = false }: R
               exit={{ opacity: 0, x: 50 }}
               className="fixed bottom-4 right-4 z-50 w-80 bg-[#0a0a0a] border border-white/10 shadow-2xl p-4"
             >
-              <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-white">
+              <button onClick={onClose} aria-label="Close" className="absolute top-2 right-2 text-gray-500 hover:text-white">
                 <X className="w-4 h-4" />
               </button>
               <h3 className="text-sm font-bold text-white uppercase mb-1">Save Progress?</h3>

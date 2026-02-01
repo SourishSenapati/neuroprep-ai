@@ -1,9 +1,11 @@
 # NeuroPrep AI - Dark Green Theme Design System
 
 
+
 ## Official Color Palette
 
 This is the authoritative color scheme for NeuroPrep AI, applied throughout the entire application.
+
 
 
 ### Primary Colors
@@ -19,6 +21,7 @@ This is the authoritative color scheme for NeuroPrep AI, applied throughout the 
 ```text
 
 
+
 ### Extended Palette
 
 
@@ -29,7 +32,9 @@ This is the authoritative color scheme for NeuroPrep AI, applied throughout the 
 ```text
 
 
+
 ## Usage Guidelines
+
 
 
 ### 60-30-10 Rule Applied
@@ -39,7 +44,9 @@ This is the authoritative color scheme for NeuroPrep AI, applied throughout the 
 - **10% Accents:** `#4ADE80` (buttons, links, highlights)
 
 
+
 ### Component Examples
+
 
 
 #### Buttons
@@ -50,12 +57,14 @@ className="bg-[#4ADE80]/10 border border-[#4ADE80] text-[#4ADE80] hover:bg-[#4AD
 ```text
 
 
+
 #### Cards
 
 ```tsx
 className="bg-[#0a0a0a] border border-[#1F1F1F]"
 
 ```text
+
 
 
 #### Headings
@@ -66,12 +75,14 @@ className="text-[#F0F0F0]"
 ```text
 
 
+
 #### Body Text
 
 ```tsx
 className="text-[#A3A3A3]"
 
 ```text
+
 
 
 ### Ambient Glow (Radial Gradients)
@@ -82,11 +93,13 @@ style={{ background: 'radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(
 ```text
 
 
+
 ## Accessibility
 
 - ✅ WCAG AA compliant contrast ratios
 - ✅ Primary text (#F0F0F0 on #050505): 17.38:1
 - ✅ Accent green (#4ADE80 on #050505): 11.24:1
+
 
 
 ## Implementation Status

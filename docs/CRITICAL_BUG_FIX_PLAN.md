@@ -1,6 +1,7 @@
 # 🚨 CRITICAL BUG FIX + ENHANCEMENTS
 
 
+
 ## Issue 1: Wrong Questions for Selected Role ⚠️ CRITICAL
 
 **User Report:** Selected "Chemical Engineer Level 5" but got tech questions about latency/system design
@@ -10,6 +11,7 @@
 **Fix Required:** Update backend to generate role-specific questions.
 
 **Temporary Workaround (Frontend):** Map role IDs to full role descriptions
+
 
 
 ### Role ID Mapping
@@ -37,6 +39,7 @@ CS National Qualifier Test - programming, aptitude, reasoning',
 ---
 
 
+
 ## Issue 2: Supabase Integration for Real Data
 
 **Credentials Provided:**
@@ -50,6 +53,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 **Required Changes:**
 
 
+
 ### 1. Update `.env.local` (User must add manually - gitignored)
 
 ```text
@@ -59,7 +63,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 ```text
 
 
+
 ### 2. Enable Supabase Client (already done in `/lib/supabase/client.ts`)
+
 
 
 ### 3. Create Supabase Tables
@@ -102,6 +108,7 @@ CREATE INDEX idx_profiles_city ON user_profiles(city);
 ```text
 
 
+
 ### 4. Update RealTimeAnalytics to pull from Supabase
 
 ```typescript
@@ -122,10 +129,12 @@ const { data: cityStats } = await supabase
 ---
 
 
+
 ## Issue 3: Mobile Optimization
 
-**Current:** Desktop-first  
+**Current:** Desktop-first
 **Required:** Mobile-first responsive
+
 
 
 ### Actions
@@ -137,6 +146,7 @@ const { data: cityStats } = await supabase
 5. **Hamburger menu** for navigation
 
 
+
 ### Key Files to Update
 - `app/globals-mobile.css` - enhance
 - `components/Dashboard.tsx` - responsive grid
@@ -145,6 +155,7 @@ const { data: cityStats } = await supabase
 - `app/layout.tsx` - mobile nav
 
 ---
+
 
 
 ## Issue 4: Dynamic Interview Responses
@@ -166,7 +177,7 @@ const { data: cityStats } = await supabase
 // Analyze user input
 const isShort = processedInput.length < 20;
 const isQuestion = processedInput.includes('?');
-const hasTechKeywords = /code|algorithm|system|design/i.test(processedInput);
+const hasTechKeywords = /code | algorithm | system | design/i.test(processedInput);
 
 // Dynamic responses based on context
 let aiResponse = '';
@@ -183,6 +194,7 @@ if (isShort && !isQuestion) {
 ---
 
 
+
 ## Priority Order
 
 1. **CRITICAL**: Fix role-based question generation (30 min)
@@ -191,6 +203,7 @@ if (isShort && !isQuestion) {
 4. **LOW**: Dynamic offline responses (1 hour)
 
 ---
+
 
 
 ## Deployment Steps

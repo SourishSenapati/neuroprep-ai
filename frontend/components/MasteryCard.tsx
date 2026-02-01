@@ -76,7 +76,7 @@ export default function MasteryCard({
             <p className="text-xs text-gray-500">Avg. Salary</p>
             <p className="font-mono text-[#F0F0F0]">{salaryRange}</p>
         </div>
-        <button className="p-2 rounded-full bg-[#4ADE80]/10 text-[#4ADE80] group-hover:bg-[#4ADE80] group-hover:text-black transition-all">
+        <button aria-label="View Details" className="p-2 rounded-full bg-[#4ADE80]/10 text-[#4ADE80] group-hover:bg-[#4ADE80] group-hover:text-black transition-all">
             <ArrowRight className="w-4 h-4" />
         </button>
       </div>

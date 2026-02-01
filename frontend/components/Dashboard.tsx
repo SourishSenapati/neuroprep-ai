@@ -124,7 +124,7 @@ export default function Dashboard({ onStartInterview }: DashboardProps) {
                  <Zap className="w-3 h-3 text-[#EAB308]" />
                  <span className="text-xs font-mono text-[#EAB308]">{xp} XP</span>
              </div>
-             <button onClick={() => setIsProfileOpen(true)} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#333] to-[#111] border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
+             <button onClick={() => setIsProfileOpen(true)} aria-label="User Profile" className="w-8 h-8 rounded-full bg-gradient-to-br from-[#333] to-[#111] border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors">
                  <User className="w-4 h-4 text-gray-400" />
              </button>
          </div>

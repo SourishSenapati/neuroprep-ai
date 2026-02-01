@@ -3,6 +3,7 @@
 To ensure **Authentication (NextAuth)** and **Payments (Razorpay)** work correctly on Vercel, you MUST configure the following Environment Variables in your Vercel Project Settings.
 
 
+
 ## 1. Vercel Project Settings > Environment Variables
 
 Add these keys:
@@ -20,11 +21,13 @@ Add these keys:
 ---
 
 
+
 ## 2. Authentication Logic (Configured)
 
 - **Provider**: NextAuth.js (Email + Google)
-- **Database Sync**: Defaulted to `demo` mode if backend is unreachable. 
+- **Database Sync**: Defaulted to `demo` mode if backend is unreachable.
 - **Production URL**: Configured to use `NEXT_PUBLIC_API_URL`.
+
 
 
 ## 3. Payment Logic (Configured)
@@ -34,9 +37,10 @@ Add these keys:
 - **Demo Mode**: Allows judges/users to complete the payment flow and see the "Pro" upgrade animation without a real backend transaction.
 
 
+
 ## 4. How to Verify
 
-1. **Login**: Click "Login" -> Try "demo@example.com" or Google. 
+1. **Login**: Click "Login" -> Try "demo@example.com" or Google.
   - *Result*: Should verify and show "Welcome back".
 2. **Upgrade**: Click "Upgrade/Pricing" -> Click "I have Paid".
   - *Result*: Should show confetti and gold "Pro" badge.

@@ -1,6 +1,8 @@
 # NeuroPrep AI - Windows Setup Guide
 
+
 ## 🚀 Quick Setup (5 Minutes)
+
 
 ### Step 1: Install Dependencies
 
@@ -10,6 +12,7 @@ setup.bat
 ```text
 
 This installs all dependencies for root, backend, and frontend.
+
 
 ### Step 2: Configure Environment
 
@@ -30,6 +33,7 @@ OPENAI_API_KEY=sk-proj-your-key-here
 
 ```text
 
+
 ### Step 3: Start Development Servers
 
 ```cmd
@@ -44,6 +48,7 @@ npm run dev
 
 ```text
 
+
 ### Step 4: Open Browser
 
 ```text
@@ -52,7 +57,9 @@ http://localhost:3000
 
 ```text
 
+
 ## 🔧 Manual Installation (If setup.bat Fails)
+
 
 ### Install Root Dependencies
 
@@ -60,6 +67,7 @@ http://localhost:3000
 npm install
 
 ```text
+
 
 ### Install Backend Dependencies
 
@@ -70,6 +78,7 @@ npm install --save-dev @types/express @types/node @types/cors typescript ts-node
 cd ..
 
 ```text
+
 
 ### Install Frontend Dependencies
 
@@ -82,6 +91,7 @@ cd ..
 
 ```text
 
+
 ### Install Dev Tools
 
 ```cmd
@@ -89,7 +99,9 @@ npm install --save-dev concurrently cypress jest ts-jest @types/jest vercel
 
 ```text
 
+
 ## 🧪 Running Tests
+
 
 ### Backend Tests
 
@@ -97,6 +109,7 @@ npm install --save-dev concurrently cypress jest ts-jest @types/jest vercel
 npx jest --config jest.config.js
 
 ```text
+
 
 ### E2E Tests
 
@@ -112,7 +125,9 @@ npx cypress open
 
 ```text
 
+
 ## 🚀 Deployment
+
 
 ### Install Vercel CLI
 
@@ -120,6 +135,7 @@ npx cypress open
 npm install -g vercel
 
 ```text
+
 
 ### Deploy
 
@@ -129,7 +145,9 @@ vercel --prod
 
 ```text
 
+
 ## 🐛 Troubleshooting
+
 
 ### Error: 'concurrently' is not recognized
 
@@ -138,12 +156,14 @@ npm install concurrently --save-dev
 
 ```text
 
+
 ### Error: 'jest' is not recognized
 
 ```cmd
 npm install jest ts-jest @types/jest --save-dev
 
 ```text
+
 
 ### Error: 'cypress' is not recognized
 
@@ -152,6 +172,7 @@ npm install cypress --save-dev
 
 ```text
 
+
 ### Port Already in Use
 
 ```cmd
@@ -159,6 +180,7 @@ netstat -ano | findstr :3001
 taskkill /PID <PID> /F
 
 ```text
+
 
 ### Clear Node Modules
 
@@ -173,6 +195,7 @@ setup.bat
 
 ```text
 
+
 ## 📦 Verify Installation
 
 ```cmd
@@ -186,11 +209,14 @@ npx cypress --version
 
 Expected:
 
+
 - Node: v18.x or higher
 - npm: v9.x or higher
 - All tools installed
 
+
 ## 🎯 Next Steps
+
 
 1. ✅ Dependencies installed
 2. ✅ Environment configured

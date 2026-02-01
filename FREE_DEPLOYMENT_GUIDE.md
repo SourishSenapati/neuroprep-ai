@@ -1,7 +1,9 @@
 # FREE DEPLOYMENT GUIDE - NeuroPrep AI
 
 
+
 ## ✅ Your Project is Now Fixed and Ready to Deploy
+
 
 
 ### Changes Made
@@ -15,7 +17,9 @@
 ---
 
 
+
 ## 🌐 FREE DEPLOYMENT OPTIONS
+
 
 
 ### Option 1: **Vercel** (Recommended - Easiest)
@@ -23,16 +27,20 @@
 **Free Tier:** Unlimited hobby projects, 100GB bandwidth/month
 
 
+
 #### Steps
 
 ```bash
+
 
 # Install Vercel CLI
 npm install -g vercel
 
 
+
 # Login to Vercel
 vercel login
+
 
 
 # Deploy Frontend
@@ -40,11 +48,13 @@ cd frontend
 vercel
 
 
-# Deploy Backend  
+
+# Deploy Backend
 cd ../backend
 vercel
 
 ```text
+
 
 
 #### Environment Variables (Set in Vercel Dashboard)
@@ -67,9 +77,11 @@ vercel
 ---
 
 
+
 ### Option 2: **Render.com**
 **Best for:** Backend services with databases
 **Free Tier:** 750 hours/month, auto-sleep after 15 min inactivity
+
 
 
 #### Steps
@@ -85,9 +97,11 @@ vercel
 ---
 
 
+
 ### Option 3: **Railway.app**
 **Best for:** Quick deployments with databases
 **Free Tier:** $5 credit/month, ~500 hours
+
 
 
 #### Steps
@@ -101,21 +115,26 @@ vercel
 ---
 
 
+
 ### Option 4: **Netlify** (Frontend only)
 **Best for:** Static frontend hosting
 **Free Tier:** 100GB bandwidth/month
+
 
 
 #### Steps for Frontend
 
 ```bash
 
+
 # Install Netlify CLI
 npm install -g netlify-cli
 
 
+
 # Login
 netlify login
+
 
 
 # Deploy from frontend folder
@@ -129,21 +148,26 @@ For Backend: Use Render.com or Railway.app
 ---
 
 
+
 ### Option 5: **Fly.io**
 **Best for:** Long-running backend services
 **Free Tier:** 3 VMs with 256MB RAM each
+
 
 
 #### Steps
 
 ```bash
 
+
 # Install Fly CLI
+
 
 # Windows: iwr https://fly.io/install.ps1 -useb | iex
 
 #Login
 fly auth login
+
 
 
 # Deploy Backend
@@ -155,7 +179,9 @@ fly launch
 ---
 
 
+
 ## 🎯  QUICKEST PATH (< 5 minutes)
+
 
 
 ### Vercel Deployment
@@ -163,12 +189,15 @@ fly launch
 
 ```powershell
 
+
 # Step 1: Install Vercel CLI
 npm install -g vercel
 
 
+
 # Step 2: Login
 vercel login
+
 
 
 # Step 3: Deploy Frontend
@@ -176,14 +205,18 @@ cd d:\PROJECT\ai-interviewer\frontend
 vercel --prod
 
 
+
 # Step 4: Deploy Backend
 cd ..\backend
 vercel --prod
 
 
+
 # Step 5: Configure Environment Variables
 
+
 # Go to vercel.com dashboard → Your Project → Settings → Environment Variables
+
 
 # Add the variables listed above
 
@@ -198,6 +231,7 @@ After deployment:
 ---
 
 
+
 ## 📊 Current Features
 ✅ **5 Free Attempts** - Tracks user attempts via backend
 ✅ **Email/Password Auth** - Registration and login
@@ -209,6 +243,7 @@ After deployment:
 ---
 
 
+
 ## 🔑 Optional API Keys (for full functionality)
 
 To enable AI features, add these to backend environment:
@@ -216,10 +251,12 @@ To enable AI features, add these to backend environment:
 
 ```env
 
+
 # AI APIs (Optional - system works with mock responses)
 OPENAI_API_KEY=sk-proj-your-key
-ANTHROPIC_API_KEY=sk-ant-your-key  
+ANTHROPIC_API_KEY=sk-ant-your-key
 GEMINI_API_KEY=your-gemini-key
+
 
 
 # Social Login (Optional)
@@ -237,23 +274,28 @@ TWITTER_CONSUMER_SECRET=your-secret
 ---
 
 
+
 ## 🎉 **Your Project is Ready!**
+
 
 
 ### Local Development
 
 ```powershell
 
+
 # Terminal 1 - Backend
 cd backend
 npm run dev
 
 
-# Terminal 2 - Frontend  
+
+# Terminal 2 - Frontend
 cd frontend
 npm run dev
 
 ```text
+
 
 
 ### Production Deployment

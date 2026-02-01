@@ -1,6 +1,7 @@
 # NeuroPrep AI - Complete Technical Architecture & Flow
 
 
+
 ## System Overview
 
 NeuroPrep AI is a **full-stack web application** for engineering interview preparation built on a **monorepo architecture** with separate frontend and backend deployments.
@@ -45,7 +46,9 @@ NeuroPrep AI is a **full-stack web application** for engineering interview prepa
 ---
 
 
+
 ## 1. Frontend Architecture (Next.js 16)
+
 
 
 ### **Tech Stack:**
@@ -57,7 +60,9 @@ NeuroPrep AI is a **full-stack web application** for engineering interview prepa
 - **Build Tool:** Webpack (configured via `next.config.js`)
 
 
+
 ### **Key Components & Flow:**
+
 
 
 #### **A. Landing Page (`app/page.tsx`)**
@@ -86,6 +91,7 @@ paths.map(path => <MasteryCard {...path} />)
 4. Cards render with titles, descriptions, salary ranges
 
 ---
+
 
 
 #### **B. Firebase Authentication Flow (`lib/firebase.js` + `hooks/useAuth.ts`)**
@@ -165,9 +171,9 @@ useEffect(() => {
 // backend/routes/auth.js
 router.post('/sync', async (req, res) => {
   const { uid, email, name } = req.body;
-  
+
   let user = await User.findById(uid); // Check if user exists
-  
+
   if (!user) {
     // First-time login → Create new user in MongoDB
     user = new User({
@@ -179,7 +185,7 @@ router.post('/sync', async (req, res) => {
     });
     await user.save();
   }
-  
+
   res.json(user); // Return user with isPro, stats, etc.
 });
 
@@ -192,6 +198,7 @@ router.post('/sync', async (req, res) => {
 - Dashboard can fetch `user.stats` for XP/Level display
 
 ---
+
 
 
 #### **C. Razorpay Payment Flow (`hooks/useRazorpay.ts`)**
@@ -215,7 +222,7 @@ router.post('/sync', async (req, res) => {
 const handlePayment = async (userId) => {
   // 1. Load Razorpay SDK script
   await loadRazorpayScript();
-  
+
   // 2. Create order on our backend
   const res = await fetch('/api/payment/create-order', { method: 'POST' });
   const order = await res.json();
@@ -290,14 +297,14 @@ handler: async function(response) {
 // backend/routes/payment.js
 router.post('/verify', async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature, userId } = req.body;
-  
+
   // CRITICAL: Verify signature to prevent fraud
-  const sign = razorpay_order_id + "|" + razorpay_payment_id;
+  const sign = razorpay_order_id + " | " + razorpay_payment_id;
   const expectedSign = crypto
     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
     .update(sign)
     .digest("hex");
-  
+
   if (razorpay_signature === expectedSign) {
     // ✅ Payment is legit! Update user to Pro
     await User.findByIdAndUpdate(userId, { isPro: true });
@@ -319,7 +326,9 @@ router.post('/verify', async (req, res) => {
 ---
 
 
+
 ## 2. Backend Architecture (Express + MongoDB)
+
 
 
 ### **Tech Stack:**
@@ -330,7 +339,9 @@ router.post('/verify', async (req, res) => {
 - **Deployment:** Vercel Serverless Functions
 
 
+
 ### **Key Routes:**
+
 
 
 #### **1. `/api/auth/sync` - User Registration/Login**
@@ -344,6 +355,7 @@ Body: { uid: "abc123", email: "user@gmail.com", name: "John" }
 Response: { _id: "abc123", name: "John", email: "...", isPro: false, stats: {...} }
 
 ```text
+
 
 
 #### **2. `/api/dashboard` - Fetch User Stats**
@@ -360,6 +372,7 @@ Response: {
 }
 
 ```text
+
 
 
 #### **3. `/api/mastery-paths` - Get All Learning Paths**
@@ -379,7 +392,9 @@ Response: [
 ---
 
 
+
 ## 3. Database Schema (MongoDB)
+
 
 
 ### **Users Collection:**
@@ -403,6 +418,7 @@ Response: [
 ```text
 
 
+
 ### **MasteryPaths Collection:**
 
 
@@ -424,7 +440,9 @@ Response: [
 ---
 
 
+
 ## 4. Deployment Architecture
+
 
 
 ### **Frontend (Vercel):**
@@ -457,6 +475,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=neuroprep-12bb7
 ```text
 
 
+
 ### **Backend (Vercel Serverless):**
 
 
@@ -485,7 +504,9 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 ---
 
 
+
 ## 5. Complete User Journey
+
 
 
 ### **First-Time Visitor:**
@@ -501,6 +522,7 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 9. **Dashboard Refreshes** → Shows "PRO MEMBER" badge
 
 
+
 ### **Returning Pro User:**
 
 1. **Visits Site** → Firebase auto-logs them in (token in IndexedDB)
@@ -510,7 +532,9 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 ---
 
 
+
 ## 6. Security Measures
+
 
 
 ### **Authentication:**
@@ -519,10 +543,12 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 - Backend validates Firebase UID on every request
 
 
+
 ### **Payment Security:**
 - Razorpay uses HMAC-SHA256 signature verification
 - Secret key NEVER exposed to frontend
 - Backend verifies every payment before updating database
+
 
 
 ### **API Security:**
@@ -531,6 +557,7 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 - Environment variables never committed to Git (.gitignore)
 
 ---
+
 
 
 ## 7. Mobile Optimization
@@ -547,6 +574,7 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 - Service workers can cache for offline mode (future)
 
 ---
+
 
 
 ## Summary

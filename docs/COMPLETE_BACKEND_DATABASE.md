@@ -1,12 +1,15 @@
 # 🗄️ COMPLETE BACKEND & DATABASE SOLUTION
 
 
+
 ## **Full-Stack Architecture - Production Ready**
 
 ---
 
 
+
 ## **OPTION 1: Client-Side Database (IndexedDB)** ⭐ RECOMMENDED
+
 
 
 ### **Already Created:** `lib/client-db.ts`
@@ -38,10 +41,13 @@ npm install dexie
 ---
 
 
-## **OPTION 2: Supabase Backend (Cloud Database)** 
+
+## **OPTION 2: Supabase Backend (Cloud Database)**
+
 
 
 ### **Setup Steps:**
+
 
 
 #### 1. Install Supabase Client
@@ -52,10 +58,12 @@ npm install @supabase/supabase-js
 ```text
 
 
+
 #### 2. Create Supabase Project
 1. Go to https://supabase.com
 2. Create new project: "neuroprep-ai"
 3. Copy URL and ANON key
+
 
 
 #### 3. Add to `.env.local`
@@ -65,6 +73,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 ```text
+
 
 
 #### 4. Create Tables (Run in Supabase SQL Editor)
@@ -177,6 +186,7 @@ CREATE POLICY "Users can view own questions" ON question_history
   FOR SELECT USING (auth.uid() = user_id);
 
 ```text
+
 
 
 #### 5. Create Supabase Client (`lib/supabase.ts`)
@@ -333,6 +343,7 @@ export const db = {
 ```text
 
 
+
 #### 6. Create Auth Callback (`app/auth/callback/route.ts`)
 
 
@@ -358,7 +369,9 @@ export async function GET(request: Request) {
 ---
 
 
-## **OPTION 3: PlanetScale (MySQL)** 
+
+## **OPTION 3: PlanetScale (MySQL)**
+
 
 
 ### **Setup:**
@@ -387,6 +400,7 @@ export const conn = connect(config);
 ---
 
 
+
 ## **COMPARISON**
 
 | Feature | IndexedDB | Supabase | PlanetScale | 
@@ -400,6 +414,7 @@ export const conn = connect(config);
 | Privacy | Best | Good | Good | 
 
 ---
+
 
 
 ## **RECOMMENDATION:**
@@ -423,7 +438,9 @@ export const conn = connect(config);
 ---
 
 
+
 ## **NEXT STEPS:**
+
 
 
 ### **For IndexedDB (Recommended):**
@@ -431,6 +448,7 @@ export const conn = connect(config);
 2. Install: `npm install dexie`
 3. Import in components: `import { db, auth } from '@/lib/client-db`
 4. Use immediately!
+
 
 
 ### **For Supabase:**

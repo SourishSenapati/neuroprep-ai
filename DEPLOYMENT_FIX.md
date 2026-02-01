@@ -1,8 +1,10 @@
 # 🚨 URGENT: Deployment Configuration Fix
 
 
+
 ## Problem
 Vercel deployment is failing with: `"The specified Root Directory 'frontend' does not exist"`
+
 
 
 ## Root Cause
@@ -11,7 +13,9 @@ Your Vercel Project Settings have **"Root Directory: frontend"** configured, but
 ---
 
 
+
 ## ✅ SOLUTION (Choose ONE)
+
 
 
 ### **Option 1: Fix Vercel Dashboard Settings (RECOMMENDED)**
@@ -26,6 +30,7 @@ Your Vercel Project Settings have **"Root Directory: frontend"** configured, but
 8. Navigate to: **Deployments** tab
 9. Find the latest deployment
 10. Click: **⋯ (three dots)** → **Redeploy**
+
 
 
 ### **Option 2: Use Deployment Script**
@@ -45,13 +50,16 @@ The script will:
 - ✅ Provide deployment instructions
 
 
+
 ### **Option 3: Manual Vercel CLI Deploy**
 
 
 ```bash
 
+
 # Make sure you're in the PROJECT ROOT (not frontend folder)
 cd d:\PROJECT\ai-interviewer
+
 
 
 # Deploy to production
@@ -62,7 +70,9 @@ vercel --prod
 ---
 
 
+
 ## 🔍 Why This Happens
+
 
 
 ### Your Repository Structure
@@ -80,6 +90,7 @@ d:\PROJECT\ai-interviewer\     ← PROJECT ROOT
 ```text
 
 
+
 ### What Vercel Sees (Current Config)
 
 ```text
@@ -87,6 +98,7 @@ Vercel Setting: Root Directory = "frontend"
 Vercel looks for: frontend/frontend/package.json ❌ (doesn't exist)
 
 ```text
+
 
 
 ### What Vercel Should See (After Fix)
@@ -98,6 +110,7 @@ Vercel looks for: frontend/package.json ✅ (exists!)
 ```text
 
 ---
+
 
 
 ## ✅ Verification After Fix
@@ -118,6 +131,7 @@ Once you redeploy, you should see:
 ---
 
 
+
 ## 🆘 If Still Having Issues
 
 1. **Check Git Repository:** Confirm `frontend/` folder exists in GitHub:
@@ -135,5 +149,5 @@ Once you redeploy, you should see:
 
 ---
 
-**Last Updated:** December 21, 2025, 6:15 PM IST  
+**Last Updated:** December 21, 2025, 6:15 PM IST
 **Status:** ⚠️ Awaiting Vercel Dashboard configuration update

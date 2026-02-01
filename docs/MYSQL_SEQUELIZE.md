@@ -1,29 +1,36 @@
 # 🗄️ MYSQL IMPLEMENTATION #2 - Traditional MySQL + Sequelize
 
 
+
 ## **Complete MySQL Setup with Sequelize ORM**
 
 ---
 
 
+
 ## **1. Install MySQL**
+
 
 
 ### **Option A: Local MySQL**
 
 ```bash
 
+
 # Windows (using Chocolatey)
 choco install mysql
 
 
+
 # Or download from: https://dev.mysql.com/downloads/mysql/
+
 
 
 # Start MySQL
 net start mysql
 
 ```text
+
 
 
 ### **Option B: Docker MySQL**
@@ -38,12 +45,14 @@ docker run --name neuroprep-mysql \
 ```text
 
 
+
 ### **Option C: Railway (FREE Cloud MySQL)**
 1. Go to https://railway.app
 2. New Project → MySQL
 3. Copy connection string
 
 ---
+
 
 
 ## **2. Install Dependencies**
@@ -58,11 +67,13 @@ npm install -D @types/sequelize
 ---
 
 
+
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
 
 ```env
+
 
 # MySQL
 DB_HOST=localhost
@@ -72,12 +83,14 @@ DB_PASSWORD=root
 DB_NAME=neuroprep
 
 
+
 # Or use connection URL
 DATABASE_URL="mysql://root:root@localhost:3306/neuroprep"
 
 ```text
 
 ---
+
 
 
 ## **4. Database Configuration**
@@ -111,6 +124,7 @@ export default sequelize;
 ```text
 
 ---
+
 
 
 ## **5. Define Models**
@@ -457,6 +471,7 @@ export { sequelize };
 ---
 
 
+
 ## **6. Database Service**
 
 Create `frontend/lib/mysql-service.ts`:
@@ -471,7 +486,7 @@ export async function initDatabase() {
   try {
     await sequelize.authenticate();
     console.log('✅ MySQL connected');
-    
+
     await sequelize.sync({ alter: true });
     console.log('✅ Database synced');
   } catch (error) {
@@ -484,31 +499,31 @@ export async function initDatabase() {
 export const auth = {
   async signup(email: string, name: string, password: string) {
     const passwordHash = await bcrypt.hash(password, 10);
-    
+
     const user = await User.create({
       email,
       name,
       passwordHash,
     });
-    
+
     return user.toJSON();
   },
 
   async login(email: string, password: string) {
     const user = await User.findOne({ where: { email } });
-    
+
     if (!user?.passwordHash) {
       throw new Error('Invalid credentials');
     }
-    
+
     const isValid = await bcrypt.compare(password, user.passwordHash);
-    
+
     if (!isValid) {
       throw new Error('Invalid credentials');
     }
-    
+
     await user.update({ lastLogin: new Date() });
-    
+
     return user.toJSON();
   },
 
@@ -533,32 +548,32 @@ export const sessions = {
       role,
       difficulty,
     });
-    
+
     return session.toJSON();
   },
 
   async endSession(sessionId: string, score: number, xpEarned: number) {
     const session = await InterviewSession.findByPk(sessionId);
-    
+
     if (!session) throw new Error('Session not found');
-    
+
     const duration = Math.floor(
       (Date.now() - session.startTime.getTime()) / 1000
     );
-    
+
     await session.update({
       endTime: new Date(),
       duration,
       score,
       xpEarned,
     });
-    
+
     // Update user XP
     const user = await User.findByPk(session.userId);
     if (user) {
       const newXP = user.xp + xpEarned;
       const newLevel = Math.floor(newXP / 1000) + 1;
-      
+
       await user.update({
         xp: newXP,
         level: newLevel,
@@ -572,7 +587,7 @@ export const sessions = {
       order: [['startTime', 'DESC']],
       limit,
     });
-    
+
     return sessions.map(s => s.toJSON());
   },
 };
@@ -591,7 +606,7 @@ export const payments = {
       method,
       razorpayOrderId,
     });
-    
+
     return payment.toJSON();
   },
 
@@ -601,17 +616,17 @@ export const payments = {
     razorpaySignature: string
   ) {
     const payment = await Payment.findByPk(paymentId);
-    
+
     if (!payment) throw new Error('Payment not found');
-    
+
     await payment.update({
       status: 'completed',
       razorpayPaymentId,
       razorpaySignature,
     });
-    
+
     await auth.upgradeToPremium(payment.userId);
-    
+
     return payment.toJSON();
   },
 };
@@ -643,7 +658,7 @@ export const questions = {
       where: { userId },
       attributes: ['questionHash'],
     });
-    
+
     return new Set(questions.map(q => q.questionHash));
   },
 
@@ -651,7 +666,7 @@ export const questions = {
     const allQuestions = await QuestionHistory.findAll({
       where: { userId },
     });
-    
+
     const totalQuestions = allQuestions.length;
     const correctAnswers = allQuestions.filter(q => q.isCorrect).length;
     const accuracy = totalQuestions > 0
@@ -660,7 +675,7 @@ export const questions = {
     const averageTime = totalQuestions > 0
       ? allQuestions.reduce((sum, q) => sum + (q.timeTaken || 0), 0) / totalQuestions
       : 0;
-    
+
     return {
       totalQuestions,
       correctAnswers,
@@ -673,6 +688,7 @@ accuracy,
 ```text
 
 ---
+
 
 
 ## **7. Initialize on Server Start**
@@ -697,6 +713,7 @@ export async function ensureDatabase() {
 ---
 
 
+
 ## **8. API Route Example**
 
 `app/api/sessions/start/route.ts`:
@@ -710,11 +727,11 @@ import { sessions } from '@/lib/mysql-service';
 export async function POST(request: Request) {
   try {
     await ensureDatabase();
-    
+
     const { userId, role, difficulty } = await request.json();
-    
+
     const session = await sessions.startSession(userId, role, difficulty);
-    
+
     return NextResponse.json({ success: true, session });
   } catch (error: any) {
     return NextResponse.json(
@@ -727,6 +744,7 @@ export async function POST(request: Request) {
 ```text
 
 ---
+
 
 
 ## **COMPLETE MYSQL + SEQUELIZE SETUP! 🗄️**

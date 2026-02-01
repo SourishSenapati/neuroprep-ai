@@ -1,7 +1,9 @@
 # 🚀 VERCEL DEPLOYMENT GUIDE - NeuroPrep AI
 
 
+
 ## ✅ Features Implemented
+
 
 
 ### Universal Engineering Support
@@ -12,6 +14,7 @@
 - **8+ Chemical Engineering Fields** (Process, Petroleum, Materials, etc.)
 
 
+
 ### Dynamic Question System
 - **1,000,000+ Questions Per Discipline** using quantum-inspired RNG
 - **75+ Question Patterns** across 10 types (conceptual, coding, design, debugging, etc.)
@@ -20,6 +23,7 @@
 - **Zero Repetition** with FNV-1a hash algorithm and collision detection (1000 retries)
 - **Adaptive Difficulty** based on user performance
 - **Topic Diversity** ensuring no over-concentration
+
 
 
 ### Mathematical Proof of Question Capacity
@@ -38,7 +42,9 @@ Total System: 500,000,000+ unique questions
 ---
 
 
+
 ## 🌐 VERCEL DEPLOYMENT (FREE)
+
 
 
 ### Prerequisites
@@ -47,28 +53,35 @@ Total System: 500,000,000+ unique questions
 3. Git installed locally
 
 
+
 ### Step 1: Push to GitHub
 
 
 ```powershell
 
+
 # Navigate to project root
 cd d:\PROJECT\ai-interviewer
+
 
 
 # Initialize git if not already done
 git init
 
 
+
 # Add all files
 git add .
+
 
 
 # Commit
 git commit -m "Complete NeuroPrep AI with 1M+ questions and universal engineering support"
 
 
+
 # Create new repository on GitHub (go to github.com/new)
+
 
 # Then connect and push
 git remote add origin https://github.com/YOUR_USERNAME/ai-interviewer.git
@@ -76,6 +89,7 @@ git branch -M main
 git push -u origin main
 
 ```text
+
 
 
 ### Step 2: Deploy Backend
@@ -98,7 +112,7 @@ git push -u origin main
    JWT_SECRET=your-jwt-secret-here
    CORS_ORIGIN=https://your-frontend-url.vercel.app
    FRONTEND_URL=https://your-frontend-url.vercel.app
-   
+
    # Optional AI API Keys (system works without them using mock responses)
    OPENAI_API_KEY=sk-proj-your-key
    ANTHROPIC_API_KEY=sk-ant-your-key
@@ -107,6 +121,7 @@ git push -u origin main
 
 6. Click **Deploy**
 7. **Copy the deployment URL** (e.g., `https://ai-interviewer-backend-xyz.vercel.app`)
+
 
 
 ### Step 3: Deploy Frontend
@@ -134,6 +149,7 @@ git push -u origin main
 6. Wait for deployment to complete
 
 
+
 ### Step 4: Update CORS Settings
 
 1. Go to your **backend deployment** on Vercel
@@ -147,26 +163,33 @@ git push -u origin main
 ---
 
 
+
 ## 🔑 Generate Secrets
+
 
 
 ### Generate NEXTAUTH_SECRET
 
 ```powershell
 
+
 # Option 1: Using OpenSSL (if installed)
 openssl rand -base64 32
+
 
 
 # Option 2: Using Node.js
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 
+
 # Option 3: Online
+
 
 # Visit: https://generate-secret.vercel.app/32
 
 ```text
+
 
 
 ### Generate SESSION_SECRET and JWT_SECRET
@@ -175,19 +198,24 @@ Use the same method as above, generate 3 different secrets.
 ---
 
 
+
 ## 📊 Verify Deployment
+
 
 
 ### Test Backend
 
 ```bash
 
+
 # Health check
 curl https://your-backend-url.vercel.app/health
 
 
+
 # Question stats
 curl https://your-backend-url.vercel.app/api/question-stats
+
 
 
 # Expected Response
@@ -203,6 +231,7 @@ curl https://your-backend-url.vercel.app/api/question-stats
 ```text
 
 
+
 ### Test Frontend
 1. Visit `https://your-frontend-url.vercel.app`
 2. Should see NeuroPrep AI landing page
@@ -211,7 +240,9 @@ curl https://your-backend-url.vercel.app/api/question-stats
 ---
 
 
+
 ## 🎯 Quick Deploy with Vercel CLI
+
 
 
 ### Install Vercel CLI
@@ -222,12 +253,14 @@ npm install -g vercel
 ```text
 
 
+
 ### Login to Vercel
 
 ```powershell
 vercel login
 
 ```text
+
 
 
 ### Deploy Backend
@@ -237,20 +270,27 @@ cd d:\PROJECT\ai-interviewer\backend
 vercel --prod
 
 
+
 # Follow prompts
+
 
 # - Link to existing project? No
 
+
 # - Project name: neuroprep-backend
+
 
 # - Directory: ./
 
+
 # - Override settings? No
+
 
 
 # After deployment, copy the URL
 
 ```text
+
 
 
 ### Deploy Frontend
@@ -260,33 +300,44 @@ cd ..\frontend
 vercel --prod
 
 
+
 # Follow prompts
+
 
 # - Link to existing project? No
 
+
 # - Project name: neuroprep-frontend
 
+
 # - Directory: ./
+
 
 # - Override settings? No
 
 ```text
 
 
+
 ### Update Environment Variables
 
 ```powershell
 
+
 # Set backend CORS_ORIGIN
 vercel env add CORS_ORIGIN production
 
+
 # Paste your frontend URL
+
 
 
 # Set frontend API_URL
 vercel env add NEXT_PUBLIC_API_URL production
 
+
 # Paste your backend URL
+
 
 
 # Redeploy both
@@ -301,7 +352,9 @@ vercel --prod
 ---
 
 
+
 ## 🔍 Question System Features
+
 
 
 ### 1. Zero Repetition Guarantee
@@ -309,6 +362,7 @@ vercel --prod
 - **Hash-based unique IDs**: FNV-1a algorithm generates collision-resistant IDs
 - **1000 retry attempts**: If collision detected, generates variations
 - **99%+ uniqueness rate**: Across all sessions
+
 
 
 ### 2. Dynamic Generation
@@ -334,10 +388,12 @@ const question = questionBankManager.getNextQuestion(
 ```text
 
 
+
 ### 3. Topic Coverage
 - **Automatic balancing**: Prevents over-concentration on single topics
 - **40% limit**: No topic exceeds 40% of total questions
 - **Diverse coverage**: Ensures broad knowledge assessment
+
 
 
 ### 4. Adaptive Difficulty
@@ -348,7 +404,9 @@ const question = questionBankManager.getNextQuestion(
 ---
 
 
+
 ## 📈 Performance Metrics
+
 
 
 ### Question Generation
@@ -356,6 +414,7 @@ const question = questionBankManager.getNextQuestion(
 - **Collision rate**: <1%
 - **Concurrent sessions**: 100+ supported
 - **Memory efficient**: Session-based cleanup
+
 
 
 ### Scalability
@@ -367,7 +426,9 @@ const question = questionBankManager.getNextQuestion(
 ---
 
 
+
 ## 🛠️ Troubleshooting
+
 
 
 ### Build Errors
@@ -376,10 +437,12 @@ const question = questionBankManager.getNextQuestion(
 
 ```powershell
 
+
 # Backend
 cd backend
 npm install
 npm run build
+
 
 
 # Frontend
@@ -393,6 +456,7 @@ npm run build
 
 - Check `tsconfig.json` in both folders
 - Ensure all types are properly imported
+
 
 
 ### Runtime Errors
@@ -412,6 +476,7 @@ npm run build
 ---
 
 
+
 ## 🎉 Success Checklist
 
 - ✅ Backend deployed to Vercel
@@ -429,6 +494,7 @@ npm run build
 ---
 
 
+
 ## 🔗 Useful Links
 
 - **Vercel Dashboard**: https://vercel.com/dashboard
@@ -440,7 +506,9 @@ npm run build
 ---
 
 
+
 ## 💡 Optional Enhancements
+
 
 
 ### Custom Domain
@@ -450,9 +518,11 @@ npm run build
 4. Update environment variables with new domain
 
 
+
 ### Analytics
 - Vercel provides built-in analytics
 - View in Dashboard → Your Project → Analytics
+
 
 
 ### Monitoring
@@ -461,6 +531,7 @@ npm run build
 - Monitor function execution times
 
 ---
+
 
 
 ## 📝 Notes

@@ -1,11 +1,14 @@
 # 🎨 NeuroPrep AI Design System
 
+
 ## Premium Dark Mode Implementation
 
 ---
 
 
+
 ## 1️⃣ THE HIERARCHY OF DARKNESS
+
 
 
 ### **Background Layers**
@@ -40,7 +43,9 @@
 ---
 
 
+
 ## 2️⃣ TYPOGRAPHY STRATEGY
+
 
 
 ### **The Contrast Rule**
@@ -52,8 +57,10 @@
 | **Labels** | Muted Silver | `#A3A3A3` | Inter / Manrope | Form labels, metadata | 
 
 
+
 ### **Why Not Pure White Everywhere?**
 Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears to vibrate). Use Muted Silver (#A3A3A3) for body text to reduce eye strain.
+
 
 
 ### **Hover States**
@@ -73,10 +80,13 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ---
 
 
+
 ## 3️⃣ THE ACCENT LOGIC
 
 
+
 ### **Color-Coded Functions**
+
 
 
 #### 🔵 **Electric Blue (#3B82F6) = ACTION**
@@ -99,6 +109,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ```text
 
 
+
 #### 🟢 **Terminal Green (#4ADE80) = DATA & TECH**
 **Rule:** Visual indicators, not interactive elements.
 
@@ -113,6 +124,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 <button className="bg-terminal-green">Click Me</button> // Use Blue for actions!
 
 ```text
+
 
 
 #### 🟡 **Iconic Gold (#EAB308) = IDENTITY**
@@ -132,10 +144,13 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ---
 
 
+
 ## 4️⃣ IMPLEMENTATION CHECKLIST
 
 
+
 ### ✅ **DO THIS**
+
 
 
 #### **Shadows**
@@ -149,6 +164,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ```text
 
 
+
 #### **Borders**
 
 ```css
@@ -158,6 +174,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 }
 
 ```text
+
 
 
 #### **Buttons**
@@ -180,6 +197,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ```text
 
 
+
 #### **Spacing**
 
 ```css
@@ -197,6 +215,7 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ---
 
 
+
 ### ❌ **AVOID THIS**
 
 | Don't | Why | 
@@ -210,7 +229,9 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 ---
 
 
+
 ## 5️⃣ ACCESSIBILITY
+
 
 
 ### **Contrast Ratios**
@@ -222,8 +243,9 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 | Electric Blue (#3B82F6) on Void Black (#050505) | **6.5:1** | AA | ✅ Good for large text/buttons | 
 
 
+
 ### **Blue Text Warning**
-❌ **Don't use Electric Blue (#3B82F6) for small body text on black.**  
+❌ **Don't use Electric Blue (#3B82F6) for small body text on black.**
 ✅ **Use it for button backgrounds or large clickable links only.**
 
 If you need blue text, lighten it to `#60A5FA` for better readability.
@@ -231,18 +253,20 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
 ---
 
 
+
 ## 6️⃣ COMPONENT PATTERNS
+
 
 
 ### **Card Component**
 
 ```tsx
 <div className="
-  bg-glass-charcoal/80 
-  border border-white/10 
-  backdrop-blur-xl 
-  rounded-2xl 
-  p-6 
+  bg-glass-charcoal/80
+  border border-white/10
+  backdrop-blur-xl
+  rounded-2xl
+  p-6
   shadow-[0_8px_32px_rgba(0,0,0,0.5)]
   hover:border-white/20
   transition-all duration-300
@@ -254,12 +278,12 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
     Body text uses Muted Silver for comfortable reading.
   </p>
   <button className="
-    mt-4 
-    bg-electric-blue 
-    text-crisp-white 
-    px-6 py-3 
-    rounded-full 
-    hover:bg-blue-600 
+    mt-4
+    bg-electric-blue
+    text-crisp-white
+    px-6 py-3
+    rounded-full
+    hover:bg-blue-600
     transition-colors
   ">
     Take Action
@@ -269,19 +293,20 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
 ```text
 
 
+
 ### **Badge Component**
 
 ```tsx
 <span className="
-  inline-flex 
-  items-center 
-  gap-2 
-  px-3 py-1.5 
-  rounded-full 
-  bg-glass-charcoal 
-  border border-white/10 
-  text-muted-silver 
-  font-mono 
+  inline-flex
+  items-center
+  gap-2
+  px-3 py-1.5
+  rounded-full
+  bg-glass-charcoal
+  border border-white/10
+  text-muted-silver
+  font-mono
   text-sm
 ">
   <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
@@ -291,18 +316,19 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
 ```text
 
 
+
 ### **Hero Section**
 
 ```tsx
 <section className="
-  min-h-screen 
-  bg-void-black 
-  relative 
+  min-h-screen
+  bg-void-black
+  relative
   overflow-hidden
 ">
   {/* Radial gradient background */}
   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(18,18,18,0.4)_0%,rgba(5,5,5,0)_70%)]" />
-  
+
   {/* Content */}
   <div className="relative z-10 max-w-4xl mx-auto px-4 py-20">
     <h1 className="font-serif text-crisp-white text-6xl mb-4">
@@ -318,6 +344,7 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
 ```text
 
 ---
+
 
 
 ## 7️⃣ TAILWIND CONFIG
@@ -354,6 +381,7 @@ module.exports = {
 ---
 
 
+
 ## 8️⃣ GLOBAL CSS
 
 
@@ -367,11 +395,11 @@ module.exports = {
   body {
     @apply bg-void-black text-muted-silver font-sans antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif text-crisp-white;
   }
-  
+
   ::selection {
     @apply bg-terminal-green/20 text-crisp-white;
   }
@@ -381,15 +409,15 @@ module.exports = {
   .glass-card {
     @apply bg-glass-charcoal/80 border border-white/10 backdrop-blur-xl;
   }
-  
+
   .shadow-premium {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   }
-  
+
   .glow-terminal {
     text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
   }
-  
+
   .glow-electric {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
@@ -398,6 +426,7 @@ module.exports = {
 ```text
 
 ---
+
 
 
 ## ✅ CURRENT IMPLEMENTATION STATUS

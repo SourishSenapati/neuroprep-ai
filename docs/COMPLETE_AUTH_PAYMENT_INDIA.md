@@ -1,12 +1,15 @@
 # 🔐 COMPLETE AUTH + PAYMENT SYSTEM (India-Optimized)
 
 
+
 ## **NextAuth.js + Razorpay (Google, LinkedIn, GitHub + UPI, Net Banking)**
 
 ---
 
 
+
 ## **PART 1: AUTHENTICATION (OAuth + Email)**
+
 
 
 ### **1. Install Dependencies**
@@ -21,7 +24,9 @@ npm install @types/bcryptjs -D
 ---
 
 
+
 ### **2. Setup OAuth Applications**
+
 
 
 #### **A. Google OAuth**
@@ -33,11 +38,13 @@ npm install @types/bcryptjs -D
 6. Copy Client ID and Secret
 
 
+
 #### **B. GitHub OAuth**
 1. Go to https://github.com/settings/developers
 2. New OAuth App
 3. Authorization callback: `https://your-domain.com/api/auth/callback/github`
 4. Copy Client ID and Secret
+
 
 
 #### **C. LinkedIn OAuth**
@@ -49,6 +56,7 @@ npm install @types/bcryptjs -D
 ---
 
 
+
 ### **3. Environment Variables**
 
 Add to `frontend/.env.local`:
@@ -56,9 +64,11 @@ Add to `frontend/.env.local`:
 
 ```env
 
+
 # NextAuth
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-super-secret-key-min-32-chars
+
 
 
 # Google OAuth
@@ -66,14 +76,17 @@ GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 
+
 # GitHub OAuth
 GITHUB_ID=your-github-client-id
 GITHUB_SECRET=your-github-client-secret
 
 
+
 # LinkedIn OAuth
 LINKEDIN_CLIENT_ID=your-linkedin-client-id
 LINKEDIN_CLIENT_SECRET=your-linkedin-client-secret
+
 
 
 # Razorpay (India Payment Gateway)
@@ -82,12 +95,14 @@ RAZORPAY_KEY_SECRET=your_razorpay_secret
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxxx
 
 
+
 # Database (use any from previous implementations)
 DATABASE_URL=your-database-url
 
 ```text
 
 ---
+
 
 
 ### **4. Update Database Schema**
@@ -133,7 +148,7 @@ model User {
   emailVerified DateTime?
   image         String?
   passwordHash  String?
-  
+
   // Your existing fields
   isPremium     Boolean   @default(false)
   xp            Int       @default(0)
@@ -145,7 +160,7 @@ model User {
 
   accounts      Account[]
   sessions      Session[]
-  
+
   // Your existing relations
   interviewSessions InterviewSession[]
   payments          Payment[]
@@ -171,6 +186,7 @@ npx prisma db push
 ```text
 
 ---
+
 
 
 ### **5. Create NextAuth Configuration**
@@ -296,7 +312,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
-        
+
         // Fetch full user data
         const fullUser = await prisma.user.findUnique({
           where: { id: user.id },
@@ -345,6 +361,7 @@ export { handler as GET, handler as POST };
 ```text
 
 ---
+
 
 
 ### **6. Create Registration API**
@@ -420,6 +437,7 @@ export async function POST(request: Request) {
 ---
 
 
+
 ### **7. Create Auth Context**
 
 Create `frontend/components/Providers.tsx`:
@@ -455,6 +473,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```text
 
 ---
+
 
 
 ### **8. Login Component Example**
@@ -595,6 +614,7 @@ export default function LoginForm() {
 ---
 
 
+
 ### **9. Logout Function**
 
 
@@ -611,7 +631,9 @@ const handleLogout = async () => {
 ---
 
 
+
 ## **PART 2: PAYMENT SYSTEM (UPI + Net Banking)**
+
 
 
 ### **1. Install Razorpay**
@@ -624,6 +646,7 @@ npm install @types/razorpay -D
 ```text
 
 ---
+
 
 
 ### **2. Create Razorpay Client**
@@ -656,6 +679,7 @@ export const PAYMENT_PLANS = {
 ```text
 
 ---
+
 
 
 ### **3. Create Order API**
@@ -739,6 +763,7 @@ export async function POST(request: Request) {
 ---
 
 
+
 ### **4. Verify Payment API**
 
 Create `frontend/app/api/payments/verify/route.ts`:
@@ -771,7 +796,7 @@ export async function POST(request: Request) {
     } = await request.json();
 
     // Verify signature
-    const body = razorpay_order_id + '|' + razorpay_payment_id;
+    const body = razorpay_order_id + ' | ' + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
       .update(body)
@@ -831,6 +856,7 @@ export async function POST(request: Request) {
 ---
 
 
+
 ### **5. Payment Component**
 
 Create `frontend/components/PaymentModal.tsx`:
@@ -878,7 +904,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
         description: plan === 'MONTHLY' ? 'Premium Monthly' : 'Premium Yearly',
         image: '/logo.png',
         order_id: orderData.order.id,
-        
+
         // Payment methods (India-optimized)
         method: {
           upi: true,
@@ -886,17 +912,17 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
           card: true,
           wallet: true,
         },
-        
+
         prefill: {
           name: '',
           email: '',
           contact: '',
         },
-        
+
         theme: {
           color: '#B76E79', // Rose gold
         },
-        
+
         handler: async function (response: any) {
           // Verify payment
           const verifyRes = await fetch('/api/payments/verify', {
@@ -914,7 +940,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
             alert('Payment verification failed');
           }
         },
-        
+
         modal: {
           ondismiss: function () {
             setIsLoading(false);
@@ -934,7 +960,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
   return (
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-      
+
       <motion.button
         onClick={handlePayment}
         disabled={isLoading}
@@ -951,6 +977,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
 ```text
 
 ---
+
 
 
 ## **COMPLETE AUTH + PAYMENT SYSTEM READY! 🎉**

@@ -1,8 +1,10 @@
 # NeuroSync - Advanced Biometric Analysis System
 
+
 ## Overview
 
 NeuroSync is a bleeding-edge biometric analysis system that combines WebNN, MediaPipe FaceMesh, and Web Bluetooth for real-time stress detection and authenticity verification.
+
 
 ## Architecture
 
@@ -32,7 +34,9 @@ NeuroSync is a bleeding-edge biometric analysis system that combines WebNN, Medi
 
 ```text
 
+
 ## Components
+
 
 ### 1. neuroSync.ts (Core Engine)
 
@@ -77,6 +81,7 @@ await neuroSync.connectFitbit();
 
 ```text
 
+
 ### 2. authGuardian.ts (Authenticity Checking)
 
 **Entropy Calculation:**
@@ -113,6 +118,7 @@ const auth = analyzeResponseAuthenticity(response, timeSpent);
 
 ```text
 
+
 ### 3. NeuralReset.tsx (Stress Intervention)
 
 **4-7-8 Breathing Technique:**
@@ -137,6 +143,7 @@ synth.speak(utterance);
 - Overlay with animated breathing guide
 - Audio instructions via Web Speech
 
+
 ### 4. mitTimer.ts (High-Pressure Timer)
 
 **Timed Challenges:**
@@ -160,7 +167,9 @@ const result = await validatePythonCode(code, pyodide);
 
 ```text
 
+
 ## Integration Flow
+
 
 ### 1. Initialization
 
@@ -172,6 +181,7 @@ await neuroSync.initMediaPipe(videoRef.current, canvas);
 await neuroSync.startWebcam();
 
 ```text
+
 
 ### 2. Real-Time Monitoring
 
@@ -195,6 +205,7 @@ if (metrics.level > 8) {
 
 ```text
 
+
 ### 3. Response Submission
 
 ```typescript
@@ -217,7 +228,9 @@ socket.emit('interview-response', {
 
 ```text
 
+
 ## Features
+
 
 ### WebNN CapsNet (96% Accuracy)
 
@@ -240,6 +253,7 @@ const features = new Float32Array([
 ]);
 
 ```text
+
 
 ### MediaPipe FaceMesh v0.4
 
@@ -273,6 +287,7 @@ const pupilSize = Math.abs(leftPupil.x - rightPupil.x);
 - 60-100 bpm range
 - Updates every frame (30 FPS)
 
+
 ### Web Bluetooth (Fitbit Integration)
 
 **Heart Rate Service:**
@@ -297,6 +312,7 @@ const hr = await neuroSync.pollFitbitAPI(accessToken);
 // Fetch resting heart rate from Fitbit cloud
 
 ```text
+
 
 ### Auth Guardian (Client-Side)
 
@@ -328,9 +344,12 @@ if (actualTime < expectedTime * 0.3) {
 
 ```text
 
+
 ## Browser Compatibility
 
+
 ### WebNN Support
+
 
 - ✅ Chrome 113+ (with flag)
 - ✅ Edge 113+ (with flag)
@@ -345,26 +364,33 @@ chrome://flags/#enable-experimental-web-platform-features
 
 ```text
 
+
 ### MediaPipe Support
+
 
 - ✅ Chrome 90+
 - ✅ Edge 90+
 - ✅ Firefox 88+
 - ✅ Safari 14+
 
+
 ### Web Bluetooth Support
+
 
 - ✅ Chrome 56+
 - ✅ Edge 79+
 - ❌ Firefox (not supported)
 - ❌ Safari (not supported)
 
+
 ### Web Speech Support
+
 
 - ✅ Chrome 33+
 - ✅ Edge 14+
 - ✅ Safari 7+
 - ⚠️ Firefox (limited)
+
 
 ## Fallback Strategy
 
@@ -395,7 +421,9 @@ if (!bluetoothReady) {
 
 ```text
 
+
 ## Performance
+
 
 - **WebNN Inference**: <50ms per frame
 - **MediaPipe FaceMesh**: 30 FPS (33ms per frame)
@@ -403,7 +431,9 @@ if (!bluetoothReady) {
 - **Total CPU Usage**: <15% on modern hardware
 - **Memory**: ~100MB (models + video stream)
 
+
 ## Security & Privacy
+
 
 - ✅ All processing client-side (no video upload)
 - ✅ Webcam access requires user permission
@@ -411,6 +441,7 @@ if (!bluetoothReady) {
 - ✅ No biometric data stored
 - ✅ Sandboxed Pyodide execution
 - ✅ HTTPS required for Web Bluetooth
+
 
 ## Usage Example
 
@@ -428,7 +459,7 @@ await neuroSync.startWebcam();
 setInterval(async () => {
   const metrics = await neuroSync.detectStress();
   console.log(`Stress: ${metrics.level}/10, Emotion: ${metrics.emotion}`);
-  
+
   if (metrics.level > 8) {
     triggerNeuralReset();
   }
@@ -442,7 +473,9 @@ if (!auth.authentic) {
 
 ```text
 
+
 ## Future Enhancements
+
 
 1. **Real ONNX Models**: Replace stub with trained CapsNet
 2. **Eye Tracking**: Gaze patterns for attention detection

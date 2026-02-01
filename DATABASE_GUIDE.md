@@ -1,8 +1,11 @@
 # NeuroPrep AI - Production Database Guide
 
+
 ## Supabase Setup
 
+
 ### 1. Create Supabase Project
+
 
 1. Go to <https://supabase.com>
 2. Create new project
@@ -14,6 +17,7 @@ DATABASE_URL=postgresql://postgres:[password]@db.[project].supabase.co:5432/post
 
 ```text
 
+
 ### 2. Run Migrations
 
 In Supabase SQL Editor, run:
@@ -23,9 +27,12 @@ In Supabase SQL Editor, run:
 
 ```text
 
+
 ## Database Schema
 
+
 ### Tables
+
 
 #### users
 
@@ -43,6 +50,7 @@ updated_at TIMESTAMPTZ
 
 - `idx_users_email` - Fast email lookup
 - `idx_users_readiness` (GIN) - JSONB queries
+
 
 #### sessions
 
@@ -67,6 +75,7 @@ ts TIMESTAMPTZ
 - `idx_sessions_responses` (GIN) - JSONB queries
 - `idx_sessions_biometrics` (GIN) - JSONB array queries
 
+
 #### session_responses
 
 ```sql
@@ -88,6 +97,7 @@ timestamp TIMESTAMPTZ
 - `idx_session_responses_session_id` - Session's responses
 - `idx_session_responses_timestamp` - Time-based queries
 
+
 #### benchmarks
 
 ```sql
@@ -108,7 +118,9 @@ updated_at TIMESTAMPTZ
 - `caltech-phd`: avg_eq=8.2, avg_tech=85.0, avg_resilience=85.0
 - `mit-ai`: avg_eq=7.8, avg_tech=82.0, avg_resilience=82.0
 
+
 ## Database Functions
+
 
 ### update_user_readiness()
 
@@ -123,6 +135,7 @@ UPDATE users SET readiness = {
 }
 
 ```text
+
 
 ### detect_stress_patterns(user_id)
 
@@ -149,7 +162,9 @@ SELECT * FROM detect_stress_patterns('user-uuid');
 
 ```text
 
+
 ## Node.js API (db.ts)
+
 
 ### Initialize Pool
 
@@ -160,12 +175,14 @@ const pool = db.initPool(process.env.DATABASE_URL);
 
 ```text
 
+
 ### Insert Session
 
 ```typescript
 const sessionId = await db.insertSession(userId, 'caltech-phd');
 
 ```text
+
 
 ### Update Session
 
@@ -179,6 +196,7 @@ await db.updateSession(sessionId, {
 
 ```text
 
+
 ### Add Biometric
 
 ```typescript
@@ -190,6 +208,7 @@ await db.addBiometric(sessionId, {
 });
 
 ```text
+
 
 ### Insert Response
 
@@ -206,6 +225,7 @@ await db.insertSessionResponse(sessionId, {
 
 ```text
 
+
 ### Update Readiness
 
 ```typescript
@@ -214,6 +234,7 @@ const readiness = await db.updateReadiness(userId);
 
 ```text
 
+
 ### Detect Patterns
 
 ```typescript
@@ -221,6 +242,7 @@ const patterns = await db.detectStressPatterns(userId);
 // Returns: [{ pattern, severity, details }, ...]
 
 ```text
+
 
 ### Get Dashboard Data
 
@@ -236,6 +258,7 @@ const data = await db.getDashboardData(userId);
 
 ```text
 
+
 ### AI-Enhanced Insights
 
 ```typescript
@@ -244,7 +267,9 @@ const insights = await db.generateLongitudinalInsights(userId, openaiKey);
 
 ```text
 
+
 ## API Endpoints
+
 
 ### GET /api/dashboard/:userId
 
@@ -290,6 +315,7 @@ Returns complete dashboard data with charts.
 
 ```text
 
+
 ### POST /api/end-session
 
 Stores session and generates insights.
@@ -325,7 +351,9 @@ Stores session and generates insights.
 
 ```text
 
+
 ## JSONB Queries
+
 
 ### Query Readiness
 
@@ -338,24 +366,26 @@ SELECT * FROM users WHERE (readiness->>'eq')::float < 5;
 
 ```text
 
+
 ### Query Biometrics
 
 ```sql
 -- Sessions with high stress
-SELECT * FROM sessions 
+SELECT * FROM sessions
 WHERE EXISTS (
   SELECT 1 FROM unnest(biometrics) AS b
   WHERE (b->>'stressLevel')::float > 8
 );
 
 -- Average stress per session
-SELECT 
+SELECT
   id,
   AVG((unnest(biometrics)->>'stressLevel')::float) as avg_stress
 FROM sessions
 GROUP BY id;
 
 ```text
+
 
 ### Query Responses
 
@@ -365,7 +395,7 @@ SELECT * FROM sessions
 WHERE (responses->>'authenticityScore')::float < 70;
 
 -- Technical performance trend
-SELECT 
+SELECT
   user_id,
   AVG((responses->>'technicalScore')::float) as avg_tech
 FROM sessions
@@ -374,13 +404,15 @@ ORDER BY avg_tech DESC;
 
 ```text
 
+
 ## Performance Optimization
+
 
 ### Index Usage
 
 ```sql
 -- Check index usage
-SELECT 
+SELECT
   schemaname,
   tablename,
   indexname,
@@ -392,6 +424,7 @@ ORDER BY idx_scan DESC;
 
 ```text
 
+
 ### Query Performance
 
 ```sql
@@ -400,6 +433,7 @@ EXPLAIN ANALYZE
 SELECT * FROM sessions WHERE user_id = 'uuid';
 
 ```text
+
 
 ### Vacuum
 
@@ -410,7 +444,9 @@ VACUUM ANALYZE users;
 
 ```text
 
+
 ## Backup & Restore
+
 
 ### Backup
 
@@ -419,6 +455,7 @@ pg_dump $DATABASE_URL > backup_$(date +%Y%m%d).sql
 
 ```text
 
+
 ### Restore
 
 ```bash
@@ -426,13 +463,17 @@ psql $DATABASE_URL < backup_20240115.sql
 
 ```text
 
+
 ### Supabase Backups
+
 
 - Automatic daily backups (Pro plan)
 - Point-in-time recovery
 - Manual backups via dashboard
 
+
 ## Security
+
 
 ### Row Level Security (RLS)
 
@@ -452,14 +493,18 @@ CREATE POLICY session_isolation ON sessions
 
 ```text
 
+
 ### API Security
+
 
 - All queries use parameterized statements
 - No SQL injection vulnerabilities
 - Connection pooling with limits
 - Timeout protection
 
+
 ## Monitoring
+
 
 ### Connection Pool
 
@@ -473,6 +518,7 @@ pool.on('error', (err) => {
 });
 
 ```text
+
 
 ### Query Logging
 
@@ -490,15 +536,19 @@ pool.on('query', (query) => {
 
 ```text
 
+
 ## Troubleshooting
+
 
 ### Connection Issues
 
 ```bash
 
+
 # Test connection
 
 psql $DATABASE_URL -c "SELECT 1"
+
 
 # Check pool status
 
@@ -506,11 +556,12 @@ SELECT * FROM pg_stat_activity WHERE datname = 'postgres';
 
 ```text
 
+
 ### Performance Issues
 
 ```sql
 -- Find slow queries
-SELECT 
+SELECT
   query,
   calls,
   total_time,
@@ -521,11 +572,12 @@ LIMIT 10;
 
 ```text
 
+
 ### Disk Space
 
 ```sql
 -- Check table sizes
-SELECT 
+SELECT
   tablename,
   pg_size_pretty(pg_total_relation_size(tablename::text)) as size
 FROM pg_tables

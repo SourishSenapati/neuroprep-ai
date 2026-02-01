@@ -1,21 +1,23 @@
 # 7-DAY IMPLEMENTATION ROADMAP - EXPONENTIAL FEATURES
 
-**Duration:** 7 days  
-**Goal:** Build AI Voice Clone, Multiplayer Mode, AR Face Tracking  
-**Score Impact:** +30 points (to 120/100)  
+**Duration:** 7 days
+**Goal:** Build AI Voice Clone, Multiplayer Mode, AR Face Tracking
+**Score Impact:** +30 points (to 120/100)
 **Status:** All features are BUILDABLE
 
 ---
 
 
+
 ## DAY-BY-DAY BREAKDOWN
+
 
 
 ### **DAY 1-2: AI Voice Clone** (+8 points)
 
-**Complexity:** Medium  
-**Tech:** ElevenLabs API + Web Speech API  
-**Time:** 16 hours  
+**Complexity:** Medium
+**Tech:** ElevenLabs API + Web Speech API
+**Time:** 16 hours
 
 **What You'll Build:**
 
@@ -29,6 +31,7 @@
 
 ```bash
 npm install @11ty/eleventy-plugin-syntaxhighlight
+
 
 # Use ElevenLabs free tier: 10,000 chars/month
 
@@ -47,11 +50,12 @@ npm install @11ty/eleventy-plugin-syntaxhighlight
 ---
 
 
+
 ### **DAY 3-4: Multiplayer Mode** (+10 points)
 
-**Complexity:** High  
-**Tech:** Supabase Realtime + WebRTC (optional)  
-**Time:** 20 hours  
+**Complexity:** High
+**Tech:** Supabase Realtime + WebRTC (optional)
+**Time:** 20 hours
 
 **What You'll Build:**
 
@@ -65,6 +69,7 @@ npm install @11ty/eleventy-plugin-syntaxhighlight
 
 ```bash
 npm install @supabase/supabase-js socket.io-client
+
 
 # Supabase free tier: Unlimited connections
 
@@ -83,11 +88,12 @@ npm install @supabase/supabase-js socket.io-client
 ---
 
 
+
 ### **DAY 5-7: AR Face Tracking** (+12 points)
 
-**Complexity:** Very High  
-**Tech:** MediaPipe Face Mesh + Three.js  
-**Time:** 30 hours  
+**Complexity:** Very High
+**Tech:** MediaPipe Face Mesh + Three.js
+**Time:** 30 hours
 
 **What You'll Build:**
 
@@ -101,6 +107,7 @@ npm install @supabase/supabase-js socket.io-client
 
 ```bash
 npm install @mediapipe/face_mesh @mediapipe/camera_utils
+
 
 # Google MediaPipe: Free + runs in browser
 
@@ -119,10 +126,13 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 ---
 
 
+
 ## IMPLEMENTATION GUIDES (DETAILED)
 
 
+
 ### **FEATURE 1: AI VOICE CLONE**
+
 
 
 #### **Architecture:**
@@ -142,6 +152,7 @@ Text → Speech (in your voice!)
 ```text
 
 
+
 #### **Code Scaffold:**
 
 **File: `components/VoiceCloneSetup.tsx`**
@@ -156,21 +167,21 @@ export default function VoiceCloneSetup() {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [voiceId, setVoiceId] = useState<string | null>(null);
-  
+
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const mediaRecorder = new MediaRecorder(stream);
     const chunks: Blob[] = [];
-    
+
     mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
     mediaRecorder.onstop = () => {
       const blob = new Blob(chunks, { type: 'audio/webm' });
       setAudioBlob(blob);
     };
-    
+
     mediaRecorder.start();
     setIsRecording(true);
-    
+
     // Auto-stop after 30 seconds
     setTimeout(() => {
       mediaRecorder.stop();
@@ -178,14 +189,14 @@ export default function VoiceCloneSetup() {
       stream.getTracks().forEach(track => track.stop());
     }, 30000);
   };
-  
+
   const cloneVoice = async () => {
     if (!audioBlob) return;
-    
+
     const formData = new FormData();
     formData.append('name', 'User Voice Clone');
     formData.append('files', audioBlob, 'voice-sample.webm');
-    
+
     const response = await fetch('https://api.elevenlabs.io/v1/voices/add', {
       method: 'POST',
       headers: {
@@ -193,12 +204,12 @@ export default function VoiceCloneSetup() {
       },
       body: formData
     });
-    
+
     const data = await response.json();
     setVoiceId(data.voice_id);
     localStorage.setItem('cloned_voice_id', data.voice_id);
   };
-  
+
   const speak = async (text: string) => {
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
@@ -211,23 +222,23 @@ export default function VoiceCloneSetup() {
         body: JSON.stringify({ text, model_id: 'eleven_monolingual_v1' })
       }
     );
-    
+
     const audioBlob = await response.blob();
     const audioUrl = URL.createObjectURL(audioBlob);
     const audio = new Audio(audioUrl);
     audio.play();
   };
-  
+
   return (
     <div className="p-6 border border-white/10 bg-white/5">
       <h3 className="text-xl font-bold mb-4">Clone Your Voice</h3>
-      
+
       {!voiceId ? (
         <>
           <button onClick={startRecording} disabled={isRecording}>
             {isRecording ? 'Recording... (30s)' : 'Start Recording'}
           </button>
-          
+
           {audioBlob && (
             <button onClick={cloneVoice}>
               Clone Voice
@@ -255,12 +266,12 @@ export default function VoiceCloneSetup() {
 export async function POST(req: Request) {
   const formData = await req.formData();
   const audioFile = formData.get('audio') as File;
-  
+
   // Forward to ElevenLabs
   const elevenlabsFormData = new FormData();
   elevenlabsFormData.append('name', 'User Clone');
   elevenlabsFormData.append('files', audioFile);
-  
+
   const response = await fetch('https://api.elevenlabs.io/v1/voices/add', {
     method: 'POST',
     headers: {
@@ -268,7 +279,7 @@ export async function POST(req: Request) {
     },
     body: elevenlabsFormData
   });
-  
+
   return Response.json(await response.json());
 }
 
@@ -286,7 +297,9 @@ export async function POST(req: Request) {
 ---
 
 
+
 ### **FEATURE 2: MULTIPLAYER MODE**
+
 
 
 #### **Architecture:**
@@ -304,6 +317,7 @@ Supabase Realtime Sync
 Both see same interview
 
 ```text
+
 
 
 #### **Code Scaffold:**
@@ -334,10 +348,10 @@ export default function MultiplayerRoom() {
   const [roomCode, setRoomCode] = useState('');
   const [participants, setParticipants] = useState<any[]>([]);
   const [sharedState, setSharedState] = useState<any>({});
-  
+
   const createRoom = async () => {
     const code = Math.random().toString(36).substr(2, 6).toUpperCase();
-    
+
     const { data } = await supabase
       .from('interview_rooms')
       .insert({
@@ -347,16 +361,16 @@ export default function MultiplayerRoom() {
       })
       .select()
       .single();
-    
+
     setRoomCode(code);
     subscribeToRoom(code);
   };
-  
+
   const joinRoom = async (code: string) => {
     setRoomCode(code);
     subscribeToRoom(code);
   };
-  
+
   const subscribeToRoom = (code: string) => {
     const channel = supabase
       .channel(`room:${code}`)
@@ -381,20 +395,20 @@ export default function MultiplayerRoom() {
         }
       });
   };
-  
+
   const updateState = async (newState: any) => {
     await supabase
       .from('interview_rooms')
       .update({ state: newState })
       .eq('code', roomCode);
   };
-  
+
   return (
     <div>
       {!roomCode ? (
         <>
           <button onClick={createRoom}>Create Room</button>
-          <input 
+          <input
             placeholder="Or enter room code"
             onChange={(e) => joinRoom(e.target.value)}
           />
@@ -441,7 +455,9 @@ alter publication supabase_realtime add table interview_rooms;
 ---
 
 
+
 ### **FEATURE 3: AR FACE TRACKING**
+
 
 
 #### **Architecture:**
@@ -459,6 +475,7 @@ Color by stress level
 ```text
 
 
+
 #### **Code Scaffold:**
 
 **File: `components/ARFaceTracking.tsx`**
@@ -474,23 +491,23 @@ import { Camera } from '@mediapipe/camera_utils';
 export default function ARFaceTracking() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   useEffect(() => {
     const faceMesh = new FaceMesh({
       locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
       }
     });
-    
+
     faceMesh.setOptions({
       maxNumFaces: 1,
       refineLandmarks: true,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5
     });
-    
+
     faceMesh.onResults(onResults);
-    
+
     if (videoRef.current) {
       const camera = new Camera(videoRef.current, {
         onFrame: async () => {
@@ -502,26 +519,26 @@ export default function ARFaceTracking() {
       camera.start();
     }
   }, []);
-  
+
   const onResults = (results: any) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d')!;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     if (results.multiFaceLandmarks) {
       for (const landmarks of results.multiFaceLandmarks) {
         // Draw 3D mesh
         drawFaceMesh(ctx, landmarks);
-        
+
         // Calculate stress (example: based on eyebrow position)
         const stress = calculateStress(landmarks);
         drawHeatmap(ctx, landmarks, stress);
       }
     }
   };
-  
+
   const drawFaceMesh = (ctx: CanvasRenderingContext2D, landmarks: any[]) => {
     // Draw all 468 points
     landmarks.forEach((point) => {
@@ -533,23 +550,23 @@ export default function ARFaceTracking() {
       );
     });
   };
-  
+
   const calculateStress = (landmarks: any[]): number => {
     // Example: measure eyebrow raise (stress indicator)
     const leftEyebrow = landmarks[70];
     const leftEye = landmarks[33];
     const distance = Math.abs(leftEyebrow.y - leftEye.y);
-    
+
     // Normalize to 0-1
     return Math.min(1, distance * 10);
   };
-  
+
   const drawHeatmap = (ctx: CanvasRenderingContext2D, landmarks: any[], stress: number) => {
     // Color face based on stress
     const color = stress > 0.7 ? 'rgba(255, 0, 0, 0.3)' :
                   stress > 0.4 ? 'rgba(255, 255, 0, 0.3)' :
                   'rgba(0, 255, 0, 0.3)';
-    
+
     // Draw semi-transparent overlay
     ctx.fillStyle = color;
     landmarks.forEach((point) => {
@@ -560,11 +577,11 @@ export default function ARFaceTracking() {
       );
     });
   };
-  
+
   return (
     <div className="relative">
       <video ref={videoRef} className="hidden" />
-      <canvas 
+      <canvas
         ref={canvasRef}
         width={1280}
         height={720}
@@ -589,7 +606,9 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 ---
 
 
+
 ## SUCCESS CHECKLIST
+
 
 
 ### **Week Plan:**
@@ -621,7 +640,9 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 ---
 
 
+
 ## MINIMUM VIABLE VERSIONS
+
 
 
 ### **If Short on Time:**
@@ -650,6 +671,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 ---
 
 
+
 ## DEPLOYMENT NOTES
 
 **ElevenLabs Free Tier:**
@@ -671,6 +693,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 - Works offline
 
 ---
+
 
 
 ## FINAL SCORE PROJECTION
@@ -699,6 +722,7 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 - **Score: 128/100**
 
 ---
+
 
 
 ## TIPS FOR SUCCESS

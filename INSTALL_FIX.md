@@ -1,10 +1,13 @@
 # NeuroPrep AI - Installation Fix
 
+
 ## ✅ Fixed Installation Issue
 
 The postinstall script was causing infinite loop. Fixed by removing it from package.json.
 
+
 ## 🚀 Correct Installation Steps
+
 
 ### 1. Install Root Dependencies
 
@@ -12,6 +15,7 @@ The postinstall script was causing infinite loop. Fixed by removing it from pack
 npm install
 
 ```text
+
 
 ### 2. Install Backend Dependencies
 
@@ -22,6 +26,7 @@ cd ..
 
 ```text
 
+
 ### 3. Install Frontend Dependencies
 
 ```cmd
@@ -31,12 +36,14 @@ cd ..
 
 ```text
 
+
 ### 4. Verify Installation
 
 ```cmd
 npm list concurrently --depth=0
 
 ```text
+
 
 ### 5. Start Development
 
@@ -51,6 +58,7 @@ Or use the batch file:
 dev.bat
 
 ```text
+
 
 ## 📦 What Gets Installed
 
@@ -76,6 +84,7 @@ dev.bat
 - socket.io-client, next-auth
 - @monaco-editor/react
 
+
 ## 🐛 If Installation Still Fails
 
 Run manual installation:
@@ -94,6 +103,7 @@ npm install @types/react @types/node typescript tailwindcss postcss autoprefixer
 cd ..
 
 ```text
+
 
 ## ✅ Verification
 

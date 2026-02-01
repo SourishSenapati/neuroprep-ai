@@ -1,7 +1,9 @@
 # NeuroPrep AI - Quick Setup Guide
 
 
+
 ## 🚀 Get Your App Running in 5 Minutes
+
 
 
 ### Step 1: Install Vercel CLI
@@ -12,12 +14,15 @@ npm install -g vercel
 ```text
 
 
+
 ### Step 2: Deploy
 
 ```bash
 
+
 # For Windows
 .\deploy-vercel.bat
+
 
 
 # For Mac/Linux
@@ -27,12 +32,14 @@ chmod +x deploy-vercel.sh
 ```text
 
 
+
 ### Step 3: Configure Environment Variables
 
 After deployment, you'll get two URLs:
 
 - Frontend: `https://neuroprep-frontend-xyz.vercel.app`
 - Backend: `https://neuroprep-backend-xyz.vercel.app`
+
 
 
 #### Configure Backend
@@ -51,6 +58,7 @@ JWT_SECRET = (generate with: node -e "console.log(require('crypto').randomBytes(
 ```text
 
 
+
 #### Configure Frontend
 1. Go to your frontend project on Vercel
 2. Go to Settings → Environment Variables
@@ -66,6 +74,7 @@ NEXTAUTH_URL = https://neuroprep-frontend-xyz.vercel.app
 ```text
 
 
+
 ### Step 4: Redeploy
 
 After adding environment variables:
@@ -73,6 +82,7 @@ After adding environment variables:
 1. Go to Deployments tab in each project
 2. Click on the latest deployment
 3. Click the three dots (•••) → Redeploy
+
 
 
 ### Step 5: Test
@@ -84,6 +94,7 @@ Visit your frontend URL and:
 3. Start answering questions!
 
 ---
+
 
 
 ## 🎯 Features You Get
@@ -119,7 +130,9 @@ Visit your frontend URL and:
 ---
 
 
+
 ## 🛠️ Troubleshooting
+
 
 
 ### "CORS Error"
@@ -128,10 +141,12 @@ Visit your frontend URL and:
 - Redeploy backend after changing
 
 
+
 ### "Cannot connect to API"
 - Verify `NEXT_PUBLIC_API_URL` in frontend
 - Check backend `/health` endpoint
 - Ensure backend is deployed and running
+
 
 
 ### "Questions not loading"
@@ -140,6 +155,7 @@ Visit your frontend URL and:
 - Clear browser cache and reload
 
 ---
+
 
 
 ## 📚 Full Documentation
@@ -153,7 +169,9 @@ For detailed instructions, see:
 ---
 
 
+
 ## 💡 Optional Enhancements
+
 
 
 ### Add AI API Keys (Optional)
@@ -167,6 +185,7 @@ GEMINI_API_KEY = your-gemini-key
 ```text
 
 
+
 ### Add Database (Optional)
 For persistent storage across server restarts:
 
@@ -176,6 +195,7 @@ DATABASE_URL = postgresql://user:password@host:port/database
 ```text
 
 
+
 ### Add Custom Domain
 1. Go to Project Settings → Domains
 2. Add your domain
@@ -183,6 +203,7 @@ DATABASE_URL = postgresql://user:password@host:port/database
 4. Update environment variables
 
 ---
+
 
 
 ## ✅ Success

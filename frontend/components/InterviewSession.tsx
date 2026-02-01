@@ -491,7 +491,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
           >
             <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-4">
               <h3 className="font-mono text-sm uppercase text-white">&gt;&gt; CODE_ENVIRONMENT</h3>
-              <button onClick={() => setShowCodeEditor(false)} className="p-2 hover:bg-white/10 text-white">
+              <button onClick={() => setShowCodeEditor(false)} aria-label="Close Code Editor" className="p-2 hover:bg-white/10 text-white">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -518,6 +518,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
           <div className="max-w-4xl mx-auto flex gap-4">
               <button
                   onClick={() => setIsMuted(!isMuted)}
+                  aria-label={isMuted ? "Unmute" : "Mute"}
                   className="p-3 border border-white/10 text-gray-400 hover:text-white hover:border-white transition-colors"
               >
                   {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
@@ -525,6 +526,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
               
               <button
                   onClick={() => setShowCodeEditor(true)}
+                  aria-label="Open Code Editor"
                   className="p-3 border border-white/10 text-gray-400 hover:text-white hover:border-white transition-colors"
               >
                   <Code className="w-5 h-5" />
@@ -543,6 +545,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
 
               <button
                   onClick={isListening ? stopListening : startListening}
+                  aria-label={isListening ? "Stop Listening" : "Start Listening"}
                   className={`p-3 border transition-colors ${
                       isListening 
                           ? 'bg-red-600 border-red-600 text-white animate-pulse' 
@@ -555,6 +558,7 @@ export default function InterviewSession({ onEndSession, initialConfig }: Interv
               <button
                   onClick={() => handleSendMessage(inputText)}
                   disabled={!inputText.trim()}
+                  aria-label="Send Message"
                   className="p-3 bg-[#4ADE80] text-black hover:bg-[#22c55e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                   <Send className="w-5 h-5" />

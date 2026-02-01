@@ -237,6 +237,7 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
                 max="10"
                 value={config.difficulty}
                 onChange={(e) => setConfig({ ...config, difficulty: parseInt(e.target.value) })}
+                aria-label="Difficulty Level"
                 className="w-full h-1 bg-white/10 rounded-none appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-black"
               />
               <div className="flex justify-between mt-4 text-xs font-bold uppercase text-gray-500">

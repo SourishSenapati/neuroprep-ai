@@ -1,12 +1,15 @@
 # 🗄️ MYSQL IMPLEMENTATION #1 - PlanetScale (Serverless)
 
 
+
 ## **Complete PlanetScale MySQL Setup**
 
 ---
 
 
+
 ## **1. Setup PlanetScale Account**
+
 
 
 ### **Sign Up:**
@@ -16,17 +19,21 @@
 4. Region: Mumbai (ap-south-1) or Singapore (ap-southeast-1)
 
 
+
 ### **Get Connection String:**
 
 ```bash
 
+
 # Click "Connect" in PlanetScale dashboard
+
 
 # Copy connection string
 
 ```text
 
 ---
+
 
 
 ## **2. Install Dependencies**
@@ -41,11 +48,13 @@ npm install -D prisma @prisma/client
 ---
 
 
+
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
 
 ```env
+
 
 # PlanetScale
 DATABASE_URL="mysql://username:password@host/database?sslaccept=strict"
@@ -56,6 +65,7 @@ DATABASE_PASSWORD="your-password"
 ```text
 
 ---
+
 
 
 ## **4. Database Schema**
@@ -103,20 +113,20 @@ model InterviewSession {
   id              String    @id @default(uuid())
   userId          String
   user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   role            String
   difficulty      Int
   score           Int       @default(0)
   questionsAsked  Int       @default(0)
   correctAnswers  Int       @default(0)
-  
+
   startTime       DateTime  @default(now())
   endTime         DateTime?
   duration        Int?      // seconds
   xpEarned        Int       @default(0)
-  
+
   questions       QuestionHistory[]
-  
+
   @@index([userId])
   @@index([startTime(sort: Desc)])
   @@index([role])
@@ -126,19 +136,19 @@ model Payment {
   id                String   @id @default(uuid())
   userId            String
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   amount            Int      // in paise/cents
   currency          String   @default("INR")
   method            String   // 'upi', 'card', 'netbanking'
-  
+
   razorpayOrderId   String?  @unique
   razorpayPaymentId String?  @unique
   razorpaySignature String?
-  
+
   status            String   @default("pending") // 'pending', 'completed', 'failed'
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  
+
   @@index([userId])
   @@index([status])
   @@index([createdAt(sort: Desc)])
@@ -148,18 +158,18 @@ model QuestionHistory {
   id           String   @id @default(uuid())
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   sessionId    String
   session      InterviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  
+
   questionHash String
   question     String   @db.Text
   userAnswer   String?  @db.Text
   isCorrect    Boolean?
   timeTaken    Int?     // seconds
-  
+
   askedAt      DateTime @default(now())
-  
+
   @@index([userId])
   @@index([sessionId])
   @@index([questionHash])
@@ -170,12 +180,12 @@ model AnalyticsEvent {
   id        String   @id @default(uuid())
   userId    String?
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   eventType String   // 'page_view', 'button_click', 'feature_used'
   eventData String?  @db.Text // JSON string
-  
+
   createdAt DateTime @default(now())
-  
+
   @@index([userId])
   @@index([eventType])
   @@index([createdAt(sort: Desc)])
@@ -186,13 +196,16 @@ model AnalyticsEvent {
 ---
 
 
+
 ## **5. Initialize Prisma**
 
 
 ```bash
 
+
 # Generate Prisma Client
 npx prisma generate
+
 
 
 # Push schema to PlanetScale
@@ -201,6 +214,7 @@ npx prisma db push
 ```text
 
 ---
+
 
 
 ## **6. Create Database Client**
@@ -224,7 +238,7 @@ export const auth = {
   async signup(email: string, name: string, password: string) {
     const bcrypt = await import('bcryptjs');
     const passwordHash = await bcrypt.hash(password, 10);
-    
+
     const user = await prisma.user.create({
       data: {
         email,
@@ -232,7 +246,7 @@ export const auth = {
         passwordHash,
       },
     });
-    
+
     return user;
   },
 
@@ -240,24 +254,24 @@ export const auth = {
     const user = await prisma.user.findUnique({
       where: { email },
     });
-    
+
     if (!user?.passwordHash) {
       throw new Error('Invalid credentials');
     }
-    
+
     const bcrypt = await import('bcryptjs');
     const isValid = await bcrypt.compare(password, user.passwordHash);
-    
+
     if (!isValid) {
       throw new Error('Invalid credentials');
     }
-    
+
     // Update last login
     await prisma.user.update({
       where: { id: user.id },
       data: { lastLogin: new Date() },
     });
-    
+
     return user;
   },
 
@@ -291,13 +305,13 @@ export const sessions = {
     const session = await prisma.interviewSession.findUnique({
       where: { id: sessionId },
     });
-    
+
     if (!session) throw new Error('Session not found');
-    
+
     const duration = Math.floor(
       (Date.now() - session.startTime.getTime()) / 1000
     );
-    
+
     await prisma.interviewSession.update({
       where: { id: sessionId },
       data: {
@@ -307,16 +321,16 @@ export const sessions = {
         xpEarned,
       },
     });
-    
+
     // Update user XP
     const user = await prisma.user.findUnique({
       where: { id: session.userId },
     });
-    
+
     if (user) {
       const newXP = user.xp + xpEarned;
       const newLevel = Math.floor(newXP / 1000) + 1;
-      
+
       await prisma.user.update({
         where: { id: session.userId },
         data: {
@@ -367,10 +381,10 @@ export const payments = {
         razorpaySignature,
       },
     });
-    
+
     // Upgrade user to premium
     await auth.upgradeToPremium(payment.userId);
-    
+
     return payment;
   },
 
@@ -411,7 +425,7 @@ export const questions = {
       where: { userId },
       select: { questionHash: true },
     });
-    
+
     return new Set(questions.map(q => q.questionHash));
   },
 
@@ -419,7 +433,7 @@ export const questions = {
     const allQuestions = await prisma.questionHistory.findMany({
       where: { userId },
     });
-    
+
     const totalQuestions = allQuestions.length;
     const correctAnswers = allQuestions.filter(q => q.isCorrect).length;
     const accuracy = totalQuestions > 0
@@ -428,7 +442,7 @@ export const questions = {
     const averageTime = totalQuestions > 0
       ? allQuestions.reduce((sum, q) => sum + (q.timeTaken || 0), 0) / totalQuestions
       : 0;
-    
+
     return {
       totalQuestions,
       correctAnswers,
@@ -468,7 +482,9 @@ export const analytics = {
 ---
 
 
+
 ## **7. API Routes**
+
 
 
 ### **Create `app/api/auth/signup/route.ts`:**
@@ -481,9 +497,9 @@ import { auth } from '@/lib/planetscale';
 export async function POST(request: Request) {
   try {
     const { email, name, password } = await request.json();
-    
+
     const user = await auth.signup(email, name, password);
-    
+
     return NextResponse.json({
       success: true,
       user: {
@@ -503,6 +519,7 @@ export async function POST(request: Request) {
 ```text
 
 
+
 ### **Create `app/api/auth/login/route.ts`:**
 
 
@@ -513,9 +530,9 @@ import { auth } from '@/lib/planetscale';
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
-    
+
     const user = await auth.login(email, password);
-    
+
     return NextResponse.json({
       success: true,
       user: {
@@ -540,21 +557,26 @@ export async function POST(request: Request) {
 ---
 
 
+
 ## **8. Deploy to PlanetScale**
 
 
 ```bash
 
+
 # Create production branch
 pscale branch create neuroprep-ai production
+
 
 
 # Deploy schema
 npx prisma db push
 
 
+
 # Promote to production
 pscale deploy-request create neuroprep-ai production
+
 
 
 # Get production connection string
@@ -565,16 +587,18 @@ pscale connect neuroprep-ai production
 ---
 
 
+
 ## **9. Advantages**
 
-✅ **FREE Tier:** 5 GB storage, 1B row reads/month  
-✅ **Serverless:** No servers to manage  
-✅ **Branching:** Git-like database branches  
-✅ **Auto-scaling:** Handles traffic spikes  
-✅ **Global:** Low latency worldwide  
-✅ **Prisma:** Type-safe database access  
+✅ **FREE Tier:** 5 GB storage, 1B row reads/month
+✅ **Serverless:** No servers to manage
+✅ **Branching:** Git-like database branches
+✅ **Auto-scaling:** Handles traffic spikes
+✅ **Global:** Low latency worldwide
+✅ **Prisma:** Type-safe database access
 
 ---
+
 
 
 ## **COMPLETE PLANETSCALE SETUP! 🚀**

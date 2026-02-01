@@ -1,6 +1,7 @@
 # NeuroPrep AI - System Architecture Diagram
 
 
+
 ## Visual Architecture
 
 
@@ -12,19 +13,19 @@ graph TB
         Monaco["Monaco Editor<br/>VS Code Component"]
         Pyodide["Pyodide WebAssembly<br/>Python Execution"]
     end
-    
+
     subgraph Edge[" Vercel Edge Network"]
         CDN["Global CDN<br/>Static Assets"]
         EdgeAPI["Edge Functions<br/>API Routes"]
         SSR["Server-Side Rendering"]
     end
-    
+
     subgraph API[" API Layer Next.js"]
         Stream["POST /api/stream<br/>AI Streaming SSE"]
         Resume["POST /api/parse-resume<br/>PDF→JSON Extraction"]
         Auth["POST /api/auth<br/>NextAuth.js"]
     end
-    
+
     subgraph Backend["️ Backend Server Node.js + Express"]
         QB["Question Bank Manager<br/>224M+ Unique Questions<br/>FNV-1a Hash Tracking"]
         SM["Session Manager<br/>In-Memory + Persistence"]
@@ -32,52 +33,52 @@ graph TB
         ResParser["Resume Parser<br/>pdf-parse Library<br/>NLP Extraction"]
         Socket["Socket.io Server<br/>Real-time Biometrics"]
     end
-    
+
     subgraph Storage[" Data Layer"]
         SQLite["SQLite Database<br/>Users, Sessions<br/>Biometrics, Responses"]
         Redis["Redis Cache Optional<br/>Session State<br/>Pub/Sub Events"]
     end
-    
+
     subgraph External[" External Services"]
         OpenAI["OpenAI API<br/>GPT-4 Turbo"]
         Claude["Anthropic API<br/>Claude 3 Opus/Sonnet"]
         Stripe["Stripe API<br/>Payments"]
     end
-    
+
     %% Client connections
-    UI -->|HTTPS| CDN
-    UI -->|API Calls| EdgeAPI
-    UI -->|WebSocket| Socket
+    UI --> | HTTPS | CDN
+    UI --> | API Calls | EdgeAPI
+    UI --> | WebSocket | Socket
     Monaco --> Pyodide
     FM --> UI
-    
+
     %% Edge to API
     CDN --> SSR
     EdgeAPI --> Stream
     EdgeAPI --> Resume
     EdgeAPI --> Auth
-    
+
     %% API to Backend
-    Stream -->|Proxy| AIEngine
-    Resume -->|Proxy| ResParser
-    Auth -->|Session| SM
-    
+    Stream --> | Proxy | AIEngine
+    Resume --> | Proxy | ResParser
+    Auth --> | Session | SM
+
     %% Backend internal
     AIEngine --> QB
     AIEngine --> SM
     ResParser --> SM
     Socket --> SM
-    
+
     %% Backend to Storage
     SM --> SQLite
     SM --> Redis
     QB --> SQLite
-    
+
     %% External services
-    AIEngine -->|API Call| OpenAI
-    AIEngine -->|API Call| Claude
+    AIEngine --> | API Call | OpenAI
+    AIEngine --> | API Call | Claude
     Backend --> Stripe
-    
+
     %% Styling
     classDef clientClass fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#fff
     classDef edgeClass fill:#50C878,stroke:#2D7A4A,stroke-width:2px,color:#fff
@@ -85,7 +86,7 @@ graph TB
     classDef backendClass fill:#9B59B6,stroke:#6C3483,stroke-width:2px,color:#fff
     classDef storageClass fill:#F39C12,stroke:#B8750A,stroke-width:2px,color:#fff
     classDef externalClass fill:#34495E,stroke:#1C2833,stroke-width:2px,color:#fff
-    
+
     class UI,FM,Monaco,Pyodide clientClass
     class CDN,EdgeAPI,SSR edgeClass
     class Stream,Resume,Auth apiClass
@@ -98,7 +99,9 @@ graph TB
 ---
 
 
+
 ## Data Flow Diagrams
+
 
 
 ### 1. Interview Session Flow
@@ -112,7 +115,7 @@ sequenceDiagram
     participant B as Backend AIEngine
     participant O as OpenAI/Claude
     participant DB as SQLite
-    
+
     U->>F: Start Interview (role, difficulty)
     F->>A: POST /api/stream {messages, config}
     A->>B: Proxy request
@@ -134,6 +137,7 @@ sequenceDiagram
 ```text
 
 
+
 ### 2. Resume Upload & Auto-Fill Flow
 
 
@@ -144,7 +148,7 @@ sequenceDiagram
     participant A as API /parse-resume
     participant P as Resume Parser
     participant S as InterviewSetup
-    
+
     U->>F: Upload resume.pdf
     F->>F: Validate (type, size)
     F->>A: POST FormData {resume: file}
@@ -161,6 +165,7 @@ sequenceDiagram
 ```text
 
 
+
 ### 3. Question Generation Flow
 
 
@@ -171,11 +176,11 @@ flowchart TD
     CheckHistory --> Generate[Generate Question<br/>QuestionBankManager]
     Generate --> Hash[Calculate FNV-1a Hash]
     Hash --> CheckDupe{Duplicate?}
-    CheckDupe -->|Yes| Retry[Retry Counter++]
+    CheckDupe --> | Yes | Retry[Retry Counter++]
     Retry --> MaxRetries{Max Retries<br/>1000?}
-    MaxRetries -->|No| Generate
-    MaxRetries -->|Yes| Fallback[Use Fallback Question]
-    CheckDupe -->|No| AdaptDiff[Adapt Difficulty<br/>Based on Performance]
+    MaxRetries --> | No | Generate
+    MaxRetries --> | Yes | Fallback[Use Fallback Question]
+    CheckDupe --> | No | AdaptDiff[Adapt Difficulty<br/>Based on Performance]
     AdaptDiff --> Stream[Stream to User]
     Fallback --> Stream
     Stream --> SaveDB[Save to Database]
@@ -186,7 +191,9 @@ flowchart TD
 ---
 
 
+
 ## Component Architecture
+
 
 
 ### Frontend Component Hierarchy
@@ -197,25 +204,26 @@ graph TD
     Root[app/layout.tsx<br/>Root Layout] --> Providers[Providers Wrapper]
     Providers --> Page[app/page.tsx<br/>Landing Page]
     Providers --> Interview[app/interview/*]
-    
+
     Page --> Chaos[ChaosToOrderLanding<br/>Animated Hero NEW!]
-    
+
     Interview --> Setup[InterviewSetup<br/>Multi-Step Form]
     Interview --> Session[InterviewSession<br/>AI Chat Interface]
-    
+
     Setup --> Upload[Resume Upload NEW!<br/>PDF Drag & Drop]
     Setup --> RoleSelect[Role Selection<br/>40+ Engineering Fields]
     Setup --> Difficulty[Difficulty Slider<br/>1-10 Scale]
-    
+
     Session --> Chat[Chat Messages<br/>User + AI]
     Session --> Bio[Biometric Display<br/>Stress, HR, Emotion]
     Session --> CodeEd[CodeEditor<br/>Monaco + Pyodide]
     Session --> Voice[Voice Controls<br/>Speech Synthesis/Recognition]
-    
+
     CodeEd --> Monaco[Monaco Editor<br/>Syntax Highlighting]
     CodeEd --> PyEngine[Pyodide Engine<br/>Python Execution]
 
 ```text
+
 
 
 ### Backend Module Architecture
@@ -226,19 +234,19 @@ graph LR
     Server[server.js<br/>Express App] --> Routes[API Routes]
     Server --> Socket[Socket.io]
     Server --> Middleware[Middleware<br/>CORS, Helmet, Rate Limit]
-    
+
     Routes --> QuestionAPI[/api/question]
     Routes --> StreamAPI[/api/stream]
     Routes --> ParseAPI[/api/parse-resume NEW!]
     Routes --> DashboardAPI[/api/dashboard]
-    
+
     QuestionAPI --> QB[questionBank.ts<br/>FNV-1a Hash<br/>224M Combos]
     StreamAPI --> AI[aiEngine.js<br/>OpenAI/Claude]
     ParseAPI --> Parser[parse-resume.js<br/>pdf-parse + NLP NEW!]
     DashboardAPI --> DB[database.js<br/>SQLite Queries]
-    
+
     Socket --> SessionMgr[sessionManager.ts<br/>In-Memory State]
-    
+
     QB --> DB
     AI --> DB
     SessionMgr --> DB
@@ -249,7 +257,9 @@ graph LR
 ---
 
 
+
 ## Technology Stack Breakdown
+
 
 
 ### Frontend Stack
@@ -266,6 +276,7 @@ graph LR
 | **Real-time** | Socket.io Client 4.8 | Bi-directional WebSocket events | 
 | **Auth** | NextAuth 4.24 | Authentication, session management | 
 | **State Management** | React Hooks + Zustand | Local & global state | 
+
 
 
 ### Backend Stack
@@ -287,6 +298,7 @@ graph LR
 ---
 
 
+
 ## Deployment Architecture
 
 
@@ -297,49 +309,49 @@ graph TB
         User2[User Device 2]
         UserN[User Device N]
     end
-    
+
     subgraph Vercel[" Vercel Platform"]
         subgraph Frontend["Frontend Deployment"]
             EdgeFront[Edge Network<br/>Global CDN]
             NextFunc[Next.js<br/>Serverless Functions]
         end
-        
+
         subgraph BackendV["Backend Deployment"]
             EdgeBack[Edge Network]
             NodeFunc[Node.js<br/>Serverless Functions]
         end
     end
-    
+
     subgraph Services[" External Services"]
         OpenAISvc[OpenAI API<br/>gpt-4-turbo]
         ClaudeSvc[Anthropic API<br/>claude-3-opus]
         StripeSvc[Stripe API<br/>Billing]
     end
-    
+
     subgraph Data[" Data Storage"]
         SQLiteDB[(SQLite<br/>File-based)]
         RedisDB[(Redis Labs<br/>Optional)]
     end
-    
-    User1 -->|HTTPS| EdgeFront
-    User2 -->|HTTPS| EdgeFront
-    UserN -->|HTTPS| EdgeFront
-    
+
+    User1 --> | HTTPS | EdgeFront
+    User2 --> | HTTPS | EdgeFront
+    UserN --> | HTTPS | EdgeFront
+
     EdgeFront --> NextFunc
-    NextFunc -->|Proxy /api/*| EdgeBack
+    NextFunc --> | Proxy /api/* | EdgeBack
     EdgeBack --> NodeFunc
-    
+
     NodeFunc --> OpenAISvc
     NodeFunc --> ClaudeSvc
     NodeFunc --> StripeSvc
     NodeFunc --> SQLiteDB
     NodeFunc --> RedisDB
-    
+
     classDef userClass fill:#3498DB,stroke:#2874A6
     classDef vercelClass fill:#000000,stroke:#333333,color:#fff
     classDef serviceClass fill:#E74C3C,stroke:#C0392B
     classDef dataClass fill:#F39C12,stroke:#D68910
-    
+
     class User1,User2,UserN userClass
     class EdgeFront,NextFunc,EdgeBack,NodeFunc vercelClass
     class OpenAISvc,ClaudeSvc,StripeSvc serviceClass
@@ -350,28 +362,29 @@ graph TB
 ---
 
 
+
 ## Security Architecture
 
 
 ```mermaid
 graph TD
     Request[Incoming Request] --> HTTPS{HTTPS?}
-    HTTPS -->|No| Reject[Reject: 403]
-    HTTPS -->|Yes| CORS{Valid Origin?}
-    CORS -->|No| Reject
-    CORS -->|Yes| RateLimit{Rate Limit OK?}
-    RateLimit -->|No| Reject429[Reject: 429]
-    RateLimit -->|Yes| Auth{Authenticated?}
-    Auth -->|Required + No| Reject401[Reject: 401]
-    Auth -->|Yes/Optional| Validate{Input Valid?}
-    Validate -->|No| Reject400[Reject: 400]
-    Validate -->|Yes| FileCheck{File Upload?}
-    FileCheck -->|Yes| SizeCheck{Size OK?}
-    SizeCheck -->|No| Reject413[Reject: 413]
-    SizeCheck -->|Yes| TypeCheck{Type OK?}
-    TypeCheck -->|No| Reject415[Reject: 415]
-    TypeCheck -->|Yes| Process
-    FileCheck -->|No| Process[Process Request]
+    HTTPS --> | No | Reject[Reject: 403]
+    HTTPS --> | Yes | CORS{Valid Origin?}
+    CORS --> | No | Reject
+    CORS --> | Yes | RateLimit{Rate Limit OK?}
+    RateLimit --> | No | Reject429[Reject: 429]
+    RateLimit --> | Yes | Auth{Authenticated?}
+    Auth --> | Required + No | Reject401[Reject: 401]
+    Auth --> | Yes/Optional | Validate{Input Valid?}
+    Validate --> | No | Reject400[Reject: 400]
+    Validate --> | Yes | FileCheck{File Upload?}
+    FileCheck --> | Yes | SizeCheck{Size OK?}
+    SizeCheck --> | No | Reject413[Reject: 413]
+    SizeCheck --> | Yes | TypeCheck{Type OK?}
+    TypeCheck --> | No | Reject415[Reject: 415]
+    TypeCheck --> | Yes | Process
+    FileCheck --> | No | Process[Process Request]
     Process --> Sanitize[Sanitize Input<br/>XSS Prevention]
     Sanitize --> Execute[Execute Logic]
     Execute --> Response[Return Response]
@@ -381,7 +394,9 @@ graph TD
 ---
 
 
+
 ## Performance Metrics
+
 
 
 ### Frontend Optimization
@@ -400,17 +415,19 @@ pie title Bundle Size Distribution (Target <500KB)
 ```text
 
 
+
 ### Backend Performance
 
 | Metric | Target | Actual | Status | 
 | -------- | -------- | -------- | -------- | 
-| Question Generation | <50ms | ~30ms |  Exceeded | 
-| AI Streaming (First Token) | <500ms | ~400ms |  Met | 
-| Database Query | <10ms | ~5ms |  Exceeded | 
-| Resume Parsing | <2s | ~1.5s |  Met | 
-| Session Creation | <100ms | ~80ms |  Met | 
+| Question Generation | <50ms | ~30ms | Exceeded | 
+| AI Streaming (First Token) | <500ms | ~400ms | Met | 
+| Database Query | <10ms | ~5ms | Exceeded | 
+| Resume Parsing | <2s | ~1.5s | Met | 
+| Session Creation | <100ms | ~80ms | Met | 
 
 ---
+
 
 
 ## Future Enhancements
@@ -437,6 +454,7 @@ timeline
 ---
 
 
+
 ## Diagram Export
 
 To convert this Mermaid diagram to PNG:
@@ -447,6 +465,6 @@ To convert this Mermaid diagram to PNG:
 
 ---
 
-**Architecture Version:** 2.0  
-**Last Updated:** December 2025  
+**Architecture Version:** 2.0
+**Last Updated:** December 2025
 **Maintained By:** NeuroPrep AI Team

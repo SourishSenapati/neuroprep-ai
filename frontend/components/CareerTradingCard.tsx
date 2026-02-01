@@ -72,8 +72,8 @@ export default function CareerTradingCard({ user }: { user: any }) {
                 {/* Footer / QR Code Placeholder */}
                 <div className="flex items-center justify-between pt-4 border-t border-white/10 relative z-20">
                     <div className="flex gap-2">
-                        <button className="p-2 hover:bg-white/10 rounded-full transition-colors"><Share2 className="w-4 h-4 text-gray-400" /></button>
-                        <button className="p-2 hover:bg-white/10 rounded-full transition-colors"><Linkedin className="w-4 h-4 text-blue-400" /></button>
+                        <button aria-label="Share" className="p-2 hover:bg-white/10 rounded-full transition-colors"><Share2 className="w-4 h-4 text-gray-400" /></button>
+                        <button aria-label="Share on LinkedIn" className="p-2 hover:bg-white/10 rounded-full transition-colors"><Linkedin className="w-4 h-4 text-blue-400" /></button>
                     </div>
                     <div className="text-right">
                          <p className="text-[10px] text-gray-600">Scan to Join</p>

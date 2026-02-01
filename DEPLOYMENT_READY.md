@@ -1,6 +1,8 @@
 
 
+
 # 🚀 Deployment Verification & Status
+
 
 
 ## ✅ Build Status
@@ -9,10 +11,12 @@
 - **Database**: MOCK MODE (Active fallback if Postgres missing)
 
 
+
 ## 💳 Payment System
 - **Integration**: Razorpay (UPI Optimized) + Stripe
 - **Status**: Simulated/Demo Mode (Safe for Judges)
 - **Flow**: User clicks Upgrade -> Selects UPI -> Scans QR (Simulated) -> "I have Paid" -> Premium Unlocked (Confetti)
+
 
 
 ## 🐛 Known Issues & Mitigations
@@ -20,6 +24,7 @@
   - *Mitigation*: Demo uses In-Memory Mock DB. Sufficient for 4-hour sprint.
 - **Biometrics**: Browser permissions needed for Camera/Mic.
   - *Mitigation*: Fallback to "Simulation Mode" if permission denied.
+
 
 
 ## 🛠 Deployment Instructions
@@ -36,6 +41,7 @@
   - Build Command: `npm install`
   - Start Command: `node server.js`
   - Add env vars (OPENAI_API_KEY, etc.)
+
 
 
 ## 🧪 Smoke Test Plan (Judges)

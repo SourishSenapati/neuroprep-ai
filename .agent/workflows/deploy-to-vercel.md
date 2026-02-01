@@ -2,9 +2,11 @@
 description: Deploy NeuroPrep AI to Vercel for Free
 ---
 
+
 # Deploy to Vercel - Complete Workflow
 
 This workflow will guide you through deploying NeuroPrep AI to Vercel completely free.
+
 
 ## Prerequisites
 
@@ -15,53 +17,65 @@ This workflow will guide you through deploying NeuroPrep AI to Vercel completely
 
 ---
 
+
 ## Step 1: Push to GitHub
 
 // turbo
+
 ```bash
+
 # Initialize git if needed
 git init
+
 
 # Add all files
 git add .
 
+
 # Commit everything
 git commit -m "NeuroPrep AI - Production Ready v2.0"
 
-# Create repository on GitHub first, then:
+
+# Create repository on GitHub first, then
 git remote add origin https://github.com/YOUR_USERNAME/neuroprep-ai.git
 git branch -M main
 git push -u origin main
-```
 
+```text
 ---
+
 
 ## Step 2: Install Vercel CLI
 
 // turbo
+
 ```bash
 npm install -g vercel
-```
 
+```text
 ---
+
 
 ## Step 3: Login to Vercel
 
+
 ```bash
 vercel login
-```
 
+```text
 Follow the browser prompts to authenticate.
 
 ---
 
+
 ## Step 4: Deploy Backend
+
 
 ```bash
 cd backend
 vercel --prod
-```
 
+```text
 When prompted:
 - Project name: `neuroprep-backend`
 - Link to existing project? `N`
@@ -71,6 +85,7 @@ When prompted:
 
 ---
 
+
 ## Step 5: Configure Backend Environment Variables
 
 Go to https://vercel.com/dashboard
@@ -79,29 +94,33 @@ Go to https://vercel.com/dashboard
 2. Go to Settings → Environment Variables
 3. Add these variables for **Production**:
 
-```
+
+```text
 NODE_ENV=production
 PORT=5000
 SESSION_SECRET=<generate-secret>
 JWT_SECRET=<generate-secret>
 CORS_ORIGIN=<will-add-after-frontend-deployed>
 FRONTEND_URL=<will-add-after-frontend-deployed>
-```
 
+```text
 To generate secrets:
+
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
-```
 
+```text
 ---
 
+
 ## Step 6: Deploy Frontend
+
 
 ```bash
 cd ../frontend
 vercel --prod
-```
 
+```text
 When prompted:
 - Project name: `neuroprep-frontend`
 - Link to existing project? `N`
@@ -111,6 +130,7 @@ When prompted:
 
 ---
 
+
 ## Step 7: Configure Frontend Environment Variables
 
 In Vercel Dashboard:
@@ -119,16 +139,18 @@ In Vercel Dashboard:
 2. Go to Settings → Environment Variables
 3. Add these variables for **Production**:
 
-```
+
+```text
 NEXT_PUBLIC_API_URL=https://neuroprep-backend-abc123.vercel.app
 NEXT_PUBLIC_WS_URL=https://neuroprep-backend-abc123.vercel.app
 NEXTAUTH_SECRET=<generate-secret>
 NEXTAUTH_URL=https://neuroprep-frontend-xyz789.vercel.app
 NEXT_PUBLIC_TFJS_BACKEND=webgpu
 NEXT_PUBLIC_ENABLE_GAUSSIAN_SPLATS=true
-```
 
+```text
 ---
+
 
 ## Step 8: Update Backend CORS Settings
 
@@ -137,19 +159,23 @@ Go back to `neuroprep-backend` project:
 1. Go to Settings → Environment Variables
 2. Update these variables:
 
-```
+
+```text
 CORS_ORIGIN=https://neuroprep-frontend-xyz789.vercel.app
 FRONTEND_URL=https://neuroprep-frontend-xyz789.vercel.app
-```
 
+```text
 ---
 
+
 ## Step 9: Redeploy Both Projects
+
 
 ### Redeploy Backend
 1. Go to `neuroprep-backend` → Deployments
 2. Click on latest deployment
 3. Click three dots (•••) → Redeploy
+
 
 ### Redeploy Frontend
 1. Go to `neuroprep-frontend` → Deployments
@@ -158,36 +184,42 @@ FRONTEND_URL=https://neuroprep-frontend-xyz789.vercel.app
 
 ---
 
+
 ## Step 10: Verify Deployment
 
+
 ### Test Backend Health
+
 ```bash
 curl https://neuroprep-backend-abc123.vercel.app/health
-```
 
+```text
 Expected response:
+
 ```json
 {
   "status": "healthy",
   "timestamp": 1234567890,
   "services": {...}
 }
-```
 
+```text
 ### Test Question Stats
+
 ```bash
 curl https://neuroprep-backend-abc123.vercel.app/api/question-stats
-```
 
+```text
 Expected response:
+
 ```json
 {
   "totalPatterns": 75,
   "estimatedCombinations": 84375000,
   "message": "NeuroPrep AI can generate over 1 million unique questions per engineering discipline"
 }
-```
 
+```text
 ### Test Frontend
 Visit: `https://neuroprep-frontend-xyz789.vercel.app`
 
@@ -197,6 +229,7 @@ You should see:
 - Role selection dropdown
 
 ---
+
 
 ## Step 11: Start an Interview
 
@@ -209,6 +242,7 @@ You should see:
 
 ---
 
+
 ## Optional Step 12: Add Custom Domain
 
 1. Go to Project Settings → Domains
@@ -219,17 +253,21 @@ You should see:
 
 ---
 
+
 ## Troubleshooting
+
 
 ### CORS Error
 - Verify `CORS_ORIGIN` in backend matches frontend URL exactly
 - Include `https://` in the URL
 - Redeploy backend
 
+
 ### API Connection Failed
 - Check `NEXT_PUBLIC_API_URL` in frontend env vars
 - Test backend `/health` endpoint
 - Check Vercel logs for errors
+
 
 ### Questions Not Loading
 - Verify backend is deployed and accessible
@@ -238,29 +276,35 @@ You should see:
 
 ---
 
+
 ## Optional Enhancements
+
 
 ### Add AI API Keys (Optional)
 In backend environment variables:
-```
+
+```text
 OPENAI_API_KEY=sk-proj-your-key
 ANTHROPIC_API_KEY=sk-ant-your-key
 GEMINI_API_KEY=your-gemini-key
-```
 
+```text
 ### Add Database (Optional)
 Use Vercel Postgres or other provider:
-```
-DATABASE_URL=postgresql://user:password@host:port/database
-```
 
+```text
+DATABASE_URL=postgresql://user:password@host:port/database
+
+```text
 ### Add Redis (Optional)
 For distributed sessions:
-```
-REDIS_URL=redis://user:password@host:port
-```
 
+```text
+REDIS_URL=redis://user:password@host:port
+
+```text
 ---
+
 
 ## Success Checklist
 
@@ -281,8 +325,8 @@ REDIS_URL=redis://user:password@host:port
 
 ---
 
-## 🎉 Congratulations!
 
+## 🎉 Congratulations
 Your NeuroPrep AI is now live and ready to conduct world-class engineering interviews!
 
 **Your URLs**:
@@ -293,6 +337,7 @@ Share with your team and start interviewing!
 
 ---
 
+
 ## Next Steps
 
 1. **Test thoroughly** - Try different roles and difficulties
@@ -302,6 +347,7 @@ Share with your team and start interviewing!
 5. **Share** - Tell others about NeuroPrep AI!
 
 ---
+
 
 ## Support
 

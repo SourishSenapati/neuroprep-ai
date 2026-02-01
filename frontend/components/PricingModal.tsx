@@ -104,6 +104,7 @@ export default function PricingModal({
           {/* Close Button */}
           <button
             onClick={onClose}
+            aria-label="Close Modal"
             className="absolute -top-4 -right-4 z-20 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
           >
             <X className="w-6 h-6" />

@@ -217,6 +217,7 @@ export default function AuthPage({ onAuthSuccess, showAttemptLimit = false, atte
                       <select
                         value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                        aria-label="Select Role"
                         className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-400 transition-colors appearance-none"
                       >
                         {roles.map(role => (
@@ -230,6 +231,7 @@ export default function AuthPage({ onAuthSuccess, showAttemptLimit = false, atte
                       <select
                         value={formData.level}
                         onChange={(e) => setFormData({ ...formData, level: e.target.value })}
+                        aria-label="Select Level"
                         className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-400 transition-colors appearance-none"
                       >
                         {levels.map(level => (

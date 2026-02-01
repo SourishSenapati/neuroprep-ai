@@ -1,8 +1,10 @@
 # NeuroPrep AI - Neural Core Backend
 
+
 ## Executive Summary
 
 Production-grade backend with GPT-4o/Claude 3.5 streaming, RAG vector search, real-time biometric analysis, and cheat detection.
+
 
 ## Core Architecture
 
@@ -36,7 +38,9 @@ Production-grade backend with GPT-4o/Claude 3.5 streaming, RAG vector search, re
 
 ```text
 
+
 ## Key Components
+
 
 ### 1. aiEngine.ts (Advanced AI Orchestration)
 
@@ -66,7 +70,7 @@ await streamInitialQuestion(mode, (chunk) => {
 **LLM Pattern Detection:**
 
 ```typescript
-const hasLLMPatterns = /furthermore|moreover|in conclusion|it is important to note/i.test(response);
+const hasLLMPatterns = /furthermore | moreover | in conclusion | it is important to note/i.test(response);
 
 ```text
 
@@ -75,6 +79,7 @@ const hasLLMPatterns = /furthermore|moreover|in conclusion|it is important to no
 - AI verifies technical claims
 - 95% confidence threshold
 - Flags uncertain responses
+
 
 ### 2. sessionManager.ts (State Management)
 
@@ -112,17 +117,20 @@ All backend instances receive events and broadcast to connected clients.
 
 ```text
 
+
 ### 3. server.js (Express + Socket.io)
 
 **REST Endpoints:**
 
 `POST /api/start-session`
 
+
 - Creates session
 - Streams initial question via SSE
 - Returns sessionId
 
 `POST /api/end-session`
+
 
 - Aggregates scores
 - Generates insights
@@ -133,6 +141,7 @@ All backend instances receive events and broadcast to connected clients.
 
 `interview-response` (client → server)
 
+
 - Receives user response + biometrics
 - Triggers AI analysis
 - Stores scores
@@ -141,11 +150,14 @@ All backend instances receive events and broadcast to connected clients.
 
 `analysis-complete` (server → client)
 
+
 - Real-time analysis results
 - EQ/technical/authenticity scores
 - Feedback and recommendations
 
+
 ## Knowledge Banks
+
 
 ### Caltech PhD Mode
 
@@ -158,6 +170,7 @@ All backend instances receive events and broadcast to connected clients.
 
 ```text
 
+
 ### MIT AI Mode
 
 ```typescript
@@ -169,7 +182,9 @@ All backend instances receive events and broadcast to connected clients.
 
 ```text
 
+
 ## AI Prompting Strategy
+
 
 ### Initial Question Generation
 
@@ -178,6 +193,7 @@ All backend instances receive events and broadcast to connected clients.
 Elite MIT-level probe: How would you scale neural network training to exascale computing (10^18 FLOPS)?
 
 Consider:
+
 1. Communication bottlenecks
 2. Memory hierarchy optimization
 3. Fault tolerance at scale
@@ -188,6 +204,7 @@ Context from research:
 [RAG context injected here]
 
 ```text
+
 
 ### Response Analysis
 
@@ -213,6 +230,7 @@ Analyze and provide JSON:
 
 ```text
 
+
 ## Adaptive Difficulty
 
 **Triggers:**
@@ -231,6 +249,7 @@ if (analysis.adaptationNeeded) {
 
 ```text
 
+
 ## Cheat Detection Algorithm
 
 **Pattern Matching:**
@@ -248,6 +267,7 @@ cheatDetected = hasLLMPatterns && wordCount > 200;
 
 ```text
 
+
 ## Neural Resilience Calculation
 
 ```typescript
@@ -263,7 +283,9 @@ readiness = neuralResilience >= 85 ? 'MIT-ready' :
 
 ```text
 
+
 ## Scaling Architecture
+
 
 ### Multi-Instance Support
 
@@ -287,13 +309,16 @@ redisSub.on('message', (channel, message) => {
 - Session state in Redis
 - Socket.io sticky sessions via IP hash
 
+
 ### Performance Metrics
+
 
 - **Streaming latency**: <100ms first chunk
 - **Analysis time**: 2-5s per response
 - **Session retrieval**: <5ms (Redis)
 - **Event propagation**: <10ms (Socket.io)
 - **Concurrent sessions**: 10,000+ per instance
+
 
 ## Error Handling
 
@@ -315,6 +340,7 @@ try {
 - No OpenAI key → Mock responses
 - Redis down → In-memory sessions
 - PostgreSQL down → Skip persistence
+
 
 ## Security
 
@@ -343,6 +369,7 @@ const schema = z.object({
 - Security headers
 - XSS protection
 - Content Security Policy
+
 
 ## Deployment
 
@@ -375,6 +402,7 @@ docker run -p 3001:3001 --env-file .env neuroprep-backend
 
 ```text
 
+
 ## Testing
 
 **Unit Tests:**
@@ -388,17 +416,20 @@ npm test
 
 ```bash
 
+
 # Start session
 
 curl -X POST http://localhost:3001/api/start-session \
   -H "Content-Type: application/json" \
   -d '{"userId":"test_user","mode":"caltech-phd"}'
 
+
 # WebSocket test
 
 node test-socket.js
 
 ```text
+
 
 ## Monitoring
 
@@ -424,7 +455,9 @@ console.log({
 
 ```text
 
+
 ## Future Enhancements
+
 
 1. **Real Vector Embeddings**: OpenAI embeddings API
 2. **Advanced RAG**: Pinecone/Weaviate vector DB

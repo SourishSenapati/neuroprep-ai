@@ -1,28 +1,37 @@
 # NeuroPrep AI - Testing Guide
 
+
 ## 🧪 Test Suite Overview
 
+
 ### Backend Unit Tests (Jest)
+
 
 - **Location:** `backend/__tests__/`
 - **Framework:** Jest + ts-jest
 - **Coverage Target:** 80% lines, 75% functions
 
+
 ### Frontend E2E Tests (Cypress)
+
 
 - **Location:** `cypress/e2e/`
 - **Framework:** Cypress 13
 - **Browser:** Chrome with fake media stream
 
+
 ## 🚀 Running Tests
+
 
 ### Quick Start
 
 ```bash
 
+
 # Install dependencies
 
 npm install
+
 
 # Run all tests
 
@@ -31,22 +40,27 @@ npm run test:e2e
 
 ```text
 
+
 ### Backend Tests
 
 ```bash
 
+
 # Run with coverage
 
 npm run test:jest
+
 
 # Watch mode
 
 cd backend
 npm test -- --watch
 
+
 # Specific test file
 
 npm test -- aiEngine.test.ts
+
 
 # Verbose output
 
@@ -54,17 +68,21 @@ npm test -- --verbose
 
 ```text
 
+
 ### E2E Tests
 
 ```bash
+
 
 # Headless (CI mode)
 
 npm run test:e2e
 
+
 # Interactive mode
 
 npm run test:e2e:open
+
 
 # Specific spec
 
@@ -72,7 +90,9 @@ npx cypress run --spec "cypress/e2e/interview.cy.ts"
 
 ```text
 
+
 ## 📋 Test Scenarios
+
 
 ### 1. Adaptive AI Flow (Jest)
 
@@ -112,6 +132,7 @@ expect(insights.readiness).toBe('Strong');
 
 ```text
 
+
 ### 2. Full Interview Simulation (Cypress)
 
 **Scenario:** Caltech PhD session with score > 90
@@ -147,6 +168,7 @@ cy.get('[data-testid="neural-resilience"]').invoke('text').then((text) => {
 
 ```text
 
+
 ### 3. Pyodide Execution (Cypress)
 
 **Test:** `verifies Pyodide numpy execution`
@@ -159,6 +181,7 @@ cy.get('[data-testid="code-output"]', { timeout: 10000 })
 
 ```text
 
+
 ### 4. Neural Reset Trigger (Cypress)
 
 **Test:** `triggers neural reset when stress > 8`
@@ -170,6 +193,7 @@ cy.get('[data-testid="neural-reset-overlay"]', { timeout: 5000 })
 cy.contains('4-7-8 Breathing').should('be.visible');
 
 ```text
+
 
 ### 5. Cheat Detection (Cypress)
 
@@ -185,25 +209,32 @@ cy.get('[data-testid="auth-flag"]', { timeout: 10000 })
 
 ```text
 
+
 ## 🎯 Coverage Reports
+
 
 ### Generate Coverage
 
 ```bash
 npm run test:jest
 
+
 # Opens: coverage/lcov-report/index.html
 
 ```text
 
+
 ### Coverage Thresholds
+
 
 - **Lines:** 80%
 - **Functions:** 75%
 - **Branches:** 70%
 - **Statements:** 80%
 
+
 ## 🔧 Mock Configuration
+
 
 ### OpenAI/Anthropic Mocks (Jest)
 
@@ -213,10 +244,10 @@ jest.mock('openai', () => ({
     chat: {
       completions: {
         create: jest.fn().mockResolvedValue({
-          choices: [{ 
-            message: { 
-              content: '{"eqScore":8,"technicalScore":85}' 
-            } 
+          choices: [{
+            message: {
+              content: '{"eqScore":8,"technicalScore":85}'
+            }
           }]
         })
       }
@@ -225,6 +256,7 @@ jest.mock('openai', () => ({
 }));
 
 ```text
+
 
 ### Camera Mock (Cypress)
 
@@ -236,6 +268,7 @@ cy.window().then((win) => {
 });
 
 ```text
+
 
 ### Cypress Browser Config
 
@@ -253,15 +286,19 @@ setupNodeEvents(on, config) {
 
 ```text
 
+
 ## 🐛 Debugging Tests
+
 
 ### Jest Debug
 
 ```bash
 
+
 # Node inspector
 
 node --inspect-brk node_modules/.bin/jest --runInBand
+
 
 # VS Code launch.json
 
@@ -276,13 +313,16 @@ node --inspect-brk node_modules/.bin/jest --runInBand
 
 ```text
 
+
 ### Cypress Debug
 
 ```bash
 
+
 # Interactive mode with DevTools
 
 npm run test:e2e:open
+
 
 # Debug specific test
 
@@ -291,7 +331,9 @@ cy.pause()  // Interactive pause
 
 ```text
 
+
 ## 📊 CI/CD Integration
+
 
 ### GitHub Actions
 
@@ -302,13 +344,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+
       - run: npm install
       - run: npm run test:jest
+
       - run: npm run test:e2e
 
 ```text
+
 
 ### Vercel Pre-Deploy Hook
 
@@ -319,16 +365,21 @@ jobs:
 
 ```text
 
+
 ## ✅ Test Checklist
 
+
 ### Before Commit
+
 
 - [ ] All Jest tests pass
 - [ ] Coverage > 80%
 - [ ] No console errors
 - [ ] TypeScript compiles
 
+
 ### Before Deploy
+
 
 - [ ] E2E tests pass
 - [ ] Camera permissions work
@@ -336,14 +387,18 @@ jobs:
 - [ ] WebSocket connects
 - [ ] Database seeded
 
+
 ### Production Smoke Tests
+
 
 - [ ] Health endpoint responds
 - [ ] AI streaming works
 - [ ] Session persists
 - [ ] Scores calculated correctly
 
+
 ## 🎓 Writing New Tests
+
 
 ### Backend Test Template
 
@@ -358,6 +413,7 @@ describe('Module Name', () => {
 });
 
 ```text
+
 
 ### E2E Test Template
 
@@ -375,15 +431,19 @@ describe('Feature Name', () => {
 
 ```text
 
+
 ## 📈 Performance Testing
+
 
 ### Load Testing (Optional)
 
 ```bash
 
+
 # Install k6
 
 npm install -g k6
+
 
 # Run load test
 
@@ -391,7 +451,9 @@ k6 run loadtest.js
 
 ```text
 
+
 ### Metrics to Monitor
+
 
 - Response time < 5s
 - Concurrent sessions > 100

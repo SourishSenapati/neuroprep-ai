@@ -1,5 +1,6 @@
 # 🎯 QUICK START - COPY/PASTE THIS
 
+
 ## **STEP 1: Environment Variables**
 
 **Copy this ENTIRE block to `frontend/.env.local`:**
@@ -13,6 +14,7 @@ OPENAI_API_KEY=
 ```text
 
 ---
+
 
 ## **STEP 2: Supabase SQL**
 
@@ -45,9 +47,11 @@ ALTER PUBLICATION supabase_realtime ADD TABLE dojo_rooms;
 
 ---
 
+
 ## **STEP 3: Restart Server**
 
 ```powershell
+
 
 # Ctrl+C to stop
 
@@ -58,7 +62,9 @@ npm run dev
 
 ---
 
+
 ## **STEP 4: Test Multiplayer**
+
 
 1. Open: http://localhost:3000/multiplayer
 2. Click "Create Room"
@@ -70,9 +76,11 @@ npm run dev
 
 ---
 
+
 ## **DONE!** 🎉
 
 Your app now has:
+
 
 - ✅ Multiplayer collaboration
 - ✅ Real-time code sync

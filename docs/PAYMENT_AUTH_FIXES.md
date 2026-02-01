@@ -1,12 +1,14 @@
 # 🚨 CRITICAL ISSUES TO FIX
 
 
+
 ## User-Reported Problems (Testing in Chrome)
 
 
+
 ### 1. ❌ Payment Terminal - UPI Not Working
-**Issue:** Payment collection system not accepting UPI payments  
-**Current:** Stripe-based (US-focused)  
+**Issue:** Payment collection system not accepting UPI payments
+**Current:** Stripe-based (US-focused)
 **Required:** Indian UPI integration (Razorpay/PhonePe/Paytm)
 
 **Fix Needed:**
@@ -22,9 +24,10 @@
 ---
 
 
+
 ### 2. ❌ SQL/Database Not Working
-**Issue:** User registration/data not persisting  
-**Symptoms:** 
+**Issue:** User registration/data not persisting
+**Symptoms:**
 
 - Registration data not saved
 - Login fails after signup
@@ -48,8 +51,9 @@
 ---
 
 
+
 ### 3. ❌ GitHub/LinkedIn OAuth Not Working
-**Issue:** Social login buttons don't work  
+**Issue:** Social login buttons don't work
 **Current State:** Buttons exist but no integration
 
 **Fix Needed:**
@@ -70,8 +74,9 @@
 ---
 
 
+
 ### 4. ❌ Payment Collection Not Working
-**Issue:** Users can't actually pay for premium  
+**Issue:** Users can't actually pay for premium
 **Related to:** #1 (UPI terminal)
 
 **Current Flow:**
@@ -95,7 +100,9 @@
 ---
 
 
+
 ## Implementation Plan
+
 
 
 ### Phase 1: Database Setup (30 min)
@@ -128,6 +135,7 @@ CREATE TABLE payments (
 ```text
 
 
+
 ### Phase 2: Razorpay Integration (1 hour)
 
 ```typescript
@@ -150,6 +158,7 @@ const order = await razorpay.orders.create({
 });
 
 ```text
+
 
 
 ### Phase 3: UPI Payment Flow (1 hour)
@@ -187,6 +196,7 @@ const rzp = new window.Razorpay(options);
 rzp.open();
 
 ```text
+
 
 
 ### Phase 4: OAuth Setup (1 hour)
@@ -228,10 +238,12 @@ export const authOptions = {
 ---
 
 
+
 ## Environment Variables Needed
 
 
 ```env
+
 
 # Razorpay (get from https://dashboard.razorpay.com)
 RAZORPAY_KEY_ID=rzp_test_...
@@ -239,9 +251,11 @@ RAZORPAY_KEY_SECRET=...
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
 
 
+
 # GitHub OAuth (create at https://github.com/settings/developers)
 GITHUB_ID=...
 GITHUB_SECRET=...
+
 
 
 # LinkedIn OAuth (create at https://www.linkedin.com/developers)
@@ -249,9 +263,11 @@ LINKEDIN_ID=...
 LINKEDIN_SECRET=...
 
 
+
 # NextAuth
 NEXTAUTH_URL=https://your-domain.vercel.app
 NEXTAUTH_SECRET=<random-string>
+
 
 
 # Supabase (already have)
@@ -261,6 +277,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```text
 
 ---
+
 
 
 ## Testing Checklist

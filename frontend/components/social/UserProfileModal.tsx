@@ -71,6 +71,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
              <div className="w-full h-[600px] relative">
                 <button 
                   onClick={() => setShowAuth(false)}
+                  aria-label="Close Authentication"
                   className="absolute top-4 right-4 z-50 p-2 bg-black/50 rounded-full text-white hover:bg-white/10"
                 >
                    <X className="w-5 h-5" />
@@ -96,7 +97,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                         <h3 className="text-xl font-bold text-white mb-1">Career Profile</h3>
                         <p className="text-xs text-[#737373]">Manage your athlete status</p>
                       </div>
-                      <button onClick={onClose} className="text-[#525252] hover:text-white transition-colors">
+                      <button onClick={onClose} aria-label="Close Profile" className="text-[#525252] hover:text-white transition-colors">
                         <X className="w-5 h-5" />
                       </button>
                    </div>
