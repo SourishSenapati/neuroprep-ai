@@ -435,9 +435,17 @@ graph TB
 ## 📚 Links
 
 - **Live Demo:** https://neuroprep-ai.vercel.app
-- **GitHub Repo:** [Your GitHub URL]
+- **GitHub Repo:** https://github.com/SourishSenapati/neuroprep-ai
 - **Documentation:** [See /docs folder]
 - **Architecture Diagram:** /docs/ARCHITECTURE_DIAGRAM.md
+
+---
+
+## 👤 Author
+
+**Sourish Senapati**  
+📧 [sourishsenapati791@gmail.com](mailto:sourishsenapati791@gmail.com)  
+🔗 [LinkedIn](https://linkedin.com/in/sourish-senapati)
 
 ---
 
@@ -448,4 +456,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
 ---
 
 **Built with ❤️ using Next.js 15, deployed on Vercel**  
-**Status:** ✅ Production Ready | **Version:** 2.0.0 | **Last Updated:** December 2025
+**Hack2Hire 2026 Submission** | **Status:** ✅ Production Ready
