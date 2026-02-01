@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { multiAuraSync } from '../lib/multiAuraSync';
 import ARProctorHUD from './ARProctorHUD';
 import { useGameStore } from '../lib/store/gameStore';
+import { LocalInferenceEngine } from '../lib/local-ai/InferenceEngine';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://backend-c7le0xxvj-sourish-sennapatis-projects.vercel.app';
 
@@ -108,6 +109,11 @@ export default function AuraSingularityChamber({
   // Configuration Modal State
   const [showConfigModal, setShowConfigModal] = useState(true);
   const [isInitializing, setIsInitializing] = useState(false);
+  
+  // Initialize Local Neural Core
+  useEffect(() => {
+     LocalInferenceEngine.getInstance().init();
+  }, []);
 
   const handleManualStart = async () => {
       setShowConfigModal(false);
@@ -140,48 +146,19 @@ export default function AuraSingularityChamber({
     try {
 
       if (isOffline) {
-        // Dynamic Offline Intelligence (Mock NLP)
+        // Dynamic Offline Intelligence (Local Neural Core)
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate "Thinking"
-
-        // 1. Simulate Grammar/Understanding Correction (Simulated)
-        let processedInput = inputMessage;
-        let correctionNote = "";
-        if (inputMessage.length > 5 && Math.random() < 0.3) {
-           processedInput = inputMessage.charAt(0).toUpperCase() + inputMessage.slice(1); // naive fix
-           correctionNote = "(Auto-Correcting syntax for clarity...) ";
+        
+        try {
+            const aiResponse = await LocalInferenceEngine.getInstance().generateResponse(inputMessage, role);
+            setChatHistory(prev => [...prev, { role: 'ai', content: aiResponse }]);
+            speakWithRadioEffect(aiResponse);
+        } catch (localError) {
+            console.error("Local Neural Core failed:", localError);
+            const fallback = "Signal lost. Please verify your connection or proceed.";
+            setChatHistory(prev => [...prev, { role: 'ai', content: fallback }]);
+            speakWithRadioEffect(fallback);
         }
-
-        // 2. Keyword Analysis & Contextual Response
-        const lowerInput = processedInput.toLowerCase();
-        let aiResponse = "";
-
-        if (lowerInput.includes("don't know") || lowerInput.includes("not sure") || lowerInput.includes("no idea")) {
-            aiResponse = "That is perfectly fine. Honesty is crucial. Let's try to derive the answer from first principles. What are the fundamental constraints here?";
-        } else if (lowerInput.length < 20) {
-            aiResponse = `I notice your answer is quite brief ("${processedInput}"). Could you elaborate more on your reasoning?`;
-        } else if (lowerInput.includes("scale") || lowerInput.includes("traffic") || lowerInput.includes("load")) {
-            aiResponse = "You mentioned scalability. How would you specifically handle database bottlenecks under high concurrent write loads in this architecture?";
-        } else if (lowerInput.includes("database") || lowerInput.includes("sql") || lowerInput.includes("mongo")) {
-            aiResponse = "Regarding the data layer, how would you ensure data consistency across multiple availability zones during a partition event?";
-        } else if (lowerInput.includes("python") || lowerInput.includes("java") || lowerInput.includes("javascript")) {
-            aiResponse = "In the context of that language, how would you manage memory effectively for a long-running background process?";
-        } else if (lowerInput.includes("team") || lowerInput.includes("conflict")) {
-            aiResponse = "Interpersonal dynamics are key. Can you give a specific example of a time you had to compromise on a technical decision for the greater good?";
-        } else {
-             const genericResponses = [
-                `Interesting point about "${processedInput.substring(0, 15)}...". How does this approach impact the overall system latency?`,
-                "I see. That's a valid approach. How would you modify this if latency was the primary constraint?",
-                "Excellent point. Let's pivot slightly—how would you ensure data consistency in this distribuetd setup?",
-                "Understood. Can you walk me through the trade-offs you considered when choosing this design pattern?",
-                "How would you test this implementation to ensure it's robust against race conditions?"
-            ];
-            aiResponse = genericResponses[Math.floor(Math.random() * genericResponses.length)];
-        }
-
-        const finalResponse = correctionNote + aiResponse;
-
-        setChatHistory(prev => [...prev, { role: 'ai', content: finalResponse }]);
-        speakWithRadioEffect(finalResponse);
         return;
       }
 
@@ -241,6 +218,17 @@ export default function AuraSingularityChamber({
 
     } catch (e) {
       console.error('Chat error:', e);
+      // Fallback to Local AI if API fails mid-session
+      try {
+        const localResponse = await LocalInferenceEngine.getInstance().generateResponse(inputMessage, role);
+        setChatHistory(prev => [...prev, { role: 'ai', content: localResponse }]);
+        speakWithRadioEffect(localResponse);
+        // Switch to offline mode for future messages
+        setIsOffline(true);
+        setAiThought("Cloud Uplink Severed. Switching to Local Neural Core via Browser Runtime.");
+      } catch (localE) {
+         console.error("Critical Failure: Both Cloud and Local Cores unreachable", localE);
+      }
     } finally {
       setIsStreaming(false);
     }
