@@ -289,12 +289,24 @@ Micro-Analysis: [Specific feedback on their answer]
 Next Question: ${nextQuestionText}
 `;
 
+  // Prepare conversation history for context-aware responses
+  const conversationHistory = transcript.map(m => ({
+      role: m.role === 'ai' ? 'assistant' : m.role,
+      content: m.content
+  }));
+
+  // Ensure the history ends with the user message (if not already present in transcript)
+  // Logic: interview.js passes full messages as transcript.
+  
   // Attempt OpenAI (Primary)
   if (openai) {
     try {
       const stream = await openai.chat.completions.create({
         model: 'gpt-4o',
-        messages: [{ role: 'system', content: systemPrompt }],
+        messages: [
+            { role: 'system', content: systemPrompt },
+            ...conversationHistory
+        ],
         stream: true,
       });
       for await (const chunk of stream) {
@@ -314,7 +326,9 @@ Next Question: ${nextQuestionText}
         model: 'claude-3-sonnet-20240229',
         max_tokens: 1024,
         system: NEUROPREP_AI_SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: systemPrompt }],
+        messages: [
+            ...conversationHistory
+        ],
         stream: true,
       });
       for await (const chunk of stream) {
@@ -332,7 +346,18 @@ Next Question: ${nextQuestionText}
   if (!usedApi && gemini) {
     try {
       const model = gemini.getGenerativeModel({ model: "gemini-pro"});
-      const result = await model.generateContentStream(systemPrompt);
+      // Gemini Pro works best with chat history in a specific format or merged prompt
+      // For simplicity/robustness, we'll merge history into the prompt
+      const fullContextPrompt = `
+      ${systemPrompt}
+
+      CONVERSATION HISTORY:
+      ${formatHistory(transcript)}
+
+      (Respond to the last candidate message above)
+      `;
+      
+      const result = await model.generateContentStream(fullContextPrompt);
       for await (const chunk of result.stream) {
         const chunkText = chunk.text();
         if (chunkText) onChunk(chunkText);
@@ -348,7 +373,10 @@ Next Question: ${nextQuestionText}
     try {
       const stream = await groq.chat.completions.create({
         model: 'llama3-70b-8192',
-        messages: [{ role: 'system', content: systemPrompt }],
+        messages: [
+            { role: 'system', content: systemPrompt },
+            ...conversationHistory
+        ],
         stream: true,
       });
       for await (const chunk of stream) {
