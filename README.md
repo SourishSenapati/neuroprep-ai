@@ -1,4 +1,4 @@
-# 🚀 NeuroPrep AI - Next.js Architecture
+#  NeuroPrep AI - Next.js Architecture
 
 **Production Deployment:** https://neuroprep-ai.vercel.app  
 **Backend API:** https://neuroprep-backend.vercel.app  
@@ -6,7 +6,7 @@
 
 ---
 
-## 📐 System Architecture
+##  System Architecture
 
 ### High-Level Overview
 
@@ -49,7 +49,7 @@
 
 ---
 
-## 🏗️ Frontend Architecture (Next.js 15)
+##  Frontend Architecture (Next.js 15)
 
 ### Directory Structure
 
@@ -102,7 +102,7 @@ frontend/
 
 ---
 
-## 🔐 Backend Architecture (Node.js + Express)
+##  Backend Architecture (Node.js + Express)
 
 ### Core Components
 
@@ -159,7 +159,7 @@ CREATE TABLE biometrics (
 
 ---
 
-## 🎨 Key Features
+##  Key Features
 
 ### 1. **Chaos to Order Landing Page** (NEW!)
 
@@ -289,7 +289,7 @@ TOTAL:               224,625,000+ questions
 
 ---
 
-## 🚀 Deployment
+##  Deployment
 
 ### Vercel Configuration
 
@@ -349,7 +349,7 @@ NODE_ENV=production
 
 ---
 
-## 🎯 Performance Optimizations
+##  Performance Optimizations
 
 ### Frontend
 
@@ -406,7 +406,7 @@ graph TB
 
 ---
 
-## 🧪 Testing Strategy
+##  Testing Strategy
 
 ### Unit Tests
 
@@ -432,7 +432,7 @@ graph TB
 
 ---
 
-## 📚 Links
+##  Links
 
 - **Live Demo:** https://neuroprep-ai.vercel.app
 - **GitHub Repo:** https://github.com/SourishSenapati/neuroprep-ai
@@ -441,7 +441,7 @@ graph TB
 
 ---
 
-## 👤 Author
+##  Author
 
 **Sourish Senapati**  
 📧 [sourishsenapati791@gmail.com](mailto:sourishsenapati791@gmail.com)  
