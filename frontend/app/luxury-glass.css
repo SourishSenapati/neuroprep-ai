@@ -15,6 +15,7 @@
 /* Glassmorphic Card Base */
 .glass-card-luxury {
   background: rgba(17, 25, 40, 0.75);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.125);
@@ -74,6 +75,7 @@
 .btn-luxury-ghost {
   background: transparent;
   border: 1.5px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 14px 28px;
@@ -93,6 +95,7 @@
 /* Stat Card with Glow */
 .stat-card-luxury {
   background: rgba(17, 25, 40, 0.6);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -132,6 +135,7 @@
 /* Input Fields */
 .input-luxury {
   background: rgba(17, 25, 40, 0.6);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -200,6 +204,7 @@
   font-size: 13px;
   font-weight: 600;
   color: rgba(102, 126, 234, 1);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   letter-spacing: 0.3px;
   transition: all 0.3s;
@@ -237,6 +242,7 @@
 /* Modal/Dialog */
 .modal-luxury {
   background: rgba(17, 25, 40, 0.95);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
   backdrop-filter: blur(32px) saturate(180%);
   -webkit-backdrop-filter: blur(32px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.125);
@@ -248,6 +254,7 @@
 /* Tooltip */
 .tooltip-luxury {
   background: rgba(17, 25, 40, 0.98);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
