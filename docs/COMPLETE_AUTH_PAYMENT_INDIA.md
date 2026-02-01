@@ -11,10 +11,12 @@
 
 ### **1. Install Dependencies**
 
+
 ```bash
 npm install next-auth @auth/prisma-adapter bcryptjs
 npm install @types/bcryptjs -D
-```
+
+```text
 
 ---
 
@@ -51,6 +53,7 @@ npm install @types/bcryptjs -D
 
 Add to `frontend/.env.local`:
 
+
 ```env
 
 # NextAuth
@@ -81,7 +84,8 @@ NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxxx
 
 # Database (use any from previous implementations)
 DATABASE_URL=your-database-url
-```
+
+```text
 
 ---
 
@@ -89,6 +93,7 @@ DATABASE_URL=your-database-url
 ### **4. Update Database Schema**
 
 Add to your Prisma schema:
+
 
 ```prisma
 model Account {
@@ -155,12 +160,15 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-```
+
+```text
 
 Run migration:
+
 ```bash
 npx prisma db push
-```
+
+```text
 
 ---
 
@@ -168,6 +176,7 @@ npx prisma db push
 ### **5. Create NextAuth Configuration**
 
 Create `frontend/app/api/auth/[...nextauth]/route.ts`:
+
 
 ```typescript
 import NextAuth, { NextAuthOptions } from 'next-auth';
@@ -332,7 +341,8 @@ export const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-```
+
+```text
 
 ---
 
@@ -340,6 +350,7 @@ export { handler as GET, handler as POST };
 ### **6. Create Registration API**
 
 Create `frontend/app/api/auth/register/route.ts`:
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -403,7 +414,8 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 ---
 
@@ -411,6 +423,7 @@ export async function POST(request: Request) {
 ### **7. Create Auth Context**
 
 Create `frontend/components/Providers.tsx`:
+
 
 ```typescript
 'use client';
@@ -420,9 +433,11 @@ import { SessionProvider } from 'next-auth/react';
 export function Providers({ children }: { children: React.ReactNode }) {
   return <SessionProvider>{children}</SessionProvider>;
 }
-```
+
+```text
 
 Update `frontend/app/layout.tsx`:
+
 
 ```typescript
 import { Providers } from '@/components/Providers';
@@ -436,7 +451,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-```
+
+```text
 
 ---
 
@@ -444,6 +460,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ### **8. Login Component Example**
 
 Create `frontend/components/LoginForm.tsx`:
+
 
 ```typescript
 'use client';
@@ -572,12 +589,14 @@ export default function LoginForm() {
     </div>
   );
 }
-```
+
+```text
 
 ---
 
 
 ### **9. Logout Function**
+
 
 ```typescript
 import { signOut } from 'next-auth/react';
@@ -586,7 +605,8 @@ import { signOut } from 'next-auth/react';
 const handleLogout = async () => {
   await signOut({ callbackUrl: '/' });
 };
-```
+
+```text
 
 ---
 
@@ -596,10 +616,12 @@ const handleLogout = async () => {
 
 ### **1. Install Razorpay**
 
+
 ```bash
 npm install razorpay
 npm install @types/razorpay -D
-```
+
+```text
 
 ---
 
@@ -607,6 +629,7 @@ npm install @types/razorpay -D
 ### **2. Create Razorpay Client**
 
 Create `frontend/lib/razorpay.ts`:
+
 
 ```typescript
 import Razorpay from 'razorpay';
@@ -629,7 +652,8 @@ export const PAYMENT_PLANS = {
     name: 'Premium Yearly',
   },
 };
-```
+
+```text
 
 ---
 
@@ -637,6 +661,7 @@ export const PAYMENT_PLANS = {
 ### **3. Create Order API**
 
 Create `frontend/app/api/payments/create-order/route.ts`:
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -708,7 +733,8 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 ---
 
@@ -716,6 +742,7 @@ export async function POST(request: Request) {
 ### **4. Verify Payment API**
 
 Create `frontend/app/api/payments/verify/route.ts`:
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -798,7 +825,8 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 ---
 
@@ -806,6 +834,7 @@ export async function POST(request: Request) {
 ### **5. Payment Component**
 
 Create `frontend/components/PaymentModal.tsx`:
+
 
 ```typescript
 'use client';
@@ -918,7 +947,8 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
     </>
   );
 }
-```
+
+```text
 
 ---
 
@@ -926,6 +956,7 @@ export default function PaymentModal({ plan = 'MONTHLY' }: { plan?: 'MONTHLY' | 
 ## **COMPLETE AUTH + PAYMENT SYSTEM READY! 🎉**
 
 **Includes:**
+
 - ✅ Google, GitHub, LinkedIn OAuth
 - ✅ Email/Password registration & login
 - ✅ Secure password hashing

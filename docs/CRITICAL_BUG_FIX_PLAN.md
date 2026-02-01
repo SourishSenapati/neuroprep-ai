@@ -12,7 +12,8 @@
 **Temporary Workaround (Frontend):** Map role IDs to full role descriptions
 
 
-### Role ID Mapping:
+### Role ID Mapping
+
 ```typescript
 const ROLE_MAPPING = {
   'tcs-nqt': '
@@ -28,7 +29,8 @@ CS National Qualifier Test - programming, aptitude, reasoning',
   'chemical': 'Chemical Engineer - Process Design, Thermodynamics, Chemistry, Safety',
   // ... etc
 };
-```
+
+```text
 
 **Action:** Send full role description to backend instead of just ID.
 
@@ -38,25 +40,30 @@ CS National Qualifier Test - programming, aptitude, reasoning',
 ## Issue 2: Supabase Integration for Real Data
 
 **Credentials Provided:**
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
+
+```text
 
 **Required Changes:**
 
 
-### 1. Update `.env.local` (User must add manually - gitignored):
-```
+### 1. Update `.env.local` (User must add manually - gitignored)
+
+```text
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
-```
+
+```text
 
 
 ### 2. Enable Supabase Client (already done in `/lib/supabase/client.ts`)
 
 
-### 3. Create Supabase Tables:
+### 3. Create Supabase Tables
+
 ```sql
 -- User activity tracking
 CREATE TABLE analytics_events (
@@ -91,10 +98,12 @@ CREATE TABLE user_profiles (
 CREATE INDEX idx_events_created ON analytics_events(created_at DESC);
 CREATE INDEX idx_sessions_created ON user_sessions(created_at DESC);
 CREATE INDEX idx_profiles_city ON user_profiles(city);
-```
+
+```text
 
 
-### 4. Update RealTimeAnalytics to pull from Supabase:
+### 4. Update RealTimeAnalytics to pull from Supabase
+
 ```typescript
 // Instead of simulated data
 const { data: recentEvents } = await supabase
@@ -107,7 +116,8 @@ const { data: cityStats } = await supabase
   .from('user_profiles')
   .select('city')
   .eq('country', 'India');
-```
+
+```text
 
 ---
 
@@ -118,7 +128,7 @@ const { data: cityStats } = await supabase
 **Required:** Mobile-first responsive
 
 
-### Actions:
+### Actions
 
 1. **Update `globals-mobile.css`** - already exists but needs enhancement
 2. **Add responsive breakpoints** to all components
@@ -127,7 +137,7 @@ const { data: cityStats } = await supabase
 5. **Hamburger menu** for navigation
 
 
-### Key Files to Update:
+### Key Files to Update
 - `app/globals-mobile.css` - enhance
 - `components/Dashboard.tsx` - responsive grid
 - `components/AuraSingularityChamber.tsx` - mobile controls
@@ -142,6 +152,7 @@ const { data: cityStats } = await supabase
 **User Report:** AI gives same response ("Could you elaborate...") for different inputs
 
 **Fix:** Update offline mode mock responses to be truly dynamic based on:
+
 - User input content
 - Role context
 - Previous conversation
@@ -150,6 +161,7 @@ const { data: cityStats } = await supabase
 **File:** `components/AuraSingularityChamber.tsx` (lines 510-650)
 
 **Better Offline AI:**
+
 ```typescript
 // Analyze user input
 const isShort = processedInput.length < 20;
@@ -165,12 +177,13 @@ if (isShort && !isQuestion) {
 } else {
   // ...contextual responses
 }
-```
+
+```text
 
 ---
 
 
-## Priority Order:
+## Priority Order
 
 1. **CRITICAL**: Fix role-based question generation (30 min)
 2. **HIGH**: Add Supabase for real analytics (1 hour)
@@ -180,7 +193,7 @@ if (isShort && !isQuestion) {
 ---
 
 
-## Deployment Steps:
+## Deployment Steps
 
 1. Fix role mapping in interview session
 2. User adds Supabase keys to `.env.local`

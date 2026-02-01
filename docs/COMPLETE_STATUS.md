@@ -127,13 +127,15 @@
 
 If you want the FULL multiplayer code back:
 
+
 ```powershell
 
-# See the complete code in:
+# See the complete code in
 - docs/MULTIPLAYER_SETUP.md
 - All implementation details documented
 - Can be re-added in 2 minutes if Supabase is configured
-```
+
+```text
 
 ---
 

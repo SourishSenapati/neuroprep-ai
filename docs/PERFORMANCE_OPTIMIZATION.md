@@ -39,6 +39,7 @@
 
 **vercel.json:**
 
+
 ```json
 {
   "regions": ["bom1"],
@@ -48,7 +49,8 @@
     }
   }
 }
-```
+
+```text
 
 **Why BOM1?**
 
@@ -74,6 +76,7 @@
 
 ### **Static Assets (1-Year Cache):**
 
+
 ```json
 {
   "source": "/_next/static/(.*)",
@@ -82,7 +85,8 @@
     "value": "public, max-age=31536000, immutable"
   }]
 }
-```
+
+```text
 
 **Assets Cached for 1 Year:**
 
@@ -101,6 +105,7 @@
 
 ### **API Edge Caching:**
 
+
 ```json
 {
   "source": "/api/(.*)",
@@ -109,7 +114,8 @@
     "value": "public, s-maxage=60, stale-while-revalidate=300"
   }]
 }
-```
+
+```text
 
 **Strategy:**
 
@@ -127,20 +133,25 @@
 
 **1. SWC Minification:**
 
+
 ```javascript
 swcMinify: true // 7x faster than Terser
-```
+
+```text
 
 **2. Image Optimization:**
+
 
 ```javascript
 images: {
   formats: ['image/avif', 'image/webp'],
   minimumCacheTTL: 31536000,
 }
-```
+
+```text
 
 **3. Code Splitting:**
+
 
 ```javascript
 splitChunks: {
@@ -153,9 +164,11 @@ splitChunks: {
     },
   },
 }
-```
+
+```text
 
 **4. Package Import Optimization:**
+
 
 ```javascript
 optimizePackageImports: [
@@ -163,7 +176,8 @@ optimizePackageImports: [
   'recharts', 
   'framer-motion'
 ]
-```
+
+```text
 
 **Bundle Size Reduction:**
 
@@ -178,6 +192,7 @@ optimizePackageImports: [
 
 ### **Run Performance Audit:**
 
+
 ```powershell
 
 # Local testing
@@ -186,7 +201,8 @@ npm run lighthouse
 
 # Production testing
 npm run lighthouse:prod
-```
+
+```text
 
 **What It Does:**
 
@@ -309,17 +325,21 @@ npm run lighthouse:prod
 
 ### **1. DNS Prefetch:**
 
+
 ```html
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-```
+
+```text
 
 
 ### **2. Resource Hints:**
 
+
 ```html
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preload" href="/fonts/inter.woff2" as="font">
-```
+
+```text
 
 
 ### **3. Critical CSS Inline:**
@@ -349,26 +369,30 @@ npm run lighthouse:prod
 
 ### **Before Optimization:**
 
-```
+
+```text
 Lighthouse Scores:
 - Performance: 72/100
 - First Load: 3.2s
 - Bundle Size: 500 KB
 - Region: US East (iad1)
 - Latency: 200ms
-```
+
+```text
 
 
 ### **After Optimization:**
 
-```
+
+```text
 Lighthouse Scores:
 - Performance: 98/100 
 - First Load: 1.2s 
 - Bundle Size: 300 KB 
 - Region: Mumbai (bom1) 
 - Latency: 8ms 
-```
+
+```text
 
 **Improvement:**
 
@@ -412,9 +436,11 @@ Lighthouse Scores:
 
 ### **Run This Before Demo:**
 
+
 ```powershell
 npm run lighthouse:prod
-```
+
+```text
 
 **Screenshot for Slides:**
 
@@ -545,6 +571,7 @@ npm run lighthouse:prod
 
 ## COMMANDS SUMMARY
 
+
 ```powershell
 
 # Deploy to production (Mumbai edge)
@@ -558,7 +585,8 @@ npm run lighthouse:prod
 
 # Check performance locally
 npm run lighthouse
-```
+
+```text
 
 ---
 

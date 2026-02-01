@@ -27,11 +27,13 @@
 
 **Visual Metaphor:**
 
-```
+
+```text
 CHAOS (Random Scatter) → TRANSFORMATION → ORDER (Structured Grid)
     ↓                              ↓                    ↓
 Untapped Potential        AI Processing        Mastery Achieved
-```
+
+```text
 
 **Key Features:**
 
@@ -65,6 +67,7 @@ Untapped Potential        AI Processing        Mastery Achieved
 
 **Extraction Capabilities:**
 
+
 ```javascript
 {
   name: "John Doe",
@@ -76,7 +79,8 @@ Untapped Potential        AI Processing        Mastery Achieved
   education: "B.Tech, Computer Science",
   metadata: { pages: 2, fileName: "resume.pdf", parsedAt: "..." }
 }
-```
+
+```text
 
 **Auto-Detection Logic:**
 
@@ -87,13 +91,15 @@ Untapped Potential        AI Processing        Mastery Achieved
 
 **API Endpoint:**
 
-```
+
+```text
 POST /api/parse-resume
 Content-Type: multipart/form-data
 
 Body: { resume: <File> }
 Response: { success: true, data: {...}, metadata: {...} }
-```
+
+```text
 
 **Usage in Interview Flow:**
 
@@ -262,16 +268,19 @@ Response: { success: true, data: {...}, metadata: {...} }
 
 ### **Dependencies Added:**
 
+
 ```bash
 
 # Backend
 npm install pdf-parse --workspace=backend  #  Installed
-```
+
+```text
 
 
 ### **Files Created (8 new files):**
 
-```
+
+```text
 frontend/components/ChaosToOrderLanding.tsx    # 320 lines
 frontend/app/api/parse-resume/route.ts         # 65 lines
 backend/api/parse-resume.js                    # 180 lines
@@ -280,15 +289,18 @@ docs/HACKATHON_SPRINT_PLAN.md                  # 450 lines
 docs/ARCHITECTURE_DIAGRAM.md                   # 550 lines
 models/.gitkeep                                # 5 lines
 demo/.gitkeep                                  # 6 lines
-```
+
+```text
 
 
 ### **Files Modified (2 files):**
 
-```
+
+```text
 backend/server.js                              # +3 lines (import + route)
 README.md                                      # Rewritten (450 lines)
-```
+
+```text
 
 **Total Lines of Code Added:** ~2,700+ lines
 
@@ -300,7 +312,8 @@ README.md                                      # Rewritten (450 lines)
 
 ### **Enhanced 5-Minute Script:**
 
-```
+
+```text
 [00:00-00:45] CHAOS TO ORDER INTRO (NEW!)
 - Show Chaos→Order landing page animation
 - Explain visual metaphor (potential → mastery)
@@ -331,7 +344,8 @@ README.md                                      # Rewritten (450 lines)
 - Mobile responsive demo (change viewport)
 - GitHub link + live demo link
 - "Built in 10 hours for the hackathon"
-```
+
+```text
 
 ---
 
@@ -422,10 +436,10 @@ README.md                                      # Rewritten (450 lines)
    ```
 
 3. **Next Steps:**
-   - Integrate `ChaosToOrderLanding` into main app flow
-   - Add resume upload button to `InterviewSetup`
-   - Connect parser output to form state
-   - Deploy to Vercel to test production
+  - Integrate `ChaosToOrderLanding` into main app flow
+  - Add resume upload button to `InterviewSetup`
+  - Connect parser output to form state
+  - Deploy to Vercel to test production
 
 ---
 

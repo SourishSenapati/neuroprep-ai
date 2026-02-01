@@ -11,6 +11,7 @@
 
 ### 1. **Netlify (FREE Tier)** ⭐ RECOMMENDED
 **What You Get FREE:**
+
 - 300 build minutes/month
 - Concurrent builds (3 simultaneous)
 - 100 GB bandwidth
@@ -21,19 +22,23 @@
 - Split testing
 
 **Setup:**
+
 ```bash
 npm install -g netlify-cli
 netlify login
 netlify init
 netlify deploy --prod
-```
+
+```text
 
 **Custom Domain (FREE):**
+
 1. Buy domain from Namecheap ($8.88/year for .ai domain)
 2. Add to Netlify (free SSL auto-configured)
 3. Total cost: $8.88/year vs Vercel Pro $240/year
 
 **netlify.toml Configuration:**
+
 ```toml
 [build]
   command = "npm run build"
@@ -46,13 +51,15 @@ netlify deploy --prod
 
 [build.environment]
   NODE_VERSION = "18"
-```
+
+```text
 
 ---
 
 
 ### 2. **Cloudflare Pages (100% FREE)** ⭐⭐ BEST FOR SPEED
 **What You Get FREE:**
+
 - Unlimited builds
 - Unlimited sites
 - Unlimited requests
@@ -63,14 +70,17 @@ netlify deploy --prod
 - DDoS protection
 
 **Setup:**
+
 ```bash
 npm install -g wrangler
 wrangler login
 wrangler pages project create neuroprep
 wrangler pages publish .next --project-name=neuroprep
-```
+
+```text
 
 **Why It's Better:**
+
 - Cloudflare's CDN is the fastest globally
 - No bandwidth limits (Vercel Pro: 1TB, then charges)
 - No build time limits
@@ -81,6 +91,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### 3. **Railway.app (FREE $5 Credit/Month)** 
 **What You Get FREE:**
+
 - $5/month usage credit (enough for small apps)
 - Custom domains
 - PostgreSQL database (free)
@@ -95,6 +106,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### 4. **Render.com (FREE Tier)**
 **What You Get FREE:**
+
 - Static sites (unlimited)
 - Web services (750 hours/month)
 - PostgreSQL database (90 days)
@@ -110,6 +122,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### Option 1: Use FREE Domain from Freenom
 **Get .tk, .ml, .ga, .cf domains for FREE:**
+
 - Visit: freenom.com
 - Register: neuroprep.tk (FREE forever)
 - Point to Cloudflare Pages
@@ -118,6 +131,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### Option 2: Cheap .ai Domain
 **Best Indian Registrars:**
+
 - **Hostinger India:** ₹599/year for .ai
 - **BigRock:** ₹699/year for .ai  
 - **GoDaddy India:** ₹799/year for .ai
@@ -127,6 +141,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### Option 3: Use Subdomain (FREE)
 **Professional subdomain options:**
+
 - neuroprep.pages.dev (Cloudflare - looks professional)
 - neuroprep.netlify.app (Netlify)
 - neuroprep.onrender.com (Render)
@@ -139,6 +154,7 @@ wrangler pages publish .next --project-name=neuroprep
 
 ### 1. **GitHub Actions (FREE - 2000 min/month)**
 **Parallel builds without paying:**
+
 
 ```yaml
 
@@ -180,9 +196,11 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: neuroprep
           directory: .next
-```
+
+```text
 
 **Benefits:**
+
 - Faster builds (GitHub has 8-core machines free)
 - Concurrent builds (unlimited)
 - Build caching
@@ -194,6 +212,7 @@ jobs:
 ### 2. **Optimize Build Speed (FREE)**
 
 **In `next.config.js`:**
+
 ```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -233,7 +252,8 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-```
+
+```text
 
 ---
 
@@ -243,6 +263,7 @@ module.exports = nextConfig;
 
 ### Option 1: Cloudflare (FREE Forever)
 **What You Get:**
+
 - Global CDN (200+ locations)
 - DDoS protection
 - SSL certificates
@@ -252,6 +273,7 @@ module.exports = nextConfig;
 - Firewall
 
 **Setup:**
+
 1. Add your domain to Cloudflare
 2. Change nameservers
 3. Enable "Full (strict)" SSL
@@ -260,13 +282,15 @@ module.exports = nextConfig;
 6. Set "Browser Cache TTL" to 4 hours
 
 **Page Rule (FREE - improves speed):**
-```
+
+```text
 URL: *neuroprep.ai/*
 Settings:
 - Cache Level: Cache Everything
 - Edge Cache TTL: 1 month
 - Browser Cache TTL: 4 hours
-```
+
+```text
 
 ---
 
@@ -276,6 +300,7 @@ Settings:
 
 ### Option 1: Supabase (FREE Tier)
 **What You Get FREE:**
+
 - PostgreSQL database (500 MB)
 - Real-time subscriptions
 - Authentication
@@ -284,6 +309,7 @@ Settings:
 - No credit card needed
 
 **Perfect for:**
+
 - User authentication
 - Session storage
 - Analytics
@@ -292,6 +318,7 @@ Settings:
 
 ### Option 2: PlanetScale (FREE Tier)
 **What You Get FREE:**
+
 - MySQL database (5 GB)
 - 1 billion row reads/month
 - 10 million row writes/month
@@ -300,6 +327,7 @@ Settings:
 
 ### Option 3: MongoDB Atlas (FREE)
 **What You Get FREE:**
+
 - 512 MB storage
 - Shared cluster
 - Perfect for document storage
@@ -312,6 +340,7 @@ Settings:
 
 ### Option 1: Google Analytics 4 (FREE)
 **What You Get:**
+
 - Unlimited events
 - Real-time reporting
 - User behavior tracking
@@ -320,6 +349,7 @@ Settings:
 
 ### Option 2: Plausible (Self-hosted - FREE)
 **What You Get:**
+
 - Privacy-friendly
 - GDPR compliant
 - No cookies
@@ -328,6 +358,7 @@ Settings:
 
 ### Option 3: Umami (FREE & Open Source)
 **What You Get:**
+
 - Self-hosted
 - Real-time analytics
 - Beautiful dashboard
@@ -340,7 +371,8 @@ Settings:
 
 
 ### **Stack:**
-```
+
+```text
 Domain: neuroprep.pages.dev (FREE) or neuroprep.tk (FREE)
 Hosting: Cloudflare Pages (FREE)
 Database: Supabase (FREE)
@@ -348,7 +380,8 @@ Analytics: Umami (FREE)
 CDN: Cloudflare (FREE)
 CI/CD: GitHub Actions (FREE)
 Monitoring: UptimeRobot (FREE)
-```
+
+```text
 
 
 ### **Total Cost: ₹0/month** 🎉
@@ -376,14 +409,17 @@ Monitoring: UptimeRobot (FREE)
 
 
 ### Step 1: Export from Vercel
+
 ```bash
 
 # Your project is already in Git
 git push origin main
-```
+
+```text
 
 
 ### Step 2: Deploy to Cloudflare Pages
+
 ```bash
 
 # Install Wrangler
@@ -408,14 +444,16 @@ npx @cloudflare/next-on-pages@1
 
 # 4. Set output directory: .next
 
-# 5. Deploy!
-```
+# 5. Deploy
+
+```text
 
 
 ### Step 3: Add Custom Domain (Optional)
+
 ```bash
 
-# In Cloudflare Pages Dashboard:
+# In Cloudflare Pages Dashboard
 
 # 1. Click "Custom domains"
 
@@ -423,8 +461,9 @@ npx @cloudflare/next-on-pages@1
 
 # 3. Follow DNS instructions
 
-# 4. SSL auto-configured!
-```
+# 4. SSL auto-configured
+
+```text
 
 ---
 

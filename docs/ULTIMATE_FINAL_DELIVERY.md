@@ -87,6 +87,7 @@
 ## **💰 COST: $0/MONTH**
 
 **Free Options for Everything:**
+
 - Hosting: Cloudflare Pages (FREE)
 - Database: IndexedDB (FREE) or PlanetScale (FREE 5GB)
 - Auth: NextAuth (FREE)
@@ -99,6 +100,7 @@
 ## **🚀 PRODUCTION READY:**
 
 **What works:**
+
 - ✅ Google/GitHub/LinkedIn login
 - ✅ Email registration
 - ✅ UPI payments
@@ -109,6 +111,7 @@
 - ✅ Session persistence
 
 **What's needed (user setup):**
+
 1. Create OAuth apps (Google, GitHub, LinkedIn)
 2. Create Razorpay account
 3. Add env vars to `.env.local`
@@ -217,6 +220,7 @@
 ## **✨ ACHIEVEMENT SUMMARY:**
 
 **Delivered:**
+
 - 3 database implementations
 - 4 OAuth providers (Google, GitHub, LinkedIn, Email)
 - India payment system (UPI, net banking, cards, wallets)
@@ -227,11 +231,13 @@
 - $0/month cost
 
 **Scores:**
+
 - All categories: 150-185/100
 - Average: 170/100
 - Over target: 70%
 
 **Status:**
+
 - 95% complete (waiting for JSX fix)
 - Production-ready
 - Zero-cost deployment

@@ -248,17 +248,19 @@
 
 **Fix (1 hour):**
 
+
 ```bash
 
 # Install testing framework
 npm install --save-dev @testing-library/react @testing-library/jest-dom vitest
 
 
-# Create critical tests:
+# Create critical tests
 - components/BiometricEye.test.tsx
 - lib/apiClient.test.ts
 - lib/store/gameStore.test.ts
-```
+
+```text
 
 **Minimum Viable Tests:**
 
@@ -282,6 +284,7 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom vitest
 
 **Fix (30 min):**
 
+
 ```bash
 
 # Deploy to Vercel
@@ -291,7 +294,8 @@ vercel --prod
 # Test live URL
 
 # Add URL to README
-```
+
+```text
 
 **Impact:** Judges will test on their devices, want to share with others
 
@@ -313,12 +317,14 @@ vercel --prod
 
 **Fix (2 hours):**
 
+
 ```css
 /* Add to all major components */
 @media (max-width: 768px) {
   /* Responsive styles */
 }
-```
+
+```text
 
 **Test on:**
 
@@ -347,6 +353,7 @@ vercel --prod
 
 **Fix (1 hour):**
 
+
 ```tsx
 // Add ARIA labels
 <button aria-label="Enable biometric eye">Enable</button>
@@ -358,7 +365,8 @@ vercel --prod
 .button:focus-visible {
   outline: 2px solid white;
 }
-```
+
+```text
 
 ---
 
@@ -377,6 +385,7 @@ vercel --prod
 
 **Fix (30 min):**
 
+
 ```tsx
 // Add fallback modes
 if (!modelLoaded) {
@@ -386,7 +395,8 @@ if (!modelLoaded) {
 if (!apiKey) {
   return <MockAIResponses />; // Use pre-recorded responses
 }
-```
+
+```text
 
 ---
 
@@ -405,6 +415,7 @@ if (!apiKey) {
 
 **Fix (1 hour):**
 
+
 ```tsx
 // Use Web Workers
 const worker = new Worker('/face-detection-worker.js');
@@ -414,7 +425,8 @@ setInterval(detectFace, 1000); // 1 FPS instead of 2 FPS
 
 // Add performance monitoring
 console.time('face-detection');
-```
+
+```text
 
 ---
 

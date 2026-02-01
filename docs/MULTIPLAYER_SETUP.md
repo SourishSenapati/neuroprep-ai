@@ -43,6 +43,7 @@
 
 ### **Step 2: Create Database Table**
 
+
 ```sql
 create table dojo_rooms (
   id uuid primary key default uuid_generate_v4(),
@@ -56,17 +57,20 @@ create table dojo_rooms (
 
 -- Enable realtime
 alter publication supabase_realtime add table dojo_rooms;
-```
+
+```text
 
 
 ### **Step 3: Add Environment Variables**
+
 
 ```bash
 
 # In frontend/.env.local
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+
+```text
 
 ---
 

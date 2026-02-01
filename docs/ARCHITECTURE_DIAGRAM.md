@@ -3,6 +3,7 @@
 
 ## Visual Architecture
 
+
 ```mermaid
 graph TB
     subgraph Client[" Client Browser"]
@@ -91,7 +92,8 @@ graph TB
     class QB,SM,AIEngine,ResParser,Socket backendClass
     class SQLite,Redis storageClass
     class OpenAI,Claude,Stripe externalClass
-```
+
+```text
 
 ---
 
@@ -100,6 +102,7 @@ graph TB
 
 
 ### 1. Interview Session Flow
+
 
 ```mermaid
 sequenceDiagram
@@ -127,10 +130,12 @@ sequenceDiagram
     B-->>A: SSE: [DONE]
     A-->>F: Close stream
     B->>DB: Save transcript
-```
+
+```text
 
 
 ### 2. Resume Upload & Auto-Fill Flow
+
 
 ```mermaid
 sequenceDiagram
@@ -152,10 +157,12 @@ sequenceDiagram
     F->>S: Auto-fill form fields
     S-->>U: Show pre-filled setup
     U->>S: Adjust & Start
-```
+
+```text
 
 
 ### 3. Question Generation Flow
+
 
 ```mermaid
 flowchart TD
@@ -173,7 +180,8 @@ flowchart TD
     Fallback --> Stream
     Stream --> SaveDB[Save to Database]
     SaveDB --> End[Complete]
-```
+
+```text
 
 ---
 
@@ -182,6 +190,7 @@ flowchart TD
 
 
 ### Frontend Component Hierarchy
+
 
 ```mermaid
 graph TD
@@ -205,10 +214,12 @@ graph TD
     
     CodeEd --> Monaco[Monaco Editor<br/>Syntax Highlighting]
     CodeEd --> PyEngine[Pyodide Engine<br/>Python Execution]
-```
+
+```text
 
 
 ### Backend Module Architecture
+
 
 ```mermaid
 graph LR
@@ -232,7 +243,8 @@ graph LR
     AI --> DB
     SessionMgr --> DB
     Parser --> DB
-```
+
+```text
 
 ---
 
@@ -276,6 +288,7 @@ graph LR
 
 
 ## Deployment Architecture
+
 
 ```mermaid
 graph TB
@@ -331,12 +344,14 @@ graph TB
     class EdgeFront,NextFunc,EdgeBack,NodeFunc vercelClass
     class OpenAISvc,ClaudeSvc,StripeSvc serviceClass
     class SQLiteDB,RedisDB dataClass
-```
+
+```text
 
 ---
 
 
 ## Security Architecture
+
 
 ```mermaid
 graph TD
@@ -360,7 +375,8 @@ graph TD
     Process --> Sanitize[Sanitize Input<br/>XSS Prevention]
     Sanitize --> Execute[Execute Logic]
     Execute --> Response[Return Response]
-```
+
+```text
 
 ---
 
@@ -369,6 +385,7 @@ graph TD
 
 
 ### Frontend Optimization
+
 
 ```mermaid
 pie title Bundle Size Distribution (Target <500KB)
@@ -379,7 +396,8 @@ pie title Bundle Size Distribution (Target <500KB)
     "Pyodide Lazy" : 0
     "Three.js Lazy" : 0
     "Other Dependencies" : 90
-```
+
+```text
 
 
 ### Backend Performance
@@ -397,6 +415,7 @@ pie title Bundle Size Distribution (Target <500KB)
 
 ## Future Enhancements
 
+
 ```mermaid
 timeline
     title NeuroPrep AI Roadmap
@@ -412,7 +431,8 @@ timeline
     2025 Q4 : Enterprise Features
            : White-label Solution
            : Analytics Dashboard
-```
+
+```text
 
 ---
 

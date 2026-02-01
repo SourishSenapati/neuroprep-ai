@@ -26,7 +26,8 @@
     │PostgreSQL │      │  Redis  │        │ OpenAI/  │
     │ Database  │      │ Pub/Sub │        │ Claude   │
     └───────────┘      └─────────┘        └──────────┘
-```
+
+```text
 
 ## Component Architecture
 
@@ -50,7 +51,8 @@ frontend/
 └── lib/
     ├── useSocket.ts            # Socket.io hook
     └── cn.ts                   # Utility functions
-```
+
+```text
 
 #### Key Technologies
 
@@ -188,13 +190,15 @@ frontend/
 session:{sessionId} → JSON session data (TTL: 24h)
 session:{sessionId}:stress → Current stress level (TTL: 1h)
 session:{sessionId}:question:{questionId} → Question data (TTL: 1h)
-```
+
+```text
 
 ##### Pub/Sub Channels
 
 ```text
 interview-events → Broadcast session events
-```
+
+```text
 
 #### Use Cases
 
@@ -241,7 +245,8 @@ RAG_KNOWLEDGE_BASE = {
   algorithms: [...],
   physics: [...]
 }
-```
+
+```text
 
 ##### Retrieval Process
 
@@ -273,7 +278,8 @@ function generateAdaptivePrompt(topic, stressLevel, difficulty) {
     return basePrompt + "Challenge with advanced concepts...";
   }
 }
-```
+
+```text
 
 ### Code Execution (Pyodide)
 
@@ -293,7 +299,8 @@ const pyodide = await loadPyodide({
   indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.0/full/'
 });
 await pyodide.loadPackage(['numpy', 'scipy']);
-```
+
+```text
 
 ##### Execution Flow
 
@@ -459,7 +466,8 @@ console.log({
   userId: '...',
   timestamp: Date.now()
 });
-```
+
+```text
 
 ##### Log Aggregation
 

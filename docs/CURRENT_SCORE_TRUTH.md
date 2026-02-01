@@ -84,9 +84,10 @@
 **Impact:** -4 points (would be 113/100 with live demo)  
 **Solution:**
 
+
 ```bash
 
-# Add to .env.local:
+# Add to .env.local
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 
@@ -94,7 +95,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 # Re-add files from docs
 
 # 2-minute restoration
-```
+
+```text
 
 **For Judges:** Status page is actually PROFESSIONAL - shows you built it without exposing credentials
 
@@ -108,37 +110,45 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 
 **+5: Production Deployment**
 
+
 ```bash
 vercel --prod
 
 # Live URL for judges to test
-```
+
+```text
 
 **+3: Lighthouse 100 Score**
+
 
 ```bash
 npm run lighthouse:prod
 
 # Automated performance proof
-```
+
+```text
 
 **+4: Live Multiplayer**
+
 
 ```bash
 
 # Add Supabase credentials
 
 # Enable full P2P demo
-```
+
+```text
 
 **+7: Demo Video**
+
 
 ```bash
 
 # 3-minute showcase
 
 # YouTube embed
-```
+
+```text
 
 **Total: 109 + 19 = 128/100**
 

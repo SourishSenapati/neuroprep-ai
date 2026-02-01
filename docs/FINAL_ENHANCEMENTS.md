@@ -13,6 +13,7 @@
 ### 2. Indian Engineering Tracks - OPTIMIZED FOR ALL ENGINEERS ✅
 
 **New Interview Paths:**
+
 - 🎯 **TCS NQT Ready** - TCS, Infosys, Wipro patterns
 - 💻 **Infosys Power Programmer** - Advanced DSA & coding
 - 🚀 **Product & Service** - Amazon, Flipkart, Google, Microsoft
@@ -32,6 +33,7 @@
 ### 3. Gamification - ACTUALLY WORKING ✅
 
 **What's Live:**
+
 - ✅ XP tracking (persisted to localStorage)
 - ✅ Level calculation (XP / 100 = level)
 - ✅ Streak tracking (daily activity check)
@@ -40,6 +42,7 @@
 - ✅ Code execution tracking
 
 **XP Rewards:**
+
 - Interview completion: +50 XP
 - Focus session: +100 XP
 - Resume roast: +50 XP
@@ -55,6 +58,7 @@ Level 3: 200 XP
 ...up to Level 10+
 
 **Streak System:**
+
 - Updates daily
 - Resets if inactive for >1 day
 - Triggers on ANY activity (interview, roast, focus)
@@ -63,6 +67,7 @@ Level 3: 200 XP
 ### 4. Trading Card - REAL DATA ✅
 
 **Now Shows:**
+
 - Actual XP from gameStore
 - Actual Level from gameStore
 - Actual Streak from gameStore

@@ -14,7 +14,7 @@
 ## What Was Fixed
 
 
-### All Client Pages - force-dynamic added:
+### All Client Pages - force-dynamic added
 1. ✓ app/page.tsx
 2. ✓ app/dashboard/page.tsx
 3. ✓ app/interview/setup/page.tsx

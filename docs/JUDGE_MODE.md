@@ -38,9 +38,11 @@ Judges visit: `http://localhost:3000/judge/login`
 
 ### **1. VIP Authentication**
 
+
 ```javascript
 localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
-```
+
+```text
 
 - Bypasses NextAuth completely
 - No login, no email, no password
@@ -48,6 +50,7 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
 
 
 ### **2. Perfect User Profile**
+
 
 ```json
 {
@@ -57,10 +60,12 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
   "isPremium": true,
   "isJudge": true
 }
-```
+
+```text
 
 
 ### **3. Steve Jobs Resume**
+
 
 ```json
 {
@@ -77,10 +82,12 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
   "experience": "15+ years",
   "summary": "Visionary technologist..."
 }
-```
+
+```text
 
 
 ### **4. Impressive Gamification Stats**
+
 
 ```json
 {
@@ -98,10 +105,12 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
     " Interview Pro"
   ]
 }
-```
+
+```text
 
 
 ### **5. Perfect Growth Trend**
+
 
 ```json
 {
@@ -118,7 +127,8 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
   "averageScore": 89,
   "improvementRate": "+45%"
 }
-```
+
+```text
 
 **Dashboard will show beautiful upward growth curve!**
 
@@ -130,9 +140,11 @@ localStorage.setItem('token', 'JUDGE_VIP_ACCESS_TOKEN_2024');
 
 ### **Step 1: They Click Your Link**
 
-```
+
+```text
 https://your-app.vercel.app/judge/login
-```
+
+```text
 
 
 ### **Step 2: Dramatic VIP Entrance (2 seconds)**
@@ -147,7 +159,8 @@ https://your-app.vercel.app/judge/login
 
 ### **Step 3: Welcome Modal Appears**
 
-```
+
+```text
 ┌─────────────────────────────────────────┐
 │    Welcome, Honorable Judge           │
 │                                         │
@@ -164,7 +177,8 @@ https://your-app.vercel.app/judge/login
 │                                         │
 │   [Start Exploring] [View Dashboard]   │
 └─────────────────────────────────────────┘
-```
+
+```text
 
 
 ### **Step 4: They Land on Dashboard**
@@ -189,29 +203,29 @@ https://your-app.vercel.app/judge/login
 ### **Immediate Actions:**
 
 1. **Dashboard Shows:**
-   - Perfect metrics dashboard
-   - Growth trends
-   - Achievement badges
-   - Active streak flame
+  - Perfect metrics dashboard
+  - Growth trends
+  - Achievement badges
+  - Active streak flame
 
 2. **Click "Start Roast Battle":**
-   - Pre-filled Steve Jobs resume snippet
-   - AI roasts immediately
-   - +50 XP animation
+  - Pre-filled Steve Jobs resume snippet
+  - AI roasts immediately
+  - +50 XP animation
 
 3. **Click "Enter Focus Pod":**
-   - Pomodoro timer ready
-   - Brown noise audio
-   - +100 XP for session
+  - Pomodoro timer ready
+  - Brown noise audio
+  - +100 XP for session
 
 4. **Click "Begin Interview":**
-   - Auto-fills: "Steve Jobs, Senior Engineer"
-   - Saves 2 minutes of setup
+  - Auto-fills: "Steve Jobs, Senior Engineer"
+  - Saves 2 minutes of setup
 
 5. **Enable BiometricEye:**
-   - Webcam starts
-   - Emotion detection works
-   - Targeting overlay impressive
+  - Webcam starts
+  - Emotion detection works
+  - Targeting overlay impressive
 
 ---
 
@@ -292,6 +306,7 @@ While other teams fumble with logins:
 
 1. **Update README.md:**
 
+
 ```markdown
 
 ##  For Judges (VIP Access)
@@ -306,26 +321,31 @@ This will:
 -  Enable all premium features
 
 No account creation needed. Start exploring in 2 seconds!
-```
+
+```text
 
 1. **Print QR Code:**
 
-```
+
+```text
 Generate QR code for:
 https://your-app.vercel.app/judge/login
 
 Put on poster/laptop
-```
+
+```text
 
 1. **Verbal Pitch:**
 
-```
+
+```text
 "Hi! I know you're busy evaluating 50 projects.
 We've made this super easy for you.
 Just scan this QR code or visit /judge/login
 You'll be demoing in 2 seconds with no setup.
 Everything's pre-loaded. Zero friction."
-```
+
+```text
 
 ---
 
@@ -385,7 +405,8 @@ Everything's pre-loaded. Zero friction."
 
 **Add this at the beginning:**
 
-```
+
+```text
 [00:00-00:10] JUDGE MODE INTRO
 "Before we start, I want to show you something special.
 We've created a VIP judge mode that eliminates all setup friction."
@@ -412,7 +433,8 @@ we let you demo in 2 seconds."
 
 [01:00-05:00] FEATURE DEMO
 [Now demo actual features with pre-loaded context]
-```
+
+```text
 
 ---
 

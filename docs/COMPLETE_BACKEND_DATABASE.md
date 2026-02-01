@@ -12,6 +12,7 @@
 ### **Already Created:** `lib/client-db.ts`
 
 **Features:**
+
 - ✅ Full user authentication
 - ✅ Payment processing (demo + real Razorpay ready)
 - ✅ Session management
@@ -20,11 +21,14 @@
 - ✅ Offline-first architecture
 
 **Install Dexie:**
+
 ```bash
 npm install dexie
-```
+
+```text
 
 **Benefits:**
+
 - FREE (no hosting costs)
 - Instant (< 5ms queries)
 - 100% uptime
@@ -41,9 +45,11 @@ npm install dexie
 
 
 #### 1. Install Supabase Client
+
 ```bash
 npm install @supabase/supabase-js
-```
+
+```text
 
 
 #### 2. Create Supabase Project
@@ -53,13 +59,16 @@ npm install @supabase/supabase-js
 
 
 #### 3. Add to `.env.local`
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+
+```text
 
 
 #### 4. Create Tables (Run in Supabase SQL Editor)
+
 
 ```sql
 -- Enable UUID extension
@@ -166,10 +175,12 @@ CREATE POLICY "Users can view own payments" ON payments
 
 CREATE POLICY "Users can view own questions" ON question_history
   FOR SELECT USING (auth.uid() = user_id);
-```
+
+```text
 
 
 #### 5. Create Supabase Client (`lib/supabase.ts`)
+
 
 ```typescript
 import { createClient } from '@supabase/supabase-js';
@@ -318,10 +329,12 @@ export const db = {
     };
   }
 };
-```
+
+```text
 
 
 #### 6. Create Auth Callback (`app/auth/callback/route.ts`)
+
 
 ```typescript
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
@@ -339,7 +352,8 @@ export async function GET(request: Request) {
 
   return NextResponse.redirect(new URL('/dashboard', request.url));
 }
-```
+
+```text
 
 ---
 
@@ -349,9 +363,12 @@ export async function GET(request: Request) {
 
 ### **Setup:**
 
+
 ```bash
 npm install @planetscale/database
-```
+
+```text
+
 
 ```typescript
 // lib/planetscale.ts
@@ -364,7 +381,8 @@ const config = {
 };
 
 export const conn = connect(config);
-```
+
+```text
 
 ---
 
@@ -387,6 +405,7 @@ export const conn = connect(config);
 ## **RECOMMENDATION:**
 
 **Use IndexedDB (Option 1)** because:
+
 1. Already created in `lib/client-db.ts`
 2. FREE forever
 3. Works offline
@@ -395,6 +414,7 @@ export const conn = connect(config);
 6. Privacy-first
 
 **When to use Supabase:**
+
 - Need real-time features
 - Need OAuth (GitHub, LinkedIn)
 - Need server-side logic

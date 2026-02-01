@@ -6,7 +6,8 @@ NeuroSync is a bleeding-edge biometric analysis system that combines WebNN, Medi
 
 ## Architecture
 
-```
+```text
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    Browser (Client-Side)                     │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐  │
@@ -28,27 +29,33 @@ NeuroSync is a bleeding-edge biometric analysis system that combines WebNN, Medi
 │                    │  Emit metrics  │                        │
 │                    └────────────────┘                        │
 └─────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ## Components
 
 ### 1. neuroSync.ts (Core Engine)
 
 **WebNN CapsNet Integration:**
+
 ```typescript
 await neuroSync.initWebNN();
 // Loads quantized CapsNet model for anxiety detection
 // 96% accuracy on stress classification
-```
+
+```text
 
 **MediaPipe FaceMesh v0.4:**
+
 ```typescript
 await neuroSync.initMediaPipe(videoElement, canvasElement);
 // Tracks 468 facial landmarks
 // Detects micro-expressions: eyebrow raise, jaw clench, pupil dilation
-```
+
+```text
 
 **Stress Detection (every 3s):**
+
 ```typescript
 const metrics = await neuroSync.detectStress();
 // Returns: {
@@ -58,25 +65,31 @@ const metrics = await neuroSync.detectStress();
 //   confidence: 0.96,
 //   microExpressions: { eyebrowRaise, jawClench, pupilDilation }
 // }
-```
+
+```text
 
 **Web Bluetooth (Fitbit HRV):**
+
 ```typescript
 await neuroSync.connectFitbit();
 // Optional: Connect to Fitbit for real HRV data
 // Falls back to webcam-based HR estimation
-```
+
+```text
 
 ### 2. authGuardian.ts (Authenticity Checking)
 
 **Entropy Calculation:**
+
 ```typescript
 const entropy = calculateEntropy(response);
 // Shannon entropy: measures text randomness
 // Low entropy (<0.5) suggests AI-generated text
-```
+
+```text
 
 **AI Pattern Detection:**
+
 ```typescript
 const check = detectAIPatterns(response);
 // Detects:
@@ -85,9 +98,11 @@ const check = detectAIPatterns(response);
 // - Lack of personal pronouns
 // - Perfect grammar (no typos)
 // - Low entropy
-```
+
+```text
 
 **Response Analysis:**
+
 ```typescript
 const auth = analyzeResponseAuthenticity(response, timeSpent);
 // Returns: {
@@ -95,24 +110,29 @@ const auth = analyzeResponseAuthenticity(response, timeSpent);
 //   score: 0-1,
 //   reasons: string[]
 // }
-```
+
+```text
 
 ### 3. NeuralReset.tsx (Stress Intervention)
 
 **4-7-8 Breathing Technique:**
+
 - Inhale: 4 seconds
 - Hold: 7 seconds
 - Exhale: 8 seconds
 - Repeat: 3 cycles
 
 **Web Speech API:**
+
 ```typescript
 const synth = window.speechSynthesis;
 const utterance = new SpeechSynthesisUtterance('Breathe in');
 synth.speak(utterance);
-```
+
+```text
 
 **Trigger:**
+
 - Automatically activates when stress > 8
 - Overlay with animated breathing guide
 - Audio instructions via Web Speech
@@ -120,6 +140,7 @@ synth.speak(utterance);
 ### 4. mitTimer.ts (High-Pressure Timer)
 
 **Timed Challenges:**
+
 ```typescript
 const timer = new MITTimer();
 timer.start(300, (remaining) => {
@@ -127,27 +148,33 @@ timer.start(300, (remaining) => {
 }, () => {
   console.log('Time up!');
 });
-```
+
+```text
 
 **Pyodide Code Validation:**
+
 ```typescript
 const result = await validatePythonCode(code, pyodide);
 // Sandboxed execution with 5s timeout
 // Returns: { valid, output, error, executionTime }
-```
+
+```text
 
 ## Integration Flow
 
 ### 1. Initialization
+
 ```typescript
 // In InterviewSimulator component
 const neuroSync = getNeuroSync();
 await neuroSync.initWebNN();
 await neuroSync.initMediaPipe(videoRef.current, canvas);
 await neuroSync.startWebcam();
-```
+
+```text
 
 ### 2. Real-Time Monitoring
+
 ```typescript
 // Every 3 seconds
 const metrics = await neuroSync.detectStress();
@@ -165,9 +192,11 @@ socket.emit('biometrics-update', {
 if (metrics.level > 8) {
   setShowNeuralReset(true);
 }
-```
+
+```text
 
 ### 3. Response Submission
+
 ```typescript
 // Client-side authenticity check
 const authCheck = analyzeResponseAuthenticity(response, responseTime);
@@ -185,19 +214,22 @@ socket.emit('interview-response', {
   },
   authenticity: authCheck
 });
-```
+
+```text
 
 ## Features
 
 ### WebNN CapsNet (96% Accuracy)
 
 **Model Architecture:**
+
 - Input: 5D feature vector (micro-expressions + HR)
 - Capsule layers: 3 layers with dynamic routing
 - Output: Stress score 0-10
 - Quantized: INT8 for edge deployment
 
 **Feature Extraction:**
+
 ```typescript
 const features = new Float32Array([
   microExpressions.eyebrowRaise,  // 0-1
@@ -206,11 +238,13 @@ const features = new Float32Array([
   baselineHR / 100,               // Normalized HR
   noise                           // Random noise for robustness
 ]);
-```
+
+```text
 
 ### MediaPipe FaceMesh v0.4
 
 **468 Facial Landmarks:**
+
 - Eyes: 71 landmarks per eye
 - Eyebrows: 10 landmarks per eyebrow
 - Nose: 9 landmarks
@@ -219,6 +253,7 @@ const features = new Float32Array([
 - Pupils: 2 landmarks (468, 473)
 
 **Micro-Expression Detection:**
+
 ```typescript
 // Eyebrow raise (stress indicator)
 const eyebrowRaise = (leftEyebrow.y + rightEyebrow.y) / 2;
@@ -228,9 +263,11 @@ const jawClench = jaw.y;
 
 // Pupil dilation (arousal indicator)
 const pupilSize = Math.abs(leftPupil.x - rightPupil.x);
-```
+
+```text
 
 **HRV Proxy (Webcam-based):**
+
 - Tracks subtle face color changes (PPG)
 - Estimates heart rate from facial landmarks movement
 - 60-100 bpm range
@@ -239,6 +276,7 @@ const pupilSize = Math.abs(leftPupil.x - rightPupil.x);
 ### Web Bluetooth (Fitbit Integration)
 
 **Heart Rate Service:**
+
 ```typescript
 const device = await navigator.bluetooth.requestDevice({
   filters: [{ services: ['heart_rate'] }]
@@ -249,22 +287,27 @@ characteristic.addEventListener('characteristicvaluechanged', (event) => {
   const hr = event.target.value.getUint8(1);
   // Real-time HR from wearable
 });
-```
+
+```text
 
 **Fitbit API (Optional):**
+
 ```typescript
 const hr = await neuroSync.pollFitbitAPI(accessToken);
 // Fetch resting heart rate from Fitbit cloud
-```
+
+```text
 
 ### Auth Guardian (Client-Side)
 
 **Entropy Threshold:**
+
 - Normal text: entropy > 4.0
 - AI-generated: entropy < 3.5
 - Flag if: entropy < 0.5 (normalized)
 
 **Pattern Matching:**
+
 ```typescript
 const llmPhrases = [
   /\bfurthermore\b/gi,
@@ -272,42 +315,52 @@ const llmPhrases = [
   /\bin conclusion\b/gi,
   /\bit is important to note\b/gi
 ];
-```
+
+```text
 
 **Response Time Analysis:**
+
 ```typescript
 const expectedTime = wordCount * 2; // 2s per word
 if (actualTime < expectedTime * 0.3) {
   flag('Response too fast for length');
 }
-```
+
+```text
 
 ## Browser Compatibility
 
 ### WebNN Support
+
 - ✅ Chrome 113+ (with flag)
 - ✅ Edge 113+ (with flag)
 - ⚠️ Firefox: Polyfill
 - ⚠️ Safari: Polyfill
 
 **Enable WebNN in Chrome:**
-```
+
+```text
+
 chrome://flags/#enable-experimental-web-platform-features
-```
+
+```text
 
 ### MediaPipe Support
+
 - ✅ Chrome 90+
 - ✅ Edge 90+
 - ✅ Firefox 88+
 - ✅ Safari 14+
 
 ### Web Bluetooth Support
+
 - ✅ Chrome 56+
 - ✅ Edge 79+
 - ❌ Firefox (not supported)
 - ❌ Safari (not supported)
 
 ### Web Speech Support
+
 - ✅ Chrome 33+
 - ✅ Edge 14+
 - ✅ Safari 7+
@@ -339,7 +392,8 @@ const bluetoothReady = await neuroSync.connectFitbit();
 if (!bluetoothReady) {
   useWebcamHREstimation();
 }
-```
+
+```text
 
 ## Performance
 
@@ -385,7 +439,8 @@ const auth = analyzeResponseAuthenticity(response, timeSpent);
 if (!auth.authentic) {
   console.warn('Low authenticity:', auth.reasons);
 }
-```
+
+```text
 
 ## Future Enhancements
 

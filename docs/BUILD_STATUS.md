@@ -12,7 +12,8 @@
 
 ### **Build Output:**
 
-```
+
+```text
  Compiled successfully
  Linting and checking validity of types
  Collecting page data
@@ -33,7 +34,8 @@ Route (app)                              Size     First Load JS
 ƒ  (Dynamic)  11 API routes
 
 Exit code: 0 
-```
+
+```text
 
 ---
 
@@ -134,9 +136,11 @@ Exit code: 0
 
 The dev server should now be running at:
 
-```
+
+```text
 http://localhost:3000
-```
+
+```text
 
 
 ### **Step 2: Test Core Flow**
@@ -262,21 +266,25 @@ http://localhost:3000
 
 ### **Frontend (.env.local):**
 
+
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:5000
 NEXTAUTH_SECRET=your-secret-here
 NEXTAUTH_URL=http://localhost:3000
-```
+
+```text
 
 
 ### **Backend (.env):**
+
 
 ```bash
 OPENAI_API_KEY=sk-...  # ← REQUIRED for AI features
 ANTHROPIC_API_KEY=...  # Optional
 PORT=5000
 CORS_ORIGIN=http://localhost:3000
-```
+
+```text
 
 **Note:** AI features (Resume Roast, Emotion-Aware AI) will NOT work without `OPENAI_API_KEY`
 
@@ -370,24 +378,24 @@ CORS_ORIGIN=http://localhost:3000
 ## KNOWN LIMITATIONS
 
 1. **AI Features Require API Key**
-   - Resume Roast won't work without OpenAI key
-   - Emotion-Aware AI won't work without OpenAI key
-   - Solution: Add key to `.env` file
+  - Resume Roast won't work without OpenAI key
+  - Emotion-Aware AI won't work without OpenAI key
+  - Solution: Add key to `.env` file
 
 2. **Three.js May Have Performance Issues**
-   - React 19 not officially supported
-   - CSS fallback is active and works great
-   - Solution: Already using CSS version
+  - React 19 not officially supported
+  - CSS fallback is active and works great
+  - Solution: Already using CSS version
 
 3. **Webcam Permission Required**
-   - BiometricEye needs camera access
-   - Users must grant permission
-   - Solution: Clear error messages implemented
+  - BiometricEye needs camera access
+  - Users must grant permission
+  - Solution: Clear error messages implemented
 
 4. **Type Errors Suppressed**
-   - `ignoreBuildErrors: true` in config
-   - Runtime behavior is correct
-   - Solution: Can fix post-hackathon with AI SDK update
+  - `ignoreBuildErrors: true` in config
+  - Runtime behavior is correct
+  - Solution: Can fix post-hackathon with AI SDK update
 
 ---
 

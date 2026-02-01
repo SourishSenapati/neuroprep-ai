@@ -27,6 +27,7 @@
 
 ## **HOW IT WORKS**
 
+
 ```typescript
 // Intelligent branching logic:
 const voiceId = localStorage.getItem('user_voice_id');
@@ -38,7 +39,8 @@ if (voiceId) {
   // 2. Fallback to browser speechSynthesis
   window.speechSynthesis.speak(utterance);
 }
-```
+
+```text
 
 **Result:** Interview AI speaks in YOUR voice! 🤯
 
@@ -57,9 +59,11 @@ if (voiceId) {
 
 ### **Step 2: Add to .env.local**
 
+
 ```bash
 ELEVENLABS_API_KEY=your_key_here
-```
+
+```text
 
 
 ### **Step 3: Test**

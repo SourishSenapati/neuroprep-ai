@@ -29,12 +29,14 @@
 
 #### **Streak Logic ("The Streak Keeper"):**
 
+
 ```typescript
 // On init:
 - If last active was yesterday → Keep streak
 - If last active was today → Do nothing
 - If last active was older → Reset streak to 0
-```
+
+```text
 
 
 #### **Actions:**
@@ -180,12 +182,14 @@
 
 #### **Breathing Animation (CSS):**
 
+
 ```css
 /* Safe CSS keyframes - NO physics */
 scale: [1, 1.05, 1]
 duration: 4s
 repeat: Infinity while active
-```
+
+```text
 
 
 #### **Deep Work Mode:**
@@ -227,12 +231,14 @@ repeat: Infinity while active
 
 #### **Live Stats Display:**
 
-```
+
+```text
 ┌─────────┬─────────┬─────────┬─────────┐
 │ XP: 350 │ Streak: │ Level:  │ Sessions│
 │         │ 7 Days  │   3     │    12   │
 └─────────┴─────────┴─────────┴─────────┘
-```
+
+```text
 
 - All stats read from `gameStore` in real-time
 - SSR-safe (renders skeleton during SSR)
@@ -274,6 +280,7 @@ repeat: Infinity while active
 
 ### **Layout Integration:**
 
+
 ```tsx
 // frontend/app/layout.tsx
 import { initializeGameStore } from '../lib/store/gameStore'
@@ -281,16 +288,19 @@ import { initializeGameStore } from '../lib/store/gameStore'
 useEffect(() => {
   initializeGameStore(); // Initializes streak on app load
 }, []);
-```
+
+```text
 
 
 ### **Dashboard Integration:**
+
 
 ```tsx
 // frontend/app/dashboard/page.tsx
 <DojoEntry />  {/* Added above Dashboard */}
 <Dashboard user={user} onStartInterview={handleStartInterview} />
-```
+
+```text
 
 ---
 
@@ -301,29 +311,29 @@ useEffect(() => {
 ### **User Journey:**
 
 1. **User visits app** → `initializeGameStore()` runs
-   - Checks `lastActiveDate` in localStorage
-   - If yesterday → Keeps streak
-   - If older → Resets to 0
+  - Checks `lastActiveDate` in localStorage
+  - If yesterday → Keeps streak
+  - If older → Resets to 0
 
 2. **User goes to Dashboard** → Sees DojoEntry portal
-   - Displays: XP, Streak, Level, Sessions
-   - Two portal buttons visible
+  - Displays: XP, Streak, Level, Sessions
+  - Two portal buttons visible
 
 3. **User clicks "Roast Battle"** → `/training/roast`
-   - Enters resume snippet
-   - AI streams witty roast
-   - **+50 XP** awarded on completion
-   - Toast notification appears
+  - Enters resume snippet
+  - AI streams witty roast
+  - **+50 XP** awarded on completion
+  - Toast notification appears
 
 4. **User clicks "Focus Pod"** → `/training/focus`
-   - Starts 25-min Pomodoro timer
-   - Optional: Enable brown noise audio
-   - Optional: Activate Deep Work fullscreen
-   - **+100 XP** on session complete
+  - Starts 25-min Pomodoro timer
+  - Optional: Enable brown noise audio
+  - Optional: Activate Deep Work fullscreen
+  - **+100 XP** on session complete
 
 5. **User completes interview** → Main app flow
-   - Existing `InterviewSession` can call `completeTask()`
-   - **Suggestion:** Award 200 XP per interview completion
+  - Existing `InterviewSession` can call `completeTask()`
+  - **Suggestion:** Award 200 XP per interview completion
 
 ---
 
@@ -345,9 +355,11 @@ useEffect(() => {
 
 ## DEPENDENCIES INSTALLED
 
+
 ```bash
 npm install zustand ai @ai-sdk/openai --workspace=frontend
-```
+
+```text
 
 **Versions:**
 
@@ -412,6 +424,7 @@ npm install zustand ai @ai-sdk/openai --workspace=frontend
 
 ### **Achievements System:**
 
+
 ```typescript
 achievements: [
   ' First Streak',
@@ -420,7 +433,8 @@ achievements: [
   '🧘 Focus Master (10 sessions)',
   ' Interview Pro (50 interviews)'
 ]
-```
+
+```text
 
 
 ### **Leaderboard:**
@@ -490,7 +504,8 @@ achievements: [
 
 **Add this segment at 03:30-04:30:**
 
-```
+
+```text
 [03:30-03:50] GAMIFICATION INTRO
 - "We've added a full gamification system"
 - Show Dashboard with Dojo Entry portal
@@ -514,7 +529,8 @@ achievements: [
 - Activate Deep Work mode (fullscreen)
 - "100 XP per completed session"
 - "Build your daily streak to unlock bonuses"
-```
+
+```text
 
 ---
 

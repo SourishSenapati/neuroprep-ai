@@ -78,6 +78,7 @@
 
 #### **How It Works:**
 
+
 ```typescript
 Request Body: {
   userText: "I think the answer is O(n log n)",
@@ -89,7 +90,8 @@ Request Body: {
 "️ IMPORTANT: The candidate looks TERRIFIED.
 Soften your tone. Be encouraging.
 Use: 'Take a breath, you've got this'"
-```
+
+```text
 
 
 #### **Emotion-Specific AI Behaviors:**
@@ -157,13 +159,15 @@ Use: 'Take a breath, you've got this'"
 
 #### **CSS Fallback (Currently Active):**
 
+
 ```tsx
 <ReactiveBackgroundSimple 
   emotion="fearful" 
   intensity={0.8} 
 />
 // → Background: red gradient, 70% opacity, 1s transition
-```
+
+```text
 
 - Emotion-based gradients
 - Smooth 1-second transitions
@@ -236,12 +240,14 @@ Use: 'Take a breath, you've got this'"
 
 #### **Progress Tracking:**
 
-```
+
+```text
 ┌─────────────────────────────────────────┐
 │ Win Condition: 60s Calm                 │
 │ [████████████░░░░░░░░░] 32s / 60s       │
 └─────────────────────────────────────────┘
-```
+
+```text
 
 - Green progress bar
 - Live countdown
@@ -271,6 +277,7 @@ Use: 'Take a breath, you've got this'"
 
 ### **1. BiometricEye → AI Chat:**
 
+
 ```typescript
 // BiometricEye detects emotion
 const [emotion, confidence] = ['fearful', 0.88];
@@ -283,27 +290,32 @@ fetch('/api/chat/interview', {
     userEmotion: emotion  // ← Injects into AI prompt
   })
 });
-```
+
+```text
 
 
 ### **2. BiometricEye → ReactiveBackground:**
+
 
 ```tsx
 <ReactiveBackgroundSimple 
   emotion={currentEmotion}  // ← From BiometricEye
   intensity={confidence}     // ← 0-1 scale
 />
-```
+
+```text
 
 
 ### **3. BiometricEye → Nemesis Mode:**
+
 
 ```tsx
 <NemesisMode 
   currentEmotion={emotion}  // ← For win condition tracking
   onInterrupt={() => {}}    // ← Trigger AI interruption
 />
-```
+
+```text
 
 ---
 
@@ -315,22 +327,22 @@ fetch('/api/chat/interview', {
 1. **Enable BiometricEye** → Webcam starts, face detected
 2. **Start Interview** → AI asks first question
 3. **User shows fear (88% confidence)** →
-   - Targeting overlay: "FEAR DETECTED: 88%"
-   - Background turns deep RED, spiky geometry
-   - AI receives emotion data → Softens tone: "Take a breath..."
+  - Targeting overlay: "FEAR DETECTED: 88%"
+  - Background turns deep RED, spiky geometry
+  - AI receives emotion data → Softens tone: "Take a breath..."
 4. **User activates Nemesis Mode** →
-   - TTS: "Nemesis Mode activated."
-   - Voice monitoring begins
+  - TTS: "Nemesis Mode activated."
+  - Voice monitoring begins
 5. **User answers, pauses 4 seconds** →
-   - AI interrupts: "You are hesitating. Do you not know the answer?"
+  - AI interrupts: "You are hesitating. Do you not know the answer?"
 6. **User regains composure** →
-   - Emotion: Neutral
-   - Background transitions to blue
-   - Calm streak: 15s... 30s... 45s...
+  - Emotion: Neutral
+  - Background transitions to blue
+  - Calm streak: 15s... 30s... 45s...
 7. **User maintains neutral for 60s** →
-   - Victory! +500 XP
-   - TTS: "Impressive. You have defeated the Nemesis."
-   - Nemesis Mode auto-disables
+  - Victory! +500 XP
+  - TTS: "Impressive. You have defeated the Nemesis."
+  - Nemesis Mode auto-disables
 
 ---
 
@@ -404,25 +416,25 @@ fetch('/api/chat/interview', {
 **Why this wins:**
 
 1. **Unique Technology Stack:**
-   - Face-API.js (CV in browser)
-   - Emotion-aware LLMs
-   - Voice stress detection
-   - TTS interruptions
+  - Face-API.js (CV in browser)
+  - Emotion-aware LLMs
+  - Voice stress detection
+  - TTS interruptions
 
 2. **Real-World Application:**
-   - Interview anxiety training
-   - Emotional intelligence development
-   - Self-regulation skills
+  - Interview anxiety training
+  - Emotional intelligence development
+  - Self-regulation skills
 
 3. **Technical Sophistication:**
-   - Multi-modal AI (vision + audio + NLP)
-   - Real-time processing
-   - Privacy-first (browser-based)
+  - Multi-modal AI (vision + audio + NLP)
+  - Real-time processing
+  - Privacy-first (browser-based)
 
 4. **Gamification:**
-   - Nemesis Mode (challenge)
-   - XP rewards (+500 for win)
-   - Win conditions
+  - Nemesis Mode (challenge)
+  - XP rewards (+500 for win)
+  - Win conditions
 
 **Judge Reaction:**
 
@@ -448,6 +460,7 @@ fetch('/api/chat/interview', {
 
 
 ### **Basic Integration:**
+
 
 ```tsx
 'use client';
@@ -484,10 +497,12 @@ export default function InterviewPage() {
     </>
   );
 }
-```
+
+```text
 
 
 ### **Nemesis Mode:**
+
 
 ```tsx
 import NemesisMode from '@/components/NemesisMode';
@@ -501,7 +516,8 @@ import NemesisMode from '@/components/NemesisMode';
     console.log('User hesitated!');
   }}
 />
-```
+
+```text
 
 ---
 
@@ -549,7 +565,8 @@ import NemesisMode from '@/components/NemesisMode';
 
 **Add at 04:30-06:00:**
 
-```
+
+```text
 [04:30-04:50] BIOMETRIC EYE INTRO
 - "NeuroPrep AI now watches you in real-time"
 - Enable BiometricEye
@@ -581,7 +598,8 @@ import NemesisMode from '@/components/NemesisMode';
 - Show calm streak tracker
 - "Maintain composure for 60 seconds to win"
 - "This trains you for high-pressure interviews"
-```
+
+```text
 
 ---
 

@@ -181,7 +181,8 @@
 
 ### **Growth Loop:**
 
-```
+
+```text
 User completes task
   → Earns XP/Level Up
     → Prompted to share
@@ -191,7 +192,8 @@ User completes task
             → Friends click QR/link
               → Friend signs up
                 → Friend completes task... (LOOP)
-```
+
+```text
 
 **K-Factor Potential:** 1.2-1.5 (for every 10 users, 12-15 more join)
 
@@ -251,25 +253,25 @@ User completes task
 ### **Demonstrates:**
 
 1. **Product Thinking**
-   - "They built viral mechanics into the product"
-   - Shows understanding of growth
+  - "They built viral mechanics into the product"
+  - Shows understanding of growth
 
 2. **Technical Skill**
-   - HTML to canvas export
-   - Radar chart visualization
-   - QR code generation
-   - Social API integration
+  - HTML to canvas export
+  - Radar chart visualization
+  - QR code generation
+  - Social API integration
 
 3. **Marketing Savvy**
-   - Pre-written social copy
-   - Deep linking with QR
-   - Professional card design
-   - Platform-specific optimization
+  - Pre-written social copy
+  - Deep linking with QR
+  - Professional card design
+  - Platform-specific optimization
 
 4. **User Psychology**
-   - Gamification creates shareability
-   - Status symbols drive adoption
-   - One-click reduces friction
+  - Gamification creates shareability
+  - Status symbols drive adoption
+  - One-click reduces friction
 
 
 ### **Impact on Score:**
@@ -367,9 +369,11 @@ This isn't just an app. It's a growth engine."
 
 ### **Dependencies Added:**
 
+
 ```bash
 npm install html2canvas qrcode.react recharts
-```
+
+```text
 
 - `html2canvas` - DOM to canvas export
 - `qrcode.react` - QR code SVG generation
@@ -379,18 +383,18 @@ npm install html2canvas qrcode.react recharts
 ### **Files Created:**
 
 1. **`CareerTradingCard.tsx` (500 lines)**
-   - Main component
-   - Card rendering
-   - Export logic
-   - Social sharing
+  - Main component
+  - Card rendering
+  - Export logic
+  - Social sharing
 
 2. **`ShareButton.tsx` (80 lines)**
-   - Floating action button
-   - Pulse animation
-   - Modal trigger
+  - Floating action button
+  - Pulse animation
+  - Modal trigger
 
 3. **`layout.tsx` (updated)**
-   - Added ShareButton globally
+  - Added ShareButton globally
 
 ---
 
@@ -401,30 +405,30 @@ npm install html2canvas qrcode.react recharts
 ### **Easy Additions:**
 
 1. **Multiple Card Themes**
-   - Dark mode
-   - Light mode
-   - Holographic
-   - Minimalist
+  - Dark mode
+  - Light mode
+  - Holographic
+  - Minimalist
 
 2. **Custom Backgrounds**
-   - Gradient picker
-   - Upload custom image
-   - Brand colors
+  - Gradient picker
+  - Upload custom image
+  - Brand colors
 
 3. **Animation Preview**
-   - Card flip animation
-   - Shine effect
-   - Particle effects
+  - Card flip animation
+  - Shine effect
+  - Particle effects
 
 4. **A/B Testing Copy**
-   - Try different share text
-   - Track click-through rates
-   - Optimize for virality
+  - Try different share text
+  - Track click-through rates
+  - Optimize for virality
 
 5. **Analytics Dashboard**
-   - Track shares
-   - Measure referral traffic
-   - Calculate K-factor
+  - Track shares
+  - Measure referral traffic
+  - Calculate K-factor
 
 ---
 

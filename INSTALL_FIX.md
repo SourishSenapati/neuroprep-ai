@@ -7,54 +7,69 @@ The postinstall script was causing infinite loop. Fixed by removing it from pack
 ## 🚀 Correct Installation Steps
 
 ### 1. Install Root Dependencies
+
 ```cmd
 npm install
-```
+
+```text
 
 ### 2. Install Backend Dependencies
+
 ```cmd
 cd backend
 npm install
 cd ..
-```
+
+```text
 
 ### 3. Install Frontend Dependencies
+
 ```cmd
 cd frontend
 npm install
 cd ..
-```
+
+```text
 
 ### 4. Verify Installation
+
 ```cmd
 npm list concurrently --depth=0
-```
+
+```text
 
 ### 5. Start Development
+
 ```cmd
 npm run dev
-```
+
+```text
 
 Or use the batch file:
+
 ```cmd
 dev.bat
-```
+
+```text
 
 ## 📦 What Gets Installed
 
 **Root:**
+
 - concurrently
 - cypress
 - jest, ts-jest
 - vercel
 
 **Backend:**
+
 - express, socket.io, cors
 - openai, @anthropic-ai/sdk
 - ioredis, pg
 - zod, helmet, compression
 
 **Frontend:**
+
 - next, react, react-dom
 - three, @react-three/fiber
 - framer-motion, recharts
@@ -64,6 +79,7 @@ dev.bat
 ## 🐛 If Installation Still Fails
 
 Run manual installation:
+
 ```cmd
 npm install concurrently cypress jest ts-jest @types/jest typescript vercel --save-dev
 
@@ -76,21 +92,26 @@ npm install next react react-dom three @react-three/fiber @react-three/drei fram
 npm install @types/react @types/node typescript tailwindcss postcss autoprefixer --save-dev
 
 cd ..
-```
+
+```text
 
 ## ✅ Verification
 
 After installation, verify:
+
 ```cmd
 node -v
 npm -v
 npx concurrently --version
-```
+
+```text
 
 Then start:
+
 ```cmd
 npm run dev
-```
+
+```text
 
 Backend: http://localhost:3001
 Frontend: http://localhost:3000

@@ -60,13 +60,15 @@
 
 #### **1. Generic Retry Function:**
 
+
 ```typescript
 fetchWithRetry(url, options, {
   retries: 3,
   backoffMs: 1000,
   retryableStatuses: [408, 500, 502, 503, 504]
 })
-```
+
+```text
 
 **Behavior:**
 
@@ -78,9 +80,11 @@ fetchWithRetry(url, options, {
 
 #### **2. Specialized Resume Parser:**
 
+
 ```typescript
 fetchResumeParser(file, onProgress)
-```
+
+```text
 
 **Features:**
 
@@ -178,7 +182,7 @@ fetchResumeParser(file, onProgress)
 When resume is successfully parsed:
 
 1. **Role Detection** → Auto-fills `topic` field
-   - Example: "Frontend Engineer" detected → topic set
+  - Example: "Frontend Engineer" detected → topic set
 
 2. **Difficulty Mapping** → Auto-sets difficulty slider
 
@@ -191,7 +195,7 @@ When resume is successfully parsed:
    ```
 
 3. **Toast Confirmation:**
-   - " Detected role: Frontend Engineer"
+  - " Detected role: Frontend Engineer"
 
 ---
 
@@ -350,7 +354,8 @@ When resume is successfully parsed:
 
 **Add this segment at 01:15-02:00:**
 
-```
+
+```text
 [01:15-01:45] RESUME UPLOAD (NEW!)
 - "Let's speed up the setup with our Resume Parser"
 - Click "Upload Resume (Auto-Fill)"
@@ -369,7 +374,8 @@ When resume is successfully parsed:
 - "If anything goes wrong, users see this instead of a white screen"
 - Click "Try Again"
 - [App recovers gracefully]
-```
+
+```text
 
 ---
 

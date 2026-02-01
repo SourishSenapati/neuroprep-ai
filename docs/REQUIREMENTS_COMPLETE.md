@@ -64,9 +64,11 @@
 
 **Deploy Command:**
 
+
 ```powershell
 vercel --prod
-```
+
+```text
 
 **Score Impact:** +5 points (when deployed)
 
@@ -96,6 +98,7 @@ vercel --prod
 
 ## **TO VERIFY:**
 
+
 ```powershell
 
 # 1. Run tests
@@ -109,7 +112,8 @@ npm test
 
 # 3. Deploy
 vercel --prod
-```
+
+```text
 
 ---
 

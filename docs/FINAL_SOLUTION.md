@@ -16,10 +16,12 @@
 
 ### **OPTION 1: Development Mode (RECOMMENDED FOR HACKATHON)**
 
+
 ```powershell
 cd frontend
 npm run dev
-```
+
+```text
 
 **Why This Works:**
 
@@ -47,9 +49,11 @@ dal
 
 ### **OPTION 2: Deploy to Vercel**
 
+
 ```powershell
 vercel --prod
-```
+
+```text
 
 **Why This Works:**
 

@@ -9,7 +9,8 @@ NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
 ELEVENLABS_API_KEY=
 OPENAI_API_KEY=
-```
+
+```text
 
 ---
 
@@ -37,7 +38,8 @@ CREATE POLICY "Allow all" ON dojo_rooms FOR ALL USING (true) WITH CHECK (true);
 CREATE INDEX idx_dojo_rooms_code ON dojo_rooms(room_code);
 
 ALTER PUBLICATION supabase_realtime ADD TABLE dojo_rooms;
-```
+
+```text
 
 **Click "Run" ✅**
 
@@ -46,10 +48,13 @@ ALTER PUBLICATION supabase_realtime ADD TABLE dojo_rooms;
 ## **STEP 3: Restart Server**
 
 ```powershell
+
 # Ctrl+C to stop
+
 cd frontend
 npm run dev
-```
+
+```text
 
 ---
 
@@ -68,6 +73,7 @@ npm run dev
 ## **DONE!** 🎉
 
 Your app now has:
+
 - ✅ Multiplayer collaboration
 - ✅ Real-time code sync
 - ✅ Video/audio P2P

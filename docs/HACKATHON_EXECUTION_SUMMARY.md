@@ -225,6 +225,7 @@
 
 #### 1. Test the Chaos→Order Landing Page
 
+
 ```bash
 
 # Option A: View as standalone component
@@ -239,10 +240,12 @@
 # Replace: frontend/app/page.tsx
 
 # Import: ChaosToOrderLanding
-```
+
+```text
 
 
 #### 2. Test Resume Parser
+
 
 ```bash
 
@@ -255,7 +258,7 @@ curl -X POST http://localhost:5000/api/parse-resume \
   -F "resume=@/path/to/resume.pdf"
 
 
-# Expected response:
+# Expected response
 
 # {
 
@@ -272,10 +275,12 @@ curl -X POST http://localhost:5000/api/parse-resume \
 #   }
 
 # }
-```
+
+```text
 
 
 #### 3. Deploy to Vercel (Test)
+
 
 ```bash
 
@@ -285,17 +290,20 @@ cd frontend && vercel --prod
 
 # Deploy backend
 cd backend && vercel --prod
-```
+
+```text
 
 
 #### 4. Proceed to Hour 1-2 Tasks
+
 
 ```bash
 
 # Start with Error Boundary implementation
 
 # See: docs/HACKATHON_SPRINT_PLAN.md (Hour 1-2)
-```
+
+```text
 
 ---
 
@@ -305,7 +313,8 @@ cd backend && vercel --prod
 
 ### **Enhanced Script with New Features:**
 
-```
+
+```text
 [00:00-00:15] HOOK
 "What if your interview prep could transform chaos into mastery?"
 [Show Chaos→Order animation]
@@ -355,7 +364,8 @@ cd backend && vercel --prod
 - "GitHub: [link]"
 - "Built in 10 hours for the hackathon"
 - "Transform your engineering career today"
-```
+
+```text
 
 ---
 

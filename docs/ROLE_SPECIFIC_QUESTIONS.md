@@ -1,11 +1,11 @@
 # 🎯 COMPREHENSIVE QUESTION GENERATION SYSTEM
 
 
-## The Problem:
+## The Problem
 User selected "Chemical Engineer Level 5" but got tech questions about "latency" and "system design"
 
 
-## Root Cause:
+## Root Cause
 Backend receives `role` parameter but doesn't use it properly in question generation
 
 ---
@@ -18,7 +18,8 @@ Backend receives `role` parameter but doesn't use it properly in question genera
 
 **Math Behind 224M+ Questions:**
 
-```
+
+```text
 Base Formula: Questions = Topics × Difficulty Levels × Question Templates × Variations
 
 For EACH role:
@@ -38,12 +39,14 @@ Example for Chemical Engineering:
 ALL 12 tracks:
 2.4M × 12 tracks = 28.8M base
 With dynamic parameter generation: 28.8M × 8 = 230.4M+ questions
-```
+
+```text
 
 ---
 
 
 ### 2. Role-Specific Topic Maps
+
 
 ```typescript
 const ROLE_TOPICS = {
@@ -205,12 +208,14 @@ const ROLE_TOPICS = {
   
   // ... Similar detailed mappings for ALL 12 tracks
 };
-```
+
+```text
 
 ---
 
 
 ### 3. Question Generation Engine
+
 
 ```typescript
 function generateRoleSpecificQuestion(
@@ -241,7 +246,8 @@ function generateRoleSpecificQuestion(
     followUps: generateFollowUps(topic, difficulty)
   };
 }
-```
+
+```text
 
 ---
 
@@ -249,14 +255,17 @@ function generateRoleSpecificQuestion(
 ### 4. Verification System
 
 **Ensures 99.9% Uniqueness:**
+
 ```typescript
 - Store hash of each generated question
 - Check against previous N questions (N = 1000)
 - Regenerate if collision detected
 - Track collision rate (must be < 0.1%)
-```
+
+```text
 
 **Adaptive AI:**
+
 ```typescript
 - Starts at selected difficulty level
 - Adjusts based on:
@@ -265,12 +274,13 @@ function generateRoleSpecificQuestion(
   - Code quality (for coding questions)
   - Explanation depth
 - Never more than 2 levels away from initial setting
-```
+
+```text
 
 ---
 
 
-## Implementation Status:
+## Implementation Status
 
 **Current:**  
 ❌ Backend uses generic prompts  
@@ -287,7 +297,7 @@ function generateRoleSpecificQuestion(
 ---
 
 
-## Next Steps:
+## Next Steps
 
 1. Update backend `/api/start-session` to use role-specific generator
 2. Create question template library for each role

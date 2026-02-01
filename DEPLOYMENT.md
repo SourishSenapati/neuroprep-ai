@@ -7,24 +7,32 @@
 ```bash
 npm install -g vercel
 vercel login
-```
+
+```text
 
 ### Deploy Full Stack
 
 ```bash
+
 # From root directory
+
 npm run deploy:vercel
-```
+
+```text
 
 ### Deploy Separately
 
 ```bash
+
 # Backend only
+
 npm run deploy:backend
 
 # Frontend only
+
 npm run deploy:frontend
-```
+
+```text
 
 ### Environment Variables (Vercel Dashboard)
 
@@ -51,16 +59,21 @@ Set these in Vercel project settings:
 ### Backend Unit Tests (Jest)
 
 ```bash
+
 # Run all backend tests
+
 npm run test:jest
 
 # Watch mode
+
 cd backend
 npm test -- --watch
 
 # Coverage report
+
 npm run test:jest
-```
+
+```text
 
 **Test Coverage:**
 
@@ -74,49 +87,57 @@ npm run test:jest
 ### E2E Tests (Cypress)
 
 ```bash
+
 # Headless mode
+
 npm run test:e2e
 
 # Interactive mode
+
 npm run test:e2e:open
-```
+
+```text
 
 **E2E Test Scenarios:**
 
 1. **Full Caltech Interview Simulation**
-   - Start session with caltech-phd mode
-   - Grant camera permissions (mocked)
-   - Answer quantum physics question
-   - Verify technical score > 90
-   - Execute Python code with Pyodide
-   - Verify numpy import and print(42)
-   - End session and check neural resilience > 85
+  - Start session with caltech-phd mode
+  - Grant camera permissions (mocked)
+  - Answer quantum physics question
+  - Verify technical score > 90
+  - Execute Python code with Pyodide
+  - Verify numpy import and print(42)
+  - End session and check neural resilience > 85
 
 2. **Pyodide Code Execution**
-   - Load code editor
-   - Type: `import numpy; print(42)`
-   - Run code
-   - Assert output contains "42"
+  - Load code editor
+  - Type: `import numpy; print(42)`
+  - Run code
+  - Assert output contains "42"
 
 3. **Neural Reset Trigger**
-   - Set stress level > 8
-   - Verify breathing overlay appears
-   - Check 4-7-8 breathing instructions
+  - Set stress level > 8
+  - Verify breathing overlay appears
+  - Check 4-7-8 breathing instructions
 
 4. **Cheat Detection**
-   - Submit LLM-style response
-   - Verify authenticity warning appears
-   - Check flag in session data
+  - Submit LLM-style response
+  - Verify authenticity warning appears
+  - Check flag in session data
 
 ### Database Seeding
 
 ```bash
+
 # Seed Caltech/MIT sample data
+
 npm run seed:db
 
 # Or manually
+
 psql $DATABASE_URL -f backend/seed.sql
-```
+
+```text
 
 **Seeded Data:**
 
@@ -130,15 +151,20 @@ psql $DATABASE_URL -f backend/seed.sql
 ### Vercel Logs
 
 ```bash
+
 # Real-time logs
+
 vercel logs --follow
 
 # Backend logs
+
 vercel logs backend --follow
 
 # Frontend logs
+
 vercel logs frontend --follow
-```
+
+```text
 
 ### Console Monitoring
 
@@ -148,16 +174,20 @@ console.log('Socket connected:', socket.connected);
 
 // Backend: Monitor AI streaming
 console.log('Streaming question:', { sessionId, mode, stressLevel });
-```
+
+```text
 
 ### Health Checks
 
 ```bash
+
 # Backend health
+
 curl https://your-backend.vercel.app/api/health
 
 # Expected: {"status":"ok","redis":"connected","db":"connected"}
-```
+
+```text
 
 ## 🔍 Verification Checklist
 
@@ -182,63 +212,88 @@ curl https://your-backend.vercel.app/api/health
 ### Test Scenarios
 
 ```bash
+
 # 1. Start development servers
+
 npm run dev
 
 # 2. Run unit tests
+
 npm run test:jest
 
 # 3. Run E2E tests
+
 npm run test:e2e
 
 # 4. Seed database
+
 npm run seed:db
 
 # 5. Deploy to Vercel
+
 npm run deploy:vercel
-```
+
+```text
 
 ## 🐛 Troubleshooting
 
 ### Vercel Build Fails
 
 ```bash
+
 # Check build logs
+
 vercel logs --build
 
-# Common fixes:
+# Common fixes
+
 # - Verify package.json scripts
+
 # - Check TypeScript errors
+
 # - Ensure all dependencies installed
-```
+
+```text
 
 ### Socket.io Not Connecting
 
 ```bash
+
 # Verify CORS settings in backend
+
 CORS_ORIGIN=https://your-frontend.vercel.app
 
 # Check WebSocket URL in frontend
+
 NEXT_PUBLIC_WS_URL=https://your-backend.vercel.app
-```
+
+```text
 
 ### Pyodide Not Loading
 
 ```bash
+
 # Check COOP/COEP headers in vercel.json
+
 # Verify CDN access to jsdelivr.net
+
 # Clear browser cache
-```
+
+```text
 
 ### Database Connection Error
 
 ```bash
+
 # Test connection
+
 psql $DATABASE_URL -c "SELECT 1"
 
 # Verify SSL mode
+
 DATABASE_URL=postgresql://user:pass@host:5432/db?sslmode=require
-```
+
+```text
 
 ## 📈 Performance Benchmarks
 
@@ -264,7 +319,9 @@ DATABASE_URL=postgresql://user:pass@host:5432/db?sslmode=require
 ## 📝 CI/CD Pipeline (Optional)
 
 ```yaml
+
 # .github/workflows/deploy.yml
+
 name: Deploy to Vercel
 on:
   push:
@@ -277,7 +334,8 @@ jobs:
       - run: npm install
       - run: npm run test:jest
       - run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
-```
+
+```text
 
 ---
 

@@ -30,35 +30,37 @@
 ### **Test Files Created:**
 
 1. **`tests/gameStore.test.ts`** - 10 tests
-   - XP addition
-   - Level calculation
-   - Streak tracking
-   - Premium upgrade
-   - LocalStorage persistence
-   - Daily rewards
-   - Quest completion
+  - XP addition
+  - Level calculation
+  - Streak tracking
+  - Premium upgrade
+  - LocalStorage persistence
+  - Daily rewards
+  - Quest completion
 
 2. **`tests/PricingModal.test.tsx`** - 6 tests
-   - Rendering pricing tiers
-   - Indian pricing (₹99)
-   - UPI payment options
-   - Upgrade interactions
-   - Feature lists
-   - Modal closing
+  - Rendering pricing tiers
+  - Indian pricing (₹99)
+  - UPI payment options
+  - Upgrade interactions
+  - Feature lists
+  - Modal closing
 
 3. **`tests/api.test.ts`** - 3 tests
-   - Successful API calls
-   - Error handling
-   - Authentication headers
+  - Successful API calls
+  - Error handling
+  - Authentication headers
 
 
 ### **Run Tests:**
+
 
 ```powershell
 npm run test           # Run once
 npm run test:watch     # Watch mode
 npm run test:coverage  # With coverage
-```
+
+```text
 
 **Score Impact:** +3 Technical, +2 Completeness = **+5 points**
 
@@ -142,6 +144,7 @@ npm run test:coverage  # With coverage
 
 **Deployment Steps:**
 
+
 ```powershell
 
 # 1. Install Vercel CLI
@@ -159,19 +162,24 @@ vercel --prod
 
 # 4. Verify
 npm run lighthouse:prod
-```
+
+```text
 
 **Expected URL:**
 
-```
+
+```text
 https://neuroprep-ai.vercel.app
-```
+
+```text
 
 **Judge Access:**
 
-```
+
+```text
 https://neuroprep-ai.vercel.app/judge/login
-```
+
+```text
 
 **Score Impact:** +2 Technical, +3 Completeness = **+5 points**
 
@@ -244,20 +252,24 @@ https://neuroprep-ai.vercel.app/judge/login
 
 ## **TO DEPLOY NOW:**
 
+
 ```powershell
 
 # Install testing deps (running in background)
 
-# Then deploy:
+# Then deploy
 
 vercel --prod
-```
+
+```text
 
 **That's it!** Your app will be live at:
 
-```
+
+```text
 https://neuroprep-ai.vercel.app
-```
+
+```text
 
 ---
 

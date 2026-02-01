@@ -26,11 +26,13 @@
 
 **Dependencies:**
 
+
 ```bash
 npm install @11ty/eleventy-plugin-syntaxhighlight
 
 # Use ElevenLabs free tier: 10,000 chars/month
-```
+
+```text
 
 **Implementation Steps:**
 
@@ -60,11 +62,13 @@ npm install @11ty/eleventy-plugin-syntaxhighlight
 
 **Dependencies:**
 
+
 ```bash
 npm install @supabase/supabase-js socket.io-client
 
 # Supabase free tier: Unlimited connections
-```
+
+```text
 
 **Implementation Steps:**
 
@@ -94,11 +98,13 @@ npm install @supabase/supabase-js socket.io-client
 
 **Dependencies:**
 
+
 ```bash
 npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 # Google MediaPipe: Free + runs in browser
-```
+
+```text
 
 **Implementation Steps:**
 
@@ -121,7 +127,8 @@ npm install @mediapipe/face_mesh @mediapipe/camera_utils
 
 #### **Architecture:**
 
-```
+
+```text
 User Records Voice (30s)
   ↓
 Send to ElevenLabs API
@@ -131,12 +138,14 @@ Voice Clone Created
 Use Clone for Interview AI
   ↓
 Text → Speech (in your voice!)
-```
+
+```text
 
 
 #### **Code Scaffold:**
 
 **File: `components/VoiceCloneSetup.tsx`**
+
 
 ```typescript
 'use client';
@@ -236,9 +245,11 @@ export default function VoiceCloneSetup() {
     </div>
   );
 }
-```
+
+```text
 
 **API Route: `app/api/voice/clone/route.ts`**
+
 
 ```typescript
 export async function POST(req: Request) {
@@ -260,7 +271,8 @@ export async function POST(req: Request) {
   
   return Response.json(await response.json());
 }
-```
+
+```text
 
 **Setup:**
 
@@ -279,7 +291,8 @@ export async function POST(req: Request) {
 
 #### **Architecture:**
 
-```
+
+```text
 User 1 Creates Room
   ↓
 Gets Room Code
@@ -289,12 +302,14 @@ User 2 Joins Room
 Supabase Realtime Sync
   ↓
 Both see same interview
-```
+
+```text
 
 
 #### **Code Scaffold:**
 
 **File: `lib/supabase.ts`**
+
 
 ```typescript
 import { createClient } from '@supabase/supabase-js';
@@ -303,9 +318,11 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
-```
+
+```text
 
 **File: `components/MultiplayerRoom.tsx`**
+
 
 ```typescript
 'use client';
@@ -392,12 +409,14 @@ export default function MultiplayerRoom() {
     </div>
   );
 }
-```
+
+```text
 
 **Supabase Setup:**
 
 1. Create Supabase project: <https://supabase.com>
 2. Create table:
+
 
 ```sql
 create table interview_rooms (
@@ -406,12 +425,16 @@ create table interview_rooms (
   state jsonb default '{}'::jsonb,
   created_at timestamptz default now()
 );
-```
+
+```text
+
 1. Enable Realtime:
+
 
 ```sql
 alter publication supabase_realtime add table interview_rooms;
-```
+
+```text
 
 **Time:** 20 hours total
 
@@ -423,7 +446,8 @@ alter publication supabase_realtime add table interview_rooms;
 
 #### **Architecture:**
 
-```
+
+```text
 MediaPipe Face Mesh
   ↓
 468-point 3D mesh
@@ -431,12 +455,14 @@ MediaPipe Face Mesh
 Three.js Overlay
   ↓
 Color by stress level
-```
+
+```text
 
 
 #### **Code Scaffold:**
 
 **File: `components/ARFaceTracking.tsx`**
+
 
 ```typescript
 'use client';
@@ -547,13 +573,16 @@ export default function ARFaceTracking() {
     </div>
   );
 }
-```
+
+```text
 
 **Dependencies:**
 
+
 ```bash
 npm install @mediapipe/face_mesh @mediapipe/camera_utils
-```
+
+```text
 
 **Time:** 30 hours total
 

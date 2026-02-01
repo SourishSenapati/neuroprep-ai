@@ -10,6 +10,7 @@
 
 
 ### **Option A: Local MySQL**
+
 ```bash
 
 # Windows (using Chocolatey)
@@ -21,17 +22,20 @@ choco install mysql
 
 # Start MySQL
 net start mysql
-```
+
+```text
 
 
 ### **Option B: Docker MySQL**
+
 ```bash
 docker run --name neuroprep-mysql \
   -e MYSQL_ROOT_PASSWORD=root \
   -e MYSQL_DATABASE=neuroprep \
   -p 3306:3306 \
   -d mysql:8.0
-```
+
+```text
 
 
 ### **Option C: Railway (FREE Cloud MySQL)**
@@ -44,10 +48,12 @@ docker run --name neuroprep-mysql \
 
 ## **2. Install Dependencies**
 
+
 ```bash
 npm install sequelize mysql2 bcryptjs
 npm install -D @types/sequelize
-```
+
+```text
 
 ---
 
@@ -55,6 +61,7 @@ npm install -D @types/sequelize
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
+
 ```env
 
 # MySQL
@@ -67,7 +74,8 @@ DB_NAME=neuroprep
 
 # Or use connection URL
 DATABASE_URL="mysql://root:root@localhost:3306/neuroprep"
-```
+
+```text
 
 ---
 
@@ -75,6 +83,7 @@ DATABASE_URL="mysql://root:root@localhost:3306/neuroprep"
 ## **4. Database Configuration**
 
 Create `frontend/lib/mysql-config.ts`:
+
 
 ```typescript
 import { Sequelize } from 'sequelize';
@@ -98,7 +107,8 @@ const sequelize = new Sequelize(
 );
 
 export default sequelize;
-```
+
+```text
 
 ---
 
@@ -106,6 +116,7 @@ export default sequelize;
 ## **5. Define Models**
 
 Create `frontend/lib/models/index.ts`:
+
 
 ```typescript
 import { DataTypes, Model } from 'sequelize';
@@ -440,7 +451,8 @@ QuestionHistory.belongsTo(User, { foreignKey: 'userId' });
 QuestionHistory.belongsTo(InterviewSession, { foreignKey: 'sessionId' });
 
 export { sequelize };
-```
+
+```text
 
 ---
 
@@ -448,6 +460,7 @@ export { sequelize };
 ## **6. Database Service**
 
 Create `frontend/lib/mysql-service.ts`:
+
 
 ```typescript
 import bcrypt from 'bcryptjs';
@@ -656,7 +669,8 @@ accuracy,
     };
   },
 };
-```
+
+```text
 
 ---
 
@@ -664,6 +678,7 @@ accuracy,
 ## **7. Initialize on Server Start**
 
 Create `frontend/lib/init-db.ts`:
+
 
 ```typescript
 import { initDatabase } from './mysql-service';
@@ -676,7 +691,8 @@ export async function ensureDatabase() {
     initialized = true;
   }
 }
-```
+
+```text
 
 ---
 
@@ -684,6 +700,7 @@ export async function ensureDatabase() {
 ## **8. API Route Example**
 
 `app/api/sessions/start/route.ts`:
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -706,7 +723,8 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 ---
 

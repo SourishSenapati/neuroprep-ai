@@ -10,6 +10,7 @@
 
 **Add these lines:**
 
+
 ```bash
 
 # ========================================
@@ -37,7 +38,8 @@ ELEVENLABS_API_KEY=your_elevenlabs_key_here
 
 # ========================================
 OPENAI_API_KEY=your_existing_openai_key
-```
+
+```text
 
 **Save the file!**
 
@@ -66,14 +68,16 @@ OPENAI_API_KEY=your_existing_openai_key
 
 **Action:** Restart your development server
 
+
 ```powershell
 
 # Stop current server (Ctrl+C)
 
-# Then restart:
+# Then restart
 cd frontend
 npm run dev
-```
+
+```text
 
 **Why?** Environment variables only load on server start.
 

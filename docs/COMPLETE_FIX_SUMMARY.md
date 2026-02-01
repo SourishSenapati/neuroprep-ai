@@ -9,6 +9,7 @@
 - gameStore.test.ts: 10/10 PASS
 - PricingModal.test.tsx: 6/6 PASS
 - api.test.ts: 3/3 PASS
+
 **Total: 19/19 tests passing**
 
 
@@ -71,6 +72,7 @@ ED
 
 **Option 1: Auto-fix markdown lints**
 
+
 ```powershell
 
 # Install markdownlint-cli
@@ -79,13 +81,16 @@ npm install -g markdownlint-cli
 
 # Auto-fix all markdown files
 markdownlint --fix docs/**/*.md
-```
+
+```text
 
 **Option 2: Run emoji cleanup**
 
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/clean-emojis.ps1
-```
+
+```text
 
 **Option 3: Accept current state**
 

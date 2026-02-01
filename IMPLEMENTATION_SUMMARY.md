@@ -109,7 +109,8 @@
 // Vector similarity search with cosine distance
 retrieveRAGContext('neural networks exascale', 'caltech-phd')
 // Returns: Top-2 docs from Caltech physics bank
-```
+
+```text
 
 ### Streaming Question Generation
 
@@ -118,7 +119,8 @@ retrieveRAGContext('neural networks exascale', 'caltech-phd')
 await streamInitialQuestion('caltech-phd', (chunk) => {
   res.write(`data: ${JSON.stringify({ type: 'chunk', content: chunk })}\n\n`);
 });
-```
+
+```text
 
 ### Grok-Style Analysis
 
@@ -132,7 +134,8 @@ await streamInitialQuestion('caltech-phd', (chunk) => {
   feedback: "Good technical depth. Consider edge cases.",
   cheatDetected: false        // Flags if authenticity < 70
 }
-```
+
+```text
 
 ### Cheat Detection Patterns
 
@@ -140,7 +143,8 @@ await streamInitialQuestion('caltech-phd', (chunk) => {
 // Detects LLM-generated responses
 const hasLLMPatterns = /furthermore|moreover|in conclusion|it is important to note/i.test(response);
 // Flags: Generic phrases, overly formal, lack of personal insight
-```
+
+```text
 
 ### Neural Resilience Calculation
 
@@ -151,7 +155,8 @@ neuralResilience = (
   avgAuthenticity * 0.2
 );
 // 92% → "Your neural resilience: 92% – MIT-ready"
-```
+
+```text
 
 ### Adaptive Difficulty
 
@@ -160,7 +165,8 @@ if (analysis.adaptationNeeded) {
   await sessionManager.flagSession(sessionId, 'ADAPTATION_NEEDED');
   // Next question will be easier
 }
-```
+
+```text
 
 ## 📊 API Flow
 
@@ -174,10 +180,12 @@ POST /api/start-session
 }
 
 # Response: SSE stream
+
 data: {"type":"chunk","content":"**Exascale Neural Network Training Challenge**\n\n"}
 data: {"type":"chunk","content":"To scale neural networks to exascale..."}
 data: {"type":"complete","sessionId":"session_xyz","question":"..."}
-```
+
+```text
 
 ### 2. Real-Time Interview
 
@@ -199,7 +207,8 @@ socket.on('analysis-complete', (data) => {
   console.log(data.analysis);
   // { eqScore: 7.5, technicalScore: 78, authenticityScore: 85, ... }
 });
-```
+
+```text
 
 ### 3. End Session
 
@@ -210,6 +219,7 @@ POST /api/end-session
 }
 
 # Response
+
 {
   "sessionId": "session_xyz",
   "duration": 1800000,
@@ -224,7 +234,8 @@ POST /api/end-session
   "flags": [],
   "readiness": "Strong"
 }
-```
+
+```text
 
 ## 🚀 Running the Application
 
@@ -233,19 +244,24 @@ POST /api/end-session
 ```cmd
 setup.bat
 dev.bat
-```
+
+```text
 
 ### Manual Start
 
 ```bash
+
 # Install dependencies
+
 npm install
 cd backend && npm install && cd ..
 cd frontend && npm install && cd ..
 
 # Start both servers
+
 npm run dev
-```
+
+```text
 
 ### Servers
 
@@ -262,18 +278,21 @@ NODE_ENV=development
 CORS_ORIGIN=http://localhost:3000
 
 # Optional but recommended
+
 REDIS_URL=redis://localhost:6379
 DATABASE_URL=postgresql://user:password@localhost:5432/neuroprep
 OPENAI_API_KEY=sk-proj-...
 ANTHROPIC_API_KEY=sk-ant-...
-```
+
+```text
 
 ### Frontend (.env.local)
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001
 NEXT_PUBLIC_WS_URL=http://localhost:3001
-```
+
+```text
 
 ## 📦 Dependencies Installed
 
@@ -313,16 +332,21 @@ NEXT_PUBLIC_WS_URL=http://localhost:3001
 ## 🧪 Testing
 
 ```bash
+
 # Backend unit tests (Jest)
+
 npm run test:jest
 
 # E2E tests (Cypress)
+
 npm run test:e2e
 npm run test:e2e:open  # Interactive
 
 # Seed database
+
 npm run seed:db
-```
+
+```text
 
 ## 📈 Performance
 
@@ -346,19 +370,24 @@ npm run seed:db
 ### Vercel
 
 ```bash
+
 # Full stack
+
 npm run deploy:vercel
 
 # Or separately
+
 npm run deploy:backend
 npm run deploy:frontend
-```
+
+```text
 
 ### Docker
 
 ```bash
 docker-compose up -d
-```
+
+```text
 
 ### Environment Variables
 

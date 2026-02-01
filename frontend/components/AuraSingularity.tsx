@@ -64,6 +64,7 @@ export default function AuraSingularity({ onForge }: { onForge: (params: { role:
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
               className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-mono focus:outline-none focus:border-purple-500 transition-all appearance-none cursor-pointer"
+              aria-label="Select Difficulty Level"
             >
               <option value="Junior">Junior (L3)</option>
               <option value="Mid">Mid-Level (L4)</option>
@@ -80,6 +81,7 @@ export default function AuraSingularity({ onForge }: { onForge: (params: { role:
               value={persona}
               onChange={(e) => setPersona(e.target.value)}
               className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-mono focus:outline-none focus:border-purple-500 transition-all appearance-none cursor-pointer"
+              aria-label="Select Interviewer Persona"
             >
               <option value="Professional">Professional (Standard)</option>
               <option value="Socratic">Socratic (Deep Dive)</option>

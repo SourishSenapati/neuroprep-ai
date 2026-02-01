@@ -11,7 +11,8 @@
 
 ```env
 DATABASE_URL=postgresql://postgres:[password]@db.[project].supabase.co:5432/postgres
-```
+
+```text
 
 ### 2. Run Migrations
 
@@ -19,7 +20,8 @@ In Supabase SQL Editor, run:
 
 ```sql
 -- Copy contents from backend/schema.sql or backend/migrations/001_initial_schema.sql
-```
+
+```text
 
 ## Database Schema
 
@@ -34,7 +36,8 @@ readiness JSONB -- {"tech": 8, "eq": 9, "auth": 7}
 sessions_count INTEGER
 created_at TIMESTAMPTZ
 updated_at TIMESTAMPTZ
-```
+
+```text
 
 **Indexes:**
 
@@ -53,7 +56,8 @@ score FLOAT
 neural_resilience FLOAT
 flags TEXT[]
 ts TIMESTAMPTZ
-```
+
+```text
 
 **Indexes:**
 
@@ -76,7 +80,8 @@ authenticity_score FLOAT
 stress_level FLOAT
 response_time INTEGER
 timestamp TIMESTAMPTZ
-```
+
+```text
 
 **Indexes:**
 
@@ -94,7 +99,8 @@ avg_auth FLOAT
 avg_resilience FLOAT
 sample_size INTEGER
 updated_at TIMESTAMPTZ
-```
+
+```text
 
 **Default Data:**
 
@@ -115,7 +121,8 @@ UPDATE users SET readiness = {
   eq: AVG(eqScore) * 10,
   auth: AVG(authenticityScore) / 10
 }
-```
+
+```text
 
 ### detect_stress_patterns(user_id)
 
@@ -124,7 +131,8 @@ Analyzes stress patterns across sessions.
 ```sql
 SELECT * FROM detect_stress_patterns('user-uuid');
 -- Returns: pattern, severity, details
-```
+
+```text
 
 **Example Output:**
 
@@ -138,7 +146,8 @@ SELECT * FROM detect_stress_patterns('user-uuid');
     "affected_questions": 12
   }
 }
-```
+
+```text
 
 ## Node.js API (db.ts)
 
@@ -148,13 +157,15 @@ SELECT * FROM detect_stress_patterns('user-uuid');
 import * as db from './db';
 
 const pool = db.initPool(process.env.DATABASE_URL);
-```
+
+```text
 
 ### Insert Session
 
 ```typescript
 const sessionId = await db.insertSession(userId, 'caltech-phd');
-```
+
+```text
 
 ### Update Session
 
@@ -165,7 +176,8 @@ await db.updateSession(sessionId, {
   neural_resilience: 84,
   flags: ['ADAPTATION_NEEDED']
 });
-```
+
+```text
 
 ### Add Biometric
 
@@ -176,7 +188,8 @@ await db.addBiometric(sessionId, {
   emotion: 'tense',
   timestamp: Date.now()
 });
-```
+
+```text
 
 ### Insert Response
 
@@ -190,21 +203,24 @@ await db.insertSessionResponse(sessionId, {
   stress_level: 6.5,
   response_time: 120
 });
-```
+
+```text
 
 ### Update Readiness
 
 ```typescript
 const readiness = await db.updateReadiness(userId);
 // Returns: { tech: 8.2, eq: 7.8, auth: 8.5 }
-```
+
+```text
 
 ### Detect Patterns
 
 ```typescript
 const patterns = await db.detectStressPatterns(userId);
 // Returns: [{ pattern, severity, details }, ...]
-```
+
+```text
 
 ### Get Dashboard Data
 
@@ -217,14 +233,16 @@ const data = await db.getDashboardData(userId);
 //   benchmarks: { mode, avg_eq, ... },
 //   patterns: [...]
 // }
-```
+
+```text
 
 ### AI-Enhanced Insights
 
 ```typescript
 const insights = await db.generateLongitudinalInsights(userId, openaiKey);
 // Returns: "**Longitudinal Analysis**\n• Performance improving 15%..."
-```
+
+```text
 
 ## API Endpoints
 
@@ -269,7 +287,8 @@ Returns complete dashboard data with charts.
     }
   ]
 }
-```
+
+```text
 
 ### POST /api/end-session
 
@@ -282,7 +301,8 @@ Stores session and generates insights.
   "sessionId": "uuid",
   "userId": "uuid"
 }
-```
+
+```text
 
 **Response:**
 
@@ -302,7 +322,8 @@ Stores session and generates insights.
   "flags": [],
   "readiness": "Strong"
 }
-```
+
+```text
 
 ## JSONB Queries
 
@@ -314,7 +335,8 @@ SELECT * FROM users WHERE (readiness->>'tech')::float > 8;
 
 -- Users with low EQ
 SELECT * FROM users WHERE (readiness->>'eq')::float < 5;
-```
+
+```text
 
 ### Query Biometrics
 
@@ -332,7 +354,8 @@ SELECT
   AVG((unnest(biometrics)->>'stressLevel')::float) as avg_stress
 FROM sessions
 GROUP BY id;
-```
+
+```text
 
 ### Query Responses
 
@@ -348,7 +371,8 @@ SELECT
 FROM sessions
 GROUP BY user_id
 ORDER BY avg_tech DESC;
-```
+
+```text
 
 ## Performance Optimization
 
@@ -365,7 +389,8 @@ SELECT
 FROM pg_stat_user_indexes
 WHERE schemaname = 'public'
 ORDER BY idx_scan DESC;
-```
+
+```text
 
 ### Query Performance
 
@@ -373,7 +398,8 @@ ORDER BY idx_scan DESC;
 -- Analyze query plan
 EXPLAIN ANALYZE
 SELECT * FROM sessions WHERE user_id = 'uuid';
-```
+
+```text
 
 ### Vacuum
 
@@ -381,7 +407,8 @@ SELECT * FROM sessions WHERE user_id = 'uuid';
 -- Reclaim space and update statistics
 VACUUM ANALYZE sessions;
 VACUUM ANALYZE users;
-```
+
+```text
 
 ## Backup & Restore
 
@@ -389,13 +416,15 @@ VACUUM ANALYZE users;
 
 ```bash
 pg_dump $DATABASE_URL > backup_$(date +%Y%m%d).sql
-```
+
+```text
 
 ### Restore
 
 ```bash
 psql $DATABASE_URL < backup_20240115.sql
-```
+
+```text
 
 ### Supabase Backups
 
@@ -420,7 +449,8 @@ CREATE POLICY user_isolation ON users
 CREATE POLICY session_isolation ON sessions
   FOR ALL
   USING (user_id = auth.uid());
-```
+
+```text
 
 ### API Security
 
@@ -441,7 +471,8 @@ pool.on('connect', () => {
 pool.on('error', (err) => {
   console.error('Pool error:', err);
 });
-```
+
+```text
 
 ### Query Logging
 
@@ -456,19 +487,24 @@ pool.on('query', (query) => {
     }
   });
 });
-```
+
+```text
 
 ## Troubleshooting
 
 ### Connection Issues
 
 ```bash
+
 # Test connection
+
 psql $DATABASE_URL -c "SELECT 1"
 
 # Check pool status
+
 SELECT * FROM pg_stat_activity WHERE datname = 'postgres';
-```
+
+```text
 
 ### Performance Issues
 
@@ -482,7 +518,8 @@ SELECT
 FROM pg_stat_statements
 ORDER BY mean_time DESC
 LIMIT 10;
-```
+
+```text
 
 ### Disk Space
 
@@ -494,7 +531,8 @@ SELECT
 FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY pg_total_relation_size(tablename::text) DESC;
-```
+
+```text
 
 ---
 

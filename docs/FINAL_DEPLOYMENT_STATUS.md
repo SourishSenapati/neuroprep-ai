@@ -11,7 +11,7 @@
 ---
 
 
-## What's Live:
+## What's Live
 
 
 ### 1. ✅ All 12 Engineering Tracks
@@ -52,18 +52,20 @@
 ---
 
 
-## Deployment Command Running:
+## Deployment Command Running
+
 
 ```powershell
 vercel --prod
-```
+
+```text
 
 **Status:** Deploying latest build with all fixes...
 
 ---
 
 
-## Known Outstanding Issues:
+## Known Outstanding Issues
 
 
 ### Payment System ⚠️
@@ -96,7 +98,7 @@ vercel --prod
 ---
 
 
-## Immediate Next Steps:
+## Immediate Next Steps
 
 1. ✅ Deploy latest build (running now)
 2. Create `.env.local` with Supabase keys
@@ -108,9 +110,10 @@ vercel --prod
 ---
 
 
-## User Action Required:
+## User Action Required
 
 **Add to `/frontend/.env.local`:**
+
 ```env
 
 # Supabase (for database)
@@ -145,7 +148,8 @@ OPENAI_API_KEY=sk-...
 
 # ElevenLabs (optional - for voice)
 ELEVENLABS_API_KEY=...
-```
+
+```text
 
 ---
 

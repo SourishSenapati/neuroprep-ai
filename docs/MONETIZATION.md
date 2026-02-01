@@ -214,6 +214,7 @@
 
 ### **How Limits Work:**
 
+
 ```typescript
 // In gameStore.ts
 useNemesisMode: () => {
@@ -233,7 +234,8 @@ useNemesisMode: () => {
   state.nemesisModeUses++;
   return true;
 }
-```
+
+```text
 
 ---
 
@@ -272,6 +274,7 @@ useNemesisMode: () => {
 - Blue border-left accent
 - Shield icon
 - Clear disclaimer:
+
   > "Demo Mode: No Charges Applied
   > This is a demonstration for hackathon evaluation.
   > No real payments occur."
@@ -283,6 +286,7 @@ useNemesisMode: () => {
 
 
 ### **What Gets "Processed":**
+
 
 ```typescript
 // Simulated Razorpay checkout
@@ -304,7 +308,8 @@ const handleUpgrade = async () => {
     onUpgradeComplete();
   }, 2000);
 }
-```
+
+```text
 
 **What Judges See:**
 
@@ -362,6 +367,7 @@ const handleUpgrade = async () => {
 
 1. **Resume Roast Button:**
 
+
 ```tsx
 const handleRoast = () => {
   if (!gameStore.useResumeRoast()) {
@@ -371,9 +377,11 @@ const handleRoast = () => {
   }
   // Continue with roast...
 }
-```
+
+```text
 
 1. **Focus Dojo 50min:**
+
 
 ```tsx
 <button onClick={() => {
@@ -385,9 +393,11 @@ const handleRoast = () => {
 }}>
   50min Pro Session
 </button>
-```
+
+```text
 
 1. **Advanced Biometric Analytics:**
+
 
 ```tsx
 {isPremium ? (
@@ -395,7 +405,8 @@ const handleRoast = () => {
 ) : (
   <LockedFeature onUpgrade={() => setShowPricingModal(true)} />
 )}
-```
+
+```text
 
 ---
 
@@ -408,16 +419,16 @@ const handleRoast = () => {
 **Competitors:**
 
 1. **LeetCode Premium** - $35/mo (~₹2,900)
-   - Our advantage: 29x cheaper
+  - Our advantage: 29x cheaper
 
 2. **InterviewBit** - ₹2,999/year (₹250/mo)
-   - Our advantage: AI-powered, biometric
+  - Our advantage: AI-powered, biometric
 
 3. **Pramp** - Free peer mock interviews
-   - Our advantage: AI available 24/7
+  - Our advantage: AI available 24/7
 
 4. **Scaler Academy** - ₹3.5 lakh/year
-   - Our advantage: Self-paced, affordable
+  - Our advantage: Self-paced, affordable
 
 **Our USP:**
 
@@ -489,19 +500,19 @@ For companies training employees:
 ### **What Judges Love:**
 
 1. **Market Understanding**
-   - "They know Indian users prefer UPI"
+  - "They know Indian users prefer UPI"
 
 2. **Pricing Research**
-   - "₹99 is competitive with market"
+  - "₹99 is competitive with market"
 
 3. **Revenue Model**
-   - "Clear path to profitability"
+  - "Clear path to profitability"
 
 4. **User Psychology**
-   - "Freemium creates urgency"
+  - "Freemium creates urgency"
 
 5. **Technical Execution**
-   - "Smooth payment simulation"
+  - "Smooth payment simulation"
 
 
 ### **Scoring Impact:**

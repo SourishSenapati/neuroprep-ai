@@ -8,21 +8,25 @@ This is the authoritative color scheme for NeuroPrep AI, applied throughout the 
 
 ### Primary Colors
 
+
 ```css
 --bg-color: #050505;           /* Deep Void Background */
 --text-primary: #F0F0F0;       /* Off-White/Smoke (Primary Text) */
 --text-secondary: #A3A3A3;     /* Neutral Gray (Secondary Text) */
 --accent-green: #4ADE80;       /* Vibrant Emerald (Accent) */
 --border-subtle: #1F1F1F;      /* Subtle Border */
-```
+
+```text
 
 
 ### Extended Palette
 
+
 ```css
 --ambient-glow: #0f2e20;       /* Dark Forest Green (Gradients) */
 --card-bg: #0a0a0a;            /* Card Backgrounds */
-```
+
+```text
 
 
 ## Usage Guidelines
@@ -39,33 +43,43 @@ This is the authoritative color scheme for NeuroPrep AI, applied throughout the 
 
 
 #### Buttons
+
 ```tsx
 className="bg-[#4ADE80]/10 border border-[#4ADE80] text-[#4ADE80] hover:bg-[#4ADE80] hover:text-black"
-```
+
+```text
 
 
 #### Cards
+
 ```tsx
 className="bg-[#0a0a0a] border border-[#1F1F1F]"
-```
+
+```text
 
 
 #### Headings
+
 ```tsx
 className="text-[#F0F0F0]"
-```
+
+```text
 
 
 #### Body Text
+
 ```tsx
 className="text-[#A3A3A3]"
-```
+
+```text
 
 
 ### Ambient Glow (Radial Gradients)
+
 ```tsx
 style={{ background: 'radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(5, 5, 5, 0) 70%)' }}
-```
+
+```text
 
 
 ## Accessibility
@@ -78,6 +92,7 @@ style={{ background: 'radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(
 ## Implementation Status
 
 All components use this theme via:
+
 - `globals.css` (base styles)
 - Tailwind utilities (`bg-[#050505]`, `text-[#F0F0F0]`)
 - CSS custom properties (`var(--accent-green)`)

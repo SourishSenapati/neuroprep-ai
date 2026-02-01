@@ -13,6 +13,7 @@ Since `.env.local` is gitignored (for security), **you must manually create this
 
 ### Step 2: Add These Lines
 
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJI
@@ -23,20 +24,24 @@ UzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ
 # Optional - for full features
 OPENAI_API_KEY=your_openai_key_here
 ELEVENLABS_API_KEY=your_elevenlabs_key_here
-```
+
+```text
 
 
 ### Step 3: Restart Dev Server
 
+
 ```powershell
 cd frontend
 npm run dev
-```
+
+```text
 
 
 ### Step 4: Create Supabase Tables
 
 Go to your Supabase dashboard and run this SQL:
+
 
 ```sql
 -- Analytics events
@@ -72,12 +77,13 @@ CREATE TABLE user_profiles (
 CREATE INDEX idx_events_created ON analytics_events(created_at DESC);
 CREATE INDEX idx_sessions_created ON user_sessions(created_at DESC);
 CREATE INDEX idx_profiles_city ON user_profiles(city);
-```
+
+```text
 
 ---
 
 
-## Then You'll Have:
+## Then You'll Have
 
 ✅ Real multiplayer with Supabase Realtime  
 ✅ Real analytics (not simulated)  

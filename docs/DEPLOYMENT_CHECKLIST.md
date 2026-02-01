@@ -34,6 +34,7 @@
 
 ### **Step 1: Final Verification**
 
+
 ```powershell
 
 # Check all optimizations are in place
@@ -46,10 +47,12 @@ cat vercel.json
 
 # Verify lighthouse script
 npm run lighthouse:prod --help
-```
+
+```text
 
 
 ### **Step 2: Deploy to Vercel**
+
 
 ```powershell
 
@@ -64,22 +67,27 @@ vercel login
 # Deploy to production
 cd frontend
 vercel --prod
-```
+
+```text
 
 **Expected Output:**
 
-```
+
+```text
  Production: https://neuroprep-ai.vercel.app
-```
+
+```text
 
 
 ### **Step 3: Run Lighthouse Audit**
+
 
 ```powershell
 
 # Audit production deployment
 npm run lighthouse:prod
-```
+
+```text
 
 **Target Scores:**
 
@@ -104,6 +112,7 @@ npm run lighthouse:prod
 
 ### **Static Assets (1-Year Cache):**
 
+
 ```json
 {
   "source": "/_next/static/(.*)",
@@ -112,7 +121,8 @@ npm run lighthouse:prod
     "value": "public, max-age=31536000, immutable"
   }]
 }
-```
+
+```text
 
 **Applies to:**
 
@@ -127,6 +137,7 @@ npm run lighthouse:prod
 
 ### **Mumbai Edge Region:**
 
+
 ```json
 {
   "regions": ["bom1"],
@@ -136,7 +147,8 @@ npm run lighthouse:prod
     }
   }
 }
-```
+
+```text
 
 **Impact:**
 
@@ -146,13 +158,15 @@ npm run lighthouse:prod
 
 ### **Bundle Optimization:**
 
+
 ```javascript
 {
   swcMinify: true,        // 7x faster
   compress: true,         // Brotli compression
   optimizePackageImports  // Tree-shaking
 }
-```
+
+```text
 
 **Impact:**
 
@@ -179,12 +193,14 @@ npm run lighthouse:prod
 
 ### **Lighthouse Score:**
 
-```
+
+```text
 Performance:     100 
 Accessibility:    95
 Best Practices:  100
 SEO:            100
-```
+
+```text
 
 ---
 
@@ -259,6 +275,7 @@ SEO:            100
 
 ## **DEPLOYMENT COMMANDS**
 
+
 ```powershell
 
 # Quick deploy (recommended)
@@ -276,7 +293,8 @@ vercel ls
 
 # View logs
 vercel logs
-```
+
+```text
 
 ---
 
@@ -293,21 +311,25 @@ vercel logs
 
 ### **2. Run Lighthouse**
 
+
 ```powershell
 npm run lighthouse:prod
-```
+
+```text
 
 
 ### **3. Update README**
 
 Add live URL:
 
+
 ```markdown
 
 ##  Live Demo
  https://neuroprep-ai.vercel.app
  Judge Access: https://neuroprep-ai.vercel.app/judge/login
-```
+
+```text
 
 
 ### **4. Share with Team**
@@ -326,26 +348,32 @@ Add live URL:
 
 **1. Preload Critical Resources:**
 
+
 ```html
 <link rel="preload" href="/fonts/inter.woff2" as="font">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-```
+
+```text
 
 **2. Service Worker (PWA):**
+
 
 ```javascript
 // Offline support + background sync
 // +5 bonus points
-```
+
+```text
 
 **3. HTTP/3 (QUIC):**
 Already enabled by Vercel!
 
 **4. Resource Hints:**
 
+
 ```html
 <link rel="preconnect" href="https://skfnofbcompycyxrvmeo.supabase.co">
-```
+
+```text
 
 ---
 

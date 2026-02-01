@@ -1,11 +1,15 @@
 # 🎨 NeuroPrep AI Design System
+
 ## Premium Dark Mode Implementation
 
 ---
 
+
 ## 1️⃣ THE HIERARCHY OF DARKNESS
 
+
 ### **Background Layers**
+
 
 ```css
 /* Layer 1: The Canvas (Main Background) */
@@ -30,24 +34,30 @@
     rgba(5, 5, 5, 0) 70%
   );
 }
-```
+
+```text
 
 ---
 
+
 ## 2️⃣ TYPOGRAPHY STRATEGY
+
 
 ### **The Contrast Rule**
 
-| Element | Color | Hex | Font | Usage |
-|---------|-------|-----|------|-------|
-| **Headlines** | Crisp White | `#FFFFFF` | Playfair Display / Merriweather | H1, H2, H3 only |
-| **Body Text** | Muted Silver | `#A3A3A3` | Inter / Manrope | Paragraphs, lists, nav |
-| **Labels** | Muted Silver | `#A3A3A3` | Inter / Manrope | Form labels, metadata |
+| Element | Color | Hex | Font | Usage | 
+| --------- | ------- | ----- | ------ | ------- | 
+| **Headlines** | Crisp White | `#FFFFFF` | Playfair Display / Merriweather | H1, H2, H3 only | 
+| **Body Text** | Muted Silver | `#A3A3A3` | Inter / Manrope | Paragraphs, lists, nav | 
+| **Labels** | Muted Silver | `#A3A3A3` | Inter / Manrope | Form labels, metadata | 
+
 
 ### **Why Not Pure White Everywhere?**
 Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears to vibrate). Use Muted Silver (#A3A3A3) for body text to reduce eye strain.
 
+
 ### **Hover States**
+
 ```css
 .nav-link {
   color: #A3A3A3; /* Muted Silver */
@@ -57,16 +67,21 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 .nav-link:hover {
   color: #FFFFFF; /* Crisp White */
 }
-```
+
+```text
 
 ---
 
+
 ## 3️⃣ THE ACCENT LOGIC
+
 
 ### **Color-Coded Functions**
 
+
 #### 🔵 **Electric Blue (#3B82F6) = ACTION**
 **Rule:** If it's blue, it MUST be clickable.
+
 
 ```tsx
 // ✅ CORRECT USAGE
@@ -80,10 +95,13 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 
 // ❌ INCORRECT USAGE
 <p className="text-electric-blue">This is just text</p> // NO! Not an action
-```
+
+```text
+
 
 #### 🟢 **Terminal Green (#4ADE80) = DATA & TECH**
 **Rule:** Visual indicators, not interactive elements.
+
 
 ```tsx
 // ✅ CORRECT USAGE
@@ -93,10 +111,13 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 
 // ❌ INCORRECT USAGE
 <button className="bg-terminal-green">Click Me</button> // Use Blue for actions!
-```
+
+```text
+
 
 #### 🟡 **Iconic Gold (#EAB308) = IDENTITY**
 **Rule:** Less than 5% of the page. Reserved for branding.
+
 
 ```tsx
 // ✅ CORRECT USAGE
@@ -105,31 +126,42 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 
 // ❌ INCORRECT USAGE
 <p className="text-iconic-gold">Regular paragraph</p> // Too common!
-```
+
+```text
 
 ---
 
+
 ## 4️⃣ IMPLEMENTATION CHECKLIST
+
 
 ### ✅ **DO THIS**
 
+
 #### **Shadows**
+
 ```css
 .floating-card {
   /* Large, soft, DARK shadows */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
-```
+
+```text
+
 
 #### **Borders**
+
 ```css
 .card-edge {
   /* Thin, low-opacity white borders */
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-```
+
+```text
+
 
 #### **Buttons**
+
 ```css
 .cta-button {
   /* Pill-shaped (fully rounded) */
@@ -144,9 +176,12 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
   background: #2563EB; /* Darker blue */
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); /* Blue glow */
 }
-```
+
+```text
+
 
 #### **Spacing**
+
 ```css
 /* Generous "darkspace" */
 .section {
@@ -156,31 +191,36 @@ Pure white (#FFFFFF) on pure black (#050505) causes **halation** (text appears t
 .card-grid {
   gap: 2rem; /* Space between cards */
 }
-```
+
+```text
 
 ---
+
 
 ### ❌ **AVOID THIS**
 
-| Don't | Why |
-|-------|-----|
-| Light/white shadows | Creates a "dirty" glow effect |
-| Thick solid borders | Ruins sleek modern feel |
-| Square buttons | Aesthetic relies on smooth curves |
-| Crowded elements | Destroys luxury dark mode feel |
-| Blue text on black | Hard to read; use blue for button backgrounds |
+| Don't | Why | 
+| ------- | ----- | 
+| Light/white shadows | Creates a "dirty" glow effect | 
+| Thick solid borders | Ruins sleek modern feel | 
+| Square buttons | Aesthetic relies on smooth curves | 
+| Crowded elements | Destroys luxury dark mode feel | 
+| Blue text on black | Hard to read; use blue for button backgrounds | 
 
 ---
 
+
 ## 5️⃣ ACCESSIBILITY
+
 
 ### **Contrast Ratios**
 
-| Combo | Ratio | WCAG | Safe? |
-|-------|-------|------|-------|
-| Muted Silver (#A3A3A3) on Void Black (#050505) | **9:1** | AAA | ✅ Excellent |
-| Crisp White (#FFFFFF) on Void Black (#050505) | **21:1** | AAA | ✅ Perfect |
-| Electric Blue (#3B82F6) on Void Black (#050505) | **6.5:1** | AA | ✅ Good for large text/buttons |
+| Combo | Ratio | WCAG | Safe? | 
+| ------- | ------- | ------ | ------- | 
+| Muted Silver (#A3A3A3) on Void Black (#050505) | **9:1** | AAA | ✅ Excellent | 
+| Crisp White (#FFFFFF) on Void Black (#050505) | **21:1** | AAA | ✅ Perfect | 
+| Electric Blue (#3B82F6) on Void Black (#050505) | **6.5:1** | AA | ✅ Good for large text/buttons | 
+
 
 ### **Blue Text Warning**
 ❌ **Don't use Electric Blue (#3B82F6) for small body text on black.**  
@@ -190,9 +230,12 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
 
 ---
 
+
 ## 6️⃣ COMPONENT PATTERNS
 
+
 ### **Card Component**
+
 ```tsx
 <div className="
   bg-glass-charcoal/80 
@@ -222,9 +265,12 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
     Take Action
   </button>
 </div>
-```
+
+```text
+
 
 ### **Badge Component**
+
 ```tsx
 <span className="
   inline-flex 
@@ -241,9 +287,12 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
   <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
   Status Indicator
 </span>
-```
+
+```text
+
 
 ### **Hero Section**
+
 ```tsx
 <section className="
   min-h-screen 
@@ -265,11 +314,14 @@ If you need blue text, lighten it to `#60A5FA` for better readability.
     </p>
   </div>
 </section>
-```
+
+```text
 
 ---
 
+
 ## 7️⃣ TAILWIND CONFIG
+
 
 ```javascript
 // tailwind.config.js
@@ -296,11 +348,14 @@ module.exports = {
     },
   },
 }
-```
+
+```text
 
 ---
 
+
 ## 8️⃣ GLOBAL CSS
+
 
 ```css
 /* globals.css */
@@ -339,13 +394,16 @@ module.exports = {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
 }
-```
+
+```text
 
 ---
+
 
 ## ✅ CURRENT IMPLEMENTATION STATUS
 
 All specifications above are **LIVE** in:
+
 - ✅ `frontend/tailwind.config.js`
 - ✅ `frontend/app/globals.css`
 - ✅ `frontend/styles/apple-glass.css`

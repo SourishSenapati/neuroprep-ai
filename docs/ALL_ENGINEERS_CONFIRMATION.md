@@ -14,10 +14,10 @@
 
 ### CORE ENGINEERING (1 track)
 6. **Core Engineering** - L&T, Tata Steel, Reliance
-   - Mechanical Engineering
-   - Civil Engineering  
-   - Electrical Engineering
-   - Topics: CAD, Materials, Thermodynamics, Circuits
+  - Mechanical Engineering
+  - Civil Engineering  
+  - Electrical Engineering
+  - Topics: CAD, Materials, Thermodynamics, Circuits
 
 
 ### SPECIALIZED ENGINEERING (6 tracks)
@@ -41,6 +41,7 @@
 **All 12 tracks are coded and deployed.**
 
 The screenshot showing only 3 tracks is because:
+
 - User needs to **scroll down** to see all 12 cards
 - Grid layout: 4 columns on desktop, 3 on tablet, 1 on mobile
 - First row (3 visible): TCS NQT, Infosys, Product & Service
@@ -51,7 +52,7 @@ The screenshot showing only 3 tracks is because:
 ---
 
 
-## Company Coverage:
+## Company Coverage
 
 
 ### Indian Service Companies
@@ -92,7 +93,7 @@ The screenshot showing only 3 tracks is because:
 ---
 
 
-## Topic Coverage by Discipline:
+## Topic Coverage by Discipline
 
 
 ### Chemical Engineering ✓
@@ -125,11 +126,12 @@ The screenshot showing only 3 tracks is because:
 ---
 
 
-## Question Bank Size:
+## Question Bank Size
 
 **Total:** 230.4M+ unique questions across ALL disciplines
 
 Breakdown:
+
 - Chemical: 3.6M questions (100 topics)
 - Core Eng: 6M questions (100 topics combined)
 - Software: 5M questions (100 topics)
@@ -141,7 +143,7 @@ Breakdown:
 ---
 
 
-## ✓ Confirmed Working For:
+## ✓ Confirmed Working For
 
 - Chemical Engineers
 - Mechanical Engineers

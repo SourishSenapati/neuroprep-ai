@@ -720,6 +720,7 @@ export default function AuraSingularityChamber({
                           className="hidden"
                           checked={isBioAnalysisEnabled || false}
                           onChange={(e) => setIsBioAnalysisEnabled(e.target.checked)}
+                          aria-label="Toggle Neuro-Physical Analysis"
                         />
                         {isBioAnalysisEnabled && <Scan className="w-4 h-4 text-cyan-500 animate-pulse" />}
                      </label>

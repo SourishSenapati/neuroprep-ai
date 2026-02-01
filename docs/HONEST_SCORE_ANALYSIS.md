@@ -35,11 +35,13 @@ Let me break down the REAL scoring:
 
 **What Judges See:**
 
+
 ```bash
 npm test
 
 # No test suite found
-```
+
+```text
 
 **What They Think:** "Production-ready? Where are the tests?"
 
@@ -51,18 +53,20 @@ npm test
 
 **Fix (30 minutes):**
 
+
 ```bash
 
 # Install testing framework
 npm install --save-dev vitest @testing-library/react @testing-library/jest-dom
 
 
-# Create 10 critical tests:
+# Create 10 critical tests
 - gameStore.test.ts (5 tests)
 - BiometricEye.test.tsx (2 tests)
 - PricingModal.test.tsx (2 tests)
 - apiClient.test.ts (1 test)
-```
+
+```text
 
 **ROI:** 30 min = +5 points
 
@@ -87,6 +91,7 @@ npm install --save-dev vitest @testing-library/react @testing-library/jest-dom
 
 **Fix (20 minutes):**
 
+
 ```bash
 
 # Deploy to Vercel
@@ -95,7 +100,8 @@ vercel --prod
 
 # Update README with live URL
 https://neuroprep-ai.vercel.app/judge/login
-```
+
+```text
 
 **ROI:** 20 min = +4 points
 
@@ -121,9 +127,10 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **Fix (40 minutes):**
 
+
 ```bash
 
-# Record 3-minute demo video showing:
+# Record 3-minute demo video showing
 1. Judge Mode VIP entrance (10s)
 2. BiometricEye + emotion detection (30s)
 3. Nemesis Mode + voice interruption (40s)
@@ -136,7 +143,8 @@ https://neuroprep-ai.vercel.app/judge/login
 # Upload to YouTube
 
 # Embed in README
-```
+
+```text
 
 **ROI:** 40 min = +7 points
 
@@ -167,6 +175,7 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **Fix (60 minutes):**
 
+
 ```css
 /* Add to each major component */
 @media (max-width: 768px) {
@@ -174,7 +183,8 @@ https://neuroprep-ai.vercel.app/judge/login
     /* Responsive styles */
   }
 }
-```
+
+```text
 
 **Priority Components:**
 
@@ -204,6 +214,7 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **Fix (30 minutes):**
 
+
 ```tsx
 // Add ARIA labels
 <button aria-label="Enable biometric tracking">
@@ -222,7 +233,8 @@ https://neuroprep-ai.vercel.app/judge/login
   outline: 2px solid white;
   outline-offset: 2px;
 }
-```
+
+```text
 
 **ROI:** 30 min = +2 points
 
@@ -290,10 +302,12 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **1. Real-Time Collaboration (Multiplayer Interview)**
 
+
 ```tsx
 // Two people can practice together in real-time
 // Uses WebRTC + Supabase Realtime
-```
+
+```text
 
 **Impact:** +10 bonus points  
 **Time:** 2 hours  
@@ -301,12 +315,14 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **2. AI Voice Clone (Interview with YOUR voice)**
 
+
 ```tsx
 // User records 30 seconds
 // AI clones their voice
 // Interview in their own voice
 // Uses ElevenLabs API
-```
+
+```text
 
 **Impact:** +8 bonus points  
 **Time:** 1 hour  
@@ -314,11 +330,13 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **3. AR Face Tracking (WebXR)**
 
+
 ```tsx
 // Use WebXR for 3D face model
 // Track micro-expressions in 3D
 // Show stress heatmap on face
-```
+
+```text
 
 **Impact:** +12 bonus points  
 **Time:** 3 hours  
@@ -326,11 +344,13 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **4. Blockchain Resume NFT**
 
+
 ```tsx
 // Mint resume as NFT
 // Shareable verified credential
 // Web3 wallet integration
-```
+
+```text
 
 **Impact:** +7 bonus points  
 **Time:** 2 hours  
@@ -338,11 +358,13 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **5. Live Judge Leaderboard**
 
+
 ```tsx
 // Show real-time judge scores
 // Live voting system
 // Audience can vote too
-```
+
+```text
 
 **Impact:** +15 bonus points  
 **Time:** 1 hour  
@@ -360,29 +382,33 @@ https://neuroprep-ai.vercel.app/judge/login
 
 1. Deploy to Vercel (20 min) → +2
 2. Write 8 critical tests (40 min) → +3
+
 **Score: 91 → 96**
 
 **Hour 2: Presentation Excellence**
 
 1. Record demo video (30 min) → +5
 2. Mobile quick fixes (30 min) → +2
+
 **Score: 96 → 103**
 
 **Hour 3: Exponential Feature #1**
 
 1. Real-time Analytics Dashboard (60 min) → +5
-   - Show live user stats
-   - Real-time XP leaderboard
-   - Live interview sessions counter
+  - Show live user stats
+  - Real-time XP leaderboard
+  - Live interview sessions counter
+
 **Score: 103 → 108**
 
 **Hour 4: Exponential Feature #2**
 
 1. AI Voice Clone Integration (60 min) → +8
-   - Record 30s sample
-   - Clone voice
-   - Interview in your voice
-   - Uses ElevenLabs free tier
+  - Record 30s sample
+  - Clone voice
+  - Interview in your voice
+  - Uses ElevenLabs free tier
+
 **Score: 108 → 116**
 
 **FINAL SCORE: 116/100**
@@ -397,14 +423,17 @@ https://neuroprep-ai.vercel.app/judge/login
 
 **1. Deploy (15 min)**
 
+
 ```bash
 cd frontend
 vercel --prod
 
 # Copy URL: https://neuroprep-ai.vercel.app
-```
+
+```text
 
 **2. Update README (5 min)**
+
 
 ```markdown
 
@@ -414,9 +443,11 @@ vercel --prod
  No login required
  Pre-loaded with perfect metrics
  All features unlocked
-```
+
+```text
 
 **3. Write 3 Critical Tests (10 min)**
+
 
 ```typescript
 // gameStore.test.ts
@@ -435,7 +466,8 @@ test('Premium upgrade works', () => {
   gameStore.upgradeToPremium();
   expect(localStorage.getItem('isPremium')).toBe('true');
 });
-```
+
+```text
 
 **Instant Gain:** +5 points in 30 minutes  
 **New Score:** 91 → 96

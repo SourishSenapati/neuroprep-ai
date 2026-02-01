@@ -5,7 +5,8 @@
 
 NeuroPrep AI is a **full-stack web application** for engineering interview preparation built on a **monorepo architecture** with separate frontend and backend deployments.
 
-```
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                     USER BROWSER                            │
 │  ┌──────────────────────────────────────────────────────┐  │
@@ -38,7 +39,8 @@ NeuroPrep AI is a **full-stack web application** for engineering interview prepa
               │  - masterypaths     │
               │  - activities       │
               └─────────────────────┘
-```
+
+```text
 
 ---
 
@@ -60,6 +62,7 @@ NeuroPrep AI is a **full-stack web application** for engineering interview prepa
 
 #### **A. Landing Page (`app/page.tsx`)**
 
+
 ```typescript
 // 1. User visits https://neuroprep-ai.vercel.app
 // 2. Page fetches mastery paths from backend
@@ -72,9 +75,11 @@ useEffect(() => {
 
 // 3. Renders mastery cards dynamically
 paths.map(path => <MasteryCard {...path} />)
-```
+
+```text
 
 **What Happens:**
+
 1. Browser loads static HTML/CSS/JS from Vercel CDN
 2. React hydrates the page (makes it interactive)
 3. API call fetches 12 mastery paths from MongoDB
@@ -86,6 +91,7 @@ paths.map(path => <MasteryCard {...path} />)
 #### **B. Firebase Authentication Flow (`lib/firebase.js` + `hooks/useAuth.ts`)**
 
 **Step 1: Firebase Initialization (Client-Side Only)**
+
 
 ```javascript
 // lib/firebase.js
@@ -99,14 +105,17 @@ if (typeof window !== 'undefined') {
   auth = getAuth(app);
   googleProvider = new GoogleAuthProvider();
 }
-```
+
+```text
 
 **Why the `window` check?**
+
 - Next.js runs code **twice**: once on the server (Node.js) and once in the browser.
 - Firebase can ONLY run in the browser (it needs DOM APIs).
 - Without the check, the build fails with `auth/invalid-api-key` because server has no Firebase keys.
 
 **Step 2: User Clicks "Login with Google"**
+
 
 ```typescript
 // hooks/useAuth.ts
@@ -114,15 +123,18 @@ const loginWithGoogle = async () => {
   await signInWithPopup(auth, googleProvider);
   // Firebase handles the entire Google OAuth flow
 };
-```
+
+```text
 
 **Behind the Scenes:**
+
 1. Opens Google login popup window
 2. User selects Google account
 3. Google returns JWT token to Firebase
 4. Firebase SDK stores token in browser's `IndexedDB`
 
 **Step 3: Auto-Sync with Backend**
+
 
 ```typescript
 // hooks/useAuth.ts
@@ -143,9 +155,11 @@ useEffect(() => {
     }
   });
 }, []);
-```
+
+```text
 
 **What Happens on Backend:**
+
 
 ```javascript
 // backend/routes/auth.js
@@ -168,9 +182,11 @@ router.post('/sync', async (req, res) => {
   
   res.json(user); // Return user with isPro, stats, etc.
 });
-```
+
+```text
 
 **Result:**
+
 - Firebase user is now stored in MongoDB
 - `user.isPro` tells us if they paid for Pro
 - Dashboard can fetch `user.stats` for XP/Level display
@@ -182,14 +198,17 @@ router.post('/sync', async (req, res) => {
 
 **Step 1: User Clicks "Upgrade to PRO"**
 
+
 ```typescript
 // components/Dashboard.tsx
 <button onClick={() => handlePayment(user.uid)}>
   ⚡ Upgrade to PRO (₹99)
 </button>
-```
+
+```text
 
 **Step 2: Create Payment Order**
+
 
 ```typescript
 // hooks/useRazorpay.ts
@@ -201,9 +220,11 @@ const handlePayment = async (userId) => {
   const res = await fetch('/api/payment/create-order', { method: 'POST' });
   const order = await res.json();
   // order = { id: "order_xyz123", amount: 9900, currency: "INR" }
-```
+
+```text
 
 **Backend Creates Order:**
+
 
 ```javascript
 // backend/routes/payment.js
@@ -220,9 +241,11 @@ router.post('/create-order', async (req, res) => {
   });
   res.json(order); // Send order ID back to frontend
 });
-```
+
+```text
 
 **Step 3: Open Razorpay Checkout Modal**
+
 
 ```typescript
 const options = {
@@ -238,9 +261,11 @@ const options = {
 
 const rzp = new window.Razorpay(options);
 rzp.open(); // Shows payment modal
-```
+
+```text
 
 **Step 4: Verify Payment on Backend**
+
 
 ```typescript
 // After user pays, Razorpay calls our handler
@@ -255,9 +280,11 @@ handler: async function(response) {
     })
   });
 }
-```
+
+```text
 
 **Backend Verifies Payment:**
+
 
 ```javascript
 // backend/routes/payment.js
@@ -280,9 +307,11 @@ router.post('/verify', async (req, res) => {
     res.status(400).json({ success: false });
   }
 });
-```
+
+```text
 
 **Security Note:**
+
 - We NEVER trust the frontend's "payment success" message
 - Backend verifies signature using our secret key (which frontend can't fake)
 - Only then do we set `isPro: true` in database
@@ -306,16 +335,19 @@ router.post('/verify', async (req, res) => {
 
 #### **1. `/api/auth/sync` - User Registration/Login**
 
+
 ```javascript
 // Purpose: Save Firebase user to MongoDB
 POST /api/auth/sync
 Body: { uid: "abc123", email: "user@gmail.com", name: "John" }
 
 Response: { _id: "abc123", name: "John", email: "...", isPro: false, stats: {...} }
-```
+
+```text
 
 
 #### **2. `/api/dashboard` - Fetch User Stats**
+
 
 ```javascript
 // Purpose: Get user's XP, level, recent sessions
@@ -326,10 +358,12 @@ Response: {
   isPro: true,
   recentSessions: [...]
 }
-```
+
+```text
 
 
 #### **3. `/api/mastery-paths` - Get All Learning Paths**
+
 
 ```javascript
 // Purpose: Fetch all 12 mastery paths for landing page
@@ -339,7 +373,8 @@ Response: [
   { title: "Industry-Aligned Training", slug: "universal-placement", ... },
   { title: "GATE & PSU Preparation", ... }
 ]
-```
+
+```text
 
 ---
 
@@ -348,6 +383,7 @@ Response: [
 
 
 ### **Users Collection:**
+
 
 ```javascript
 {
@@ -363,10 +399,12 @@ Response: [
   createdAt: "2025-12-21T10:00:00Z",
   updatedAt: "2025-12-21T15:00:00Z"
 }
-```
+
+```text
 
 
 ### **MasteryPaths Collection:**
+
 
 ```javascript
 {
@@ -380,7 +418,8 @@ Response: [
   icon: "💼",
   skills: ["Quantitative Aptitude", "Logical Reasoning", ...]
 }
-```
+
+```text
 
 ---
 
@@ -390,7 +429,8 @@ Response: [
 
 ### **Frontend (Vercel):**
 
-```
+
+```text
 GitHub Push (main branch)
     ↓
 Vercel Detects Change
@@ -402,21 +442,25 @@ Compiles 22 Next.js routes
 Uploads to Vercel CDN (Global Edge Network)
     ↓
 Live at: https://neuroprep-ai.vercel.app
-```
+
+```text
 
 **Environment Variables (Vercel Dashboard):**
-```
+
+```text
 NEXT_PUBLIC_API_URL=https://backend-ivory-kappa-47.vercel.app
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_RuBymTWufgW3fT
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBVou1DYa...
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=neuroprep-12bb7.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=neuroprep-12bb7
-```
+
+```text
 
 
 ### **Backend (Vercel Serverless):**
 
-```
+
+```text
 GitHub Push (main branch)
     ↓
 Vercel Builds: backend/index.js
@@ -426,14 +470,17 @@ Converts Express routes to Serverless Functions
 Each route = 1 Lambda Function
     ↓
 Live at: https://backend-ivory-kappa-47.vercel.app
-```
+
+```text
 
 **Environment Variables (Vercel Dashboard):**
-```
+
+```text
 MONGO_URI=mongodb+srv://sourishschemug_db_user:a4r1UIXNpZe16pRA@neuroprep-db.4lhua3l.mongodb.net/
 RAZORPAY_KEY_ID=rzp_test_RuBymTWufgW3fT
 RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
-```
+
+```text
 
 ---
 
@@ -489,11 +536,13 @@ RAZORPAY_KEY_SECRET=Jtz8G0RYgmWzW5L4xg74THZn
 ## 7. Mobile Optimization
 
 **Responsive Design:**
+
 - `globals-mobile.css` forces single-column layouts on <768px screens
 - Touch targets: minimum 44px height (Apple/Google standards)
 - Input font-size: 16px (prevents iOS auto-zoom)
 
 **Progressive Web App (PWA) Ready:**
+
 - `manifest.json` allows "Add to Home Screen"
 - Service workers can cache for offline mode (future)
 

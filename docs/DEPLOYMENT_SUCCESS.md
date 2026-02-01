@@ -48,6 +48,7 @@
 ## Features Preserved: 100%
 
 ALL features remain intact:
+
 - ✅ 224M+ Dynamic Questions
 - ✅ Biometric Eye Tracking
 - ✅ Nemesis Mode

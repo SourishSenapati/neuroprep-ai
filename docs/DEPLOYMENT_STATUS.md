@@ -14,9 +14,11 @@
 **Fix:** Added to session/page.tsx
 
 **All pages now have:**
+
 ```typescript
 export const dynamic = 'force-dynamic';
-```
+
+```text
 
 ---
 

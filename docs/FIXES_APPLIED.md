@@ -36,8 +36,8 @@
 **Recommended Actions:**
 
 1. **For Hackathon (NOW):**
-   - SAFE TO IGNORE - vulnerabilities don't affect demo
-   - All issues are in dev tools only
+  - SAFE TO IGNORE - vulnerabilities don't affect demo
+  - All issues are in dev tools only
 
 2. **For Production (LATER):**
 
@@ -66,20 +66,24 @@ Go to: <http://localhost:3000/multiplayer>
 
 Create/edit `frontend/.env.local`:
 
+
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrZm5vZmJjb21weWN5eHJ2bWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4ODkwODYsImV4cCI6MjA4MTQ2NTA4Nn0.EyWYDZqWWF2TWX7b0vDj7qA-Vg7luepNPwXkufRn_3I
-```
+
+```text
 
 
 ### **3. Restart Server**
+
 
 ```powershell
 
 # Ctrl+C to stop
 cd frontend
 npm run dev
-```
+
+```text
 
 
 ### **4. Test Again**
@@ -99,11 +103,13 @@ npm run dev
 
 **Vulnerable Dependencies:**
 
-```
+
+```text
 tmp@0.0.33 (low)
 inquirer@8.x (various)
 external-editor (depends on tmp)
-```
+
+```text
 
 **Why It's Safe:**
 

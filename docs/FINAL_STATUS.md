@@ -129,6 +129,7 @@
 ## 📊 FINAL SCORE: 109+/100
 
 **Current Points:**
+
 - Core Features: 40 pts ✅
 - Gamification: 15 pts ✅
 - Voice Cloning: 10 pts ✅
@@ -141,6 +142,7 @@
 **Total:** 109/100 ✅
 
 **Bonus Opportunities:**
+
 - Demo video: +7 pts
 - Supabase multiplayer: +4 pts
 - Lighthouse 100 score: +3 pts
@@ -189,16 +191,20 @@
 ## 🔑 ENVIRONMENT VARIABLES
 
 **Required:**
+
 ```env
 OPENAI_API_KEY=sk-...
-```
+
+```text
 
 **Optional (for full features):**
+
 ```env
 ELEVENLABS_API_KEY=...  # Voice cloning/TTS
 NEXT_PUBLIC_SUPABASE_URL=...  # Multiplayer
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...  # Multiplayer
-```
+
+```text
 
 ---
 

@@ -1,7 +1,7 @@
 # 🚨 CRITICAL ISSUES TO FIX
 
 
-## User-Reported Problems (Testing in Chrome):
+## User-Reported Problems (Testing in Chrome)
 
 
 ### 1. ❌ Payment Terminal - UPI Not Working
@@ -10,6 +10,7 @@
 **Required:** Indian UPI integration (Razorpay/PhonePe/Paytm)
 
 **Fix Needed:**
+
 - Replace Stripe with Razorpay
 - Add UPI payment flow
 - Support: Google Pay, PhonePe, Paytm, BHIM
@@ -24,16 +25,19 @@
 ### 2. ❌ SQL/Database Not Working
 **Issue:** User registration/data not persisting  
 **Symptoms:** 
+
 - Registration data not saved
 - Login fails after signup
 - Session data lost
 
 **Possible Causes:**
+
 - No database configured (using localStorage only)
 - Supabase not connected
 - SQL queries failing
 
 **Fix Needed:**
+
 - Connect Supabase properly
 - Create user tables
 - Implement proper auth flow
@@ -49,6 +53,7 @@
 **Current State:** Buttons exist but no integration
 
 **Fix Needed:**
+
 - Set up NextAuth providers
 - Configure GitHub OAuth app
 - Configure LinkedIn OAuth app
@@ -56,6 +61,7 @@
 - Store social profile data
 
 **Files to Update:**
+
 - `app/api/auth/[...nextauth]/route.ts`
 - `.env.local` - add OAuth credentials
 
@@ -69,6 +75,7 @@
 **Related to:** #1 (UPI terminal)
 
 **Current Flow:**
+
 1. User clicks "Upgrade to Pro" ✓
 2. Modal shows pricing ✓
 3. "Pay Now" button... does nothing ❌
@@ -76,6 +83,7 @@
 5. No premium activation ❌
 
 **Fix Needed:**
+
 - Integrate Razorpay SDK
 - Create payment order API
 - Handle payment success/failure
@@ -87,10 +95,11 @@
 ---
 
 
-## Implementation Plan:
+## Implementation Plan
 
 
 ### Phase 1: Database Setup (30 min)
+
 ```sql
 -- User table
 CREATE TABLE users (
@@ -115,10 +124,12 @@ CREATE TABLE payments (
   status TEXT DEFAULT 'pending',
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-```
+
+```text
 
 
 ### Phase 2: Razorpay Integration (1 hour)
+
 ```typescript
 // Install: npm install razorpay
 
@@ -137,10 +148,12 @@ const order = await razorpay.orders.create({
   receipt: `receipt_${Date.now()}`,
   payment_capture: 1
 });
-```
+
+```text
 
 
 ### Phase 3: UPI Payment Flow (1 hour)
+
 ```typescript
 // Frontend: Razorpay Checkout
 const options = {
@@ -172,10 +185,12 @@ const options = {
 
 const rzp = new window.Razorpay(options);
 rzp.open();
-```
+
+```text
 
 
 ### Phase 4: OAuth Setup (1 hour)
+
 ```typescript
 // NextAuth configuration
 import GithubProvider from 'next-auth/providers/github';
@@ -207,12 +222,14 @@ export const authOptions = {
     }
   }
 };
-```
+
+```text
 
 ---
 
 
-## Environment Variables Needed:
+## Environment Variables Needed
+
 
 ```env
 
@@ -240,12 +257,13 @@ NEXTAUTH_SECRET=<random-string>
 # Supabase (already have)
 NEXT_PUBLIC_SUPABASE_URL=https://skfnofbcompycyxrvmeo.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-```
+
+```text
 
 ---
 
 
-## Testing Checklist:
+## Testing Checklist
 
 - [ ] Build passes without errors
 - [ ] User can sign up with email

@@ -17,22 +17,26 @@
 
 
 ### **Get Connection String:**
+
 ```bash
 
 # Click "Connect" in PlanetScale dashboard
 
 # Copy connection string
-```
+
+```text
 
 ---
 
 
 ## **2. Install Dependencies**
 
+
 ```bash
 npm install @planetscale/database dotenv
 npm install -D prisma @prisma/client
-```
+
+```text
 
 ---
 
@@ -40,6 +44,7 @@ npm install -D prisma @prisma/client
 ## **3. Environment Variables**
 
 Create `frontend/.env.local`:
+
 ```env
 
 # PlanetScale
@@ -47,7 +52,8 @@ DATABASE_URL="mysql://username:password@host/database?sslaccept=strict"
 DATABASE_HOST="aws.connect.psdb.cloud"
 DATABASE_USERNAME="your-username"
 DATABASE_PASSWORD="your-password"
-```
+
+```text
 
 ---
 
@@ -55,6 +61,7 @@ DATABASE_PASSWORD="your-password"
 ## **4. Database Schema**
 
 Create `frontend/prisma/schema.prisma`:
+
 
 ```prisma
 generator client {
@@ -173,12 +180,14 @@ model AnalyticsEvent {
   @@index([eventType])
   @@index([createdAt(sort: Desc)])
 }
-```
+
+```text
 
 ---
 
 
 ## **5. Initialize Prisma**
+
 
 ```bash
 
@@ -188,7 +197,8 @@ npx prisma generate
 
 # Push schema to PlanetScale
 npx prisma db push
-```
+
+```text
 
 ---
 
@@ -196,6 +206,7 @@ npx prisma db push
 ## **6. Create Database Client**
 
 Create `frontend/lib/planetscale.ts`:
+
 
 ```typescript
 import { PrismaClient } from '@prisma/client';
@@ -451,7 +462,8 @@ export const analytics = {
     });
   },
 };
-```
+
+```text
 
 ---
 
@@ -460,6 +472,7 @@ export const analytics = {
 
 
 ### **Create `app/api/auth/signup/route.ts`:**
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -486,10 +499,12 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 
 ### **Create `app/api/auth/login/route.ts`:**
+
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -519,12 +534,14 @@ export async function POST(request: Request) {
     );
   }
 }
-```
+
+```text
 
 ---
 
 
 ## **8. Deploy to PlanetScale**
+
 
 ```bash
 
@@ -542,7 +559,8 @@ pscale deploy-request create neuroprep-ai production
 
 # Get production connection string
 pscale connect neuroprep-ai production
-```
+
+```text
 
 ---
 

@@ -48,14 +48,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[01:00 - 01:30]` Global Error Boundary
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Create ErrorBoundary.tsx component
 2. Wrap app in layout.tsx
 3. Add custom error page
 4. Test error scenarios
-```
+
+```text
 
 **Files:**
 
@@ -66,14 +68,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[01:30 - 02:00]` API Error Handling
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Create API client with retry logic
 2. Add exponential backoff
 3. Implement timeout handling
 4. Add network error detection
-```
+
+```text
 
 **Files:**
 
@@ -89,14 +93,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[02:00 - 02:30]` Loading Components Library
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Create skeleton loaders
 2. Create spinner components
 3. Create typing indicator (improved)
 4. Create progress bars
-```
+
+```text
 
 **Files:**
 
@@ -107,14 +113,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[02:30 - 03:00]` Integrate Loading States
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Add to InterviewSession (streaming)
 2. Add to InterviewSetup (transitions)
 3. Add to CodeEditor (Pyodide loading)
 4. Add to RegistrationModal
-```
+
+```text
 
 **Files:**
 
@@ -130,28 +138,32 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[03:00 - 03:30]` Mobile Audit & Planning
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Test all pages in Chrome DevTools (375px, 768px, 1024px)
 2. Document layout breaks
 3. Plan responsive breakpoints
 4. Create mobile-first CSS strategy
-```
+
+```text
 
 **Tools:** Chrome DevTools Device Mode
 
 
 #### `[03:30 - 04:00]` Fix InterviewSetup Mobile
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Grid layout → Stack layout on mobile
 2. Reduce font sizes for small screens
 3. Adjust button sizes (44px touch targets)
 4. Test in responsive mode
-```
+
+```text
 
 **Files:**
 
@@ -165,14 +177,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[04:00 - 04:30]` Fix InterviewSession Mobile
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Responsive header (collapse biometrics)
 2. Mobile-friendly chat interface
 3. Bottom sheet for controls
 4. Touch-optimized buttons
-```
+
+```text
 
 **Files:**
 
@@ -181,14 +195,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[04:30 - 05:00]` Mobile Code Editor
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Lazy load Monaco on desktop only
 2. Fallback to textarea on mobile
 3. Better mobile keyboard handling
 4. Test execution on mobile
-```
+
+```text
 
 **Files:**
 
@@ -202,14 +218,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[05:00 - 05:30]` Toast Notifications
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Install react-hot-toast
 2. Add success toasts (session start, code execution)
 3. Add error toasts (API failures)
 4. Add info toasts (tips, hints)
-```
+
+```text
 
 **Files:**
 
@@ -219,14 +237,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[05:30 - 06:00]` Accessibility Improvements
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Add ARIA labels to all interactive elements
 2. Keyboard navigation (Tab, Enter, Esc)
 3. Screen reader testing
 4. Focus indicators
-```
+
+```text
 
 **Files:**
 
@@ -240,14 +260,16 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[06:00 - 06:30]` Code Splitting & Lazy Loading
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Dynamic import for Monaco Editor
 2. Dynamic import for Three.js components
 3. Route-based code splitting
 4. Analyze bundle size
-```
+
+```text
 
 **Files:**
 
@@ -257,21 +279,25 @@ Transform NeuroPrep AI from a functional prototype into a **production-grade, ha
 
 #### `[06:30 - 07:00]` Bundle Optimization
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Run next/bundle-analyzer
 2. Remove unused dependencies
 3. Optimize images
 4. Enable compression
-```
+
+```text
 
 **Commands:**
+
 
 ```bash
 npm install @next/bundle-analyzer --save-dev
 ANALYZE=true npm run build
-```
+
+```text
 
 ---
 
@@ -281,14 +307,16 @@ ANALYZE=true npm run build
 
 #### `[07:00 - 07:30]` E2E Testing
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Write Cypress tests for critical flows
 2. Test interview setup → session → completion
 3. Test error scenarios
 4. Test mobile flow
-```
+
+```text
 
 **Files:**
 
@@ -297,14 +325,16 @@ ANALYZE=true npm run build
 
 #### `[07:30 - 08:00]` Cross-Browser Testing
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Test on Chrome (Desktop + Mobile)
 2. Test on Firefox
 3. Test on Safari (if available)
 4. Fix browser-specific issues
-```
+
+```text
 
 ---
 
@@ -314,14 +344,16 @@ ANALYZE=true npm run build
 
 #### `[08:00 - 08:30]` Architecture Diagram
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Create Mermaid diagram of system architecture
 2. Document component hierarchy
 3. Document API flow
 4. Add to docs/
-```
+
+```text
 
 **Files:**
 
@@ -330,14 +362,16 @@ ANALYZE=true npm run build
 
 #### `[08:30 - 09:00]` Demo Video Recording
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Script demo (5-minute max)
 2. Record screen + voiceover
 3. Edit video
 4. Export to demo/
-```
+
+```text
 
 **Tools:** OBS Studio, Loom, or built-in screen recorder
 
@@ -349,35 +383,41 @@ ANALYZE=true npm run build
 
 #### `[09:00 - 09:30]` Production Deployment
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Final commit & push to GitHub
 2. Deploy to Vercel (production)
 3. Smoke test all critical flows
 4. Verify environment variables
-```
+
+```text
 
 **Commands:**
+
 
 ```bash
 git add .
 git commit -m "feat: Hackathon-ready production build"
 git push origin main
 vercel --prod
-```
+
+```text
 
 
 #### `[09:30 - 10:00]` Final Checks & Submission
 
+
 ```bash
 
-# Tasks:
+# Tasks
 1. Fill out submission form
 2. Verify all links work
 3. Share demo video
 4. Backup code + assets
-```
+
+```text
 
 ---
 
@@ -387,7 +427,8 @@ vercel --prod
 
 ### **NEW FILES** (8 files)
 
-```
+
+```text
 frontend/components/ErrorBoundary.tsx
 frontend/components/LoadingSkeletons.tsx
 frontend/components/LoadingSpinner.tsx
@@ -396,19 +437,22 @@ frontend/lib/apiClient.ts
 frontend/app/error.tsx
 docs/ARCHITECTURE_DIAGRAM.md
 cypress/e2e/interview-flow.cy.ts
-```
+
+```text
 
 
 ### **MODIFY FILES** (6 files)
 
-```
+
+```text
 frontend/app/layout.tsx
 frontend/components/InterviewSession.tsx
 frontend/components/InterviewSetup.tsx
 frontend/components/CodeEditor.tsx
 frontend/app/api/stream/route.ts
 frontend/next.config.js
-```
+
+```text
 
 ---
 
@@ -472,6 +516,7 @@ frontend/next.config.js
 
 ### Development Workflow
 
+
 ```bash
 
 # Terminal 1: Frontend dev server
@@ -485,7 +530,8 @@ cd backend && npm run dev
 # Terminal 3: Testing/commands
 
 # (use for git, testing, deployment)
-```
+
+```text
 
 
 ### Keyboard Shortcuts
@@ -519,7 +565,8 @@ cd backend && npm run dev
 
 ## DEMO VIDEO OUTLINE (5 minutes)
 
-```
+
+```text
 [00:00-00:30] INTRO
 - Hook: "What if you had 224 million unique interview questions?"
 - Problem: Traditional interview prep is repetitive
@@ -550,7 +597,8 @@ cd backend && npm run dev
 - Tech stack (Next.js, Vercel, OpenAI)
 - Architecture diagram
 - Call to action (GitHub link, try it now)
-```
+
+```text
 
 ---
 

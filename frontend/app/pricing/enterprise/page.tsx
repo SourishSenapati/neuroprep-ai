@@ -50,8 +50,7 @@ export default function EnterprisePage() {
             animate={{ opacity: 1, scale: 1 }}
           >
             <div 
-              className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl"
-              style={{ background: 'linear-gradient(135deg, #43e97b, #38f9d7)' }}
+              className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl bg-gradient-to-br from-green-400 to-teal-300"
             >
               ✓
             </div>
@@ -142,8 +141,7 @@ export default function EnterprisePage() {
                 >
                   <div className="flex items-start gap-4">
                     <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
-                      style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 bg-gradient-to-br from-indigo-500 to-purple-800"
                     >
                       {benefit.icon}
                     </div>
@@ -220,6 +218,7 @@ export default function EnterprisePage() {
                     className="glass-select"
                     value={formData.companySize}
                     onChange={(e) => setFormData({...formData, companySize: e.target.value})}
+                    aria-label="Company Size"
                   >
                     <option value="">Select size</option>
                     <option value="1-50">1-50 employees</option>
@@ -237,6 +236,7 @@ export default function EnterprisePage() {
                     className="glass-select"
                     value={formData.useCase}
                     onChange={(e) => setFormData({...formData, useCase: e.target.value})}
+                    aria-label="Use Case"
                   >
                     <option value="">Select use case</option>
                     <option value="university">University / Education</option>
@@ -286,11 +286,7 @@ export default function EnterprisePage() {
         >
           <h2 className="heading-md mb-4">Enterprise Pricing</h2>
           <p className="body-lg mb-8">
-            Starting at <span className="text-4xl font-bold" style={{
-              background: 'linear-gradient(135deg, #667eea, #764ba2)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>₹400,000</span>/year
+            Starting at <span className="text-4xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">₹400,000</span>/year
           </p>
           <p className="text-white/70">
             Custom pricing based on team size and features needed.

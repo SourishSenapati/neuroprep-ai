@@ -37,10 +37,12 @@
 
 **For hackathon/demo, use development mode:**
 
+
 ```powershell
 cd frontend
 npm run dev
-```
+
+```text
 
 **Why?**
 

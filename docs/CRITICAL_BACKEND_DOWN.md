@@ -4,7 +4,7 @@
 ## **Backend Status: COMPLETELY DOWN** ❌
 
 
-### Failed Endpoints:
+### Failed Endpoints
 1. `/api/forge-link` → 500 Internal Server Error
 2. `/api/start-session` → 500 Internal Server Error  
 3. `/api/auth/session` → 500 Internal Server Error
@@ -13,7 +13,7 @@
 6. `favicon.ico` → 404 Not Found
 
 
-### Root Cause:
+### Root Cause
 **Backend deployment is non-functional.** The backend at `backend-c7le0xxvj-sourish-sennapatis-projects.vercel.app` is returning 500 errors for all API routes.
 
 ---
@@ -22,15 +22,16 @@
 ## **SOLUTION: CLIENT-SIDE ONLY ARCHITECTURE**
 
 
-### Strategy:
+### Strategy
 Make the app work **100% client-side** without any backend dependency using FREE APIs.
 
 
-### Implementation:
+### Implementation
 
 
 #### 1. **Question Generation (FREE APIs)**
 Use OpenAI GPT-3.5-turbo (free tier) OR local generation:
+
 
 ```typescript
 // Client-side question generator
@@ -48,26 +49,31 @@ const generateQuestion = (role: string, difficulty: number): string => {
     .replace('{difficulty}', difficultyLabels[difficulty])
     .replace('{hash}', hash);
 };
-```
+
+```text
 
 **Math:** 
+
 - 12 roles × 100 topics × 10 difficulties × 200 templates × 50 param variations = **1.2 BILLION questions**
 - Exceeds 224M requirement by 5x! ✅
 
 
 #### 2. **Auth (localStorage)**
 No backend needed:
+
 ```typescript
 const auth = {
   signIn: (email: string) => localStorage.setItem('user', email),
   signOut: () => localStorage.removeItem('user'),
   getUser: () => localStorage.getItem('user')
 };
-```
+
+```text
 
 
 #### 3. **Database (IndexedDB)**
 Client-side persistent storage:
+
 ```typescript
 import Dexie from 'dexie';
 
@@ -77,11 +83,13 @@ db.version(1).stores({
   sessions: '++id, userId, role, score, date',
   questions: '++id, hash, role, topic, asked'
 });
-```
+
+```text
 
 
 #### 4. **Payment (Razorpay Direct)**
 No backend webhooks needed - use client SDK:
+
 ```typescript
 const rzp = new Razorpay({
   key: 'rzp_test_...',
@@ -90,7 +98,8 @@ const rzp = new Razorpay({
     localStorage.setItem('isPremium', 'true');
   }
 });
-```
+
+```text
 
 ---
 
@@ -98,7 +107,7 @@ const rzp = new Razorpay({
 ## **FIXES TO IMPLEMENT:**
 
 
-### Immediate (Now):
+### Immediate (Now)
 1. ✅ Remove all backend API calls
 2. ✅ Implement client-side question generator
 3. ✅ Add IndexedDB for persistence
@@ -107,7 +116,7 @@ const rzp = new Razorpay({
 6. ✅ Create luxury watch theme
 
 
-### Luxury Watch Theme:
+### Luxury Watch Theme
 - **Colors:** Rose gold (#B76E79), Platinum (#E5E4E2), Midnight Blue (#191970)
 - **Fonts:** Playfair Display (serif), Cinzel (luxury)
 - **Animations:** Smooth watch hand movements

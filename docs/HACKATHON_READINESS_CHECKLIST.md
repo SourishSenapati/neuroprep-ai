@@ -78,13 +78,15 @@
 
 **Files to Modify:**
 
-```
+
+```text
 frontend/components/ErrorBoundary.tsx (NEW)
 frontend/app/layout.tsx (add Error Boundary)
 frontend/components/InterviewSession.tsx
 frontend/components/InterviewSetup.tsx
 frontend/app/api/stream/route.ts
-```
+
+```text
 
 ---
 
@@ -114,12 +116,14 @@ frontend/app/api/stream/route.ts
 
 **Files to Modify:**
 
-```
+
+```text
 frontend/components/InterviewSession.tsx
 frontend/components/CodeEditor.tsx
 frontend/components/LoadingSkeletons.tsx (NEW)
 frontend/components/InterviewSetup.tsx
-```
+
+```text
 
 ---
 
@@ -151,12 +155,14 @@ frontend/components/InterviewSetup.tsx
 
 **Files to Modify:**
 
-```
+
+```text
 frontend/components/InterviewSession.tsx
 frontend/components/InterviewSetup.tsx
 frontend/components/CodeEditor.tsx
 frontend/styles/globals.css
-```
+
+```text
 
 ---
 
@@ -275,41 +281,51 @@ frontend/styles/globals.css
 
 ### 1. Add Global Error Boundary (30 min)
 
+
 ```tsx
 // frontend/components/ErrorBoundary.tsx
 // Wrap entire app in layout.tsx
-```
+
+```text
 
 
 ### 2. Add Loading Skeletons (30 min)
 
+
 ```tsx
 // frontend/components/LoadingSkeletons.tsx
 // Use in InterviewSession during AI streaming
-```
+
+```text
 
 
 ### 3. Mobile Header Fix (30 min)
 
+
 ```tsx
 // frontend/components/InterviewSession.tsx
 // Add overflow-x-auto and text-xs on mobile
-```
+
+```text
 
 
 ### 4. Retry Logic for API Calls (30 min)
 
+
 ```ts
 // frontend/lib/apiClient.ts
 // Exponential backoff with 3 retries
-```
+
+```text
 
 
 ### 5. Toast Notifications (30 min)
 
+
 ```tsx
 // Use react-hot-toast or custom component
-```
+
+```text
 
 ---
 
@@ -446,6 +462,7 @@ frontend/styles/globals.css
 
 ### Environment Variables Required
 
+
 ```env
 
 # Frontend (.env.local)
@@ -458,7 +475,8 @@ NEXTAUTH_URL=https://neuroprep-ai.vercel.app
 OPENAI_API_KEY=<your-key>
 ANTHROPIC_API_KEY=<your-key> (optional)
 CORS_ORIGIN=https://neuroprep-ai.vercel.app
-```
+
+```text
 
 
 ### Vercel Configuration

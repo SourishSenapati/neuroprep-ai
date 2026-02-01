@@ -6,11 +6,14 @@
 
 ---
 
+
 ##  System Architecture
+
 
 ### High-Level Overview
 
-```
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                      User's Browser                          │
 │  ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐   │
@@ -45,15 +48,19 @@
 │  │  Database   │  │  (Optional)  │                         │
 │  └─────────────┘  └──────────────┘                         │
 └──────────────────────────────────────────────────────────────┘
-```
+
+```text
 
 ---
 
+
 ##  Frontend Architecture (Next.js 15)
+
 
 ### Directory Structure
 
-```
+
+```text
 frontend/
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx                # Root layout with providers
@@ -84,25 +91,29 @@ frontend/
 │   └── globals.css               # Global styles + Tailwind
 │
 └── public/                       # Static assets
-```
+
+```text
+
 
 ### Key Technologies
 
-| Technology        | Purpose                        | Version |
-| ----------------- | ------------------------------ | ------- |
-| **Next.js**       | React framework with SSR/SSG   | 15.0.3  |
-| **TypeScript**    | Type safety                    | 5.3.3   |
-| **Tailwind CSS**  | Utility-first styling          | 3.4.0   |
-| **Framer Motion** | Animations (Chaos to Order)    | 11.18.2 |
-| **Monaco Editor** | Code editor component          | 4.6.0   |
-| **Pyodide**       | Python in WebAssembly          | 0.25.0  |
-| **Three.js**      | 3D graphics (optional)         | 0.160.1 |
-| **Socket.io**     | Real-time bidirectional events | 4.8.1   |
-| **NextAuth**      | Authentication                 | 4.24.5  |
+| Technology        | Purpose                        | Version | 
+| ----------------- | ------------------------------ | ------- | 
+| **Next.js**       | React framework with SSR/SSG   | 15.0.3  | 
+| **TypeScript**    | Type safety                    | 5.3.3   | 
+| **Tailwind CSS**  | Utility-first styling          | 3.4.0   | 
+| **Framer Motion** | Animations (Chaos to Order)    | 11.18.2 | 
+| **Monaco Editor** | Code editor component          | 4.6.0   | 
+| **Pyodide**       | Python in WebAssembly          | 0.25.0  | 
+| **Three.js**      | 3D graphics (optional)         | 0.160.1 | 
+| **Socket.io**     | Real-time bidirectional events | 4.8.1   | 
+| **NextAuth**      | Authentication                 | 4.24.5  | 
 
 ---
 
+
 ##  Backend Architecture (Node.js + Express)
+
 
 ### Core Components
 
@@ -114,20 +125,23 @@ frontend/
 - Session management
 - Question bank integration
 
+
 ### API Endpoints
 
-| Endpoint              | Method | Description                         |
-| --------------------- | ------ | ----------------------------------- |
-| `/api/stream`         | POST   | Stream AI interview responses (SSE) |
-| `/api/parse-resume`   | POST   | Parse PDF resume to JSON (NEW!)     |
-| `/api/forge-link`     | POST   | Create new interview session        |
-| `/api/dashboard`      | GET    | User performance analytics          |
-| `/api/question-stats` | GET    | Question bank statistics            |
-| `/health`             | GET    | Health check (Redis, PostgreSQL)    |
+| Endpoint              | Method | Description                         | 
+| --------------------- | ------ | ----------------------------------- | 
+| `/api/stream`         | POST   | Stream AI interview responses (SSE) | 
+| `/api/parse-resume`   | POST   | Parse PDF resume to JSON (NEW!)     | 
+| `/api/forge-link`     | POST   | Create new interview session        | 
+| `/api/dashboard`      | GET    | User performance analytics          | 
+| `/api/question-stats` | GET    | Question bank statistics            | 
+| `/health`             | GET    | Health check (Redis, PostgreSQL)    | 
+
 
 ### Database Schema
 
 **SQLite Tables:**
+
 
 ```sql
 -- Users
@@ -155,11 +169,14 @@ CREATE TABLE biometrics (
   emotion TEXT,
   timestamp TIMESTAMP
 );
-```
+
+```text
 
 ---
 
+
 ##  Key Features
+
 
 ### 1. **Chaos to Order Landing Page** (NEW!)
 
@@ -172,6 +189,7 @@ CREATE TABLE biometrics (
 - Demonstrates transformation from potential to mastery
 
 **Technical Implementation:**
+
 
 ```tsx
 // Chaos variants (random positions)
@@ -186,9 +204,11 @@ ordered: {
   x: 0, y: 0, rotate: 0,
   transition: { type: 'spring' }
 }
-```
+
+```text
 
 ---
+
 
 ### 2. **Resume Parser Integration** (NEW!)
 
@@ -209,6 +229,7 @@ ordered: {
 
 **Usage:**
 
+
 ```typescript
 const formData = new FormData();
 formData.append("resume", pdfFile);
@@ -220,9 +241,11 @@ const response = await fetch("/api/parse-resume", {
 
 const { data } = await response.json();
 // data: { name, email, role, experienceLevel, skills }
-```
+
+```text
 
 ---
+
 
 ### 3. **AI Streaming Interview**
 
@@ -245,6 +268,7 @@ const { data } = await response.json();
 
 ---
 
+
 ### 4. **Zero-Latency Offline Neural Core** (NEW!)
 
 **Files:**
@@ -264,13 +288,15 @@ const { data } = await response.json();
 
 ---
 
+
 ### 5. **Dynamic Question Generation**
 
 **File:** `backend/dist/questionBank.js`
 
 **Capacity:**
 
-```
+
+```text
 Software Engineering: 84,375,000 questions
 Civil Engineering:    28,125,000 questions
 Mechanical Eng:       28,125,000 questions
@@ -278,7 +304,8 @@ Electrical Eng:       28,125,000 questions
 Chemical Eng:         28,125,000 questions
 ─────────────────────────────────────────
 TOTAL:               224,625,000+ questions
-```
+
+```text
 
 **Features:**
 
@@ -289,11 +316,14 @@ TOTAL:               224,625,000+ questions
 
 ---
 
+
 ##  Deployment
+
 
 ### Vercel Configuration
 
 **Frontend:** `frontend/vercel.json`
+
 
 ```json
 {
@@ -313,9 +343,11 @@ TOTAL:               224,625,000+ questions
     }
   ]
 }
-```
+
+```text
 
 **Backend:** `backend/vercel.json`
+
 
 ```json
 {
@@ -326,30 +358,38 @@ TOTAL:               224,625,000+ questions
     { "src": "/(.*)", "dest": "/server.js" }
   ]
 }
-```
+
+```text
+
 
 ### Environment Variables
 
 **Frontend (.env.local):**
 
+
 ```env
 NEXT_PUBLIC_API_URL=https://neuroprep-backend.vercel.app
 NEXTAUTH_SECRET=<generate-with-openssl-rand>
 NEXTAUTH_URL=https://neuroprep-ai.vercel.app
-```
+
+```text
 
 **Backend (.env):**
+
 
 ```env
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 CORS_ORIGIN=https://neuroprep-ai.vercel.app
 NODE_ENV=production
-```
+
+```text
 
 ---
 
+
 ##  Performance Optimizations
+
 
 ### Frontend
 
@@ -357,6 +397,7 @@ NODE_ENV=production
 - **Lazy Loading:** Monaco Editor, Three.js components
 - **Image Optimization:** Next/Image component
 - **Bundle Size:** Target <500KB (current: ~350KB)
+
 
 ### Backend
 
@@ -367,7 +408,9 @@ NODE_ENV=production
 
 ---
 
+
 ## 📊 Architecture Diagram
+
 
 ```mermaid
 graph TB
@@ -402,11 +445,14 @@ graph TB
     SM --> REDIS
     QB --> DB
     PARSE -->|PDF Parse| API
-```
+
+```text
 
 ---
 
+
 ##  Testing Strategy
+
 
 ### Unit Tests
 
@@ -416,6 +462,7 @@ graph TB
 - **Payment Integration**: Razorpay (UPI) Support.
 - **Coverage:** Target 80%+
 
+
 ### E2E Tests
 
 - **Tool:** Cypress
@@ -424,6 +471,7 @@ graph TB
   - Resume upload → auto-fill
   - Payment flow
 
+
 ### Performance Tests
 
 - **Lighthouse Score:** 90+ (mobile & desktop)
@@ -431,6 +479,7 @@ graph TB
 - **Time to Interactive:** <3s
 
 ---
+
 
 ##  Links
 
@@ -441,6 +490,7 @@ graph TB
 
 ---
 
+
 ##  Author
 
 **Sourish Senapati**  
@@ -448,6 +498,7 @@ graph TB
 🔗 [LinkedIn](https://linkedin.com/in/sourish-senapati)
 
 ---
+
 
 ## 🤝 Contributing
 

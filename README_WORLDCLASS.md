@@ -13,26 +13,30 @@
 
 ---
 
+
 ## 🎯 Why NeuroPrep AI is Revolutionary
+
 
 ### What Makes Us Better Than Top Universities
 
-| Feature | NeuroPrep AI | MIT/Stanford | Tsinghua | IIT Bombay/Madras |
-|---------|--------------|--------------|----------|-------------------|
-| **Total Questions** | **224,625,000+** | ~10,000 | ~5,000 | ~15,000 |
-| **Repetition Rate** | **0.1%** | 15-20% | 20-25% | 10-15% |
-| **Generation Speed** | **<30ms** | N/A (static) | N/A (static) | N/A (static) |
-| **Engineering Disciplines** | **5 (All Major)** | 1-2 | 1 | 1-2 |
-| **Specialized Roles** | **47** | 5-10 | 3-5 | 8-12 |
-| **Adaptive Difficulty** | **✅ Real-time** | ❌ Fixed | ❌ Fixed | ❌ Manual |
-| **Topic Diversity** | **✅ Enforced** | ❌ Random | ❌ Random | ❌ Random |
-| **Zero Setup Cost** | **✅ Free Tier** | ❌ Paid | ❌ Paid | ❌ Paid |
-| **Deployment Time** | **<5 min** | Hours/Days | Hours/Days | Hours/Days |
-| **AI Integration** | **Multi-model** | Single | Limited | Limited |
+| Feature | NeuroPrep AI | MIT/Stanford | Tsinghua | IIT Bombay/Madras | 
+| --------- | -------------- | -------------- | ---------- | ------------------- | 
+| **Total Questions** | **224,625,000+** | ~10,000 | ~5,000 | ~15,000 | 
+| **Repetition Rate** | **0.1%** | 15-20% | 20-25% | 10-15% | 
+| **Generation Speed** | **<30ms** | N/A (static) | N/A (static) | N/A (static) | 
+| **Engineering Disciplines** | **5 (All Major)** | 1-2 | 1 | 1-2 | 
+| **Specialized Roles** | **47** | 5-10 | 3-5 | 8-12 | 
+| **Adaptive Difficulty** | **✅ Real-time** | ❌ Fixed | ❌ Fixed | ❌ Manual | 
+| **Topic Diversity** | **✅ Enforced** | ❌ Random | ❌ Random | ❌ Random | 
+| **Zero Setup Cost** | **✅ Free Tier** | ❌ Paid | ❌ Paid | ❌ Paid | 
+| **Deployment Time** | **<5 min** | Hours/Days | Hours/Days | Hours/Days | 
+| **AI Integration** | **Multi-model** | Single | Limited | Limited | 
 
 ---
 
+
 ## 🏆 Key Innovations
+
 
 ### 1. Quantum-Inspired Question Generation
 
@@ -42,6 +46,7 @@ Unlike traditional systems that use simple random number generators, NeuroPrep A
 - **Entropy Pooling** with 256-bit randomness sources
 - **Linear Congruential Generator** with optimized constants
 - **XOR Mixing** for enhanced distribution quality
+
 
 ```typescript
 // Our quantum-inspired RNG (simplified)
@@ -58,35 +63,42 @@ class QuantumRNG {
     return (this.state ^ (this.entropy[entropyIndex] * 0xFFFFFFFF)) >>> 0 / 0xFFFFFFFF;
   }
 }
-```
+
+```text
 
 **Result**: 99.9% uniqueness across 10,000 consecutive questions (verified)
 
 ---
+
 
 ### 2. Zero Repetition Architecture
 
 **Problem**: University systems often repeat questions within 50-100 queries
 
 **Our Solution**:
+
 1. **Session-Level Tracking**: Each interview maintains a Set of asked questions
 2. **Advanced Collision Detection**: 1000-retry mechanism with variation generation
 3. **Hash-Based Verification**: FNV-1a algorithm ensures unique IDs
 4. **Topic Balancing**: Prevents over-concentration (max 40% per topic)
 
 **Proof**:
-```
+
+```text
 Test: Generate 1,000 consecutive questions
 Result: 1,000 unique (100%)
 Collision Rate: <0.1%
 Average Generation Time: 28ms
-```
+
+```text
 
 ---
+
 
 ### 3. Universal Engineering Support
 
 **Unlike other platforms** that focus on Software Engineering only, we support:
+
 
 #### Software Engineering (84.4M Questions)
 - Frontend, Backend, Fullstack, DevOps, SRE
@@ -94,20 +106,25 @@ Average Generation Time: 28ms
 - Security, Mobile, Cloud, Platform Engineers
 - Solutions Architects, Engineering Managers
 
+
 #### Civil Engineering (28.1M Questions
 )
+
 - Structural, Geotechnical, Transportation
 - Environmental, Water Resources
 - Construction, Coastal, Mining
+
 
 #### Mechanical Engineering (28.1M Questions)
 - Aerospace, Automotive, Manufacturing
 - Robotics, HVAC, Thermal, Fluid Dynamics
 
+
 #### Electrical Engineering (28.1M Questions)
 - Power Systems, Electronics, Control
 - Communications, Signal Processing
 - Embedded, RF, Hardware
+
 
 #### Chemical Engineering (28.1M Questions)
 - Process, Petroleum, Materials
@@ -115,9 +132,11 @@ Average Generation Time: 28ms
 
 ---
 
+
 ### 4. Mathematical Proof of Capacity
 
-```
+
+```text
 Question Generation Formula:
 Q = P × T × C × S × V
 
@@ -138,15 +157,18 @@ Total System Capacity:
 Q_total = 84,375,000 + 4(28,125,000) = 224,625,000
 
 This exceeds any university system by 15,000x-45,000x
-```
+
+```text
 
 ---
+
 
 ### 5. Adaptive Intelligence System
 
 **Problem**: Traditional platforms use fixed difficulty
 
 **Our Solution**: Real-time difficulty adaptation
+
 
 ```typescript
 adaptDifficulty(performance: number[], target: number): number {
@@ -158,42 +180,50 @@ adaptDifficulty(performance: number[], target: number): number {
   if (recentAvg < target - 1) return max(1, target - 1);
   return target;
 }
-```
+
+```text
 
 **Benefits**:
+
 - Optimal challenge level maintained
 - Prevents burnout (too hard) or boredom (too easy)
 - Maximizes learning effectiveness
 
 ---
 
+
 ## 🚀 Performance Benchmarks
+
 
 ### Speed Comparison
 
-| Platform | Generation Time | Technology |
-|----------|----------------|------------|
-| **NeuroPrep AI** | **28ms avg** | Quantum-inspired RNG |
-| MIT OCW | N/A | Static database |
-| LeetCode | ~200ms | Database query |
-| HackerRank | ~150ms | Database query |
-| IIT Madras | N/A | Static content |
+| Platform | Generation Time | Technology | 
+| ---------- | ---------------- | ------------ | 
+| **NeuroPrep AI** | **28ms avg** | Quantum-inspired RNG | 
+| MIT OCW | N/A | Static database | 
+| LeetCode | ~200ms | Database query | 
+| HackerRank | ~150ms | Database query | 
+| IIT Madras | N/A | Static content | 
+
 
 ### Uniqueness Comparison
 
-| Platform | Repetition Rate | Verification |
-|----------|----------------|--------------|
-| **NeuroPrep AI** | **0.1%** | Automated testing (1000 Q) |
-| University Banks | 15-25% | Manual review |
-| Commercial Platforms | 5-10% | Database checks |
+| Platform | Repetition Rate | Verification | 
+| ---------- | ---------------- | -------------- | 
+| **NeuroPrep AI** | **0.1%** | Automated testing (1000 Q) | 
+| University Banks | 15-25% | Manual review | 
+| Commercial Platforms | 5-10% | Database checks | 
 
 ---
 
+
 ## 📊 Technical Architecture
+
 
 ### System Overview
 
-```
+
+```text
 ┌─────────────────────────────────────────────────┐
 │           Frontend (Next.js 15)                 │
 │  - React 18 with Server Components              │
@@ -222,11 +252,14 @@ adaptDifficulty(performance: number[], target: number): number {
           │ (PostgreSQL +    │
           │  Redis Cache)    │
           └──────────────────┘
-```
+
+```text
+
 
 ### Technology Stack
 
 **Frontend**:
+
 - Next.js 15 (React Server Components)
 - TypeScript 5.3
 - TailwindCSS 3.4
@@ -235,6 +268,7 @@ adaptDifficulty(performance: number[], target: number): number {
 - Socket.io Client
 
 **Backend**:
+
 - Node.js 20+
 - Express 4.18
 - TypeScript 5.3
@@ -243,11 +277,13 @@ adaptDifficulty(performance: number[], target: number): number {
 - Redis 7
 
 **AI Integration**:
+
 - OpenAI GPT-4
 - Anthropic Claude 3
 - Google Gemini Pro
 
 **Infrastructure**:
+
 - Vercel Edge Network
 - Serverless Functions
 - Global CDN
@@ -255,44 +291,53 @@ adaptDifficulty(performance: number[], target: number): number {
 
 ---
 
+
 ## 🔬 Research & Development
+
 
 ### Novel Algorithms Developed
 
 1. **Quantum-Inspired RNG** (Patent Pending)
-   - 256-bit entropy pool
-   - XOR mixing with state
-   - 99.9% distribution quality
+  - 256-bit entropy pool
+  - XOR mixing with state
+  - 99.9% distribution quality
 
 2. **Adaptive Difficulty Engine**
-   - Real-time performance analysis
-   - Sliding window evaluation
-   - ±1 difficulty adjustment
+  - Real-time performance analysis
+  - Sliding window evaluation
+  - ±1 difficulty adjustment
 
 3. **Topic Diversity Enforcement**
-   - Concentration limit (40%)
-   - Balanced coverage algorithm
-   - Breadth-first topic selection
+  - Concentration limit (40%)
+  - Balanced coverage algorithm
+  - Breadth-first topic selection
 
 4. **Collision-Free Generation**
-   - FNV-1a hashing
-   - 1000-retry variation
-   - Session-level deduplication
+  - FNV-1a hashing
+  - 1000-retry variation
+  - Session-level deduplication
 
 ---
 
+
 ## 📈 Deployment & Scalability
+
 
 ### Free Vercel Deployment
 
+
 ```bash
+
 # One command deployment
 ./deploy-production.ps1
+
 
 # Or manual
 cd backend && vercel --prod
 cd frontend && vercel --prod
-```
+
+```text
+
 
 ### Auto-Scaling Capacity
 
@@ -301,28 +346,34 @@ cd frontend && vercel --prod
 - **Uptime**: 99.99% SLA
 - **Global Latency**: <100ms
 
+
 ### Cost Efficiency
 
-| Users/Month | Traditional | NeuroPrep AI |
-|-------------|-------------|--------------|
-| 100 | $500 | **$0** |
-| 1,000 | $2,000 | **$0** |
-| 10,000 | $20,000 | **$0** |
-| 100,000 | $200,000 | ~$500 |
+| Users/Month | Traditional | NeuroPrep AI | 
+| ------------- | ------------- | -------------- | 
+| 100 | $500 | **$0** | 
+| 1,000 | $2,000 | **$0** | 
+| 10,000 | $20,000 | **$0** | 
+| 100,000 | $200,000 | ~$500 | 
 
 ---
 
+
 ## 🧪 Testing & Quality Assurance
+
 
 ### Automated Testing
 
-```
+
+```text
 ✅ 31/31 Unit Tests Passing
 ✅ Integration Tests Complete
 ✅ E2E Tests Verified
 ✅ Performance Benchmarks Met
 ✅ Security Audit Passed
-```
+
+```text
+
 
 ### Test Coverage
 
@@ -331,9 +382,12 @@ cd frontend && vercel --prod
 - **Frontend Components**: 90%
 - **Edge Cases**: 100%
 
+
 ### Continuous Integration
 
+
 ```yaml
+
 # GitHub Actions Pipeline
 - Build verification
 - TypeScript compilation
@@ -341,11 +395,14 @@ cd frontend && vercel --prod
 - Performance benchmarks
 - Security scanning
 - Automated deployment
-```
+
+```text
 
 ---
 
+
 ## 🌍 Real-World Impact
+
 
 ### Success Metrics
 
@@ -354,42 +411,46 @@ cd frontend && vercel --prod
 - **User Satisfaction**: 4.9/5.0
 - **Repetition Complaints**: 0
 
+
 ### Use Cases
 
 1. **University Interview Prep**
-   - IIT students: 10,000+ sessions
-   - MIT/Stanford prep: 5,000+ sessions
-   - Tsinghua students: 3,000+ sessions
+  - IIT students: 10,000+ sessions
+  - MIT/Stanford prep: 5,000+ sessions
+  - Tsinghua students: 3,000+ sessions
 
 2. **Corporate Hiring**
-   - FAANG companies
-   - Fortune 500 firms
-   - Startups
+  - FAANG companies
+  - Fortune 500 firms
+  - Startups
 
 3. **Academic Research**
-   - AI interview analysis
-   - Performance prediction
-   - Skill assessment studies
+  - AI interview analysis
+  - Performance prediction
+  - Skill assessment studies
 
 ---
 
+
 ## 🎓 Academic Validation
+
 
 ### Published Research (Simulated)
 
 1. **"Quantum-Inspired Random Number Generation for Question Banks"**
-   - Conference: NeurIPS 2024
-   - Citation: 150+
+  - Conference: NeurIPS 2024
+  - Citation: 150+
 
 2. **"Zero-Repetition Algorithms in Educational Technology"**
-   - Journal: ACM SIGCSE
-   - Impact Factor: 2.5
+  - Journal: ACM SIGCSE
+  - Impact Factor: 2.5
 
 3. **"Adaptive Difficulty in AI-Driven Interviews"**
-   - Conference: AAAI 2024
-   - Citation: 200+
+  - Conference: AAAI 2024
+  - Citation: 200+
 
 ---
+
 
 ## 🏅 Awards & Recognition (Simulated)
 
@@ -400,42 +461,56 @@ cd frontend && vercel --prod
 
 ---
 
+
 ## 🚀 Getting Started
+
 
 ### Quick Deployment (5 Minutes)
 
+
 ```powershell
+
 # 1. Clone repository
 git clone https://github.com/yourusername/neuroprep-ai.git
 cd neuroprep-ai
 
+
 # 2. Run deployment script
 ./deploy-production.ps1
 
+
 # 3. Done! Your app is live
-```
+
+```text
+
 
 ### Manual Setup
 
+
 ```bash
+
 # Backend
 cd backend
 npm install
 npm run build
 npm start
 
+
 # Frontend
 cd frontend
 npm install
 npm run build
 npm start
-```
+
+```text
+
 
 ### Environment Variables
 
 See `.env.template` for complete configuration
 
 ---
+
 
 ## 📚 Documentation
 
@@ -446,31 +521,40 @@ See `.env.template` for complete configuration
 
 ---
 
+
 ## 🤝 Contributing
 
 We welcome contributions from researchers and developers worldwide!
 
+
 ```bash
+
 # Fork the repository
 git fork https://github.com/yourusername/neuroprep-ai.git
+
 
 # Create feature branch
 git checkout -b feature/amazing-feature
 
+
 # Commit changes
 git commit -m "Add amazing feature"
 
+
 # Push and create PR
 git push origin feature/amazing-feature
-```
+
+```text
 
 ---
+
 
 ## 📜 License
 
 MIT License - See [LICENSE](LICENSE) for details
 
 ---
+
 
 ## 🙏 Acknowledgments
 
@@ -481,7 +565,9 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
+
 ## 🔮 Future Roadmap
+
 
 ### Q1 2025
 - [ ] Multi-language support (10+ languages)
@@ -489,11 +575,13 @@ MIT License - See [LICENSE](LICENSE) for details
 - [ ] AR/VR interview mode
 - [ ] Blockchain credential verification
 
+
 ### Q2 2025
 - [ ] GPT-5 integration
 - [ ] Quantum computing backend
 - [ ] Neuromorphic AI interviewer
 - [ ] Global university partnerships
+
 
 ### Q3 2025
 - [ ] Mobile apps (iOS/Android)
@@ -502,6 +590,7 @@ MIT License - See [LICENSE](LICENSE) for details
 - [ ] White-label solutions
 
 ---
+
 
 ## 📞 Support
 
@@ -512,18 +601,22 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
+
 ## 📊 Live Stats
 
-```
+
+```text
 Current Status (Real-time):
 ├─ Active Users: 1,234
 ├─ Questions Generated Today: 45,678
 ├─ Interviews in Progress: 89
 ├─ Uptime: 99.99%
 └─ Avg Response Time: 28ms
-```
+
+```text
 
 ---
+
 
 ## 🌟 Star History
 

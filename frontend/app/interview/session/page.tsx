@@ -1,7 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import AuraSingularityChamber from '../../../components/AuraSingularityChamber';
@@ -14,6 +12,7 @@ function SessionContent() {
   const persona = searchParams.get('persona') || 'Professional';
 
   return (
+    <AuraSingularityChamber
       role={role}
       difficulty={difficulty}
       persona={persona}
