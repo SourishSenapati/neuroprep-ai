@@ -88,17 +88,17 @@ frontend/
 
 ### Key Technologies
 
-| Technology | Purpose | Version |
-|------------|---------|---------|
-| **Next.js** | React framework with SSR/SSG | 15.0.3 |
-| **TypeScript** | Type safety | 5.3.3 |
-| **Tailwind CSS** | Utility-first styling | 3.4.0 |
-| **Framer Motion** | Animations (Chaos to Order) | 11.18.2 |
-| **Monaco Editor** | Code editor component | 4.6.0 |
-| **Pyodide** | Python in WebAssembly | 0.25.0 |
-| **Three.js** | 3D graphics (optional) | 0.160.1 |
-| **Socket.io** | Real-time bidirectional events | 4.8.1 |
-| **NextAuth** | Authentication | 4.24.5 |
+| Technology        | Purpose                        | Version |
+| ----------------- | ------------------------------ | ------- |
+| **Next.js**       | React framework with SSR/SSG   | 15.0.3  |
+| **TypeScript**    | Type safety                    | 5.3.3   |
+| **Tailwind CSS**  | Utility-first styling          | 3.4.0   |
+| **Framer Motion** | Animations (Chaos to Order)    | 11.18.2 |
+| **Monaco Editor** | Code editor component          | 4.6.0   |
+| **Pyodide**       | Python in WebAssembly          | 0.25.0  |
+| **Three.js**      | 3D graphics (optional)         | 0.160.1 |
+| **Socket.io**     | Real-time bidirectional events | 4.8.1   |
+| **NextAuth**      | Authentication                 | 4.24.5  |
 
 ---
 
@@ -107,6 +107,7 @@ frontend/
 ### Core Components
 
 **server.js** - Main application entry point
+
 - Express server with middleware (CORS, Helmet, Compression)
 - Socket.io for real-time updates
 - REST API endpoints
@@ -115,14 +116,14 @@ frontend/
 
 ### API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/stream` | POST | Stream AI interview responses (SSE) |
-| `/api/parse-resume` | POST | Parse PDF resume to JSON (NEW!) |
-| `/api/forge-link` | POST | Create new interview session |
-| `/api/dashboard` | GET | User performance analytics |
-| `/api/question-stats` | GET | Question bank statistics |
-| `/health` | GET | Health check (Redis, PostgreSQL) |
+| Endpoint              | Method | Description                         |
+| --------------------- | ------ | ----------------------------------- |
+| `/api/stream`         | POST   | Stream AI interview responses (SSE) |
+| `/api/parse-resume`   | POST   | Parse PDF resume to JSON (NEW!)     |
+| `/api/forge-link`     | POST   | Create new interview session        |
+| `/api/dashboard`      | GET    | User performance analytics          |
+| `/api/question-stats` | GET    | Question bank statistics            |
+| `/health`             | GET    | Health check (Redis, PostgreSQL)    |
 
 ### Database Schema
 
@@ -165,11 +166,13 @@ CREATE TABLE biometrics (
 **File:** `frontend/components/ChaosToOrderLanding.tsx`
 
 **Visual Metaphor:**
+
 - Floating UI elements start scattered (chaos)
 - Smoothly animate into structured grid (order)
 - Demonstrates transformation from potential to mastery
 
 **Technical Implementation:**
+
 ```tsx
 // Chaos variants (random positions)
 chaos: (i: number) => ({
@@ -190,10 +193,12 @@ ordered: {
 ### 2. **Resume Parser Integration** (NEW!)
 
 **Files:**
+
 - `backend/api/parse-resume.js` - Core parsing logic
 - `frontend/app/api/parse-resume/route.ts` - Next.js API route
 
 **Features:**
+
 - PDF to text extraction using `pdf-parse`
 - Structured data extraction (name, email, role, skills)
 - Auto-fill interview setup form
@@ -203,13 +208,14 @@ ordered: {
   - Invalid file type
 
 **Usage:**
+
 ```typescript
 const formData = new FormData();
-formData.append('resume', pdfFile);
+formData.append("resume", pdfFile);
 
-const response = await fetch('/api/parse-resume', {
-  method: 'POST',
-  body: formData
+const response = await fetch("/api/parse-resume", {
+  method: "POST",
+  body: formData,
 });
 
 const { data } = await response.json();
@@ -223,6 +229,7 @@ const { data } = await response.json();
 **File:** `frontend/components/InterviewSession.tsx`
 
 **Flow:**
+
 1. User sends message (text or voice)
 2. Frontend POSTs to `/api/stream`
 3. Backend streams AI response via SSE
@@ -230,6 +237,7 @@ const { data } = await response.json();
 5. Biometrics updated (stress, heart rate)
 
 **Tech Stack:**
+
 - **Streaming:** Server-Sent Events (SSE)
 - **AI Models:** OpenAI GPT-4 / Anthropic Claude
 - **Voice:** Web Speech API
@@ -237,11 +245,31 @@ const { data } = await response.json();
 
 ---
 
-### 4. **Dynamic Question Generation**
+### 4. **Zero-Latency Offline Neural Core** (NEW!)
+
+**Files:**
+
+- `frontend/lib/local-ai/InferenceEngine.ts`
+- `frontend/lib/local-ai/KnowledgeBase.ts`
+
+**Capabilities:**
+
+- **Technology:** Transformer.js + WebAssembly (ONNX Runtime)
+- **Model:** `Xenova/all-MiniLM-L6-v2` (Running entirely in-browser)
+- **Features:**
+  - Semantic analysis of user answers without internet.
+  - Generates context-aware follow-up questions from local knowledge graph.
+  - Automatic fallback when API/Cloud connection fails.
+  - **Privacy First:** No data leaves the device in offline mode.
+
+---
+
+### 5. **Dynamic Question Generation**
 
 **File:** `backend/dist/questionBank.js`
 
 **Capacity:**
+
 ```
 Software Engineering: 84,375,000 questions
 Civil Engineering:    28,125,000 questions
@@ -253,6 +281,7 @@ TOTAL:               224,625,000+ questions
 ```
 
 **Features:**
+
 - Zero repetition guarantee (FNV-1a hash tracking)
 - Adaptive difficulty (performance-based)
 - Topic diversity enforcement
@@ -265,12 +294,13 @@ TOTAL:               224,625,000+ questions
 ### Vercel Configuration
 
 **Frontend:** `frontend/vercel.json`
+
 ```json
 {
   "rewrites": [
-    { 
-      "source": "/api/:path*", 
-      "destination": "https://neuroprep-backend.vercel.app/api/:path*" 
+    {
+      "source": "/api/:path*",
+      "destination": "https://neuroprep-backend.vercel.app/api/:path*"
     }
   ],
   "headers": [
@@ -286,12 +316,11 @@ TOTAL:               224,625,000+ questions
 ```
 
 **Backend:** `backend/vercel.json`
+
 ```json
 {
   "version": 2,
-  "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
-  ],
+  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
   "routes": [
     { "src": "/api/(.*)", "dest": "/server.js" },
     { "src": "/(.*)", "dest": "/server.js" }
@@ -302,6 +331,7 @@ TOTAL:               224,625,000+ questions
 ### Environment Variables
 
 **Frontend (.env.local):**
+
 ```env
 NEXT_PUBLIC_API_URL=https://neuroprep-backend.vercel.app
 NEXTAUTH_SECRET=<generate-with-openssl-rand>
@@ -309,6 +339,7 @@ NEXTAUTH_URL=https://neuroprep-ai.vercel.app
 ```
 
 **Backend (.env):**
+
 ```env
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
@@ -321,12 +352,14 @@ NODE_ENV=production
 ## 🎯 Performance Optimizations
 
 ### Frontend
+
 - **Code Splitting:** Automatic with Next.js App Router
 - **Lazy Loading:** Monaco Editor, Three.js components
 - **Image Optimization:** Next/Image component
 - **Bundle Size:** Target <500KB (current: ~350KB)
 
 ### Backend
+
 - **Streaming:** SSE reduces perceived latency
 - **Caching:** Redis for session state
 - **Connection Pooling:** PostgreSQL (20 connections)
@@ -343,24 +376,24 @@ graph TB
         FM[Framer Motion]
         PY[Pyodide WebAssembly]
     end
-    
+
     subgraph Edge[Vercel Edge Network]
         API[API Routes]
         AUTH[NextAuth]
         PARSE[Resume Parser]
     end
-    
+
     subgraph Backend[Node.js Backend]
         QB[Question Bank<br/>224M+ Questions]
         SM[Session Manager]
         AI[AI Engine<br/>OpenAI/Claude]
     end
-    
+
     subgraph Storage[Data Layer]
         DB[(SQLite)]
         REDIS[(Redis Cache)]
     end
-    
+
     UI -->|HTTPS| API
     API -->|Proxy| QB
     API -->|Proxy| SM
@@ -376,6 +409,7 @@ graph TB
 ## 🧪 Testing Strategy
 
 ### Unit Tests
+
 - **Backend:** Jest (31 tests passing)
 - **Instant AI Feedback**: Real-time analysis of your answers.
 - **Social Login**: Google & LinkedIn Authentication.
@@ -383,6 +417,7 @@ graph TB
 - **Coverage:** Target 80%+
 
 ### E2E Tests
+
 - **Tool:** Cypress
 - **Critical Flows:**
   - Interview setup → session → completion
@@ -390,6 +425,7 @@ graph TB
   - Payment flow
 
 ### Performance Tests
+
 - **Lighthouse Score:** 90+ (mobile & desktop)
 - **Bundle Size:** <500KB
 - **Time to Interactive:** <3s
