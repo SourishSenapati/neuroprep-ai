@@ -6,7 +6,7 @@
 
 ---
 
-## 📐 System Architecture
+##  System Architecture
 
 ### High-Level Overview
 
